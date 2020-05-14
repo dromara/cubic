@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main markdown">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon iconfont icon-tongyong"></i>
+                    <div class="name">通用</div>
+                    <div class="fontclass">.icon-tongyong</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-wxbzhanghu"></i>
+                    <div class="name">wxb账户</div>
+                    <div class="fontclass">.icon-wxbzhanghu</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-gongyongquan1"></i>
+                    <div class="name">公用-圈</div>
+                    <div class="fontclass">.icon-gongyongquan1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-user"></i>
+                    <div class="name">user</div>
+                    <div class="fontclass">.icon-user</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shezhi1"></i>
+                    <div class="name">设置</div>
+                    <div class="fontclass">.icon-shezhi1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-user-guanli"></i>
+                    <div class="name">用户管理</div>
+                    <div class="fontclass">.icon-user-guanli</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-pwd"></i>
+                    <div class="name">pwd</div>
+                    <div class="fontclass">.icon-pwd</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-eye"></i>
+                    <div class="name">eye</div>
+                    <div class="fontclass">.icon-eye</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-guanggao"></i>
+                    <div class="name">广告</div>
+                    <div class="fontclass">.icon-guanggao</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-guanliyuan"></i>
+                    <div class="name">管理员</div>
+                    <div class="fontclass">.icon-guanliyuan</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-cloud-permissions"></i>
+                    <div class="name">权限-</div>
+                    <div class="fontclass">.icon-cloud-permissions</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shouye"></i>
+                    <div class="name">首页</div>
+                    <div class="fontclass">.icon-shouye</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-shijiebei"></i>
+                    <div class="name">世界杯</div>
+                    <div class="fontclass">.icon-shijiebei</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiaose"></i>
+                    <div class="name">角色</div>
+                    <div class="fontclass">.icon-jiaose</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-baobiao"></i>
+                    <div class="name">报表</div>
+                    <div class="fontclass">.icon-baobiao</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-guanliyuan1"></i>
+                    <div class="name">管理员</div>
+                    <div class="fontclass">.icon-guanliyuan1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-tiku"></i>
+                    <div class="name">题库</div>
+                    <div class="fontclass">.icon-tiku</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-xiaochengxu"></i>
+                    <div class="name">小程序</div>
+                    <div class="fontclass">.icon-xiaochengxu</div>
+                </li>
+            
+        </ul>
+
+        <h2 id="font-class-">font-class引用</h2>
+        <hr>
+
+        <p>font-class是unicode使用方式的一种变种，主要是解决unicode书写不直观，语意不明确的问题。</p>
+        <p>与unicode使用方式相比，具有如下特点：</p>
+        <ul>
+        <li>兼容性良好，支持ie8+，及所有现代浏览器。</li>
+        <li>相比于unicode语意明确，书写更直观。可以很容易分辨这个icon是什么。</li>
+        <li>因为使用class来定义图标，所以当要替换图标时，只需要修改class里面的unicode引用。</li>
+        <li>不过因为本质上还是使用的字体，所以多色图标还是不支持的。</li>
+        </ul>
+        <p>使用步骤如下：</p>
+        <h3 id="-fontclass-">第一步：引入项目下面生成的fontclass代码：</h3>
+
+
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">&lt;link rel="stylesheet" type="text/css" href="./iconfont.css"&gt;</span></code></pre>
+        <h3 id="-">第二步：挑选相应图标并获取类名，应用于页面：</h3>
+        <pre><code class="lang-css hljs">&lt;<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">class</span>="<span class="hljs-selector-tag">iconfont</span> <span class="hljs-selector-tag">icon-xxx</span>"&gt;&lt;/<span class="hljs-selector-tag">i</span>&gt;</code></pre>
+        <blockquote>
+        <p>"iconfont"是你项目下的font-family。可以通过编辑项目查看，默认是"iconfont"。</p>
+        </blockquote>
+    </div>
+</body>
+</html>

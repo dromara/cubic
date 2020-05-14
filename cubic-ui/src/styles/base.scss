@@ -1,0 +1,201 @@
+/*          reset css       */
+*, ::before, ::after {
+    /*选择所有标签*/
+    margin: 0;
+    padding: 0;
+
+    /*清除移动端默认的点击高亮效果*/
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+    /*设置所有的元素都是以边框开始计算宽度的 百分比*/
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    color: #fff;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+ul, ol {
+    list-style: none;
+}
+
+input {
+    border: none;
+    outline: none;
+    /*清除移动端默认的表单样式*/
+    -webkit-appearance: none;
+}
+
+.svg-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    overflow: hidden;
+    -webkit-transition: font-size 0.25s ease-out 0s;
+    -moz-transition: font-size 0.25s ease-out 0s;
+    transition: font-size 0.25s ease-out 0s;
+}
+
+.el-message-box {
+    width: auto;
+    min-width: 40%;
+}
+
+.query-form {
+    margin-top: 20px;
+}
+
+.table-expand {
+    .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 49%;
+        label {
+            width: 90px;
+            color: #99a9bf;
+        }
+    }
+}
+
+.pagination-container {
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .query-form-item.el-form-item {
+        display: block !important;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .query-form-item .el-form-item__content {
+        width: 100%;
+        .el-select {
+            width: 100%;
+        }
+    }
+    .el-dialog {
+        width: 80%;
+    }
+
+    .el-message {
+        min-width: 70% !important;
+    }
+}
+
+.container-left {
+    .submenu-title-noDropdown,
+    .el-submenu__title {
+        &:hover {
+            background-color: #263445 !important;
+        }
+    }
+
+    .nest-menu .el-submenu>.el-submenu__title,
+    .el-submenu .el-menu-item {
+        background-color: #1f2d3d !important;
+        &:hover {
+            background-color: #001528 !important;
+        }
+    }
+}
+// 左侧导航栏的折叠后的样式
+.el-menu--collapse {
+    .el-submenu {
+        .el-submenu__title {
+            span {
+                height: 0;
+                width: 0;
+                overflow: hidden;
+                visibility: hidden;
+                display: inline-block;
+            }
+            .el-submenu__icon-arrow {
+                display: none;
+            }
+        }
+    }
+    .el-menu-item {
+        .el-tooltip {
+            span {
+                height: 0;
+                width: 0;
+                overflow: hidden;
+                visibility: hidden;
+                display: inline-block;
+            }
+        }
+    }
+}
+.el-menu--vertical {
+
+    .nest-menu.el-submenu>.el-submenu__title,
+    .el-menu-item {
+        &:hover {
+            // you can use $subMenuHover
+            background-color: #263455 !important;
+        }
+    }
+
+    // the scroll bar appears when the subMenu is too long
+
+}
+
+.table-scrollbar {
+    height: 75vh;
+}
+
+@media screen and (min-width: 1919px) {
+    .table-scrollbar {
+        height: 80vh;
+    }
+}
+
+@media screen and (min-width: 2500px) {
+    .table-scrollbar {
+        height: 85vh;
+    }
+}
+
+// 能删除的列表
+.remove-list-box {
+    width: 100%;
+    border: 1px dashed #cccccc;
+    display: inline-block;
+    padding: 10px;
+    background-color: #f6f6f6;
+}
+.remove-list {
+    margin-bottom: 15px;
+    .remove-list-item {
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 10px;
+        margin-top: 1px;
+        border-radius: 4px;
+        background-color: #ffff;
+        margin-bottom: 2px;
+    }
+    .remove-list-item:hover {
+        background-color: rgba(0, 0, 0, 0.05) !important;
+    }
+}
+.remove-list-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
