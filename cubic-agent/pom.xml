@@ -4,12 +4,44 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>cubic</artifactId>
-        <groupId>org.cubic</groupId>
+        <groupId>matrix.cubic</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cubic-agent</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>matrix.cubic</groupId>
+            <artifactId>cubic-core</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>matrix-cubic-agent</finalName>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Premain-Class>com.matrix.agent.MatrixAgent</Premain-Class>
+                            <Agent-Class>com.matrix.agent.MatrixAgent</Agent-Class>
+                            <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                            <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
 
 </project>
