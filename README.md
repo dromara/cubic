@@ -5,20 +5,28 @@
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0514/142021_d5e1ce4b_1168339.png "屏幕截图.png")
 
 #### 软件架构
-软件架构说明
+目前整体项目分为如下几个部署模块
+cubic-agent 探针数据采集，以及动态命令执行
+cubic-proxy 代理，用于维护通道和命令下发，目前包含简单的web-ui
+
 
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  git clone https://gitee.com/sanjiankethree/cubic.git
+2.  执行打包脚本 ./script/build.sh
+3.  打包完成的agent 在agent-dist目录下
+4.  打包完成的proxy 在agent-proxy-dist目录下
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  agent 加载如下
+    java -jar -javaagent:/xxx/agent-dist/cubic-agent.jar  yyy.jar
+    
+2.  启动代理服务 
+    java -jar cubic-proxy.jar 
+    
+3.  访问web ui localhost:6080
 
 #### 参与贡献
 
