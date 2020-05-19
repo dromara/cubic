@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
  * 初始化配置
@@ -26,7 +27,7 @@ public class CubicConfInitalizer {
     private static final Logger logger = LoggerFactory.getLogger(CubicConfInitalizer.class);
 
     private final static String SYSTEM_CONFIG_PATH = "cubic_config";
-    private final static String DEFAULT_CONFIG_FILE_NAME = "/conf/agent.conf";
+    private final static String DEFAULT_CONFIG_FILE_NAME = "/config/agent.config";
     private static boolean IS_INIT_COMPLETED = false;
 
     public static void initConfig() {
@@ -39,6 +40,12 @@ public class CubicConfInitalizer {
         }
 
         IS_INIT_COMPLETED = true;
+
+        if(StringUtils.isEmpty(AgentConfig.Agent.INSTANCE_UUID)){
+            AgentConfig.Agent.INSTANCE_UUID = UUID.randomUUID().toString().replaceAll("-", "");
+        }
+
+
     }
 
     public static InputStreamReader loadConfig() throws CubicConfigNotFoundException, AgentPackageNotFoundException {

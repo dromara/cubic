@@ -16,9 +16,9 @@ public class MatrixAgent {
 
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         System.out.println("add agent");
-
         CubicConfInitalizer.initConfig();
-        instrumentation.addTransformer(new DefineTransformer(), true);
+
+//        instrumentation.addTransformer(new DefineTransformer(), true);
 
         AgentNettyClient client = new AgentNettyClient();
         client.start();

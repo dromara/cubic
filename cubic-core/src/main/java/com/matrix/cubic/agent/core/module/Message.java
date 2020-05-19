@@ -1,6 +1,8 @@
 package com.matrix.cubic.agent.core.module;
 
 
+import com.matrix.cubic.agent.core.conf.AgentConfig;
+
 /**
  * @ClassName Message
  * @Author QIANGLU
@@ -17,13 +19,12 @@ public class Message {
 
     private String command;
 
-//    private String instanceUuid = ServiceAndEndpointRegisterClient.getInstanceUuid();
-//    private String instanceName = ServiceAndEndpointRegisterClient.getInstanceName();
-//    private String instanceVersion = ServiceAndEndpointRegisterClient.getInstanceVersion();
+    private String instanceUuid = AgentConfig.Agent.INSTANCE_UUID;
 
-    private String instanceUuid;
-    private String instanceName;
-    private String instanceVersion;
+    private String instanceName = AgentConfig.Agent.SERVICE_NAME;
+
+    private String instanceVersion = AgentConfig.Agent.VERSION;
+
 
     public Message(Integer code, String body, String id) {
         this.id = id;
