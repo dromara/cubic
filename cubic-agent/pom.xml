@@ -24,7 +24,7 @@
         <can.retransform.classes>true</can.retransform.classes>
     </properties>
     <build>
-        <finalName>matrix-cubic-agent</finalName>
+        <finalName>cubic-agent</finalName>
 
         <plugins>
             <plugin>
@@ -93,6 +93,40 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo>${project.basedir}</echo>
+                                <delete dir="${project.basedir}/../agent-dist" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <mkdir dir="${project.basedir}/../agent-dist" />
+                                <copy file="${project.build.directory}/cubic-agent.jar" tofile="${project.basedir}/../agent-dist/cubic-agent.jar" overwrite="true" />
+                                <mkdir dir="${project.basedir}/../agent-dist/config" />
+                                <mkdir dir="${project.basedir}/../agent-dist/logs" />
+                                <copydir src="${project.basedir}/../config" dest="${project.basedir}/../agent-dist/config" forceoverwrite="true" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 
