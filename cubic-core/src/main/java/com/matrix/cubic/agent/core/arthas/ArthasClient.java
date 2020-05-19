@@ -1,8 +1,10 @@
 package com.matrix.cubic.agent.core.arthas;
 
+import com.matrix.cubic.agent.core.boot.AgentPackagePath;
 import com.matrix.cubic.agent.core.conf.AgentConfig;
 import com.matrix.cubic.agent.core.utils.VmUtils;
 import com.sun.tools.attach.VirtualMachine;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +17,9 @@ import org.slf4j.LoggerFactory;
  */
 public class ArthasClient {
     private static final Logger logger = LoggerFactory.getLogger(ArthasClient.class);
+
+    private final static String DEFAULT_ARTHAS_FILE_NAME = "/arthas/arthas-agent.jar";
+
 
     private final String pid;
 
@@ -32,7 +37,8 @@ public class ArthasClient {
         try {
             virtualMachine = VmUtils.getVirtualMachine(pid);
             logger.info("start load arthas agent, load {}", AgentConfig.Agent.ARTHAS_PATH);
-            virtualMachine.loadAgent(AgentConfig.Agent.ARTHAS_PATH,
+            String path = StringUtils.isEmpty(AgentConfig.Agent.ARTHAS_PATH) ? AgentPackagePath.getPath() + DEFAULT_ARTHAS_FILE_NAME : AgentConfig.Agent.ARTHAS_PATH;
+            virtualMachine.loadAgent(path,
                     "arthas");
         } finally {
             if (virtualMachine != null) {

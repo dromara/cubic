@@ -13,7 +13,7 @@ public class AgentConfig {
 
         public static String TCP_SERVERS = "localhost:9999";
 
-        public static String ARTHAS_PATH = "/data/agent/agent-skywalking/arthas/arthas-agent.jar";
+        public static String ARTHAS_PATH = "";
 
         public static String VERSION = "1.0";
 

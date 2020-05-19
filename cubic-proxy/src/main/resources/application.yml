@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: matrix-proxy
+server:
+  port: 6081
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: ${log.path}/${spring.application.name}
+      pattern:  -| %t | %a |  %h | %H | %m | %{x-Forwarded-For}i | %l | %u | %r | %s | %b
+
+matrix:
+  server:
+    agentPort: 11900
+management:
+  endpoints:
+    web:
+      base-path: /
+
+log:
+  level: info
+  path: /tmp/logs

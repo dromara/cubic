@@ -15,7 +15,4 @@ mvn clean package  -Dmaven.test.skip -Denforcer.skip=true
 echo "================ building cubic agent finished ================"
 
 
-#打包proxy
-echo "================ starting to build cubic proxy ================"
-#mvn clean package -am -pl bistoury-proxy -Pprod -Dmaven.test.skip=true -Denforcer.skip=true
-echo "================ building cubic proxy finished ================"
+
