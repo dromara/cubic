@@ -1,5 +1,8 @@
 package com.matrix.agent;
 
+import com.matrix.cubic.agent.core.AgentNettyClient;
+import com.matrix.cubic.agent.core.conf.CubicConfInitalizer;
+
 import java.lang.instrument.Instrumentation;
 
 /**
@@ -11,12 +14,18 @@ import java.lang.instrument.Instrumentation;
 
 public class MatrixAgent {
 
-    public static void premain(String agentArgs, Instrumentation instrumentation){
+    public static void premain(String agentArgs, Instrumentation instrumentation) {
         System.out.println("add agent");
 
-        instrumentation.addTransformer(new DefineTransformer(),true);
-    }
+        CubicConfInitalizer.initConfig();
+        instrumentation.addTransformer(new DefineTransformer(), true);
 
+        AgentNettyClient client = new AgentNettyClient();
+        client.start();
+
+        Runtime.getRuntime()
+                .addShutdownHook(new Thread(client::destroyAndSync, "cubic agent shutdown thread"));
+    }
 
 
 }

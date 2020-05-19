@@ -27,16 +27,18 @@ public class CubicConfInitalizer {
 
     private final static String SYSTEM_CONFIG_PATH = "cubic_config";
     private final static String DEFAULT_CONFIG_FILE_NAME = "/conf/agent.conf";
+    private static boolean IS_INIT_COMPLETED = false;
 
     public static void initConfig() {
-        try ( InputStreamReader reader = loadConfig()){
+        try (InputStreamReader reader = loadConfig()) {
             Properties properties = new Properties();
             properties.load(reader);
             CubicConfigConvert.initialize(properties, AgentConfig.class);
-        }catch (Exception e){
-            logger.error("Failed to read the config file, agent will is going to run in default config.",e);
+        } catch (Exception e) {
+            logger.error("Failed to read the config file, agent will is going to run in default config.", e);
         }
 
+        IS_INIT_COMPLETED = true;
     }
 
     public static InputStreamReader loadConfig() throws CubicConfigNotFoundException, AgentPackageNotFoundException {
