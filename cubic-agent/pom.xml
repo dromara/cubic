@@ -58,12 +58,7 @@
                                     <exclude>com.google.guava:guava</exclude>
                                 </excludes>
                             </artifactSet>
-<!--                            <relocations>-->
-<!--                                <relocation>-->
-<!--                                    <pattern>${shade.net.bytebuddy.source}</pattern>-->
-<!--                                    <shadedPattern>${shade.net.bytebuddy.target}</shadedPattern>-->
-<!--                                </relocation>-->
-<!--                            </relocations>-->
+
                             <filters>
                                 <filter>
                                     <artifact>net.bytebuddy:byte-buddy</artifact>
@@ -76,20 +71,7 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-jar-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <archive>-->
-<!--                        <manifestEntries>-->
-<!--                            <Premain-Class>com.matrix.agent.MatrixAgent</Premain-Class>-->
-<!--                            <Agent-Class>com.matrix.agent.MatrixAgent</Agent-Class>-->
-<!--                            <Can-Redefine-Classes>true</Can-Redefine-Classes>-->
-<!--                            <Can-Retransform-Classes>true</Can-Retransform-Classes>-->
-<!--                        </manifestEntries>-->
-<!--                    </archive>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

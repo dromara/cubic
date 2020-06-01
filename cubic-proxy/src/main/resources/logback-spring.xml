@@ -37,7 +37,7 @@
                 <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-        <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+        <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>${PATTERN}</Pattern>
         </layout>
     </appender>
@@ -52,7 +52,7 @@
                 <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-        <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+        <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>${PATTERN}</pattern>
         </layout>
     </appender>

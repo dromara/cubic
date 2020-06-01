@@ -1,6 +1,12 @@
 spring:
   application:
     name: matrix-proxy
+  security:
+    user:
+      name: admin
+      password: admin
+  profiles:
+    active: dev
 server:
   port: 6081
   tomcat:
