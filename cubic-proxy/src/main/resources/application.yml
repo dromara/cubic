@@ -1,24 +1,17 @@
 spring:
   application:
     name: matrix-proxy
-  security:
-    user:
-      name: admin
-      password: admin
-  profiles:
-    active: dev
-  redis:
-    lettuce:
-      pool:
-        max-active:
+  mvc:
+    view:
+      prefix: /page/
+      suffix: .html
 server:
-  port: 6081
+  port: 6080
   tomcat:
     accesslog:
       enabled: true
       directory: ${log.path}/${spring.application.name}
       pattern:  -| %t | %a |  %h | %H | %m | %{x-Forwarded-For}i | %l | %u | %r | %s | %b
-
 matrix:
   server:
     agentPort: 11900
@@ -26,7 +19,6 @@ management:
   endpoints:
     web:
       base-path: /
-
 
 log:
   level: info
