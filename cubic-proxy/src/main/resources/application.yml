@@ -7,6 +7,10 @@ spring:
       password: admin
   profiles:
     active: dev
+  redis:
+    lettuce:
+      pool:
+        max-active:
 server:
   port: 6081
   tomcat:
@@ -22,6 +26,7 @@ management:
   endpoints:
     web:
       base-path: /
+
 
 log:
   level: info

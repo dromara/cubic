@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -28,6 +29,8 @@ public class CubicConfInitalizer {
 
     private final static String SYSTEM_CONFIG_PATH = "cubic_config";
     private final static String DEFAULT_CONFIG_FILE_NAME = "/config/agent.config";
+    private static final String ENV_KEY_PREFIX = "cubic.";
+
     private static boolean IS_INIT_COMPLETED = false;
 
     public static void initConfig() {
@@ -37,6 +40,12 @@ public class CubicConfInitalizer {
             CubicConfigConvert.initialize(properties, AgentConfig.class);
         } catch (Exception e) {
             logger.error("Failed to read the config file, agent will is going to run in default config.", e);
+        }
+
+        try {
+            overrideConfigBySystemProp();
+        } catch (Exception e) {
+            logger.error( "Failed to read the system properties.",e);
         }
 
         IS_INIT_COMPLETED = true;
@@ -65,5 +74,21 @@ public class CubicConfInitalizer {
         }
         throw new CubicConfigNotFoundException("Failed to load agent.config");
 
+    }
+
+    private static void overrideConfigBySystemProp() throws IllegalAccessException {
+        Properties properties = new Properties();
+        Properties systemProperties = System.getProperties();
+        for (final Map.Entry<Object, Object> prop : systemProperties.entrySet()) {
+            String key = prop.getKey().toString();
+            if (key.startsWith(ENV_KEY_PREFIX)) {
+                String realKey = key.substring(ENV_KEY_PREFIX.length());
+                properties.put(realKey, prop.getValue());
+            }
+        }
+
+        if (!properties.isEmpty()) {
+            CubicConfigConvert.initialize(properties, AgentConfig.class);
+        }
     }
 }
