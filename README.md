@@ -20,7 +20,7 @@ cubic-proxy 代理，用于维护通道和命令下发，目前包含简单的we
 #### 安装教程
 
 1.  git clone https://gitee.com/sanjiankethree/cubic.git
-2.  执行打包脚本 ./script/build.sh
+2.  执行./mvnw package  -DskipTests 或执行打包脚本 ./script/build.sh
 3.  打包完成的agent 在agent-dist目录下
 4.  打包完成的proxy 在agent-proxy-dist目录下
 
