@@ -11,7 +11,7 @@ fi
 
 #打包agent
 echo "================ starting to build cubic agent ================"
-mvn clean package  -Dmaven.test.skip -Denforcer.skip=true
+./mvnw package  -DskipTests
 echo "================ building cubic agent finished ================"
 
 
