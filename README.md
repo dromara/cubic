@@ -65,6 +65,9 @@ scripts 包含打包脚本、启动脚本（用于测试）
     输入3，切换到arthas 命令，就可以使用了
     ![输入图片说明](https://images.gitee.com/uploads/images/2020/0604/105303_a3090417_1168339.png "屏幕截图.png")
 
+#### 公众号
+![角儿旮旯](https://images.gitee.com/uploads/images/2020/0604/110306_76d259e8_1168339.jpeg "qrcode_for_gh_13314ac27929_258.jpg")
+
 #### 参与贡献
 
 1.  Fork 本仓库
