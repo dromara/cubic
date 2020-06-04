@@ -160,6 +160,7 @@ public class WebRequestHandler extends SimpleChannelInboundHandler<TextWebSocket
         Session session = sessionManager.create(webConnection, serverConnection);
         cmd.setId(session.getId());
         session.writeToAgent(JSON.toJSONString(cmd));
+        log.info("request command :{}  type:{}  id:{}",cmd.getCommand(),cmd.getCode(),cmd.getId());
         return session;
     }
 

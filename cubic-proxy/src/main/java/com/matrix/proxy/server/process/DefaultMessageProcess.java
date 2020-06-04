@@ -1,12 +1,16 @@
 package com.matrix.proxy.server.process;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.cache.*;
+import com.matrix.proxy.module.Command;
 import com.matrix.proxy.server.SyncFuture;
 import com.matrix.proxy.server.handler.ServerMessgaeProcess;
+import com.matrix.proxy.session.Session;
+import com.matrix.proxy.session.SessionManager;
+import com.matrix.proxy.util.CubicContextHolder;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 public class DefaultMessageProcess implements ServerMessgaeProcess {
 
     private final static LoadingCache<String, SyncFuture> futureCache;
+    private SessionManager sessionManager;
+
 
     static {
         futureCache = CacheBuilder.newBuilder()
@@ -50,26 +56,51 @@ public class DefaultMessageProcess implements ServerMessgaeProcess {
     }
 
     @Override
-    public void ackSync(String msg) {
+    public boolean ackSync(String msg) {
 
+        if(sessionManager == null){
+            this.sessionManager = CubicContextHolder.getCache(SessionManager.class);
+        }
         log.info("接收到服务返回数据 length: {}", msg.length());
-
+        boolean rs = false;
         try {
-            JSONObject object = JSON.parseObject(msg);
-            String id = object.getString("id");
+            Command cmd = JSON.parseObject(msg, Command.class);
+            String id = cmd.getId();
 
             SyncFuture syncFuture = futureCache.getIfPresent(id);
 
             if (syncFuture == null) {
                 log.warn("ackSync command data length:{},but can not found SyncFuture by cache", msg.length());
-                return;
+
+                return ackToWeb(cmd);
             }
             syncFuture.setResponse(msg);
             futureCache.invalidate(id);
+            rs = true;
         } catch (Exception e) {
             log.error("ackSync data error", e);
+            rs = false;
+        }
+        return rs;
+    }
+
+    public boolean ackToWeb(Command command) {
+
+        if (sessionManager == null) {
+            return false;
+        }
+        Session session = sessionManager.getSession(command.getId());
+        if (session == null) {
+            log.warn("receive message ,can not get websocket session ");
+            return false;
         }
 
+        log.info("接收到 arthas 返回数据，id:{}", command.getId());
+
+        if (StringUtils.isNotEmpty(command.getBody())) {
+            session.writeToWeb(command.getBody());
+        }
+        return true;
     }
 
     @Override

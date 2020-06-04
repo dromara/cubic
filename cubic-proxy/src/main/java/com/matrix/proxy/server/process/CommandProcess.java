@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 public class CommandProcess extends DefaultMessageProcess {
 
 
+    public CommandProcess() {
+    }
+
     @Override
     public Integer code() {
         return ResponseCode.COMMAND.getCode();
@@ -23,7 +26,7 @@ public class CommandProcess extends DefaultMessageProcess {
 
     @Override
     public void process(ChannelHandlerContext ctx, String data) {
-        this.ackSync(data);
+        boolean rs = this.ackSync(data);
     }
 
 }

@@ -11,7 +11,7 @@ fi
 
 #打包agent
 echo "================ starting to build cubic agent ================"
-./mvnw package  -DskipTests
+./mvnw clean package  -DskipTests
 echo "================ building cubic agent finished ================"
 
 

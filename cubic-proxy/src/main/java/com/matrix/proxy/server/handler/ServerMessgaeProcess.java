@@ -10,5 +10,5 @@ import com.matrix.proxy.server.MessageProcessor;
  */
 public interface ServerMessgaeProcess extends MessageProcessor {
 
-    public void ackSync(String msg);
+    public boolean ackSync(String msg);
 }

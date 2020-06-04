@@ -52,7 +52,7 @@ public class CommandExecutor implements PidExecutor {
                     break;
 
             }
-            return readVmOutput(inputStream);
+            return inputStream == null ? "Command unsupported" : readVmOutput(inputStream);
         } catch (Exception e) {
             log.error("run JStackPidExecutor error pid:" + pid, e);
         } finally {

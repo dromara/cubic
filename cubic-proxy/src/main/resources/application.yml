@@ -1,10 +1,18 @@
 spring:
   application:
-    name: matrix-proxy
+    name: cubic-proxy
+#  security:
+#    user:
+#      name: admin
+#      password: admin
+  profiles:
+    active: dev
+
   mvc:
     view:
       prefix: /page/
       suffix: .html
+
 server:
   port: 6080
   tomcat:

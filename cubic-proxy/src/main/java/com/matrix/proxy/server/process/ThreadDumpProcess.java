@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ThreadDumpProcess extends DefaultMessageProcess {
 
+    public ThreadDumpProcess() {
+    }
+
     @Override
     public Integer code() {
         return ResponseCode.THREAD_DUMP.getCode();

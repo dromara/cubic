@@ -41,6 +41,9 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
 
     private final String heartbeatResponse = initHeartbeatResponse();
 
+    public ProxyHeartbeatProcessor() {
+    }
+
     @Override
     public Integer code() {
         return ResponseCode.RESP_TYPE_HEARTBEAT.getCode();

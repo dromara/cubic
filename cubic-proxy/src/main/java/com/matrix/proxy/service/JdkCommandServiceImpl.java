@@ -25,6 +25,10 @@ public class JdkCommandServiceImpl extends DefaultMessageProcess implements JdkC
 
     @Resource
     private ServerConnectionStore serverConnectionStore;
+
+    public JdkCommandServiceImpl() {
+    }
+
     /**
      * 获取应用当前参数信息
      *

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web socket 测试</title>
+</head>
+<body>
+
+<div style="width: 600px;height: 400px;">
+    <p>服务器输出:</p>
+    <div style="border: 1px solid #CCC;height: 300px;overflow: scroll" id="server-msg-container">
+
+    </div>
+    <p>
+        <textarea id="inp-msg" style="height: 50px;width: 500px"></textarea><input type="button" value="发送"
+                                                                                   id="send"><br/>
+        选择图片： <input type="file" id="send-pic">
+    </p>
+</div>
+
+<script type="application/javascript">
+    var ws = new WebSocket("ws://127.0.0.1:11901/ws");
+    ws.onopen = function (ev) {
+
+    };
+    ws.onmessage = function (ev) {
+        console.info("onmessage", ev);
+        var inpMsg = document.getElementById("server-msg-container");
+        if (typeof ev.data === "string") {
+            inpMsg.innerHTML += ev.data + "<br/>";
+        } else {
+            var result = ev.data;
+            var flagReader = new FileReader();
+            flagReader.readAsArrayBuffer(result);
+            flagReader.onload = function () {
+                var imageReader = new FileReader();
+                imageReader.readAsDataURL(result);
+                console.info("服务器返回的数据大小:", result.size);
+                imageReader.onload = function (img) {
+                    var imgHtml = "<img src='" + img.target.result + "' style='width: 100px;height: 100px;'>";
+                    inpMsg.innerHTML += imgHtml.replace("data:application/octet-stream;", "data:image/png;") + "<br />";
+                    inpMsg.scroll(inpMsg.scrollWidth,inpMsg.scrollHeight);
+                };
+            }
+        }
+    };
+    ws.onerror = function () {
+        var inpMsg = document.getElementById("server-msg-container");
+        inpMsg.innerHTML += "发生异常" + "<br/>";
+    };
+    ws.onclose = function () {
+        var inpMsg = document.getElementById("server-msg-container");
+        inpMsg.innerHTML += "webSocket 关闭" + "<br/>";
+    };
+
+    // 发送文字消息
+    document.getElementById("send").addEventListener("click", function () {
+        ws.send(document.getElementById("inp-msg").value);
+    }, false);
+
+    // 发送图片
+    document.querySelector('#send-pic').addEventListener('change', function () {
+        var files = this.files;
+        if (files && files.length) {
+            var file = files[0];
+            var fileReader = new FileReader();
+            fileReader.readAsArrayBuffer(file);
+            fileReader.onload = function (e) {
+                // 获取到文件对象
+                var result = e.target.result;
+                // 发送数据到服务器端
+                ws.send(result)
+            }
+        }
+    }, false);
+</script>
+</body>
+</html>
