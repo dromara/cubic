@@ -16,7 +16,12 @@ Cubic 主要有两部分，目前UI 和proxy 是写在一起的
  - 本机 6080 11900 端口未被占用（此端口都在proxy 配置）
  
  #### 启动
- - 将agent-dist整体拷贝到你要部署的机器，在启动应用时加入 -javaagent:/path/agent-dist/cubic-agent.jar -Dcubic.agent.service_name=cubic-proxy
+ - 将agent-dist整体拷贝到你要部署的机器，在启动应用时加入 
+ 
+    -javaagent:/path/agent-dist/cubic-agent.jar （添加agent）
+    
+    -Dcubic.agent.service_name=cubic-proxy (添加项目名称)
+    
  - 启动 cubic-proxy java -jar cubic-proxy.jar 的方式启动
  
  
