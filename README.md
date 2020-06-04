@@ -10,14 +10,23 @@ Cubic 可调用内部自定义命令和动态加载arthas使用arthas 命令集�
 
 #### 目录结构
 agent-dist  存放打包的agent.jar(打包后出现)
+
 agent-proxy-dist    存放打包的proxy.jar(打包后出现)
+
 arthas-dist 用于支持arthas命令集
+
 config  agent配置文件
+
 cubic-agent agent start
+
 cubic-core  agent核心
+
 cubic-proxy 代理应用，目前集成了简单的页面
+
 cubic-ui    新版UI，目前只是demo，开发中
+
 docs    文档
+
 scripts 包含打包脚本、启动脚本（用于测试）
 
 
