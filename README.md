@@ -53,11 +53,8 @@
 5. 使用search 命令来查询我们项目配置的agent, 比如在agent config 我们配置了参数 agent.service_name = cubic,则进行查询并获取到应用的agentId(如果使用quick_start启动的，因为增加了-Dcubic.agent.service_name=cubic-proxy ，所以我们可以使用cubic-proxy查询ID )
    ![输入图片说明](https://images.gitee.com/uploads/images/2020/0605/190339_bde70250_1168339.png "屏幕截图.png")
 
-6. 然后将agentId 填入上面的输入框 点击connect 按钮重新加载，则进入当前应用的命令模式
-    ![输入图片说明](https://images.gitee.com/uploads/images/2020/0604/105209_d6e1da3a_1168339.png "屏幕截图.png")
-
     
-7. 输入3，切换到arthas 命令，就可以使用了
+6. 然后将agentId 填入上面的输入框 点击connect 按钮重新加载，则进入当前应用的命令模式，输入3，切换到arthas 命令，就可以使用了
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0605/190447_b3cd9e91_1168339.png "屏幕截图.png")    
     
     
