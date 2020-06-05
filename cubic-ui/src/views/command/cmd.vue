@@ -65,6 +65,12 @@ export default {
       this.term.open(document.getElementById('xterm'))
       // 窗口初始化后,按照浏览器窗口自适应大小
       fitAddon.fit()
+
+      // 这里还把窗口的column和row传入后端,使其能自动针对前端窗口边框改为输出
+      this.socket = new WebSocket('ws://localhost:80/ws')
+
+      // xterm的socket组件与websocket实例结合
+      // this.term.loadAddon(new AttachAddon(this.socket))
       // // 聚焦
       this.term.focus()
       this.term.writeln(' ')
@@ -76,14 +82,6 @@ export default {
     },
     prompt() {
       this.term.write('\r\n$ ')
-    },
-    initSocket() {
-      // 这里还把窗口的column和row传入后端,使其能自动针对前端窗口边框改为输出
-      this.socket = new WebSocket('ws://localhost:80/ws')
-
-      // xterm的socket组件与websocket实例结合
-      // const attachAddon = new AttachAddon(this.socket)
-      // this.term.loadAddon(attachAddon)
     },
     sendMessage(agentId, data) {
       if (data === 'clear') {
@@ -124,10 +122,11 @@ export default {
       }
     },
     termOnKey() {
+      console.log(this.term)
       this.term.onKey(e => {
-        const printable = !e.domEvent.altKey && !e.domEvent.altGraphKey && !e.domEvent.ctrlKey && !e.domEvent.metaKey
+        const printable = !e.domEvent.altKey && !e.domEvent.ctrlKey
 
-        if (e.domEvent.keyCode === 13) {
+        if (e.domEvent.code === 'Enter') {
           const typeSwtich = this.switchState(this.result)
 
           if (typeSwtich) {
@@ -135,7 +134,7 @@ export default {
             this.result = ''
           }
           this.prompt()
-        } else if (e.domEvent.keyCode === 8) {
+        } else if (e.domEvent.code === 'Backspace') {
           // Do not delete the prompt
           if (this.term._core.buffer.x > 2) {
             this.result = this.result.substring(0, this.result.length - 1)
@@ -154,29 +153,31 @@ export default {
         this.termOnKey()
         this.socketOnMessage()
 
-        // let copy = "";
+        const tis = this
+        // let copy = ''
 
-        // 获取选中时间
-        // this.term.onSelectionChange(function () {
-        //   if (this.term.hasSelection()) {
-        //     copy = this.term.getSelection();
+        // this.term.attachCustomKeyEventHandler(function(ev) {
+        //   // 粘贴 ctrl+v
+        //   if (ev.code === 'KeyV' && (ev.ctrlKey || ev.metaKey)) {
+        //     tis.term.write(copy)
+        //     tis.result += copy
+        //     // websocket.send(new TextEncoder().encode("\x00" + this.copy));
         //   }
-        // });
-
-        // //监听copy事件
-        // document.addEventListener('copy', function(e){
-        //   e.clipboardData.setData('text/plain', copy);
-        //   e.preventDefault(); // We want our data, not data from any selection, to be written to the clipboard
-        // });
-
+        // })
+        // 获取选中时间
+        // this.term.onSelectionChange(function() {
+        //   if (tis.term.hasSelection()) {
+        //     copy = tis.term.getSelection()
+        //   }
+        // })
         // //监听粘贴
-        // document.addEventListener('paste', function(e){
-        //   let c = e.clipboardData.getData('text/plain');
-        //   xterm.write(c);
-        //   result += c;
-        //   e.stopPropagation();
-        // });
-        // ws.send(JSON.stringify({action: 'resize', cols: terminalSize.cols, rows: terminalSize.rows}));
+
+        document.addEventListener('paste', function(e) {
+          const c = e.clipboardData.getData('text/plain')
+          tis.term.write(c)
+          tis.result += c
+          e.stopPropagation()
+        })
       }
     },
     socketOnClose() {
@@ -221,7 +222,6 @@ export default {
         this.disconnect()
       }
       this.initXterm()
-      this.initSocket()
       this.socketOnClose()
       this.socketOnOpen()
       this.socketOnError()
