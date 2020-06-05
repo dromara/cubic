@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input placeholder="IP" value="localhost" size="mini" style="width: 200px;" class="filter-item" />
-      <el-input placeholder="Port" value="80" size="mini" style="width: 200px;" class="filter-item" />
-      <el-input placeholder="AgentId" value="cubic" size="mini" style="width: 200px;" class="filter-item" />
+      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />
+      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />
+      <el-input v-model="vm.agentId" placeholder="AgentId" size="mini" style="width: 200px;" class="filter-item" />
       <el-button v-waves class="filter-item" size="mini" type="success" @click="startConnect">
         连接
       </el-button>
@@ -129,9 +129,9 @@ export default {
       this.socket.onmessage = function(event) {
         console.log(event)
         if (event.type === 'message') {
-          var d = event.data
+          const d = event.data
           vueThis.term.write(d)
-          if (!d.toString().trimEnd().endsWith('$') && this.currType !== 3) {
+          if (!d.toString().trimEnd().endsWith('$') && vueThis.currType !== 3) {
             vueThis.prompt()
           }
         }
@@ -169,7 +169,7 @@ export default {
         this.termOnKey()
         this.socketOnMessage()
 
-        // const tis = this
+        const tis = this
         // let copy = ''
         //
         // this.term.attachCustomKeyEventHandler(function(ev) {
@@ -188,12 +188,12 @@ export default {
         // })
         // //监听粘贴
 
-        // document.addEventListener('paste', function(e) {
-        //   const c = e.clipboardData.getData('text/plain')
-        //   tis.term.write(c)
-        //   tis.result += c
-        //   e.stopPropagation()
-        // })
+        document.addEventListener('paste', function(e) {
+          const c = e.clipboardData.getData('text/plain')
+          tis.term.write(c)
+          tis.result += c
+          e.stopPropagation()
+        })
       }
     },
     socketOnClose() {

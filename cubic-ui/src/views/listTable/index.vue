@@ -73,7 +73,7 @@
             {{ row.status }}
           </el-tag>
         </template>
-      </el-table-column>
+      </el-table-column>Yrwadj Oohvcf Kceqo Iqspc Rblnce Pomxjxs
       <el-table-column label="在线时长" width="150px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
@@ -238,13 +238,13 @@ export default {
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.total = response.data.total
+        // this.list = response.data.items
+        // this.total = response.data.total
 
         // Just to simulate the time of the request
         setTimeout(() => {
           this.listLoading = false
-        }, 1.5 * 1000)
+        }, 1 * 1000)
       })
     },
     handleFilter() {
