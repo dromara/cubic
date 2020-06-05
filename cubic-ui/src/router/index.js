@@ -79,7 +79,66 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/listTable',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/listTable/index'),
+        name: 'AppTable',
+        meta: { title: '实例列表', icon: 'list' }
+      }
+    ]
+  },
+  {
+    path: '/command',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/command/cmd'),
+        name: 'AppTable',
+        meta: { title: '命令模式', icon: 'eye' }
+      }
+    ]
+  },
+  {
+    path: '/threads',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/threads/index'),
+        name: 'Thread',
+        meta: { title: '线程监控', icon: 'chart', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/logs',
+    component: Layout,
+    name: 'logs',
+    meta: {
+      title: '日志',
+      icon: 'bug'
+    },
+    children: [
+      {
+        path: 'error',
+        component: () => import('@/views/logs/error'),
+        name: 'error',
+        meta: { title: '错误日志' }
+      },
+      {
+        path: 'audit',
+        component: () => import('@/views/logs/audit'),
+        name: 'audit',
+        meta: { title: '审计日志' }
       }
     ]
   },
@@ -91,7 +150,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/documentation/index'),
         name: 'Documentation',
-        meta: { title: 'Documentation', icon: 'documentation', affix: true }
+        meta: { title: 'Documentation', icon: 'documentation', affix: false }
       }
     ]
   },
@@ -377,7 +436,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://github.com/PanJiaChen/vue-element-admin',
+        path: 'https://gitee.com/sanjiankethree/cubic',
         meta: { title: 'External Link', icon: 'link' }
       }
     ]

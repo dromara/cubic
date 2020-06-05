@@ -1,0 +1,250 @@
+<template>
+  <div id="xterm" class="xterm" />
+</template>
+<script>
+import { Terminal } from 'xterm'
+import { FitAddon } from 'xterm-addon-fit'
+// import { AttachAddon } from 'xterm-addon-attach'
+import { WebLinksAddon } from 'xterm-addon-web-links'
+import 'xterm/css/xterm.css'
+export default {
+  name: 'WebShell',
+  data() {
+    return {
+      socket: null,
+      term: null,
+      appId: '',
+      result: '',
+      ip: '',
+      currType: '1',
+      agentId: 'xt',
+      state: '',
+      type: [1, 3],
+      msg: {
+        '1': {
+          text: '进入自定义命令模式 '
+        },
+        '3': {
+          text: '进入 arthas命令模式 '
+        }},
+      rows: 400,
+      cols: 100
+    }
+  },
+  mounted() {
+    // 实例化终端并设置参数
+    this.startConnect()
+    this.interval()
+    // window.addEventListener('resize', resizeScreen);
+
+    // // 监听resize,当窗口拖动的时候,监听事件,实时改变xterm窗口
+    // window.addEventListener('resize', this.debounce(this.resizeScreen, 1500), false)
+  },
+  methods: {
+    initXterm() {
+      this.term = new Terminal({
+        cursorBlink: true, // 光标闪烁
+        // rows: parseInt(_this.rows), // 行数
+        // cols: parseInt(_this.cols), // 不指定行数，自动回车后光标从下一行开始
+        cursorStyle: 'block', // 光标样式  null | 'block' | 'underline' | 'bar'
+        screenKeys: true,
+        theme: {
+          foreground: '#7e9192', // 字体
+          background: '#002833', // 背景色
+          cursor: 'help', // 设置光标
+          lineHeight: 16
+        }
+      })
+      // 加载自适应组件
+      const fitAddon = new FitAddon()
+      this.term.loadAddon(fitAddon)
+      // 加载weblink组件
+      this.term.loadAddon(new WebLinksAddon())
+
+      // 在绑定的组件上初始化窗口
+      this.term.open(document.getElementById('xterm'))
+      // 窗口初始化后,按照浏览器窗口自适应大小
+      fitAddon.fit()
+      // // 聚焦
+      this.term.focus()
+      this.term.writeln(' ')
+      this.term.writeln(' 欢迎使用代理终端，此终端可连接到目标机器进行命令操作')
+      this.term.writeln(' 命令分为两类，自定义命令，Arthas命令（Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html）')
+      this.term.writeln(' 输入 1 回车进入自定义命令模式（默认）')
+      this.term.writeln(' 输入 3 回车进入Arthas命令模式')
+      this.term.writeln(' 正在连接。。。')
+    },
+    prompt() {
+      this.term.write('\r\n$ ')
+    },
+    initSocket() {
+      // 这里还把窗口的column和row传入后端,使其能自动针对前端窗口边框改为输出
+      this.socket = new WebSocket('ws://localhost:80/ws')
+
+      // xterm的socket组件与websocket实例结合
+      // const attachAddon = new AttachAddon(this.socket)
+      // this.term.loadAddon(attachAddon)
+    },
+    sendMessage(agentId, data) {
+      if (data === 'clear') {
+        this.term.clear()
+        return
+      }
+      if (this.socket == null) {
+        return
+      }
+      this.socket.send(JSON.stringify({
+        instanceUuid: this.agentId,
+        type: this.currType,
+        command: data
+      }))
+    },
+    switchState(data) {
+      if (data === '1' || data === '3') {
+        this.currType = data
+
+        this.prompt()
+        this.term.write(this.msg[data].text + '\r\n')
+        this.result = ''
+        return false
+      }
+      return true
+    },
+    socketOnMessage() {
+      const vueThis = this
+      this.socket.onmessage = function(event) {
+        console.log(event)
+        if (event.type === 'message') {
+          var d = event.data
+          vueThis.term.write(d)
+          if (!d.toString().trimEnd().endsWith('$') && this.currType !== 3) {
+            vueThis.prompt()
+          }
+        }
+      }
+    },
+    termOnKey() {
+      this.term.onKey(e => {
+        const printable = !e.domEvent.altKey && !e.domEvent.altGraphKey && !e.domEvent.ctrlKey && !e.domEvent.metaKey
+
+        if (e.domEvent.keyCode === 13) {
+          const typeSwtich = this.switchState(this.result)
+
+          if (typeSwtich) {
+            this.sendMessage(this.agentId, this.result)
+            this.result = ''
+          }
+          this.prompt()
+        } else if (e.domEvent.keyCode === 8) {
+          // Do not delete the prompt
+          if (this.term._core.buffer.x > 2) {
+            this.result = this.result.substring(0, this.result.length - 1)
+            this.term.write('\b \b')
+          }
+        } else if (printable) {
+          this.term.write(e.key)
+          this.result += e.key
+        }
+      })
+    },
+    socketOnOpen() {
+      this.socket.onopen = () => {
+        this.term.writeln(' 已连接, 当前 host: ' + this.ip + ', agentId: ' + this.agentId + ', findState: ' + this.state)
+        this.prompt()
+        this.termOnKey()
+        this.socketOnMessage()
+
+        // let copy = "";
+
+        // 获取选中时间
+        // this.term.onSelectionChange(function () {
+        //   if (this.term.hasSelection()) {
+        //     copy = this.term.getSelection();
+        //   }
+        // });
+
+        // //监听copy事件
+        // document.addEventListener('copy', function(e){
+        //   e.clipboardData.setData('text/plain', copy);
+        //   e.preventDefault(); // We want our data, not data from any selection, to be written to the clipboard
+        // });
+
+        // //监听粘贴
+        // document.addEventListener('paste', function(e){
+        //   let c = e.clipboardData.getData('text/plain');
+        //   xterm.write(c);
+        //   result += c;
+        //   e.stopPropagation();
+        // });
+        // ws.send(JSON.stringify({action: 'resize', cols: terminalSize.cols, rows: terminalSize.rows}));
+      }
+    },
+    socketOnClose() {
+      this.socket.onclose = () => {
+        if (this.term != null) {
+          this.term.writeln(' websocket channel close, please reconnect!')
+          this.prompt()
+        }
+      }
+    },
+    socketOnError() {
+      this.socket.onerror = () => {
+        this.socket = null
+        this.term.writeln(' websocket channel error ,will close this,please reconnect!')
+        this.prompt()
+      }
+    },
+    disconnect() {
+      try {
+        if (this.socket != null) {
+          this.socket.send(JSON.stringify({
+            instanceUuid: this.appId,
+            type: 999,
+            command: this.result
+          }))
+          this.socket.close()
+          this.socket = null
+          console.log('closed ws succ!')
+        }
+        if (this.term != null) {
+          this.term.dispose()
+          console.log('dispose xterm succ!')
+          // $('#fullSc').hide();
+        }
+        console.log('Connection was closed successfully!')
+      } catch (e) {
+        console.log('No connection, please start connect first.')
+      }
+    },
+    startConnect() {
+      if (this.socket != null && this.term != null) {
+        this.disconnect()
+      }
+      this.initXterm()
+      this.initSocket()
+      this.socketOnClose()
+      this.socketOnOpen()
+      this.socketOnError()
+    },
+    interval() {
+      const vue = this
+      window.setInterval(() => {
+        if (vue.socket !== null) {
+          vue.socket.send(JSON.stringify({
+            instanceUuid: vue.agentId,
+            type: 0,
+            command: 1
+          }))
+        }
+      }, 5000)
+    }
+  }
+}
+</script>
+<style scoped>
+  .xterm {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+</style>

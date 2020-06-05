@@ -34,9 +34,9 @@ public class MatrixNettyWebServer implements NettyServer {
 
     private static final int DEFAULT_WRITE_HIGH_WATER_MARK = 128 * 1024;
 
-    private final EventLoopGroup BOSS_GROUP = new NioEventLoopGroup(1, new ThreadFactoryBuilder().setNameFormat("agent-netty-web-server-boss").build());
+    private final EventLoopGroup BOSS_GROUP = new NioEventLoopGroup(1, new ThreadFactoryBuilder().setNameFormat("cubic-proxy-web-server-boss").build());
 
-    private final EventLoopGroup WORKER_GROUP = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors() - 1, new ThreadFactoryBuilder().setNameFormat("oap-netty-web-server-worker").build());
+    private final EventLoopGroup WORKER_GROUP = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors() - 1, new ThreadFactoryBuilder().setNameFormat("cubic-proxy-web-server-worker").build());
     private volatile Channel channel;
     private final int port;
     private WebRequestHandler webRequestHandler;
@@ -50,7 +50,7 @@ public class MatrixNettyWebServer implements NettyServer {
 
     @Override
     public void start() {
-        ConnectionCounterHandler connectionCounterHandler = new ConnectionCounterHandler("skywalking proxy");
+        ConnectionCounterHandler connectionCounterHandler = new ConnectionCounterHandler("cubic-proxy");
         ServerBootstrap bootstrap = new ServerBootstrap()
                 .option(ChannelOption.SO_KEEPALIVE, true)
                 .option(ChannelOption.SO_REUSEADDR, true)
@@ -62,7 +62,7 @@ public class MatrixNettyWebServer implements NettyServer {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline pip = ch.pipeline();
-                        pip.addLast(new IdleStateHandler(30 , 0, 30 * 1000))
+                        pip.addLast(new IdleStateHandler(0 , 0, 300 * 1000))
                                 .addLast(new ChannelCloseHandler("websocket"))
                                 .addLast(new HttpServerCodec())
                                 .addLast(new HttpObjectAggregator(1024 * 1024))
