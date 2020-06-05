@@ -1,5 +1,19 @@
 <template>
-  <div id="xterm" class="xterm" />
+  <div class="app-container">
+    <div class="filter-container">
+      <el-input placeholder="IP" value="localhost" size="mini" style="width: 200px;" class="filter-item" />
+      <el-input placeholder="Port" value="80" size="mini" style="width: 200px;" class="filter-item" />
+      <el-input placeholder="AgentId" value="cubic" size="mini" style="width: 200px;" class="filter-item" />
+      <el-button v-waves class="filter-item" size="mini" type="success" @click="startConnect">
+        连接
+      </el-button>
+      <el-button v-waves class="filter-item" size="mini" type="danger" @click="disconnect">
+        断开
+      </el-button>
+    </div>
+    <div id="xterm" class="xterm" />
+  </div>
+
 </template>
 <script>
 import { Terminal } from 'xterm'
@@ -11,13 +25,15 @@ export default {
   name: 'WebShell',
   data() {
     return {
+      vm: {
+        ip: 'localhost',
+        port: 80,
+        agentId: 'cubic'
+      },
       socket: null,
       term: null,
-      appId: '',
       result: '',
-      ip: '',
       currType: '1',
-      agentId: 'xt',
       state: '',
       type: [1, 3],
       msg: {
@@ -67,7 +83,7 @@ export default {
       fitAddon.fit()
 
       // 这里还把窗口的column和row传入后端,使其能自动针对前端窗口边框改为输出
-      this.socket = new WebSocket('ws://localhost:80/ws')
+      this.socket = new WebSocket('ws://' + this.vm.ip + ':' + this.vm.port + '/ws')
 
       // xterm的socket组件与websocket实例结合
       // this.term.loadAddon(new AttachAddon(this.socket))
@@ -92,7 +108,7 @@ export default {
         return
       }
       this.socket.send(JSON.stringify({
-        instanceUuid: this.agentId,
+        instanceUuid: this.vm.agentId,
         type: this.currType,
         command: data
       }))
@@ -130,7 +146,7 @@ export default {
           const typeSwtich = this.switchState(this.result)
 
           if (typeSwtich) {
-            this.sendMessage(this.agentId, this.result)
+            this.sendMessage(this.vm.agentId, this.result)
             this.result = ''
           }
           this.prompt()
@@ -148,14 +164,14 @@ export default {
     },
     socketOnOpen() {
       this.socket.onopen = () => {
-        this.term.writeln(' 已连接, 当前 host: ' + this.ip + ', agentId: ' + this.agentId + ', findState: ' + this.state)
+        this.term.writeln(' 已连接, 当前 host: ' + this.vm.ip + ', agentId: ' + this.vm.agentId + ', findState: ' + this.state)
         this.prompt()
         this.termOnKey()
         this.socketOnMessage()
 
-        const tis = this
+        // const tis = this
         // let copy = ''
-
+        //
         // this.term.attachCustomKeyEventHandler(function(ev) {
         //   // 粘贴 ctrl+v
         //   if (ev.code === 'KeyV' && (ev.ctrlKey || ev.metaKey)) {
@@ -164,7 +180,7 @@ export default {
         //     // websocket.send(new TextEncoder().encode("\x00" + this.copy));
         //   }
         // })
-        // 获取选中时间
+        // // 获取选中时间
         // this.term.onSelectionChange(function() {
         //   if (tis.term.hasSelection()) {
         //     copy = tis.term.getSelection()
@@ -172,12 +188,12 @@ export default {
         // })
         // //监听粘贴
 
-        document.addEventListener('paste', function(e) {
-          const c = e.clipboardData.getData('text/plain')
-          tis.term.write(c)
-          tis.result += c
-          e.stopPropagation()
-        })
+        // document.addEventListener('paste', function(e) {
+        //   const c = e.clipboardData.getData('text/plain')
+        //   tis.term.write(c)
+        //   tis.result += c
+        //   e.stopPropagation()
+        // })
       }
     },
     socketOnClose() {
@@ -199,7 +215,7 @@ export default {
       try {
         if (this.socket != null) {
           this.socket.send(JSON.stringify({
-            instanceUuid: this.appId,
+            instanceUuid: this.vm.agentId,
             type: 999,
             command: this.result
           }))
@@ -231,7 +247,7 @@ export default {
       window.setInterval(() => {
         if (vue.socket !== null) {
           vue.socket.send(JSON.stringify({
-            instanceUuid: vue.agentId,
+            instanceUuid: vue.vm.agentId,
             type: 0,
             command: 1
           }))
@@ -241,10 +257,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-  .xterm {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-</style>
