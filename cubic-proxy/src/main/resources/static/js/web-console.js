@@ -6,8 +6,8 @@ let result = '';
 let appId = '';
 let state = false;
 // let address = ["matrix-proxy-01.secoolocal.com:6080", "matrix-proxy-02.secoolocal.com:6080"];
-let address = ["matrix-proxy01.siku.cn", "matrix-proxy02.siku.cn"];
-// let address = ["localhost:6080", "localhost:6080"];
+// let address = ["matrix-proxy01.siku.cn", "matrix-proxy02.siku.cn"];
+let address = ["localhost:6080", "localhost:6080"];
 // let address = ["matrix-proxy01.siku.cn", "matrix-proxy.siku.cn"];
 
 // window.CMDTYPE = {
