@@ -6,8 +6,8 @@ let result = '';
 let appId = '';
 let state = false;
 // let address = ["matrix-proxy-01.secoolocal.com:6080", "matrix-proxy-02.secoolocal.com:6080"];
-// let address = ["matrix-proxy01.siku.cn", "matrix-proxy02.siku.cn"];
-let address = ["localhost:6080", "localhost:6080"];
+let address = ["matrix-proxy01.siku.cn", "matrix-proxy02.siku.cn"];
+// let address = ["localhost:6080", "localhost:6080"];
 // let address = ["matrix-proxy01.siku.cn", "matrix-proxy.siku.cn"];
 
 // window.CMDTYPE = {
@@ -145,7 +145,13 @@ function initXterm(cols, rows) {
         cursorBlink: true, // 光标闪烁
         cursorStyle: "block", // 光标样式  null | 'block' | 'underline' | 'bar'
         scrollback: 800, //回滚
-        screenKeys: true
+        screenKeys: true,
+        theme: {
+            foreground: '#7e9192', // 字体
+            background: '#002833', // 背景色
+            cursor: 'help', // 设置光标
+            lineHeight: 16
+        }
     });
 }
 
@@ -188,10 +194,10 @@ function openXterm() {
     // init xterm
     initXterm(terminalSize.cols, terminalSize.rows)
     xterm.open(document.getElementById('terminal'));
-    xterm.writeln('欢迎使用代理终端，此终端可连接到目标机器进行命令操作');
-    xterm.writeln('命令分为两类，自定义命令，Arthas命令（Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html）');
-    xterm.writeln('输入 1 回车进入自定义命令模式（默认）');
-    xterm.writeln('输入 3 回车进入Arthas命令模式');
+    xterm.writeln(' 欢迎使用代理终端，此终端可连接到目标机器进行命令操作');
+    xterm.writeln(' 命令分为两类，自定义命令，Arthas命令（Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html）');
+    xterm.writeln(' 输入 1 回车进入自定义命令模式（默认）');
+    xterm.writeln(' 输入 3 回车进入Arthas命令模式');
 }
 //清理缓存数据
 function clearCacheData() {
@@ -233,17 +239,17 @@ function startConnect(silent) {
     initWs(ip, port);
     ws.onerror = function () {
         ws = null;
-        xterm.writeln('websocket channel error ,will close this,please reconnect!');
+        xterm.writeln(' websocket channel error ,will close this,please reconnect!');
         prompt()
     };
     ws.onclose = function (message) {
         if (xterm != null) {
-            xterm.writeln('websocket channel close, please reconnect!');
+            xterm.writeln(' websocket channel close, please reconnect!');
             prompt()
         }
     };
     ws.onopen = function () {
-        xterm.writeln('webscoket channel is open, host: ' + ip + ' agentId: ' + agentId + ' findState: ' + state);
+        xterm.writeln(' webscoket channel is open, host: ' + ip + ' agentId: ' + agentId + ' findState: ' + state);
         prompt();
         ws.onmessage = function (event) {
             console.log(event)
