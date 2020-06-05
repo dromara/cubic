@@ -10,7 +10,7 @@ spring:
 
   mvc:
     view:
-      prefix: /page/
+      prefix: /assets/
       suffix: .html
 
 server:

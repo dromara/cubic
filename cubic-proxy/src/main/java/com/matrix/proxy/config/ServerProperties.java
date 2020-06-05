@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
  */
 @ConfigurationProperties(prefix = "matrix.server")
 @Component
-
 public class ServerProperties {
     @Getter
     @Setter
