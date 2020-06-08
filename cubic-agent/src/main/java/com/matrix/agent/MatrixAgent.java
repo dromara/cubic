@@ -19,10 +19,6 @@ public class MatrixAgent {
         System.out.println("add agent");
         CubicConfInitalizer.initConfig();
 
-//        instrumentation.addTransformer(new DefineTransformer(), true);
-
-//        AgentNettyClient client = new AgentNettyClient();
-//        client.start();
         ServiceManager.INMSTANCE.start();
         Runtime.getRuntime()
                 .addShutdownHook(new Thread(ServiceManager.INMSTANCE::shutdown, "cubic agent shutdown thread"));
