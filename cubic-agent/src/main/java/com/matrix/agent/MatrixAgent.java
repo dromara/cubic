@@ -1,6 +1,7 @@
 package com.matrix.agent;
 
 import com.matrix.cubic.agent.core.AgentNettyClient;
+import com.matrix.cubic.agent.core.boot.ServiceManager;
 import com.matrix.cubic.agent.core.conf.CubicConfInitalizer;
 
 import java.lang.instrument.Instrumentation;
@@ -20,11 +21,11 @@ public class MatrixAgent {
 
 //        instrumentation.addTransformer(new DefineTransformer(), true);
 
-        AgentNettyClient client = new AgentNettyClient();
-        client.start();
-
+//        AgentNettyClient client = new AgentNettyClient();
+//        client.start();
+        ServiceManager.INMSTANCE.start();
         Runtime.getRuntime()
-                .addShutdownHook(new Thread(client::destroyAndSync, "cubic agent shutdown thread"));
+                .addShutdownHook(new Thread(ServiceManager.INMSTANCE::shutdown, "cubic agent shutdown thread"));
     }
 
 
