@@ -21,6 +21,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.matrix.cubic.agent.core.arthas.ArthasTaskFactory;
+import com.matrix.cubic.agent.core.boot.CommonService;
+import com.matrix.cubic.agent.core.boot.DefaultService;
 import com.matrix.cubic.agent.core.conf.AgentConfig;
 import com.matrix.cubic.agent.core.process.*;
 import com.matrix.cubic.agent.core.task.AgentInfoHeartTask;
@@ -43,7 +45,11 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class AgentNettyClient {
+/**
+ * @author luqiang
+ */
+@DefaultService
+public class AgentNettyClient implements CommonService {
 
     private static final Logger log = LoggerFactory.getLogger(AgentNettyClient.class);
 
@@ -78,6 +84,7 @@ public class AgentNettyClient {
     }
 
 
+    @Override
     public void start() {
         final AgentInfoHeartTask heartbeatTask = new AgentInfoHeartTask();
         final IdleStateHandler idleStateHandler = new IdleStateHandler(0, 0, 2, TimeUnit.MINUTES);
@@ -145,6 +152,11 @@ public class AgentNettyClient {
             log.error("start bistoury netty client error", e);
         }
 
+    }
+
+    @Override
+    public void shutdown() {
+        destroyAndSync();
     }
 
     public boolean isRunning() {
