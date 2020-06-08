@@ -94,7 +94,7 @@ export const constantRoutes = [
         meta: { title: '命令模式', icon: 'eye' }
       }
     ]
-  },
+  }
   // {
   //   path: '/listTable',
   //   component: Layout,
@@ -107,41 +107,41 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
-  {
-    path: '/threads',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/threads/index'),
-        name: 'Thread',
-        meta: { title: '线程监控', icon: 'chart', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/logs',
-    component: Layout,
-    name: 'logs',
-    meta: {
-      title: '日志',
-      icon: 'bug'
-    },
-    children: [
-      {
-        path: 'error',
-        component: () => import('@/views/logs/error'),
-        name: 'error',
-        meta: { title: '错误日志' }
-      },
-      {
-        path: 'audit',
-        component: () => import('@/views/logs/audit'),
-        name: 'audit',
-        meta: { title: '审计日志' }
-      }
-    ]
-  }
+  // {
+  //   path: '/threads',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/threads/index'),
+  //       name: 'Thread',
+  //       meta: { title: '线程监控', icon: 'chart', noCache: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/logs',
+  //   component: Layout,
+  //   name: 'logs',
+  //   meta: {
+  //     title: '日志',
+  //     icon: 'bug'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'error',
+  //       component: () => import('@/views/logs/error'),
+  //       name: 'error',
+  //       meta: { title: '错误日志' }
+  //     },
+  //     {
+  //       path: 'audit',
+  //       component: () => import('@/views/logs/audit'),
+  //       name: 'audit',
+  //       meta: { title: '审计日志' }
+  //     }
+  //   ]
+  // }
   // {
   //   path: '/documentation',
   //   component: Layout,
