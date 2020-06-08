@@ -8,11 +8,6 @@ spring:
   profiles:
     active: dev
 
-  mvc:
-    view:
-      prefix: /assets/
-      suffix: .html
-
 server:
   port: 6080
   tomcat:
