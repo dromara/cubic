@@ -14,6 +14,6 @@ fi
 
 JAVA_OPTS=" -Xms512M -Xmx512M"
 echo "准备启动应用 AGENT_DIR $CUBIC_PROXY_DIR/$AGENT_DIR"
-java -jar -javaagent:${CUBIC_DIR}/${CUBIC_AGNT_DIR}/cubic-agent.jar ${JAVA_OPTS} -Dcubic.agent.service_name=cubic-proxy ${CUBIC_DIR}/${CUBIC_PROXY_DIR}/cubic-proxy.jar
+nohup java -jar -javaagent:${CUBIC_DIR}/${CUBIC_AGNT_DIR}/cubic-agent.jar ${JAVA_OPTS} -Dcubic.agent.service_name=cubic-proxy ${CUBIC_DIR}/${CUBIC_PROXY_DIR}/cubic-proxy.jar &
 
 
