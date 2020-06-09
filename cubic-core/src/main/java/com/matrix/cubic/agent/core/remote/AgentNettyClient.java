@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.matrix.cubic.agent.core;
+package com.matrix.cubic.agent.core.remote;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.SettableFuture;
@@ -23,6 +23,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.matrix.cubic.agent.core.arthas.ArthasTaskFactory;
 import com.matrix.cubic.agent.core.boot.CommonService;
 import com.matrix.cubic.agent.core.boot.DefaultService;
+import com.matrix.cubic.agent.core.boot.ServiceManager;
 import com.matrix.cubic.agent.core.conf.AgentConfig;
 import com.matrix.cubic.agent.core.process.*;
 import com.matrix.cubic.agent.core.task.AgentInfoHeartTask;
@@ -48,8 +49,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * @author luqiang
  */
-@DefaultService
-public class AgentNettyClient implements CommonService {
+public class AgentNettyClient {
 
     private static final Logger log = LoggerFactory.getLogger(AgentNettyClient.class);
 
@@ -77,14 +77,13 @@ public class AgentNettyClient implements CommonService {
 
     private void init() {
 
-        processors = ImmutableList.<Processor>of(new HeartbeatProcessor(), new CommandProcessor(), new ThreadDumpProcessor(), new ArthasProcessor(ArthasTaskFactory.getInstance()));
+        processors = ImmutableList.<Processor>of(new RegisterProcessor(),new HeartbeatProcessor(), new CommandProcessor(), new ThreadDumpProcessor(), new ArthasProcessor(ArthasTaskFactory.getInstance()));
 
         log.info("AgentNettyClient init process size:{}", processors.size());
 
     }
 
 
-    @Override
     public void start() {
         final AgentInfoHeartTask heartbeatTask = new AgentInfoHeartTask();
         final IdleStateHandler idleStateHandler = new IdleStateHandler(0, 0, 2, TimeUnit.MINUTES);
@@ -120,7 +119,7 @@ public class AgentNettyClient implements CommonService {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
                 if (future.isSuccess()) {
-                    log.info("sky netty client start success, {}");
+                    log.info("cubic netty client start success, {}");
                     channel = future.channel();
 
 //                    closeFuture(taskStore);
@@ -129,15 +128,15 @@ public class AgentNettyClient implements CommonService {
                     heartbeatTask.start(channel, running);
                 } else {
                     started.set(null);
-                    log.warn("sky netty client start fail");
-                    log.info("agent client hert error will restart  10s...");
-                    future.channel().eventLoop().schedule(new Runnable() {
-                        @Override
-                        public void run() {
-                            AgentNettyClient client = new AgentNettyClient();
-                            client.start();
-                        }
-                    }, 10L, TimeUnit.SECONDS);
+//                    log.warn("cubic netty client start fail");
+//                    log.info("agent client start error will restart  10s...");
+//                    future.channel().eventLoop().schedule(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            AgentNettyClient client = new AgentNettyClient();
+//                            client.start();
+//                        }
+//                    }, 10L, TimeUnit.SECONDS);
                 }
             }
         });
@@ -146,18 +145,14 @@ public class AgentNettyClient implements CommonService {
         try {
             started.get();
         } catch (InterruptedException e) {
-            log.error("start bistoury netty client error", e);
+            log.error("start cubic netty client error", e);
             Thread.currentThread().interrupt();
         } catch (Exception e) {
-            log.error("start bistoury netty client error", e);
+            log.error("start cubic netty client error", e);
         }
 
     }
 
-    @Override
-    public void shutdown() {
-        destroyAndSync();
-    }
 
     public boolean isRunning() {
         return running.get();
@@ -171,6 +166,10 @@ public class AgentNettyClient implements CommonService {
 //            }
 //        });
 //    }
+
+    public Channel getChannel() {
+        return this.channel;
+    }
 
     @ChannelHandler.Sharable
     private class ConnectionManagerHandler extends ChannelDuplexHandler {
@@ -193,21 +192,19 @@ public class AgentNettyClient implements CommonService {
             log.warn("agent netty client channel inactive, {}", ctx.channel());
             destroyAndSync();
             //如果运行过程中服务端挂了,执行重连机制
-            EventLoop eventLoop = ctx.channel().eventLoop();
-            restart(eventLoop);
             super.channelInactive(ctx);
         }
 
-        private void restart(EventLoop eventLoop) {
-            log.info("agent client hert error will restart  10s...");
-            eventLoop.schedule(new Runnable() {
-                @Override
-                public void run() {
-                    AgentNettyClient client = new AgentNettyClient();
-                    client.start();
-                }
-            }, 10L, TimeUnit.SECONDS);
-        }
+//        private void restart(EventLoop eventLoop) {
+//            log.info("agent client hert error will restart  10s...");
+//            eventLoop.schedule(new Runnable() {
+//                @Override
+//                public void run() {
+//                    AgentNettyClient client = new AgentNettyClient();
+//                    client.start();
+//                }
+//            }, 10L, TimeUnit.SECONDS);
+//        }
 
         @Override
         public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {

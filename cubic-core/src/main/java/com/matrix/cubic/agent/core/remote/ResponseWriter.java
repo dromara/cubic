@@ -1,4 +1,4 @@
-package com.matrix.cubic.agent.core;
+package com.matrix.cubic.agent.core.remote;
 
 import com.google.gson.Gson;
 import com.matrix.cubic.agent.core.module.Message;
@@ -19,11 +19,11 @@ public class ResponseWriter {
     }
 
     public void arthasWrite(ChannelHandlerContext ctx, String content, String id) {
-        write(ctx, ResponseCode.ARTHAS.getCode(), content, id);
+        write(ctx, CommandCode.ARTHAS.getCode(), content, id);
     }
 
     public void arthasWriteError(ChannelHandlerContext ctx, String content, String id) {
-        write(ctx, ResponseCode.ARTHAS.getCode(), content, id);
+        write(ctx, CommandCode.ARTHAS.getCode(), content, id);
     }
 
     public void write(ChannelHandlerContext ctx, Integer code, String content, String id) {

@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
-import { deepClone } from '../../src/utils/index.js'
-import { asyncRoutes, constantRoutes } from './routes.js'
+import {deepClone} from '../../src/utils/index.js'
+import {asyncRoutes, constantRoutes} from './routes.js'
 
 const routes = deepClone([...constantRoutes, ...asyncRoutes])
 
@@ -28,7 +28,7 @@ const roles = [
         {
           path: 'dashboard',
           name: 'Dashboard',
-          meta: { title: 'dashboard', icon: 'dashboard' }
+          meta: {title: 'dashboard', icon: 'dashboard'}
         }
       ]
     }]

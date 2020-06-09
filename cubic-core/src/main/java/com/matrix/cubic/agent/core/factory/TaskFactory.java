@@ -1,7 +1,7 @@
 package com.matrix.cubic.agent.core.factory;
 
 
-import com.matrix.cubic.agent.core.ResponseHandler;
+import com.matrix.cubic.agent.core.remote.ResponseHandler;
 
 /**
  * @ClassName TaskFactory

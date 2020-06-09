@@ -42,7 +42,7 @@ public class MessageHandler extends SimpleChannelInboundHandler<String> {
         JSONObject obj = JSON.parseObject(message);
         int code = obj.getInteger("code").intValue();
         String instanceUuid = obj.getString("instanceUuid");
-        if (code != ResponseCode.RESP_TYPE_HEARTBEAT.getCode()) {
+        if (code != ResponseCode.HEARTBEAT.getCode()) {
             logger.info("接收到instanceUuid:{},数据请求 ctx：{},message size:{}", instanceUuid, ctx.channel(), message.length());
         }
         ServerMessgaeProcess messageProcessor = processorMap.get(code);

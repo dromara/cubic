@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.matrix.cubic.agent.core;
+package com.matrix.cubic.agent.core.remote;
 
 
 import com.google.common.collect.ImmutableMap;
@@ -72,12 +72,14 @@ public class AgentRequestHandler extends ChannelInboundHandlerAdapter {
         Integer code = obj.getCode();
         String command = obj.getCommand();
         String id = obj.getId();
-        if (code.intValue() != ResponseCode.RESP_TYPE_HEARTBEAT.getCode()) {
-            log.info("agent receive process code {} request: id={}, sourceIp={}, code={}", code, id, ctx.channel().remoteAddress(), code);
+        if (code.intValue() != CommandCode.HEARTBEAT.getCode()) {
+            log.debug("agent receive process code {} request: id={}, sourceIp={}, code={}", code, id, ctx.channel().remoteAddress(), code);
         }
 
         Processor processor = processorMap.get(code.intValue());
         if (processor == null) {
+            log.warn("agent receive process code {} request: id={}, sourceIp={}, code={} ,but it can not find process", code, id, ctx.channel().remoteAddress(), code);
+
             return;
         }
         processor.process(ctx, id, command);

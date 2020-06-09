@@ -20,7 +20,7 @@ package com.matrix.cubic.agent.core.task;
 
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.gson.Gson;
-import com.matrix.cubic.agent.core.ResponseCode;
+import com.matrix.cubic.agent.core.remote.CommandCode;
 import com.matrix.cubic.agent.core.module.Message;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -49,7 +49,7 @@ public class AgentInfoHeartTask {
             public void run() {
                 if (running.get()) {
                     Gson gson = new Gson();
-                    channel.writeAndFlush(gson.toJson(new Message(ResponseCode.RESP_TYPE_HEARTBEAT.getCode(), "heart beat", "0000"))).addListener(new ChannelFutureListener() {
+                    channel.writeAndFlush(gson.toJson(new Message(CommandCode.HEARTBEAT.getCode(), "heart beat", "0000"))).addListener(new ChannelFutureListener() {
                         @Override
                         public void operationComplete(ChannelFuture future) throws Exception {
                             if (!future.isSuccess()) {

@@ -3,8 +3,8 @@ package com.matrix.cubic.agent.core.process;
 
 
 import com.google.common.collect.ImmutableList;
-import com.matrix.cubic.agent.core.ResponseCode;
-import com.matrix.cubic.agent.core.ResponseWriter;
+import com.matrix.cubic.agent.core.remote.CommandCode;
+import com.matrix.cubic.agent.core.remote.ResponseWriter;
 import com.matrix.cubic.agent.core.jstack.CommandExecutor;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ public class CommandProcessor implements Processor<String> {
 
     @Override
     public List<Integer> types() {
-        return ImmutableList.of(ResponseCode.COMMAND.getCode());
+        return ImmutableList.of(CommandCode.COMMAND.getCode());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CommandProcessor implements Processor<String> {
         CommandExecutor commandExecutor = new CommandExecutor();
         String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
         String data = commandExecutor.execute(pid,command);
-        ResponseWriter.getInstance().write(ctx,ResponseCode.COMMAND.getCode(),data,id);
+        ResponseWriter.getInstance().write(ctx, CommandCode.COMMAND.getCode(),data,id);
 
     }
 

@@ -36,10 +36,12 @@ public class DefaultSession implements Session {
 
     @Override
     public void writeToWeb(String data) {
-        log.info("DefaultSession will write data to web  data:{}",data);
+        if(log.isDebugEnabled()){
+            log.debug("DefaultSession will write data to web  ");
 
+        }
         webConnection.write(new TextWebSocketFrame(data));
-        log.info("DefaultSession write to web succ data length:{}",data.length());
+        log.info("DefaultSession write to web succ data length:{}");
     }
 
     @Override

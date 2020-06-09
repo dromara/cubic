@@ -26,7 +26,33 @@ public enum ServiceManager {
 
     public void start() {
         services = loadServices();
+        onPrepare();
         onStart();
+        onComplete();
+    }
+
+    private void onComplete() {
+        for (CommonService service : services.values()) {
+
+            try {
+                service.complete();
+            } catch (Exception e) {
+                logger.error("ServiceManager start onComplete : [{}]  fail,{}", service.getClass().getSimpleName(), e);
+            }
+
+        }
+    }
+
+    private void onPrepare() {
+        for (CommonService service : services.values()) {
+
+            try {
+                service.prepare();
+            } catch (Exception e) {
+                logger.error("ServiceManager start prepare : [{}]  fail,{}", service.getClass().getSimpleName(), e);
+            }
+
+        }
     }
 
 
@@ -80,5 +106,9 @@ public enum ServiceManager {
         }
 
         return services;
+    }
+
+    public <T extends CommonService> T findService(Class<T> serviceClass) {
+        return (T) services.get(serviceClass);
     }
 }

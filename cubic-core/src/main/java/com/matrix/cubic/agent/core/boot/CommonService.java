@@ -8,7 +8,11 @@ package com.matrix.cubic.agent.core.boot;
  */
 public interface CommonService {
 
+    void prepare();
+
     void start();
 
     void shutdown();
+
+    void complete();
 }

@@ -46,7 +46,7 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
 
     @Override
     public Integer code() {
-        return ResponseCode.RESP_TYPE_HEARTBEAT.getCode();
+        return ResponseCode.HEARTBEAT.getCode();
     }
 
     @Override
@@ -54,10 +54,6 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
         if (logger.isDebugEnabled()) {
             logger.info("receive  client heartbeat, {}", message);
         }
-        JSONObject obj = JSON.parseObject(message);
-        String instanceUuid = obj.getString("instanceUuid");
-        String instanceName = obj.getString("instanceName");
-        connectionStore.register(instanceName + "_" + instanceUuid, ctx.channel());
         ctx.channel().writeAndFlush(heartbeatResponse);
     }
 
@@ -65,7 +61,7 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     private String initHeartbeatResponse() {
 
         Map<String, Object> result = new HashMap<>(16);
-        result.put("code", 0);
+        result.put("code", ResponseCode.HEARTBEAT.getCode());
         result.put("command", "heartbeat");
         return JSON.toJSONString(result);
     }

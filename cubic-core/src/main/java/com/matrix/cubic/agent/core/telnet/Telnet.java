@@ -2,7 +2,7 @@ package com.matrix.cubic.agent.core.telnet;
 
 
 import com.google.common.base.Charsets;
-import com.matrix.cubic.agent.core.ResponseHandler;
+import com.matrix.cubic.agent.core.remote.ResponseHandler;
 import org.apache.commons.net.telnet.TelnetClient;
 
 import java.io.BufferedWriter;

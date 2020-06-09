@@ -1,8 +1,8 @@
 package com.matrix.cubic.agent.core.common;
 
 
-import com.matrix.cubic.agent.core.ResponseHandler;
-import com.matrix.cubic.agent.core.ResponseWriter;
+import com.matrix.cubic.agent.core.remote.ResponseHandler;
+import com.matrix.cubic.agent.core.remote.ResponseWriter;
 import io.netty.channel.ChannelHandlerContext;
 
 /**

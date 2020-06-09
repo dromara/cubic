@@ -2,7 +2,7 @@ package com.matrix.cubic.agent.core.arthas;
 
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.matrix.cubic.agent.core.ResponseHandler;
+import com.matrix.cubic.agent.core.remote.ResponseHandler;
 import com.matrix.cubic.agent.core.factory.Task;
 import com.matrix.cubic.agent.core.telnet.Telnet;
 import com.matrix.cubic.agent.core.telnet.TelnetCommand;

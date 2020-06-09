@@ -1,4 +1,4 @@
-package com.matrix.cubic.agent.core;
+package com.matrix.cubic.agent.core.remote;
 
 
 import com.matrix.cubic.agent.core.utils.GzipUtils;

@@ -1,7 +1,7 @@
 package com.matrix.cubic.agent.core.telnet;
 
 
-import com.matrix.cubic.agent.core.ResponseHandler;
+import com.matrix.cubic.agent.core.remote.ResponseHandler;
 import org.apache.commons.net.telnet.TelnetClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

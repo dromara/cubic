@@ -3,7 +3,7 @@ package com.matrix.cubic.agent.core.process;
 
 
 import com.google.common.collect.ImmutableList;
-import com.matrix.cubic.agent.core.ResponseCode;
+import com.matrix.cubic.agent.core.remote.CommandCode;
 import com.matrix.cubic.agent.core.common.ArthasResponseHandler;
 import com.matrix.cubic.agent.core.factory.Task;
 import com.matrix.cubic.agent.core.factory.TaskFactory;
@@ -29,7 +29,7 @@ public class ArthasProcessor implements Processor<String> {
 
     @Override
     public List<Integer> types() {
-        return ImmutableList.of(ResponseCode.ARTHAS.getCode());
+        return ImmutableList.of(CommandCode.ARTHAS.getCode());
     }
 
     @Override
