@@ -20,6 +20,7 @@ fi
 echo "================ starting to build cubic ui ================"
 cd "$BASE_UI_DIR"
 echo `pwd`
+npm install
 npm run build:prod
 echo "================ starting to build cubic agent ================"
 cd ..
