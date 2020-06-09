@@ -62,8 +62,7 @@
 - 因为目前自己抽时间在写，所以前端UI 有些小BUG ,功能、部署、脚本等等都在完善中，马上准备使用最新的VUE 那一套来进行页面的输出迭代了，欢迎各位大牛贡献代码。
 - 欢迎大家各种star，fork，提issue，pull request，感觉还可以就点个star吧！
 - 不能下载linux-tools 依赖的问题，可执行build 脚本，或执行下面的命令
-   
-mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
+- mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
 
 
 ## 公众号
