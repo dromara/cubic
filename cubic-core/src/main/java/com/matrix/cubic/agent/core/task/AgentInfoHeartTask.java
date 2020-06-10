@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-
+@Deprecated
 public class AgentInfoHeartTask {
 
     private static final Logger log = LoggerFactory.getLogger(AgentInfoHeartTask.class);

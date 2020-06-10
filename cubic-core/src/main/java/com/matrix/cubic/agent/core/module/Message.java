@@ -3,6 +3,8 @@ package com.matrix.cubic.agent.core.module;
 
 import com.matrix.cubic.agent.core.conf.AgentConfig;
 
+import java.util.Map;
+
 /**
  * @ClassName Message
  * @Author QIANGLU
@@ -25,6 +27,15 @@ public class Message {
 
     private String instanceVersion = AgentConfig.Agent.VERSION;
 
+    private Map<String,String> osInfo;
+
+    public Map<String, String> getOsInfo() {
+        return osInfo;
+    }
+
+    public void setOsInfo(Map<String, String> osInfo) {
+        this.osInfo = osInfo;
+    }
 
     public Message(Integer code, String body, String id) {
         this.id = id;
