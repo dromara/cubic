@@ -5,6 +5,7 @@ import com.matrix.cubic.agent.core.boot.CommonService;
 import com.matrix.cubic.agent.core.boot.DefaultService;
 import com.matrix.cubic.agent.core.boot.ServiceManager;
 import com.matrix.cubic.agent.core.module.Message;
+import com.matrix.cubic.agent.core.utils.OSUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -70,6 +71,7 @@ public class ServiceRegisterClient implements CommonService, AgentChannelListene
                 if (!registed) {
                     message.setCode(CommandCode.REGIST.getCode());
                     message.setBody("register");
+                    message.setOsInfo(OSUtil.buildOSInfo());
                 }
                 AgentNettyClient client = ServiceManager.INMSTANCE.findService(AgentClientService.class).getClient();
                 client.getChannel().writeAndFlush(gson.toJson(message)).addListener(new ChannelFutureListener() {
