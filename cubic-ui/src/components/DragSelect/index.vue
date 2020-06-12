@@ -48,18 +48,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.drag-select {
-  ::v-deep {
-    .sortable-ghost {
-      opacity: .8;
-      color: #fff !important;
-      background: #42b983 !important;
-    }
+<style scoped>
+.drag-select >>> .sortable-ghost {
+  opacity: .8;
+  color: #fff!important;
+  background: #42b983!important;
+}
 
-    .el-tag {
-      cursor: pointer;
-    }
-  }
+.drag-select >>> .el-tag {
+  cursor: pointer;
 }
 </style>

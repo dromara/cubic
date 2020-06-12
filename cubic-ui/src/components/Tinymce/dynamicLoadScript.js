@@ -8,7 +8,8 @@ function loadedTinymce() {
 
 const dynamicLoadScript = (src, callback) => {
   const existingScript = document.getElementById(src)
-  const cb = callback || function() {}
+  const cb = callback || function() {
+  }
 
   if (!existingScript) {
     const script = document.createElement('script')

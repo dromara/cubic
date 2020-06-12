@@ -104,7 +104,7 @@ export default {
 <style lang="scss" scoped>
 .editor-slide-upload {
   margin-bottom: 20px;
-  ::v-deep .el-upload--picture-card {
+  /deep/ .el-upload--picture-card {
     width: 100%;
   }
 }
