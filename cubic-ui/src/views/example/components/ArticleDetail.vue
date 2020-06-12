@@ -277,7 +277,7 @@ export default {
   }
 }
 
-.article-textarea ::v-deep {
+.article-textarea /deep/ {
   textarea {
     padding-right: 40px;
     resize: none;
