@@ -19,6 +19,8 @@ package com.matrix.proxy.server.process;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.matrix.proxy.db.repository.BasicInformationRepository;
+import com.matrix.proxy.module.Message;
 import com.matrix.proxy.server.ServerConnectionStore;
 import com.matrix.proxy.util.ResponseCode;
 import io.netty.channel.ChannelHandlerContext;
@@ -27,6 +29,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +42,8 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     @Resource
     private ServerConnectionStore connectionStore;
 
-
+    @Resource
+    private BasicInformationRepository repository;
     private final String heartbeatResponse = initHeartbeatResponse();
 
     public ProxyHeartbeatProcessor() {
@@ -50,11 +55,18 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     }
 
     @Override
+    @Transactional
     public void process(ChannelHandlerContext ctx, String message) {
         if (logger.isDebugEnabled()) {
             logger.info("receive  client heartbeat, {}", message);
         }
+        Message msg = JSON.parseObject(message, Message.class);
+        updateHeardBeat(msg.getInstanceUuid());
         ctx.channel().writeAndFlush(heartbeatResponse);
+    }
+
+    public void updateHeardBeat(String instanceId) {
+        repository.updateByInstanceId(new Date(), instanceId);
     }
 
 
