@@ -22,7 +22,7 @@ import { FitAddon } from 'xterm-addon-fit'
 import { WebLinksAddon } from 'xterm-addon-web-links'
 import 'xterm/css/xterm.css'
 export default {
-  name: 'WebShell',
+  name: 'Command',
   data() {
     return {
       vm: {

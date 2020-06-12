@@ -7,9 +7,9 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            应用
+            New Visits
           </div>
-          <count-to :start-val="0" :end-val="1024" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -20,9 +20,9 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            消息
+            Messages
           </div>
-          <count-to :start-val="0" :end-val="8112" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -33,7 +33,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            费用
+            Purchases
           </div>
           <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
         </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            订阅数
+            Shoppings
           </div>
           <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
         </div>
