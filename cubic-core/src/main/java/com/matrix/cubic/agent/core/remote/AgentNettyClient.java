@@ -21,12 +21,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.matrix.cubic.agent.core.arthas.ArthasTaskFactory;
-import com.matrix.cubic.agent.core.boot.CommonService;
-import com.matrix.cubic.agent.core.boot.DefaultService;
-import com.matrix.cubic.agent.core.boot.ServiceManager;
 import com.matrix.cubic.agent.core.conf.AgentConfig;
 import com.matrix.cubic.agent.core.process.*;
-import com.matrix.cubic.agent.core.task.AgentInfoHeartTask;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -85,7 +81,6 @@ public class AgentNettyClient {
 
 
     public void start() {
-        final AgentInfoHeartTask heartbeatTask = new AgentInfoHeartTask();
         final IdleStateHandler idleStateHandler = new IdleStateHandler(0, 0, 2, TimeUnit.MINUTES);
 
         final AgentRequestHandler requestHandler = new AgentRequestHandler(processors);
@@ -125,7 +120,6 @@ public class AgentNettyClient {
 //                    closeFuture(taskStore);
                     running.compareAndSet(false, true);
                     started.set(null);
-                    heartbeatTask.start(channel, running);
                 } else {
                     started.set(null);
 //                    log.warn("cubic netty client start fail");
