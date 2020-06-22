@@ -27,7 +27,7 @@ export default {
     return {
       vm: {
         ip: 'localhost',
-        port: 80,
+        port: 11901,
         agentId: 'cubic'
       },
       socket: null,

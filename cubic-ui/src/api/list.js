@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function appList(query) {
   return request({
-    url: '/app/getAppList',
+    url: '/app/getList',
     method: 'get',
     params: query
   })
