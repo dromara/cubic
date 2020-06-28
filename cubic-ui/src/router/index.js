@@ -98,18 +98,6 @@ export const constantRoutes = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
   // {
-  //   path: '/listTable',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/listTable/index'),
-  //       name: 'AppTable',
-  //       meta: { title: '实例列表', icon: 'list' }
-  //     }
-  //   ]
-  // },
-  // {
   //   path: '/threads',
   //   component: Layout,
   //   children: [
