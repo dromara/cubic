@@ -28,6 +28,9 @@ server:
       enabled: true
       directory: ${log.path}/${spring.application.name}
       pattern:  -| %t | %a |  %h | %H | %m | %{x-Forwarded-For}i | %l | %u | %r | %s | %b
+  shutdown: graceful
+
+
 matrix:
   server:
     agentPort: 11900
@@ -35,7 +38,8 @@ management:
   endpoints:
     web:
       base-path: /
-
+      exposure:
+        include: configprops
 log:
   level: info
   path: /tmp/logs

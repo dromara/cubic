@@ -20,7 +20,7 @@ public class UserController {
         info.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         info.put("name","Super Admin");
 
-        ResponseBody<Map> responseBody = new ResponseBody<>(20000,info);
+        ResponseBody<Map> responseBody = new ResponseBody<>(0,info);
         return JSON.toJSONString(responseBody);
     }
 }

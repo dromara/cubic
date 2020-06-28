@@ -14,13 +14,13 @@ public class LoginController {
 
     @RequestMapping("/valid")
     public String valid(@RequestBody String data){
-        ResponseBody<String> responseBody = new ResponseBody<>(20000,"admin-token");
+        ResponseBody<String> responseBody = new ResponseBody<>(0,"admin-token");
         return JSON.toJSONString(responseBody);
     }
 
     @RequestMapping("/logout")
     public String logout(){
-        ResponseBody<String> responseBody = new ResponseBody<>(20000,"success");
+        ResponseBody<String> responseBody = new ResponseBody<>(0,"success");
         return JSON.toJSONString(responseBody);
     }
 }
