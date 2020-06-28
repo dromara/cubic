@@ -3,6 +3,7 @@ package com.matrix.proxy.service;
 import com.matrix.proxy.db.entity.BasicInformation;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用于处理基础数据
@@ -17,5 +18,5 @@ public interface AppDataService {
      * 获取应用实例列表
      * @return
      */
-    public List<BasicInformation> getAppList();
+    public Map getAppList(String date);
 }

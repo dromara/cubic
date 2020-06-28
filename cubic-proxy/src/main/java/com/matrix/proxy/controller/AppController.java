@@ -1,11 +1,14 @@
 package com.matrix.proxy.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.matrix.proxy.db.entity.BasicInformation;
 import com.matrix.proxy.module.ResponseBody;
 import com.matrix.proxy.service.AppDataService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -29,12 +32,9 @@ public class AppController {
     private AppDataService appDataService;
 
     @RequestMapping("/getList")
-    public String getList(){
-        List<BasicInformation> list = appDataService.getAppList();
-        Map<String,Object> datas = new HashMap<>();
-        datas.put("items",list);
-        datas.put("total",list.size());
-        ResponseBody responseBody = new ResponseBody(0,datas);
-        return JSON.toJSONString(responseBody);
+    public String getList(@RequestParam(defaultValue = "", required = false) String date){
+        Map data = appDataService.getAppList(date);
+        ResponseBody response = new ResponseBody(0,data);
+        return JSONObject.toJSONString(response, SerializerFeature.WriteDateUseDateFormat);
     }
 }
