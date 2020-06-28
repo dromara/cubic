@@ -171,7 +171,7 @@ export default {
     },
     socketOnOpen() {
       this.socket.onopen = () => {
-        this.term.writeln(' 已连接, 当前 host: ' + this.vm.ip + ', agentId: ' + this.vm.agentId + ', findState: ' + this.state)
+        this.term.writeln(' 已连接, 当前 host: ' + this.vm.ip + ', agentId: ' + this.vm.agentId)
         this.prompt()
         this.termOnKey()
         this.socketOnMessage()
