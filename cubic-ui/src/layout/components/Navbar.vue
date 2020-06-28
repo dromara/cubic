@@ -24,14 +24,14 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
-          <router-link to="/profile/index">
-            <el-dropdown-item>信息</el-dropdown-item>
-          </router-link>
+          <!--          <router-link to="/profile/index">-->
+          <!--            <el-dropdown-item>信息</el-dropdown-item>-->
+          <!--          </router-link>-->
           <router-link to="/">
             <el-dropdown-item>首页</el-dropdown-item>
           </router-link>
           <a target="_blank" href="https://gitee.com/sanjiankethree/cubic">
-            <el-dropdown-item>Github</el-dropdown-item>
+            <el-dropdown-item>Gitee</el-dropdown-item>
           </a>
 
           <el-dropdown-item divided @click.native="logout">
