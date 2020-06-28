@@ -11,6 +11,14 @@ if [[ ! -w "$CUBIC_PROXY_DIR" ]] ; then
     exit 0;
 fi
 
+echo "kill old application --start--"
+PROCESS=`ps -ef|grep 'cubic-agent'|grep -v grep|grep -v PPID|awk '{ print $2}'`
+for i in $PROCESS
+do
+  echo "Kill the $1 process [ $i ]"
+  kill -9 $i
+done
+echo "kill old application --end--"
 
 JAVA_OPTS=" -Xms512M -Xmx512M"
 echo "准备启动应用 AGENT_DIR $CUBIC_PROXY_DIR/$AGENT_DIR"
