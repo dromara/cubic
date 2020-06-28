@@ -49,12 +49,11 @@
     ![输入图片说明](https://images.gitee.com/uploads/images/2020/0628/162203_3293cbe3_1168339.png "屏幕截图.png")
     
     点击connect 进入可进行重新连接
-    ![启动](https://images.gitee.com/uploads/images/2020/0605/190221_06a883fe_1168339.png "屏幕截图.png")
+    ![输入图片说明](https://images.gitee.com/uploads/images/2020/0628/162418_6e57127d_1168339.png "屏幕截图.png")
 
 4. 命令分为两部分，输入1 基础命令， 3位arthas 命令，输入1 然后输入help 可查看帮助
-     ![输入图片说明](https://images.gitee.com/uploads/images/2020/0605/190300_37cca679_1168339.png "屏幕截图.png")
-
-5. 使用search 命令来查询我们项目配置的agent, 比如在agent config 我们配置了参数 agent.service_name = cubic,则进行查询并获取到应用的agentId(如果使用quick_start启动的，因为增加了-Dcubic.agent.service_name=cubic-proxy ，所以我们可以使用cubic-proxy查询ID )
+    
+5. 也可以直接进入命令模式，使用search 命令来查询我们项目配置的agent, 比如在agent config 我们配置了参数 agent.service_name = cubic,则进行查询并获取到应用的agentId(如果使用quick_start启动的，因为增加了-Dcubic.agent.service_name=cubic-proxy ，所以我们可以使用cubic-proxy查询ID )
    ![输入图片说明](https://images.gitee.com/uploads/images/2020/0605/190339_bde70250_1168339.png "屏幕截图.png")
 
     
