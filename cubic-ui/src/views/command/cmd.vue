@@ -234,9 +234,7 @@ export default {
       }
     },
     startConnect() {
-      if (this.socket != null && this.term != null) {
-        this.disconnect()
-      }
+      this.disconnect()
       this.initXterm()
       this.socketOnClose()
       this.socketOnOpen()
