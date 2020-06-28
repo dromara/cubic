@@ -1,9 +1,15 @@
 <template>
   <div class="app-container case-list-container">
     <el-card class="box-card">
-
-      <div slot="header" class="clearfix">
-        <span>实例列表</span>
+      <div class="case-info">
+        <el-tag>在线应用：{{ caseInfo.services }}</el-tag>
+        <el-tag type="success">在线实例数：{{ caseInfo.instances }}</el-tag>
+        <el-input
+          v-model="search"
+          size="mini"
+          style="width: 220px"
+          placeholder="应用名称:输入关键字搜索"
+        />
         <span style="float: right;padding: 4px 10px">
           <el-date-picker
             v-model="searchForm.date"
@@ -17,16 +23,6 @@
           />
           <el-button class="filter-item" size="mini" type="primary" icon="el-icon-search" @click="getList">搜索</el-button>
         </span>
-      </div>
-      <div class="case-info">
-        <el-tag>在线应用：{{ caseInfo.services }}</el-tag>
-        <el-tag type="success">在线实例数：{{ caseInfo.instances }}</el-tag>
-        <el-input
-          v-model="search"
-          size="mini"
-          style="width: 220px"
-          placeholder="应用名称:输入关键字搜索"
-        />
       </div>
       <!--表格渲染-->
       <el-table
