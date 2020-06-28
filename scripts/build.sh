@@ -18,8 +18,12 @@ fi
 
 #打包agent
 echo "================ starting to build cubic ui ================"
+npm install --save xterm
+npm install --save xterm-addon-fit
+npm install --save xterm-addon-attach
 cd "$BASE_UI_DIR"
 echo `pwd`
+
 npm install
 npm run build:prod
 echo "================ starting to build cubic agent ================"
