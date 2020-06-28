@@ -21,6 +21,7 @@ echo "================ starting to build cubic ui ================"
 npm install --save xterm
 npm install --save xterm-addon-fit
 npm install --save xterm-addon-attach
+npm install --save xterm-addon-web-links
 cd "$BASE_UI_DIR"
 echo `pwd`
 
