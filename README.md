@@ -44,7 +44,11 @@
     java -jar cubic-proxy.jar 
     
 3. 访问web ui localhost:6080
-    进入默认页面，输入ip 和 agentId(id 第一次随意输入)，点击connect 进入命令交互模式
+
+    正常启动后会有数据上报到服务端，可在首页进行查看，点击唯一标识跳转到命令模式
+    ![输入图片说明](https://images.gitee.com/uploads/images/2020/0628/162203_3293cbe3_1168339.png "屏幕截图.png")
+    
+    点击connect 进入可进行重新连接
     ![启动](https://images.gitee.com/uploads/images/2020/0605/190221_06a883fe_1168339.png "屏幕截图.png")
 
 4. 命令分为两部分，输入1 基础命令， 3位arthas 命令，输入1 然后输入help 可查看帮助
