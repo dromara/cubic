@@ -4,10 +4,10 @@
       <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />
       <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />
       <el-input v-model="vm.agentId" placeholder="AgentId" size="mini" style="width: 200px;" class="filter-item" />
-      <el-button v-waves class="filter-item" size="mini" type="success" @click="startConnect">
+      <el-button class="filter-item" size="mini" type="success" @click="startConnect">
         连接
       </el-button>
-      <el-button v-waves class="filter-item" size="mini" type="danger" @click="disconnect">
+      <el-button class="filter-item" size="mini" type="danger" @click="disconnect">
         断开
       </el-button>
     </div>
@@ -45,6 +45,13 @@ export default {
         }},
       rows: 400,
       cols: 100
+    }
+  },
+  created() {
+    console.log(this.$route.query.id)
+
+    if (Object.keys(this.$route.query).length > 0) {
+      this.vm.agentId = this.$route.query.id
     }
   },
   mounted() {

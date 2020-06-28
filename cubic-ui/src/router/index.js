@@ -90,7 +90,7 @@ export const constantRoutes = [
       {
         path: 'index',
         component: () => import('@/views/command/cmd'),
-        name: 'AppTable',
+        name: 'WebShell',
         meta: { title: '命令模式', icon: 'eye' }
       }
     ]

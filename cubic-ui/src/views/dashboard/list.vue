@@ -35,8 +35,8 @@
       >
         <el-table-column prop="instanceName" label="应用唯一标识" header-align="center">
           <template slot-scope="{row}">
-            <el-tooltip :content="row.instanceName" placement="top" effect="dark">
-              <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goInstanceFn(row)">{{ row.instanceName }}</el-button>
+            <el-tooltip :content="row.appId" placement="top" effect="dark">
+              <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goCmd(row)">{{ row.appId }}</el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -54,12 +54,10 @@
 
 <script>
 import { appList, fetchPv, createArticle, updateArticle } from '@/api/list'
-import waves from '@/directive/waves' // waves directive
 
 // arr to obj, such as { CN : "China", US : "USA" }
 export default {
   name: 'List',
-  directives: { waves },
   data() {
     return {
       caseInfo: {
@@ -237,6 +235,10 @@ export default {
         })
         this.downloadLoading = false
       })
+    },
+    goCmd(row) {
+      console.log(row)
+      this.$router.push({ name: 'WebShell', query: { id: row.appId }})
     },
     getSortClass: function(key) {
       const sort = this.listQuery.sort
