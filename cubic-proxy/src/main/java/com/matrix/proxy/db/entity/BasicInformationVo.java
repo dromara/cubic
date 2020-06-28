@@ -24,6 +24,8 @@ public class BasicInformationVo {
 
     private Integer id;
 
+    private String appId;
+
     /**
      * 实例名称
      */

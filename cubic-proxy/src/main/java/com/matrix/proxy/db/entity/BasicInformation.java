@@ -27,6 +27,11 @@ public class BasicInformation {
     private Integer id;
 
     /**
+     * appId
+     */
+    private String appId;
+
+    /**
      * 实例名称
      */
     private String instanceName;

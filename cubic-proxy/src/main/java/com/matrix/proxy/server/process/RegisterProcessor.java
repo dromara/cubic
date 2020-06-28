@@ -45,7 +45,7 @@ public class RegisterProcessor extends DefaultMessageProcess {
         //进行数据注册
         BasicInformation.BasicInformationBuilder builder = BasicInformation.builder().instanceId(msg.getInstanceUuid()).instanceName(msg.getInstanceName()).version(msg.getInstanceVersion());
         Map<String,String> osInfo = msg.getOsInfo();
-        builder.startDate(new Date()).progress(osInfo.get("process_no")).host(osInfo.get("host_name")).ip(osInfo.get("ipv4")).language(osInfo.get("language")).os(osInfo.get("os_name"));
+        builder.appId(msg.getInstanceName()+'_'+msg.getInstanceUuid()).startDate(new Date()).progress(osInfo.get("process_no")).host(osInfo.get("host_name")).ip(osInfo.get("ipv4")).language(osInfo.get("language")).os(osInfo.get("os_name"));
         basicInformationRepository.save(builder.build());
         logger.info("应用实例：id {} ,channel :{}注册成功！", id, ctx.channel());
         ctx.channel().writeAndFlush(initRegisterResponse(id));
