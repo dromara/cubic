@@ -1,0 +1,2 @@
+com.matrix.cubic.agent.core.remote.AgentClientService
+com.matrix.cubic.agent.core.remote.ServiceRegisterClient
