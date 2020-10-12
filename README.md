@@ -68,7 +68,13 @@
 - mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
 
 
-## 公众号
+## 技术交流
+
 >加入组织，一起来搞，锻炼技术
+
+#### QQ群
+ ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/185932_3b5a5587_1168339.png "屏幕截图.png")
+
+#### 公众号
 
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/182506_05cc288a_1168339.jpeg "架构技术.jpg")
