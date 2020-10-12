@@ -1,11 +1,26 @@
-# cubic
+ - [简介](#简介)
+- [目录结构](#目录结构)
+- [安装教程](#安装教程)
+- [使用文档](#使用文档)
+- [JDK版本](#JDK版本)
+- [使用说明](#使用说明)
+- [Q&A](#Q&A)
+- [使用说明](#使用说明)
+- [公众号](#公众号)
+- [联系我](#联系我)
 
-## 介绍
+## 简介
+
 `Cubic` 是一个对应用透明，无侵入的java应用诊断工具，用于提升开发人员的诊断效率和能力。
 
 `Cubic` 的目标是一站式java应用诊断解决方案，让开发人员无需登录机器或修改系统，就可以从日志、内存、线程、类信息、调试、机器和系统属性等各个方面对应用进行诊断，提升开发人员诊断问题的效率和能力。
 
 `Cubic` 可调用内部自定义命令和动态加载arthas使用arthas 命令集。
+
+因为很多公司使用监控需要进行定制化开发，Cubic 可作为一种技术参考，希望给大家带来些许启发。
+ 
+  
+ 
 
 ## 目录结构
 - agent-dist  存放打包的agent.jar(打包后出现)
@@ -61,25 +76,17 @@
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0605/190447_b3cd9e91_1168339.png "屏幕截图.png")    
     
     
-## Q & A
+## Q&A
 - 因为目前自己抽时间在写，所以前端UI 有些小BUG ,功能、部署、脚本等等都在完善中，马上准备使用最新的VUE 那一套来进行页面的输出迭代了，欢迎各位大牛贡献代码。
 - 欢迎大家各种star，fork，提issue，pull request，感觉还可以就点个star吧！
 - 不能下载linux-tools 依赖的问题，可执行build 脚本，或执行下面的命令
 - mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
 
+## 公众号
+ 让我们一起学习成长，关注公众号获得每日一个知识点的储备，让我们一起成长
 
-## 技术交流
-
->加入组织，一起来搞，锻炼技术
-
-#### 公众号
-
- ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/182506_05cc288a_1168339.jpeg "架构技术.jpg")
+ ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
 
 
-
-
-
-
-#### QQ群
- ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/190233_3d063dc7_1168339.jpeg "qq.jpeg")
+## 加入组织
+![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211627_6574410c_1168339.jpeg "WechatIMG263.jpeg")
