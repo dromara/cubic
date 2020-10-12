@@ -19,7 +19,7 @@
 
 因为很多公司使用监控需要进行定制化开发，Cubic 可作为一种技术参考，希望给大家带来些许启发。
  
-  
+技术体系：Spring Boot、Vue、Netty、Websocket、xterm等
  
 
 ## 目录结构
