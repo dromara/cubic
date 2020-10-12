@@ -89,4 +89,4 @@
 
 
 ## 加入组织
-![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211627_6574410c_1168339.jpeg "WechatIMG263.jpeg")
+ ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/223847_89e00e5d_1168339.jpeg "WechatIMG263.jpeg")
