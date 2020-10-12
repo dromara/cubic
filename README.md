@@ -71,5 +71,4 @@
 ## 公众号
 >加入组织，一起来搞，锻炼技术
 
- ![输入图片说明](https://images.gitee.com/uploads/images/2020/0924/153857_9205a569_1168339.jpeg "weixin.jpg")
-
+ ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/182506_05cc288a_1168339.jpeg "架构技术.jpg")
