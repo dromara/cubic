@@ -87,6 +87,5 @@
 
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
 
-
-## 加入组织
- ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/223847_89e00e5d_1168339.jpeg "WechatIMG263.jpeg")
+## 联系我
+![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/224643_a328a6dd_1168339.jpeg "WechatIMG236.jpeg")
