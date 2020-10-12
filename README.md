@@ -6,7 +6,7 @@
 - [使用说明](#使用说明)
 - [Q&A](#Q&A)
 - [使用说明](#使用说明)
-- [公众号](#公众号)
+- [加入组织](#加入组织)
 - [联系我](#联系我)
 
 ## 简介
@@ -82,7 +82,7 @@
 - 不能下载linux-tools 依赖的问题，可执行build 脚本，或执行下面的命令
 - mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
 
-## 公众号
+## 加入组织
  让我们一起学习成长，关注公众号获得每日一个知识点的储备，让我们一起成长
 
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
