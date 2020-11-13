@@ -20,7 +20,8 @@
         <shade.io.netty.source>io.netty</shade.io.netty.source>
         <shade.io.netty.target>${shade.package}.${shade.io.netty.source}</shade.io.netty.target>
         <shade.org.apache.commons.source>org.apache.commons</shade.org.apache.commons.source>
-        <shade.org.apache.commons.target>${shade.package}.${shade.org.apache.commons.source}</shade.org.apache.commons.target>
+        <shade.org.apache.commons.target>${shade.package}.${shade.org.apache.commons.source}
+        </shade.org.apache.commons.target>
     </properties>
     <dependencies>
         <dependency>
@@ -59,6 +60,10 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
             <plugin>
                 <artifactId>maven-shade-plugin</artifactId>
                 <executions>
@@ -107,7 +112,8 @@
                                 </filter>
                             </filters>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                             </transformers>
                         </configuration>
                     </execution>

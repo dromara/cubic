@@ -43,9 +43,16 @@
 ## 安装
 
 1.  git clone https://gitee.com/sanjiankethree/cubic.git
-2.  执行./mvnw clean package  -DskipTests 或执行打包脚本 ./script/build.sh
+2.  执行打包脚本 ./script/build.sh
 3.  打包完成的agent 在agent-dist目录下
 4.  打包完成的proxy 在agent-proxy-dist目录下
+5.  拷贝agent-dist目录下的agent jar 路径，比如：/user/xxx/cubic-agent.jar
+6.  如使用IDEA 测试，在测试应用中加入配置 VM option 参数 如下：
+```
+-javaagent:/user/xxx/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy
+```
+再来个截图：
+
 
 
 ## 环境

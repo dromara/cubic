@@ -12,6 +12,7 @@
         <module>cubic-agent</module>
         <module>cubic-core</module>
         <module>cubic-proxy</module>
+        <module>cubic-demo</module>
     </modules>
 
     <properties>
@@ -33,7 +34,6 @@
                 <artifactId>cubic-core</artifactId>
                 <version>1.2.0.RELEASE</version>
             </dependency>
-
 
             <dependency>
                 <groupId>com.google.guava</groupId>
