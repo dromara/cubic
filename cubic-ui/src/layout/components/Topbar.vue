@@ -27,10 +27,10 @@
           <router-link to="/">
             <el-dropdown-item>Home</el-dropdown-item>
           </router-link>
-          <a href="https://github.com/PanJiaChen/vue-admin-template/" target="_blank">
-            <el-dropdown-item>Github</el-dropdown-item>
+          <a href="https://gitee.com/sanjiankethree/cubic" target="_blank">
+            <el-dropdown-item>Gitee</el-dropdown-item>
           </a>
-          <a href="https://panjiachen.github.io/vue-element-admin-site/#/" target="_blank">
+          <a href="https://www.jiagoujishu.com" target="_blank">
             <el-dropdown-item>Docs</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">

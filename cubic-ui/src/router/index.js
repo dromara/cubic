@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '应用列表', icon: 'dashboard' }
     }]
   },
 
@@ -152,8 +152,8 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://github.com/PanJiaChen/vue-element-admin',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'https://www.jiagoujishu.com',
+        meta: { title: '实例列表', icon: 'link' }
       }
     ]
   },
