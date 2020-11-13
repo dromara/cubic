@@ -56,27 +56,29 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/app',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    redirect: '/app/command',
+    name: 'app',
+    meta: { title: 'App', icon: 'example', activeMenu: '/article/list' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'base',
+        name: 'Base',
+        component: () => import('@/views/app/base/index'),
+        meta: {
+          title: '基础信息',
+          icon: 'table'
+        }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'command',
+        name: 'WebShell',
+        component: () => import('@/views/app/command/cmd'),
+        meta: { title: 'Arthas', icon: 'tree' }
       }
     ]
   },
-
   {
     path: '/form',
     component: Layout,
@@ -147,16 +149,16 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://www.jiagoujishu.com',
-        meta: { title: '实例列表', icon: 'link' }
-      }
-    ]
-  },
+  // {
+  //   path: 'external-link',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'https://www.jiagoujishu.com',
+  //       meta: { title: '实例列表', icon: 'link' }
+  //     }
+  //   ]
+  // },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

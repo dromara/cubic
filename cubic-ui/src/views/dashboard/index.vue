@@ -238,7 +238,7 @@ export default {
     },
     goCmd(row) {
       console.log(row)
-      this.$router.push({ name: 'WebShell', query: { id: row.appId }})
+      this.$router.push({ name: 'app', query: { id: row.appId }})
     },
     getSortClass: function(key) {
       const sort = this.listQuery.sort
