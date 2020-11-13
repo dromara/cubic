@@ -1,45 +1,40 @@
 <template>
   <div :class="classObj" class="app-wrapper">
+    <topbar />
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-    <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView:needTagsView}" class="main-container">
+    <sidebar v-if="!sidebar.hide" class="sidebar-container" />
+    <div :class="{sidebarHide: sidebar.hide}" class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
-        <tags-view v-if="needTagsView" />
       </div>
       <app-main />
-      <right-panel v-if="showSettings">
-        <settings />
-      </right-panel>
     </div>
   </div>
 </template>
 
 <script>
-import RightPanel from '@/components/RightPanel'
-import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
+import { Navbar, Sidebar, AppMain, Topbar } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
-import { mapState } from 'vuex'
 
 export default {
   name: 'Layout',
   components: {
-    AppMain,
     Navbar,
-    RightPanel,
-    Settings,
     Sidebar,
-    TagsView
+    AppMain,
+    Topbar
   },
   mixins: [ResizeMixin],
   computed: {
-    ...mapState({
-      sidebar: state => state.app.sidebar,
-      device: state => state.app.device,
-      showSettings: state => state.settings.showSettings,
-      needTagsView: state => state.settings.tagsView,
-      fixedHeader: state => state.settings.fixedHeader
-    }),
+    sidebar() {
+      return this.$store.state.app.sidebar
+    },
+    device() {
+      return this.$store.state.app.device
+    },
+    fixedHeader() {
+      return this.$store.state.settings.fixedHeader
+    },
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
@@ -64,15 +59,14 @@ export default {
   .app-wrapper {
     @include clearfix;
     position: relative;
-    height: 100%;
+    // height: 100%;
+    height: $contentHeight;
     width: 100%;
-
-    &.mobile.openSidebar {
+    &.mobile.openSidebar{
       position: fixed;
       top: 0;
     }
   }
-
   .drawer-bg {
     background: #000;
     opacity: 0.3;

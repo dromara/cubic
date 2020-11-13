@@ -2,15 +2,11 @@ import Mock from 'mockjs'
 import { param2Obj } from '../src/utils'
 
 import user from './user'
-import role from './role'
-import article from './article'
-import search from './remote-search'
+import table from './table'
 
 const mocks = [
   ...user,
-  ...role,
-  ...article,
-  ...search
+  ...table
 ]
 
 // for front mock
@@ -54,4 +50,18 @@ export function mockXHR() {
   }
 }
 
-export default mocks
+// for mock server
+const responseFake = (url, type, respond) => {
+  return {
+    url: new RegExp(`${process.env.VUE_APP_BASE_API}${url}`),
+    type: type || 'get',
+    response(req, res) {
+      console.log('request invoke:' + req.path)
+      res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
+    }
+  }
+}
+
+export default mocks.map(route => {
+  return responseFake(route.url, route.type, route.response)
+})

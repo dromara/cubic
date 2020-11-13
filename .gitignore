@@ -1,4 +1,3 @@
 /agent-dist/
 *.iml
 /agent-proxy-dist/
-/cubic-ui-v2/node_modules/
