@@ -1,3 +1,4 @@
 /agent-dist/
 *.iml
 /agent-proxy-dist/
+/cubic-ui/dist/

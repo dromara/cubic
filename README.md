@@ -51,8 +51,7 @@
 ```
 -javaagent:/user/xxx/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy
 ```
-再来个截图：
-
+ 
 
 
 ## 环境

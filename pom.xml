@@ -12,7 +12,6 @@
         <module>cubic-agent</module>
         <module>cubic-core</module>
         <module>cubic-proxy</module>
-        <module>cubic-demo</module>
     </modules>
 
     <properties>
