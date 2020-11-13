@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: agent-demo
+server:
+  port: 6080
+
