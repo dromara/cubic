@@ -1,11 +1,10 @@
  - [简介](#简介)
-- [目录结构](#目录结构)
-- [安装教程](#安装教程)
-- [使用文档](#使用文档)
+- [文档](#文档)
+- [项目结构](#项目结构)
+- [安装](#安装)
 - [JDK版本](#JDK版本)
 - [使用说明](#使用说明)
 - [Q&A](#Q&A)
-- [使用说明](#使用说明)
 - [加入组织](#加入组织)
 - [联系我](#联系我)
 
@@ -22,7 +21,11 @@
 技术体系：Spring Boot、Vue、Netty、Websocket、xterm等
  
 
-## 目录结构
+## 文档
+- [快速开始](docs/cn/quick_start.md)
+ 
+ 
+## 项目结构
 - agent-dist  存放打包的agent.jar(打包后出现)
 - agent-proxy-dist    存放打包的proxy.jar(打包后出现)
 - arthas-dist 用于支持arthas命令集
@@ -34,7 +37,7 @@
 - docs    文档
 - scripts 包含打包脚本、启动脚本（用于测试）
 
-## 安装教程
+## 安装
 
 1.  git clone https://gitee.com/sanjiankethree/cubic.git
 2.  执行./mvnw clean package  -DskipTests 或执行打包脚本 ./script/build.sh
@@ -42,15 +45,11 @@
 4.  打包完成的proxy 在agent-proxy-dist目录下
 
 
-## 使用文档
-- [快速开始](docs/cn/quick_start.md)
- 
 ## JDK版本
     目前项目编译使用的是JDK1.8,项目支持1.8+,当然如果是低版本编译也可以支持高版本最低1.6+,因为jdk1.5版本和jdk1.6+的javaagent写法不一样哦。
 
 
 ## 使用说明
-
 
 1. agent 加载如下,将agent-dist整体拷贝到一个目录进行加载，里面的结构请不要进行变动，不要单独拷贝一个jar
     java -jar -javaagent:/xxx/agent-dist/cubic-agent.jar  yyy.jar
@@ -85,7 +84,11 @@
 ## 加入组织
  让我们一起学习成长，关注公众号获得每日一个知识点的储备，让我们一起成长
 
+#### QQ群：
+687377452
+
+
+#### 微信关注
+
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
 
-## 联系我
-![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/224643_a328a6dd_1168339.jpeg "WechatIMG236.jpeg")
