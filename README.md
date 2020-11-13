@@ -25,16 +25,20 @@
 - [远程主机命令下发（动态arthas）](docs/cn/arthas_tools.md)
  
 ## 结构
-- agent-dist  存放打包的agent.jar(打包后出现)
-- agent-proxy-dist    存放打包的proxy.jar(打包后出现)
-- arthas-dist 用于支持arthas命令集
-- config  agent配置文件
-- cubic-agent agent start
-- cubic-core  agent核心
-- cubic-proxy 代理应用，目前集成了简单的页面
-- cubic-ui    新版UI，持续开发中，欢迎大神来修bug,打包完 将dist目录数据拷贝到cubic-proxy resources/static下
-- docs    文档
-- scripts 包含打包脚本、启动脚本（用于测试）
+ 
+| 名称               | 介绍                                             |
+|------------------|------------------------------------------------|
+| agent-dist       | 存放打包的agent.jar(打包后出现)                          |
+| agent-proxy-dist | 存放打包的proxy.jar(打包后出现)                          |
+| arthas-dist      | 用于支持arthas命令集                                  |
+| config           | agent配置文件                                      |
+| cubic-agent      | agent                                          |
+| cubic-core       | agent核心                                        |
+| cubic-proxy      | 代理应用，目前集成了简单的页面                                |
+| cubic-ui         | UI，持续开发中，欢迎大神来修bug,打包完 将dist目录数据拷贝到cubic-proxy |
+| docs             | 文档   |
+| scripts             | 包含打包脚本、启动脚本                                       |
+
 
 ## 安装
 
