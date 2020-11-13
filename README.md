@@ -43,7 +43,7 @@
 ## 安装
 
 1.  git clone https://gitee.com/sanjiankethree/cubic.git
-2.  执行打包脚本 ./script/build.sh
+2.  执行./mvnw clean package  -DskipTests 或 执行打包脚本 ./script/build.sh
 3.  打包完成的agent 在agent-dist目录下
 4.  打包完成的proxy 在agent-proxy-dist目录下
 5.  拷贝agent-dist目录下的agent jar 路径，比如：/user/xxx/cubic-agent.jar
@@ -85,6 +85,8 @@
 - 欢迎大家各种star，fork，提issue，pull request，感觉还可以就点个star吧！
 - 不能下载linux-tools 依赖的问题，可执行build 脚本，或执行下面的命令
 - mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
+#### 问题1
+ No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
 
 ## 组织
  让我们一起学习成长，关注公众号获得每日一个知识点的储备，让我们一起成长
