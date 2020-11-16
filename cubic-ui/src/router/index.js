@@ -60,7 +60,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/app/command',
     name: 'app',
-    meta: { title: 'App', icon: 'example', activeMenu: '/article/list' },
+    meta: { title: '实例中心', icon: 'example', activeMenu: '/article/list' },
     children: [
       {
         path: 'base',
@@ -87,7 +87,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: '服务监控', icon: 'form' }
       }
     ]
   },
@@ -98,7 +98,7 @@ export const constantRoutes = [
     redirect: '/nested/menu1',
     name: 'Nested',
     meta: {
-      title: 'Nested',
+      title: '测试',
       icon: 'nested'
     },
     children: [
