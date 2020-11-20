@@ -1,5 +1,8 @@
 # cubic
-
+<p align="center">
+<a href='https://gitee.com/sanjiankethree/cubic/stargazers'><img src='https://gitee.com/sanjiankethree/cubic/badge/star.svg?theme=gvp' alt='star'></img></a>
+	<a href='https://gitee.com/sanjiankethree/cubic/members'><img src='https://gitee.com/sanjiankethree/cubic/badge/fork.svg?theme=gvp' alt='fork'></img></a>
+</p>
 #### Description
 分布式应用监控工具，提供agent  ui,可快速进行arthas 嵌入
 
