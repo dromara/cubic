@@ -12,8 +12,8 @@
     <result column="os" jdbcType="VARCHAR" property="os" />
     <result column="language" jdbcType="VARCHAR" property="language" />
     <result column="version" jdbcType="VARCHAR" property="version" />
-    <result column="last_heartbeat" jdbcType="DATE" property="lastHeartbeat" />
-    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="last_heartbeat" jdbcType="TIMESTAMP" property="lastHeartbeat" />
+    <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
   </resultMap>
 
 

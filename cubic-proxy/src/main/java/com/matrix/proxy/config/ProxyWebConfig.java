@@ -1,7 +1,7 @@
 package com.matrix.proxy.config;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * @Date 2020/6/1 5:37 下午
  * @Version 1.0
  */
-@Configuration
+//@Configuration
 public class ProxyWebConfig extends WebMvcConfigurationSupport {
 
     @Override
@@ -21,5 +21,29 @@ public class ProxyWebConfig extends WebMvcConfigurationSupport {
                 .maxAge(16800)
                 .allowedHeaders("*")
                 .allowCredentials(true);
+    }
+
+
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(getExcludePathPatterns());
+    }
+
+    /**
+     * 需要用户和服务认证判断的路径
+     *
+     * @return
+     */
+    private String[] getExcludePathPatterns() {
+        String[] urls = {
+                "/js/**",
+                "/css/**",
+                "/fonts/**",
+                "/img/**",
+                "/index.html",
+                "/favicon.ico"
+
+        };
+        return urls;
     }
 }

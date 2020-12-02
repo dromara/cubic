@@ -45,7 +45,7 @@
         <el-table-column :show-overflow-tooltip="true" prop="ip" label="IP" />
         <el-table-column :show-overflow-tooltip="true" prop="version" label="Agent版本" />
         <el-table-column :show-overflow-tooltip="true" prop="startDate" label="启动时间" />
-        <el-table-column :show-overflow-tooltip="true" prop="startDate" label="在线时长" />
+        <el-table-column :show-overflow-tooltip="true" prop="onLine" label="在线时长" />
         <el-table-column :show-overflow-tooltip="true" prop="lastHeartbeat" label="最后心跳" />
       </el-table>
     </el-card>
