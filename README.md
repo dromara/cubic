@@ -19,19 +19,16 @@
 - [远程主机命令下发（动态arthas）](docs/cn/arthas_tools.md)
  
 ## 结构
- 
-| 名称               | 介绍                                             |
-|------------------|------------------------------------------------|
-| agent-dist       | 存放打包的agent.jar(打包后出现)                          |
-| agent-proxy-dist | 存放打包的proxy.jar(打包后出现)                          |
-| arthas-dist      | 用于支持arthas命令集                                  |
-| config           | agent配置文件                                      |
-| cubic-agent      | agent                                          |
-| cubic-core       | agent核心                                        |
-| cubic-proxy      | 代理应用，目前集成了简单的页面                                |
-| cubic-ui         | UI，持续开发中，欢迎大神来修bug,打包完 将dist目录数据拷贝到cubic-proxy |
-| docs             | 文档   |
-| scripts             | 包含打包脚本、启动脚本                                       |
+ - cubic-agent       应用数据采集agent   
+ - config            存放agent配置文件                                                                           
+ - cubic-proxy       代理应用，用于接收agent数据，图形化操作等               
+ - cubic-ui          页面UI，提供前端各种功能展示,打包完 将dist目录数据拷贝到cubic-proxy  
+ - docs              文档   
+ - scripts           包含打包脚本、启动脚本         
+
+ - agent-dist         存放打包后的agent完整组件              
+ - agent-proxy-dist   存放打包后 proxy 部署 jar                    
+ - arthas-dist        用于支持arthas命令集                                                          
 
 
 ## 安装
@@ -42,6 +39,7 @@
 4.  打包完成的proxy 在agent-proxy-dist目录下
 5.  拷贝agent-dist目录下的agent jar 路径，比如：/user/xxx/cubic-agent.jar
 6.  如使用IDEA 测试，在测试应用中加入配置 VM option 参数 如下：
+
 ```
 -javaagent:/user/xxx/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy
 ```
@@ -86,9 +84,6 @@
 
 ## 组织
  让我们一起学习成长，关注公众号获得每日一个知识点的储备，让我们一起成长
-
-#### QQ群：
-687377452
 
 
 #### 微信关注
