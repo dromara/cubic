@@ -1,12 +1,4 @@
-- [简介](#简介)
-- [文档](#文档)
-- [结构](#结构)
-- [安装](#安装)
-- [环境](#环境)
-- [功能](#功能)
-- [Q&A](#Q&A)
-- [组织](#组织)
- 
+
 ## 简介
   <a href='https://gitee.com/sanjiankethree/cubic/stargazers'><img src='https://gitee.com/sanjiankethree/cubic/badge/star.svg?theme=gvp' alt='star'></img></a>
   <a href='https://gitee.com/sanjiankethree/cubic/members'><img src='https://gitee.com/sanjiankethree/cubic/badge/fork.svg?theme=gvp' alt='fork'></img></a>
@@ -55,7 +47,7 @@
 ```
  
 
-![应用列表](https://images.gitee.com/uploads/images/2020/1116/181228_9144fe91_1168339.png "屏幕截图.png")
+ ![应用列表](https://images.gitee.com/uploads/images/2020/1202/182824_706ae6ad_1168339.png "屏幕截图.png")
 
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1116/181250_4f502c7e_1168339.png "屏幕截图.png")
 ## 环境
