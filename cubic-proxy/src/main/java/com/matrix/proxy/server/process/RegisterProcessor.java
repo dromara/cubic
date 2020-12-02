@@ -2,9 +2,8 @@
 package com.matrix.proxy.server.process;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.matrix.proxy.db.entity.BasicInformation;
-import com.matrix.proxy.db.repository.BasicInformationRepository;
+import com.matrix.proxy.entity.BasicInformation;
+import com.matrix.proxy.mapper.BasicInformationMapper;
 import com.matrix.proxy.module.Message;
 import com.matrix.proxy.server.ServerConnectionStore;
 import com.matrix.proxy.util.ResponseCode;
@@ -27,7 +26,7 @@ public class RegisterProcessor extends DefaultMessageProcess {
     private ServerConnectionStore connectionStore;
 
     @Resource
-    private BasicInformationRepository basicInformationRepository;
+    private BasicInformationMapper basicInformationMapper;
 
     public RegisterProcessor() {
     }
@@ -46,7 +45,7 @@ public class RegisterProcessor extends DefaultMessageProcess {
         BasicInformation.BasicInformationBuilder builder = BasicInformation.builder().instanceId(msg.getInstanceUuid()).instanceName(msg.getInstanceName()).version(msg.getInstanceVersion());
         Map<String,String> osInfo = msg.getOsInfo();
         builder.appId(msg.getInstanceName()+'_'+msg.getInstanceUuid()).startDate(new Date()).progress(osInfo.get("process_no")).host(osInfo.get("host_name")).ip(osInfo.get("ipv4")).language(osInfo.get("language")).os(osInfo.get("os_name"));
-        basicInformationRepository.save(builder.build());
+        basicInformationMapper.insert(builder.build());
         logger.info("应用实例：id {} ,channel :{}注册成功！", id, ctx.channel());
         ctx.channel().writeAndFlush(initRegisterResponse(id));
     }

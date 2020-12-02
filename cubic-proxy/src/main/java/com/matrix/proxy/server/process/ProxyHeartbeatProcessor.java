@@ -18,8 +18,9 @@
 package com.matrix.proxy.server.process;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.matrix.proxy.db.repository.BasicInformationRepository;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.matrix.proxy.entity.BasicInformation;
+import com.matrix.proxy.mapper.BasicInformationMapper;
 import com.matrix.proxy.module.Message;
 import com.matrix.proxy.server.ServerConnectionStore;
 import com.matrix.proxy.util.ResponseCode;
@@ -43,7 +44,7 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     private ServerConnectionStore connectionStore;
 
     @Resource
-    private BasicInformationRepository repository;
+    private BasicInformationMapper basicInformationMapper;
     private final String heartbeatResponse = initHeartbeatResponse();
 
     public ProxyHeartbeatProcessor() {
@@ -55,7 +56,7 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     public void process(ChannelHandlerContext ctx, String message) {
         if (logger.isDebugEnabled()) {
             logger.info("receive  client heartbeat, {}", message);
@@ -66,7 +67,11 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     }
 
     public void updateHeardBeat(String instanceId) {
-        repository.updateByInstanceId(new Date(), instanceId);
+
+        BasicInformation information = BasicInformation.builder().lastHeartbeat(new Date()).build();
+        UpdateWrapper<BasicInformation> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("instance_id",instanceId);
+        basicInformationMapper.update(information,updateWrapper);
     }
 
 

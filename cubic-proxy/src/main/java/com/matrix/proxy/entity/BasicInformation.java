@@ -1,12 +1,13 @@
-package com.matrix.proxy.db.entity;
+package com.matrix.proxy.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -18,22 +19,31 @@ import java.util.Date;
  * @Date 2020/6/10 11:10 上午
  * @Version 1.0
  */
+@Entity
 @Data
 @Builder
-public class BasicInformationVo {
+public class BasicInformation {
 
+    @Id
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
+    /**
+     * appId
+     */
+    @TableField(value = "app_id")
     private String appId;
 
     /**
      * 实例名称
      */
+    @TableField(value = "instance_name")
     private String instanceName;
 
     /**
      * 实例id
      */
+    @TableField(value = "instance_id")
     private String instanceId;
 
     /**
@@ -69,20 +79,17 @@ public class BasicInformationVo {
     /**
      * 最后心跳
      */
-    private String lastHeartbeat;
-
-    /**
-     * 在线时长
-     */
-    private String onLine;
+    @TableField(value = "last_heartbeat")
+    private Date lastHeartbeat;
 
     /**
      * 启动时间
      */
-    private String startDate;
+    @TableField(value = "start_date")
+    private Date startDate;
 
     @Tolerate
-    public BasicInformationVo() {
+    public BasicInformation() {
     }
 
 

@@ -1,13 +1,8 @@
-package com.matrix.proxy.db.entity;
+package com.matrix.proxy.vo;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 import lombok.experimental.Tolerate;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
 
 /**
  * 应用注册信息
@@ -17,18 +12,12 @@ import java.util.Date;
  * @Date 2020/6/10 11:10 上午
  * @Version 1.0
  */
-@Entity
 @Data
 @Builder
-public class BasicInformation {
+public class BasicInformationVo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    /**
-     * appId
-     */
     private String appId;
 
     /**
@@ -74,15 +63,20 @@ public class BasicInformation {
     /**
      * 最后心跳
      */
-    private Date lastHeartbeat;
+    private String lastHeartbeat;
+
+    /**
+     * 在线时长
+     */
+    private String onLine;
 
     /**
      * 启动时间
      */
-    private Date startDate;
+    private String startDate;
 
     @Tolerate
-    public BasicInformation() {
+    public BasicInformationVo() {
     }
 
 

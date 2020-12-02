@@ -1,8 +1,8 @@
 package com.matrix.proxy.service;
 
-import com.matrix.proxy.db.entity.BasicInformation;
-import com.matrix.proxy.db.entity.BasicInformationVo;
-import com.matrix.proxy.db.repository.BasicInformationRepository;
+import com.matrix.proxy.entity.BasicInformation;
+import com.matrix.proxy.vo.BasicInformationVo;
+import com.matrix.proxy.mapper.BasicInformationMapper;
 import com.matrix.proxy.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AppDataServiceImpl implements AppDataService {
 
     @Resource
-    private BasicInformationRepository repository;
+    private BasicInformationMapper repository;
 
     /**
      * 获取应用实例列表
