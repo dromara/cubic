@@ -10,7 +10,6 @@
     <version>1.2.0.RELEASE</version>
     <modules>
         <module>cubic-agent</module>
-        <module>cubic-core</module>
         <module>cubic-proxy</module>
     </modules>
 
@@ -27,11 +26,6 @@
                 <version>2.3.5.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>matrix.cubic</groupId>
-                <artifactId>cubic-core</artifactId>
-                <version>1.2.0.RELEASE</version>
             </dependency>
 
             <dependency>
