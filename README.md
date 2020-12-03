@@ -32,7 +32,7 @@
 
 
 ## 安装
-
+0.  执行cubic-proxy -> resources -> db -> init.sql 创建表
 1.  git clone https://gitee.com/sanjiankethree/cubic.git
 2.  执行./mvnw clean package  -DskipTests 或 执行打包脚本 ./script/build.sh
 3.  打包完成的agent 在agent-dist目录下
@@ -49,8 +49,8 @@
 
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1116/181250_4f502c7e_1168339.png "屏幕截图.png")
 ## 环境
-    目前项目编译使用的是JDK1.8,项目支持1.8+,当然如果是低版本编译也可以支持高版本最低1.6+,因为jdk1.5版本和jdk1.6+的javaagent写法不一样哦。
-
+- JDK 1.8
+- MySQL 5.5+ 
 
 ## 功能
 
