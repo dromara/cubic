@@ -2,6 +2,7 @@
 package com.matrix.proxy.server.process;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.matrix.proxy.entity.BasicInformation;
 import com.matrix.proxy.mapper.BasicInformationMapper;
 import com.matrix.proxy.module.Message;
@@ -43,13 +44,19 @@ public class RegisterProcessor extends DefaultMessageProcess {
         connectionStore.register(id, ctx.channel());
         //进行数据注册
         BasicInformation.BasicInformationBuilder builder = BasicInformation.builder().instanceId(msg.getInstanceUuid()).instanceName(msg.getInstanceName()).version(msg.getInstanceVersion());
-        Map<String,String> osInfo = msg.getOsInfo();
-        builder.appId(msg.getInstanceName()+'_'+msg.getInstanceUuid()).startDate(new Date()).progress(osInfo.get("process_no")).host(osInfo.get("host_name")).ip(osInfo.get("ipv4")).language(osInfo.get("language")).os(osInfo.get("os_name"));
-        basicInformationMapper.insert(builder.build());
-        logger.info("应用实例：id {} ,channel :{}注册成功！", id, ctx.channel());
+        Map<String, String> osInfo = msg.getOsInfo();
+        builder.appId(id).startDate(new Date()).progress(osInfo.get("process_no")).host(osInfo.get("host_name")).ip(osInfo.get("ipv4")).language(osInfo.get("language")).os(osInfo.get("os_name"));
+
+        QueryWrapper<BasicInformation> wrapper = new QueryWrapper<>();
+        wrapper.eq("app_id", id);
+        Integer count = basicInformationMapper.selectCount(wrapper);
+        if (count != null || count == 0) {
+            basicInformationMapper.insert(builder.build());
+            logger.info("应用实例：id {} ,channel :{}注册成功！", id, ctx.channel());
+        }
+
         ctx.channel().writeAndFlush(initRegisterResponse(id));
     }
-
 
     private String initRegisterResponse(String id) {
 

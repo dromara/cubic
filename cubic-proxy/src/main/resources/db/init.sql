@@ -16,9 +16,10 @@ CREATE TABLE `basic_information`
     `version`        varchar(5) CHARACTER SET latin1   DEFAULT NULL COMMENT '状态',
     `last_heartbeat` datetime                          DEFAULT NULL COMMENT '最后心跳',
     `start_date`     datetime                          DEFAULT NULL COMMENT '启动时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_app_id` (`app_id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 128
   DEFAULT CHARSET = utf8mb4;
 
 
