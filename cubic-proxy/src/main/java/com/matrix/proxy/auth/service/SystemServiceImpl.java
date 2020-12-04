@@ -4,6 +4,7 @@ import com.matrix.proxy.auth.jwt.GovernJwtAuthenticationToken;
 import com.matrix.proxy.auth.login.AuthDetail;
 import com.matrix.proxy.auth.utils.JwtDetail;
 import com.matrix.proxy.auth.utils.JwtTokenUtil;
+import com.matrix.proxy.util.DateUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.impl.DefaultClaims;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -61,7 +63,8 @@ public class SystemServiceImpl implements SystemService {
             //生成新token
             Claims claims = new DefaultClaims();
             claims.put("username", authDetail.getUsername());
-            JwtDetail detail = JwtDetail.builder().exDate(new Date(System.currentTimeMillis() + JwtTokenUtil.getJwtProperties().getExpire())).username(authDetail.getUsername()).claims(claims).build();
+            Date expireDate = DateUtils.localDateToDate(LocalDate.now().plusDays(JwtTokenUtil.getJwtProperties().getExpire()));
+            JwtDetail detail = JwtDetail.builder().exDate(expireDate).username(authDetail.getUsername()).claims(claims).build();
 
             String createToken = JwtTokenUtil.generateToken(detail);
 
