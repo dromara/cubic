@@ -3,6 +3,7 @@ package com.matrix.proxy.controller;
 import com.matrix.proxy.auth.login.AuthDetail;
 import com.matrix.proxy.auth.module.DataResult;
 import com.matrix.proxy.auth.service.SystemService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/system")
+@CrossOrigin
 public class LoginController {
 
     @Resource

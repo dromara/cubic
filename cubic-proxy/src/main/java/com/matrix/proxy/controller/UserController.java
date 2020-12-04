@@ -1,14 +1,19 @@
 package com.matrix.proxy.controller;
 
 import com.matrix.proxy.auth.module.DataResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author luqiang
+ */
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
     @RequestMapping("/info")

@@ -2,6 +2,7 @@ package com.matrix.proxy.controller;
 
 import com.matrix.proxy.auth.module.DataResult;
 import com.matrix.proxy.service.AppDataService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/app")
+@CrossOrigin
 public class AppController {
 
     @Resource

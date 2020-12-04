@@ -46,7 +46,7 @@ public class ProxySecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/index.html")
                 .defaultSuccessUrl("/")
                 .successHandler(new ProxyAuthSuccessHandler())
                 .failureHandler(proxyAuthFailHandler())
@@ -93,17 +93,15 @@ public class ProxySecurityConfig extends WebSecurityConfigurerAdapter {
      * http.permitAll(): 不会绕开springsecurity验证，相当于是允许该路径通过
      *
      * @param web
-     * @throws Exception
      */
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web)   {
         web.ignoring().antMatchers(HttpMethod.GET,
+                "/*.html",
                 "/favicon.ico",
                 "/**/*.png",
                 "/**/*.ttf",
-                "/*.html",
                 "/**/*.css",
-                "/**/*.js",
-                "/sockjs-node/**");
+                "/**/*.js");
     }
 }
