@@ -5,7 +5,6 @@ import com.matrix.proxy.auth.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,12 +27,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-
-        log.info("UserServiceImpl 进行用户密码验证 ", username);
-
         User u = userMapper.selectByUsername(username);
         if(u == null){
-           throw new UsernameNotFoundException("用户不存在");
+           throw new UsernameNotFoundException("username not found");
         }
         UserDetails user = org.springframework.security.core.userdetails.User
                 .withUsername(u.getUsername())
@@ -45,9 +41,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public static void main(String[] args) {
-        System.out.println(new BCryptPasswordEncoder().encode("123456"));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(new BCryptPasswordEncoder().encode("123456"));
+//    }
 
 
 

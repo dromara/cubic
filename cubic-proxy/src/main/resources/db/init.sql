@@ -23,7 +23,7 @@ CREATE TABLE `basic_information`
 
 
 -- ----------------------------
---  Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`
@@ -37,3 +37,12 @@ CREATE TABLE `user`
   AUTO_INCREMENT = 2
   DEFAULT CHARSET = utf8mb4;
 
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+BEGIN;
+INSERT INTO `user`
+VALUES (1, 'matrix', '$2a$10$oRzuT/fvUlO6Eh7RtUwNiuEm7vJcymtgC53AnkS/km9E8GUBjMZ8S', '2020-11-25 12:08:51');
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;

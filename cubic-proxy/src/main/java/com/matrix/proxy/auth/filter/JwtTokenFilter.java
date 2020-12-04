@@ -38,7 +38,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = request.getHeader(HEADER_STRING);
 
-        log.info("JwtTokenFilter 拦截请求准备验证token :{}", token);
+
+        log.info("JWT过滤器 - 请求路径 :{}  ,token :{}",request.getServletPath(), token);
         if (StringUtils.isNotEmpty(token)) {
             try {
                 JwtDetail detail = JwtTokenUtil.getInfoFromToken(token);
