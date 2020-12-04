@@ -1,10 +1,7 @@
 package com.matrix.proxy.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.matrix.proxy.module.ResponseBody;
+import com.matrix.proxy.auth.module.DataResult;
 import com.matrix.proxy.service.AppDataService;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +17,15 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/app")
-@CrossOrigin
 public class AppController {
 
     @Resource
     private AppDataService appDataService;
 
     @RequestMapping("/getList")
-    public String getList(@RequestParam(defaultValue = "", required = false) String date){
+    public DataResult getList(@RequestParam(defaultValue = "", required = false) String date){
         Map data = appDataService.getAppList(date);
-        ResponseBody response = new ResponseBody(0,data);
-        return JSONObject.toJSONString(response, SerializerFeature.WriteDateUseDateFormat);
+        return DataResult.ok("OK",data);
+
     }
 }

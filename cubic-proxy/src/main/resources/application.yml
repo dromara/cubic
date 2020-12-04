@@ -59,3 +59,8 @@ management:
 log:
   level: info
   path: /tmp/logs
+jwt:
+  token-header: Authorization
+  expire: 600000
+  rsa-secret: 38ed4c11_21c2_490c_bd04_5709cc9
+  sign: 38ed4c11_21c2_490c_bd04_5709cc9

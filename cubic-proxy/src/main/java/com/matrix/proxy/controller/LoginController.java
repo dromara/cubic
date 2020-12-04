@@ -1,26 +1,41 @@
 package com.matrix.proxy.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.matrix.proxy.module.ResponseBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import com.matrix.proxy.auth.login.AuthDetail;
+import com.matrix.proxy.auth.module.DataResult;
+import com.matrix.proxy.auth.service.SystemService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
+/**
+ * @author luqiang
+ */
 @RestController
-@RequestMapping("/user")
-@CrossOrigin
+@RequestMapping("/system")
 public class LoginController {
 
-    @RequestMapping("/valid")
-    public String valid(@RequestBody String data){
-        ResponseBody<String> responseBody = new ResponseBody<>(0,"admin-token");
-        return JSON.toJSONString(responseBody);
-    }
+    @Resource
+    private SystemService systemService;
+
 
     @RequestMapping("/logout")
-    public String logout(){
-        ResponseBody<String> responseBody = new ResponseBody<>(0,"success");
-        return JSON.toJSONString(responseBody);
+    public DataResult logout() {
+        return DataResult.ok();
+    }
+
+
+    @RequestMapping("/login")
+    public DataResult login(@RequestBody AuthDetail loginDetail) {
+
+        String token = systemService.login(loginDetail);
+        return DataResult.ok("",token);
+    }
+
+
+    @RequestMapping("/loginFail")
+    public DataResult loginFail() {
+        return DataResult.fail("fail");
     }
 }
