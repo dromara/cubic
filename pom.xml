@@ -11,6 +11,8 @@
     <modules>
         <module>cubic-agent</module>
         <module>cubic-proxy</module>
+        <module>cubic-proxy-websocket</module>
+        <module>cubic-proxy-common</module>
     </modules>
 
     <properties>
@@ -62,6 +64,17 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.200</version>
+            </dependency>
+            <dependency>
+                <groupId>matrix.cubic</groupId>
+                <artifactId>cubic-proxy-common</artifactId>
+                <version>1.2.0.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>matrix.cubic</groupId>
+                <artifactId>cubic-proxy-websocket</artifactId>
+                <version>1.2.0.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

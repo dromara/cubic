@@ -1,11 +1,12 @@
 package com.matrix.proxy.server;
 
+import com.cubic.proxy.common.server.NettyServer;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.matrix.proxy.encoder.DelimiterBasedFrameEncoder;
 import com.matrix.proxy.encoder.GzipDecoder;
-import com.matrix.proxy.server.handler.ChannelCloseHandler;
-import com.matrix.proxy.server.handler.ConnectionCounterHandler;
-import com.matrix.proxy.server.handler.MessageHandler;
+import com.cubic.proxy.common.handler.ChannelCloseHandler;
+import com.cubic.proxy.common.handler.ConnectionCounterHandler;
+import com.cubic.proxy.common.handler.MessageHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.buffer.Unpooled;

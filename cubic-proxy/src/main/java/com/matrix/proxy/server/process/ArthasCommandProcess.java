@@ -1,6 +1,6 @@
 package com.matrix.proxy.server.process;
 
-import com.matrix.proxy.util.ResponseCode;
+import com.cubic.proxy.common.constant.ResponseCode;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

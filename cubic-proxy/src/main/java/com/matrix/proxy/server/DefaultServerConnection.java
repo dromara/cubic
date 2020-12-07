@@ -17,7 +17,8 @@
 
 package com.matrix.proxy.server;
 
-import com.matrix.proxy.common.AbstractConnection;
+import com.cubic.proxy.common.server.ServerConnection;
+import com.cubic.proxy.common.server.AbstractConnection;
 import io.netty.channel.Channel;
 
 import java.util.Objects;
