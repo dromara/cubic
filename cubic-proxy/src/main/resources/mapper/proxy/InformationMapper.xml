@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.matrix.proxy.mapper.BasicInformationMapper">
-  <resultMap id="BaseResultMap" type="com.matrix.proxy.entity.BasicInformation">
+<mapper namespace="com.matrix.proxy.mapper.formationMapper">
+  <resultMap id="BaseResultMap" type="com.matrix.proxy.entity.Information">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="app_id" jdbcType="VARCHAR" property="appId" />
     <result column="instance_name" jdbcType="VARCHAR" property="instanceName" />
@@ -18,7 +18,7 @@
 
 
   <select id="selectInstanceByLastHeartbeat" resultMap="BaseResultMap">
-      SELECT * FROM basic_information   where  last_heartbeat > #{lastHeartbeat} order by  instance_name
+      SELECT * FROM information   where  last_heartbeat > #{lastHeartbeat} order by  instance_name
   </select>
 
 </mapper>

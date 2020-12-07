@@ -22,7 +22,7 @@ import java.util.Date;
 @Entity
 @Data
 @Builder
-public class BasicInformation {
+public class Information {
 
     @Id
     @TableId(type = IdType.AUTO)
@@ -89,7 +89,7 @@ public class BasicInformation {
     private Date startDate;
 
     @Tolerate
-    public BasicInformation() {
+    public Information() {
     }
 
 

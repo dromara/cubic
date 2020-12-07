@@ -1,8 +1,8 @@
 -- ----------------------------
---  Table structure for `basic_information`
+--  Table structure for `information`
 -- ----------------------------
-DROP TABLE IF EXISTS `basic_information`;
-CREATE TABLE `basic_information`
+DROP TABLE IF EXISTS `information`;
+CREATE TABLE `information`
 (
     `id`             int(11)                           NOT NULL AUTO_INCREMENT COMMENT '唯一主键',
     `app_id`         varchar(100) CHARACTER SET latin1 NOT NULL COMMENT '应用标识',

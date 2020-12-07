@@ -1,7 +1,7 @@
 package com.matrix.proxy.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.matrix.proxy.entity.BasicInformation;
+import com.matrix.proxy.entity.Information;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @Date 2020/6/10 11:22 上午
  * @Version 1.0
  */
-public interface BasicInformationMapper extends BaseMapper<BasicInformation> {
+public interface formationMapper extends BaseMapper<Information> {
 
 
     /**
@@ -20,5 +20,5 @@ public interface BasicInformationMapper extends BaseMapper<BasicInformation> {
      * @param lastHeartbeat
      * @return
      */
-    List<BasicInformation> selectInstanceByLastHeartbeat( Date lastHeartbeat);
+    List<Information> selectInstanceByLastHeartbeat(Date lastHeartbeat);
 }

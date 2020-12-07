@@ -1,8 +1,8 @@
 package com.matrix.proxy.service;
 
-import com.matrix.proxy.entity.BasicInformation;
+import com.matrix.proxy.entity.Information;
 import com.matrix.proxy.vo.BasicInformationVo;
-import com.matrix.proxy.mapper.BasicInformationMapper;
+import com.matrix.proxy.mapper.formationMapper;
 import com.matrix.proxy.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AppDataServiceImpl implements AppDataService {
 
     @Resource
-    private BasicInformationMapper repository;
+    private formationMapper repository;
 
     /**
      * 获取应用实例列表
@@ -47,7 +47,7 @@ public class AppDataServiceImpl implements AppDataService {
         }
 
         Map<String, Object> result = new HashMap<>(16);
-        List<BasicInformation> datas = repository.selectInstanceByLastHeartbeat(curr);
+        List<Information> datas = repository.selectInstanceByLastHeartbeat(curr);
         List<BasicInformationVo> informationVos = dispose(datas);
         result.put("informations", informationVos);
 
@@ -68,7 +68,7 @@ public class AppDataServiceImpl implements AppDataService {
      * @param datas
      * @return
      */
-    private List<BasicInformationVo> dispose(List<BasicInformation> datas) {
+    private List<BasicInformationVo> dispose(List<Information> datas) {
         List<BasicInformationVo> result = new LinkedList<>();
 
         datas.forEach(base -> {
