@@ -177,7 +177,6 @@ export default {
     //   })
     // },
     goCmd(row) {
-      console.log(row)
       this.$router.push({name: 'app', query: {id: row.appId}})
     },
 
