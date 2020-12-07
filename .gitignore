@@ -2,3 +2,32 @@
 *.iml
 /agent-proxy-dist/
 /cubic-ui/dist/
+
+.idea
+target/
+*.ts
+
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+*.json
+
+/node_modules
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache

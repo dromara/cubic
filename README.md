@@ -34,7 +34,7 @@
 ## 安装
 0.  执行cubic-proxy -> resources -> db -> init.sql 创建表
 1.  git clone https://gitee.com/sanjiankethree/cubic.git
-2.  执行./mvnw clean package  -DskipTests 或 执行打包脚本 ./script/build.sh
+2.  执行./mvnw clean package  -DskipTests 或 执行打包脚本 ./scripts/build.sh
 3.  打包完成的agent 在agent-dist目录下
 4.  打包完成的proxy 在agent-proxy-dist目录下
 5.  拷贝agent-dist目录下的agent jar 路径，比如：/user/xxx/cubic-agent.jar

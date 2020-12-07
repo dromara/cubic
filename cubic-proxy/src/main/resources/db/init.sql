@@ -8,7 +8,7 @@ CREATE TABLE `basic_information`
     `app_id`         varchar(100) CHARACTER SET latin1 NOT NULL COMMENT '应用标识',
     `instance_name`  varchar(150) CHARACTER SET latin1 DEFAULT NULL COMMENT '实例名称',
     `instance_id`    varchar(100) CHARACTER SET latin1 DEFAULT NULL COMMENT '应用名称',
-    `ip`             varchar(30) CHARACTER SET latin1  DEFAULT NULL COMMENT '地址IP',
+    `ip`             varchar(128) CHARACTER SET latin1  DEFAULT NULL COMMENT '地址IP',
     `progress`       varchar(10) CHARACTER SET latin1  DEFAULT NULL COMMENT '进程号',
     `host`           varchar(30) CHARACTER SET latin1  DEFAULT NULL COMMENT 'host',
     `os`             varchar(10) CHARACTER SET latin1  DEFAULT NULL COMMENT 'os',

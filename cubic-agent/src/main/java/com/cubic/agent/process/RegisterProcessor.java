@@ -29,7 +29,7 @@ public class RegisterProcessor implements Processor<String> {
     @Override
     public void process(ChannelHandlerContext ctx, String id, String command) {
         if (StringUtils.isNotEmpty(command)) {
-            ServiceRegisterClient.registed = Boolean.valueOf(command);
+            ServiceRegisterClient.registed = Boolean.parseBoolean(command);
             log.info("Register Succ id:{}", id);
         }
     }
