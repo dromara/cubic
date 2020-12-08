@@ -17,6 +17,7 @@ public class MatrixAgent {
 
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         CubicConfInitalizer.initConfig();
+        ServiceManager.instrumentation = instrumentation;
 
         ServiceManager.INMSTANCE.start();
 

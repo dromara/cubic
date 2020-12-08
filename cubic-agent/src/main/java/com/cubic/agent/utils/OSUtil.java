@@ -2,6 +2,7 @@
 package com.cubic.agent.utils;
 
 import com.cubic.agent.conf.AgentConfig;
+import com.google.gson.Gson;
 
 import java.lang.management.ManagementFactory;
 import java.net.*;
@@ -79,8 +80,9 @@ public class OSUtil {
         return PROCESS_NO;
     }
 
+
     public static Map<String, String> buildOSInfo() {
-        Map<String, String> osInfo = new HashMap<>();
+        Map<String, String> osInfo = new HashMap<>(16);
 
         String osName = getOsName();
         if (osName != null) {
@@ -89,14 +91,24 @@ public class OSUtil {
         String hostName = getHostName();
         if (hostName != null) {
             osInfo.put("host_name", hostName);
+
         }
         List<String> allIPV4 = getAllIPV4();
         if (allIPV4.size() > 0) {
-            osInfo.put("ipv4", Arrays.toString(allIPV4.toArray()));
+            for (String ipv4 : allIPV4) {
+                osInfo.put("ipv4", ipv4);
+
+            }
         }
+
         osInfo.put("process_no", getProcessNo() + "");
+
         osInfo.put("language", "java");
+
         osInfo.put("version", AgentConfig.Agent.VERSION);
+
+        osInfo.put("jvm_info", new Gson().toJson(JvmInfoUtil.buildJvmInfo()));
+
         return osInfo;
     }
 }

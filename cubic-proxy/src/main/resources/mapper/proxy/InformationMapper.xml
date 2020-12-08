@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.matrix.proxy.mapper.formationMapper">
+<mapper namespace="com.matrix.proxy.mapper.InformationMapper">
   <resultMap id="BaseResultMap" type="com.matrix.proxy.entity.Information">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="app_id" jdbcType="VARCHAR" property="appId" />
@@ -22,6 +22,7 @@
     <result column="processor_num" jdbcType="INTEGER" property="processorNum" />
     <result column="arguments" jdbcType="VARCHAR" property="arguments" />
     <result column="os_version" jdbcType="VARCHAR" property="osVersion" />
+    <result column="jars" jdbcType="VARCHAR" property="jars" />
   </resultMap>
 
 

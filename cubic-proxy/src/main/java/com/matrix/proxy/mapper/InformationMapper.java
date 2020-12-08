@@ -12,7 +12,7 @@ import java.util.List;
  * @Date 2020/6/10 11:22 上午
  * @Version 1.0
  */
-public interface formationMapper extends BaseMapper<Information> {
+public interface InformationMapper extends BaseMapper<Information> {
 
 
     /**

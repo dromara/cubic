@@ -20,7 +20,7 @@ package com.matrix.proxy.server.process;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.matrix.proxy.entity.Information;
-import com.matrix.proxy.mapper.formationMapper;
+import com.matrix.proxy.mapper.InformationMapper;
 import com.matrix.proxy.module.Message;
 import com.cubic.proxy.common.server.ServerConnectionStore;
 import com.cubic.proxy.common.constant.ResponseCode;
@@ -44,7 +44,7 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     private ServerConnectionStore connectionStore;
 
     @Resource
-    private formationMapper formationMapper;
+    private InformationMapper InformationMapper;
     private final String heartbeatResponse = initHeartbeatResponse();
 
     public ProxyHeartbeatProcessor() {
@@ -71,7 +71,7 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
         Information information = Information.builder().lastHeartbeat(new Date()).build();
         UpdateWrapper<Information> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("instance_id",instanceId);
-        formationMapper.update(information,updateWrapper);
+        InformationMapper.update(information,updateWrapper);
     }
 
 

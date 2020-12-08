@@ -2,9 +2,11 @@
 package com.matrix.proxy.server.process;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.matrix.proxy.entity.Information;
-import com.matrix.proxy.mapper.formationMapper;
+import com.matrix.proxy.mapper.InformationMapper;
 import com.matrix.proxy.module.Message;
 import com.cubic.proxy.common.server.ServerConnectionStore;
 import com.cubic.proxy.common.constant.ResponseCode;
@@ -14,12 +16,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * @author luqiang
+ */
 @Service
-public class RegisterProcessor extends DefaultMessageProcess {
+public class RegisterProcessor extends DefaultMessageProcess   {
 
     private static final Logger logger = LoggerFactory.getLogger(RegisterProcessor.class);
 
@@ -27,7 +30,8 @@ public class RegisterProcessor extends DefaultMessageProcess {
     private ServerConnectionStore connectionStore;
 
     @Resource
-    private formationMapper formationMapper;
+    private InformationMapper informationMapper;
+
 
     public RegisterProcessor() {
     }
@@ -43,19 +47,50 @@ public class RegisterProcessor extends DefaultMessageProcess {
         String id = msg.getInstanceName() + "_" + msg.getInstanceUuid();
         connectionStore.register(id, ctx.channel());
         //进行数据注册
-        Information.InformationBuilder builder = Information.builder().instanceId(msg.getInstanceUuid()).instanceName(msg.getInstanceName()).version(msg.getInstanceVersion());
-        Map<String, String> osInfo = msg.getOsInfo();
-        builder.appId(id).startDate(new Date()).progress(osInfo.get("process_no")).host(osInfo.get("host_name")).ip(osInfo.get("ipv4")).language(osInfo.get("language")).os(osInfo.get("os_name"));
+
+        insertJvmInfo(msg, id);
+
+        logger.info("应用实例：id {} ,channel :{}注册成功！", id, ctx.channel());
+
+        ctx.channel().writeAndFlush(initRegisterResponse(id));
+    }
+
+    private void insertJvmInfo(Message msg, String id) {
 
         QueryWrapper<Information> wrapper = new QueryWrapper<>();
         wrapper.eq("app_id", id);
-        Integer count = formationMapper.selectCount(wrapper);
-        if (count != null || count == 0) {
-            formationMapper.insert(builder.build());
-            logger.info("应用实例：id {} ,channel :{}注册成功！", id, ctx.channel());
+        Integer count = informationMapper.selectCount(wrapper);
+        if (count != 0) {
+            return;
         }
 
-        ctx.channel().writeAndFlush(initRegisterResponse(id));
+
+
+        Information.InformationBuilder builder = Information.builder().instanceId(msg.getInstanceUuid()).
+                instanceName(msg.getInstanceName()).version(msg.getInstanceVersion());
+        Map<String, String> osInfo = msg.getOsInfo();
+        String info = osInfo.get("jvm_info");
+
+        JSONObject jvmInfo = JSON.parseObject(info);
+        builder.appId(id).startDate(new Date()).progress(osInfo.get("process_no")).host(osInfo.get("host_name"))
+                .ip(osInfo.get("ipv4")).language(osInfo.get("language")).os(osInfo.get("os_name"))
+                .jdkVersion(jvmInfo.getString("version")).jdkDir(jvmInfo.getString("jvmHome")).userDir(jvmInfo.getString("userDir"));
+
+
+        JSONArray jsonArray = jvmInfo.getJSONArray("jarFileList");
+
+        Integer initMemory = jvmInfo.getInteger("initMemory");
+        Integer maxMemory = jvmInfo.getInteger("maxMemory");
+        Integer processorNum = jvmInfo.getInteger("processorNum");
+        JSONArray inputArguments = jvmInfo.getJSONArray("inputArguments");
+        String osArch = jvmInfo.getString("osArch");
+        String osVersion = jvmInfo.getString("osVersion");
+        builder.initMemory(initMemory == null ? 0 : initMemory / 1024 / 1024).maxMemory(maxMemory == null ? 0 : maxMemory / 1024 / 1024).
+                processorNum(processorNum).arguments(inputArguments == null ? null : inputArguments.toJSONString()).os(osArch).osVersion(osVersion).jars(jsonArray.toJSONString());
+
+        Information information = builder.build();
+        informationMapper.insert(information);
+
     }
 
     private String initRegisterResponse(String id) {

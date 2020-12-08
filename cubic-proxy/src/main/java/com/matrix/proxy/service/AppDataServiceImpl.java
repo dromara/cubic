@@ -2,7 +2,7 @@ package com.matrix.proxy.service;
 
 import com.matrix.proxy.entity.Information;
 import com.matrix.proxy.vo.BasicInformationVo;
-import com.matrix.proxy.mapper.formationMapper;
+import com.matrix.proxy.mapper.InformationMapper;
 import com.matrix.proxy.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AppDataServiceImpl implements AppDataService {
 
     @Resource
-    private formationMapper repository;
+    private InformationMapper repository;
 
     /**
      * 获取应用实例列表

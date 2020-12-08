@@ -24,12 +24,12 @@ CREATE TABLE `information`
     `processor_num`  int(11)                           DEFAULT NULL COMMENT '内核数',
     `arguments`      text COMMENT '启动参数',
     `os_version`     varchar(128)                      DEFAULT NULL COMMENT '系统版本',
+    `jars`           text COMMENT '依赖jar',
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_app_id` (`app_id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 138
+  AUTO_INCREMENT = 143
   DEFAULT CHARSET = utf8mb4;
-
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------

@@ -113,6 +113,9 @@ public class Information {
     @TableField(value = "os_version")
     private String osVersion;
 
+    @TableField(value = "jars")
+    private String jars;
+
     @Tolerate
     public Information() {
     }
