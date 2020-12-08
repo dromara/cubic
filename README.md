@@ -11,7 +11,11 @@
 
 因为很多公司使用监控需要进行定制化开发，Cubic 可作为一种技术参考，希望给大家带来些许启发。
  
-技术体系：Spring Boot、Vue、Netty、Websocket、xterm等
+技术体系：
+- 基于Spring Boot 整体技术栈
+- 认证模块是基于Spring Boot Security JWT 技术
+- WebShell 基于 Vue Xterm 、Websocket、Netty 技术
+- Proxy 与 agent 通信基于Netty 、GRPC
 
  
 ## 文档

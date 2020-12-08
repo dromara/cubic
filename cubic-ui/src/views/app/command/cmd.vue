@@ -1,16 +1,16 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />
-      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />
-      <el-input v-model="vm.agentId" placeholder="AgentId" size="mini" style="width: 200px;" class="filter-item" />
-      <el-button class="filter-item" size="mini" type="success" @click="startConnect">
-        连接
-      </el-button>
-      <el-button class="filter-item" size="mini" type="danger" @click="disconnect">
-        断开
-      </el-button>
-    </div>
+<!--    <div class="filter-container">-->
+<!--      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />-->
+<!--      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />-->
+<!--      <el-input v-model="vm.agentId" placeholder="AgentId" size="mini" style="width: 200px;" class="filter-item" />-->
+<!--      <el-button class="filter-item" size="mini" type="success" @click="startConnect">-->
+<!--        连接-->
+<!--      </el-button>-->
+<!--      <el-button class="filter-item" size="mini" type="danger" @click="disconnect">-->
+<!--        断开-->
+<!--      </el-button>-->
+<!--    </div>-->
     <div id="xterm" class="xterm" />
   </div>
 
@@ -33,7 +33,7 @@ export default {
       socket: null,
       term: null,
       result: '',
-      currType: '1',
+      currType: '3',
       state: '',
       type: [1, 3],
       msg: {
@@ -97,11 +97,15 @@ export default {
       // // 聚焦
       this.term.focus()
       this.term.writeln(' ')
-      this.term.writeln(' 欢迎使用代理终端，此终端可连接到目标机器进行命令操作')
-      this.term.writeln(' 命令分为两类，自定义命令，Arthas命令（Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html）')
-      this.term.writeln(' 输入 1 回车进入自定义命令模式（默认）')
-      this.term.writeln(' 输入 3 回车进入Arthas命令模式')
-      this.term.writeln(' 正在连接。。。')
+      this.term.writeln(' > 欢迎使用代理终端，此终端可连接到目标机器进行命令操作')
+      this.term.writeln('')
+      this.term.writeln(' > Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html')
+      // this.term.writeln(' 输入 1 回车进入自定义命令模式（默认）')
+      // this.term.writeln(' 输入 3 回车进入Arthas命令模式')
+      this.term.writeln('')
+      this.term.writeln(' > 正在连接。。。')
+      this.term.writeln('')
+
     },
     prompt() {
       this.term.write('\r\n$ ')
@@ -171,7 +175,7 @@ export default {
     },
     socketOnOpen() {
       this.socket.onopen = () => {
-        this.term.writeln(' 已连接, 当前 host: ' + this.vm.ip + ', agentId: ' + this.vm.agentId)
+        this.term.writeln(' > 已连接, 当前 host: ' + this.vm.ip + ', agentId: ' + this.vm.agentId)
         this.prompt()
         this.termOnKey()
         this.socketOnMessage()
