@@ -66,7 +66,7 @@ import { appList, fetchPv, createArticle, updateArticle } from '@/api/list'
 
 // arr to obj, such as { CN : "China", US : "USA" }
 export default {
-  name: 'Dashboard',
+  name: 'List',
   data() {
     return {
       caseInfo: {

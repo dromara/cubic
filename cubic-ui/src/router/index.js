@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '应用列表', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
 
@@ -60,8 +60,14 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/app/command',
     name: 'app',
-    meta: { title: '实例中心', icon: 'example', activeMenu: '/article/list' },
+    meta: { title: '应用中心', icon: 'example', activeMenu: '/article/list' },
     children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/app/list/index'),
+        meta: { title: '应用实例', icon: 'tree' }
+      },
       {
         path: 'base',
         name: 'Base',

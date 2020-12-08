@@ -88,6 +88,31 @@ public class Information {
     @TableField(value = "start_date")
     private Date startDate;
 
+    @TableField(value = "jdk_version")
+    private String jdkVersion;
+
+    @TableField(value = "jdk_dir")
+    private String jdkDir;
+
+    @TableField(value = "user_dir")
+    private String userDir;
+
+    @TableField(value = "init_memory")
+    private Integer initMemory;
+
+    @TableField(value = "max_memory")
+    private Integer maxMemory;
+
+
+    @TableField(value = "processor_num")
+    private Integer processorNum;
+
+    @TableField(value = "arguments")
+    private String arguments;
+
+    @TableField(value = "os_version")
+    private String osVersion;
+
     @Tolerate
     public Information() {
     }

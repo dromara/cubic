@@ -1,16 +1,16 @@
 <template>
   <div class="app-container">
-<!--    <div class="filter-container">-->
-<!--      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />-->
-<!--      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />-->
-<!--      <el-input v-model="vm.agentId" placeholder="AgentId" size="mini" style="width: 200px;" class="filter-item" />-->
-<!--      <el-button class="filter-item" size="mini" type="success" @click="startConnect">-->
-<!--        连接-->
-<!--      </el-button>-->
-<!--      <el-button class="filter-item" size="mini" type="danger" @click="disconnect">-->
-<!--        断开-->
-<!--      </el-button>-->
-<!--    </div>-->
+    <!--    <div class="filter-container">-->
+    <!--      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />-->
+    <!--      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />-->
+    <!--      <el-input v-model="vm.agentId" placeholder="AgentId" size="mini" style="width: 200px;" class="filter-item" />-->
+    <!--      <el-button class="filter-item" size="mini" type="success" @click="startConnect">-->
+    <!--        连接-->
+    <!--      </el-button>-->
+    <!--      <el-button class="filter-item" size="mini" type="danger" @click="disconnect">-->
+    <!--        断开-->
+    <!--      </el-button>-->
+    <!--    </div>-->
     <div id="xterm" class="xterm" />
   </div>
 
@@ -65,10 +65,15 @@ export default {
   },
   methods: {
     initXterm() {
+      // 获取容器宽高/字号大小，定义行数和列数
+      this.rows = document.querySelector('.app-container').offsetHeight
+      this.cols = document.querySelector('.app-container').offsetWidth
+
+      const _this = this
       this.term = new Terminal({
         cursorBlink: true, // 光标闪烁
-        // rows: parseInt(_this.rows), // 行数
-        // cols: parseInt(_this.cols), // 不指定行数，自动回车后光标从下一行开始
+        rows: parseInt(_this.rows), // 行数
+        cols: parseInt(_this.cols), // 不指定行数，自动回车后光标从下一行开始
         cursorStyle: 'block', // 光标样式  null | 'block' | 'underline' | 'bar'
         screenKeys: true,
         theme: {
@@ -97,7 +102,7 @@ export default {
       // // 聚焦
       this.term.focus()
       this.term.writeln(' ')
-      this.term.writeln(' > 欢迎使用代理终端，此终端可连接到目标机器进行命令操作')
+      this.term.writeln(' > 欢迎进入Arthas代理终端，此终端可连接到目标机器进行命令操作')
       this.term.writeln('')
       this.term.writeln(' > Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html')
       // this.term.writeln(' 输入 1 回车进入自定义命令模式（默认）')
@@ -105,7 +110,20 @@ export default {
       this.term.writeln('')
       this.term.writeln(' > 正在连接。。。')
       this.term.writeln('')
+    },
+    resizeScreen(size) {
+      console.log('size', size)
+      try {
+        this.fitAddon.fit()
 
+        const _this = this
+        // 窗口大小改变时触发xterm的resize方法，向后端发送行列数，格式由后端决定
+        this.term.onResize(size => {
+          _this.sendMessage(_this.agentId, { Op: 'resize', Cols: size.cols, Rows: size.rows })
+        })
+      } catch (e) {
+        console.log('e', e.message)
+      }
     },
     prompt() {
       this.term.write('\r\n$ ')
@@ -175,7 +193,7 @@ export default {
     },
     socketOnOpen() {
       this.socket.onopen = () => {
-        this.term.writeln(' > 已连接, 当前 host: ' + this.vm.ip + ', agentId: ' + this.vm.agentId)
+        this.term.writeln(' > 已连接, 当前 IP : ' + this.vm.ip + ', ID: ' + this.vm.agentId)
         this.prompt()
         this.termOnKey()
         this.socketOnMessage()

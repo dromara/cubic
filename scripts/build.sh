@@ -21,10 +21,10 @@ fi
 #打包agent
 echo "================ starting to build cubic ui ================"
 npm install --save xterm
+npm i -S xterm-addon-web-links
 npm install --save xterm-addon-fit
 npm install --save xterm-addon-attach
-npm install --save xterm-addon-web-links
-cd "$BASE_UI_DIR"
+ cd "$BASE_UI_DIR"
 echo `pwd`
 
 npm install

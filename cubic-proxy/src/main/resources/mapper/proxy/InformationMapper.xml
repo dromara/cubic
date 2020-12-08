@@ -14,6 +14,14 @@
     <result column="version" jdbcType="VARCHAR" property="version" />
     <result column="last_heartbeat" jdbcType="TIMESTAMP" property="lastHeartbeat" />
     <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="jdk_version" jdbcType="VARCHAR" property="jdkVersion" />
+    <result column="jdk_dir" jdbcType="VARCHAR" property="jdkDir" />
+    <result column="user_dir" jdbcType="VARCHAR" property="userDir" />
+    <result column="init_memory" jdbcType="INTEGER" property="initMemory" />
+    <result column="max_memory" jdbcType="INTEGER" property="maxMemory" />
+    <result column="processor_num" jdbcType="INTEGER" property="processorNum" />
+    <result column="arguments" jdbcType="VARCHAR" property="arguments" />
+    <result column="os_version" jdbcType="VARCHAR" property="osVersion" />
   </resultMap>
 
 
