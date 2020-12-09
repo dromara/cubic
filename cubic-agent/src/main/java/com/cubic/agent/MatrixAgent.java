@@ -19,11 +19,11 @@ public class MatrixAgent {
         CubicConfInitalizer.initConfig();
         ServiceManager.instrumentation = instrumentation;
 
-        ServiceManager.INMSTANCE.start();
+        ServiceManager.INSTANCE.start();
 
 
         Runtime.getRuntime()
-                .addShutdownHook(new Thread(ServiceManager.INMSTANCE::shutdown, "cubic agent shutdown thread"));
+                .addShutdownHook(new Thread(ServiceManager.INSTANCE::shutdown, "cubic agent shutdown thread"));
     }
 
 

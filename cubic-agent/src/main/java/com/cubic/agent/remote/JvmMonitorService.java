@@ -29,7 +29,7 @@ public class JvmMonitorService implements CommonService, AgentChannelListener, R
 
     @Override
     public void prepare() {
-        ServiceManager.INMSTANCE.findService(AgentClientManager.class).addListener(this);
+        ServiceManager.INSTANCE.findService(AgentClientManager.class).addListener(this);
 
         sendMetricFuture = new ScheduledThreadPoolExecutor(1, new DefaultThreadFactory("JvmMonitorService-")).scheduleAtFixedRate(this, 0L, 10, TimeUnit.SECONDS);
 
@@ -54,7 +54,7 @@ public class JvmMonitorService implements CommonService, AgentChannelListener, R
     @Override
     public void statusChanged(ChannelStatus status) {
         if (ChannelStatus.CONNECTION == status) {
-            client = ServiceManager.INMSTANCE.findService(AgentClientManager.class).getClient();
+            client = ServiceManager.INSTANCE.findService(AgentClientManager.class).getClient();
         }
         this.status = status;
 

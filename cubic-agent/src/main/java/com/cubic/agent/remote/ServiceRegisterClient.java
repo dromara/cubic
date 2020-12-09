@@ -32,7 +32,7 @@ public class ServiceRegisterClient implements CommonService, AgentChannelListene
 
     @Override
     public void prepare() {
-        ServiceManager.INMSTANCE.findService(AgentClientManager.class).addListener(this);
+        ServiceManager.INSTANCE.findService(AgentClientManager.class).addListener(this);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class ServiceRegisterClient implements CommonService, AgentChannelListene
                     message.setBody("register");
                     message.setOsInfo(OSUtil.buildOSInfo());
                 }
-                AgentNettyClient client = ServiceManager.INMSTANCE.findService(AgentClientManager.class).getClient();
+                AgentNettyClient client = ServiceManager.INSTANCE.findService(AgentClientManager.class).getClient();
                 client.getChannel().writeAndFlush(gson.toJson(message)).addListener(new ChannelFutureListener() {
                     @Override
                     public void operationComplete(ChannelFuture future) throws Exception {

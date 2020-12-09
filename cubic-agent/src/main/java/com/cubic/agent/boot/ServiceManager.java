@@ -19,7 +19,7 @@ public enum ServiceManager {
     /**
      * 默认实例
      */
-    INMSTANCE;
+    INSTANCE;
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceManager.class);
 
