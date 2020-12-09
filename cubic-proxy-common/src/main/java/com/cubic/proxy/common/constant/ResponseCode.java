@@ -28,7 +28,14 @@ public enum ResponseCode {
     /**
      * 注册REGIST
      */
-    REGIST(4);
+    REGIST(4),
+
+    /**
+     * JVM
+     */
+    JVM(5);
+
+
 
 
     private Integer code;

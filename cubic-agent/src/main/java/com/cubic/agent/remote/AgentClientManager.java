@@ -18,8 +18,9 @@ import java.util.concurrent.TimeUnit;
  * @Version 1.0
  */
 @DefaultService
-public class AgentClientService implements CommonService {
-    private static final Logger logger = LoggerFactory.getLogger(AgentClientService.class);
+public class AgentClientManager implements CommonService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AgentClientManager.class);
 
     private static final ScheduledExecutorService FAIL_EXECUTOR = new ScheduledThreadPoolExecutor(1);
     private volatile AgentNettyClient client;

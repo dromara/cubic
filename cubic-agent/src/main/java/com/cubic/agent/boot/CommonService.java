@@ -8,11 +8,23 @@ package com.cubic.agent.boot;
  */
 public interface CommonService {
 
+    /**
+     * 数据预处理
+     */
     void prepare();
 
+    /**
+     * 启动功能
+     */
     void start();
 
+    /**
+     * 停止功能
+     */
     void shutdown();
 
+    /**
+     * 初始化完毕
+     */
     void complete();
 }

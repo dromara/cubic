@@ -31,7 +31,12 @@ public enum CommandCode {
     /**
      * 注册信息
      */
-    REGIST(4);
+    REGIST(4),
+
+    /**
+     * JVM 信息
+     */
+    JVM(5);
 
     private final Integer code;
 
