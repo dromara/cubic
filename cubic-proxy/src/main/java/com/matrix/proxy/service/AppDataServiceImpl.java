@@ -107,7 +107,7 @@ public class AppDataServiceImpl implements AppDataService {
             if (information != null) {
                 builder.jdkDir(information.getJdkDir()).jdkVersion(information.getJdkVersion()).userDir(information.getUserDir()).
                         initMemory(information.getInitMemory()).maxMemory(information.getMaxMemory()).processorNum(information.getProcessorNum())
-                        .ips(information.getIp()).hostname(information.getHost())
+                        .ips(information.getIp()).hostname(information.getHost()).appId(information.getAppId())
                         .progress(information.getProgress()).os(information.getOs()).osArch(information.getOsArch()).osVersion(information.getOsVersion())
                         .arguments(JSON.parseArray(information.getArguments()).toJavaList(String.class)).instanceName(information.getInstanceName());
                 String jars = information.getJars();
@@ -136,9 +136,15 @@ public class AppDataServiceImpl implements AppDataService {
             Calendar nowTime = Calendar.getInstance();
             nowTime.add(Calendar.MINUTE, -5);
             Date curr = nowTime.getTime();
+            QueryWrapper<Information> wrapper = new QueryWrapper<>();
+            wrapper.eq("instance_name",name).gt("last_heartbeat",curr);
+            List<Information> informationList = informationMapper.selectList(wrapper);
 
-            List<String> informationList = informationMapper.selectInstancesByName(name,curr);
-            return informationList;
+            List<String> names = new LinkedList<>();
+            informationList.forEach(info ->{
+                names.add(info.getAppId());
+            });
+            return names;
         } catch (Exception e) {
             log.error("处理InstanceInfoVo 数据异常", e);
         }

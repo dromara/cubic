@@ -104,6 +104,10 @@ export default {
             value: res.data.instanceName
           },
           {
+            name: 'appId',
+            value: res.data.appId
+          },
+          {
             name: 'hostname',
             value: res.data.hostname
           },
@@ -165,7 +169,7 @@ export default {
       })
     },
     instanceUidChange(val) {
-      this.getInstanceDetail({ instanceUid: val })
+      this.getInstanceDetail({ appId: val })
     }
   }
 }
