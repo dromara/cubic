@@ -47,13 +47,17 @@
 ```
 -javaagent:/user/xxx/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy
 ```
- 
 
- ![应用列表](https://images.gitee.com/uploads/images/2020/1202/182824_706ae6ad_1168339.png "屏幕截图.png")
+  ![实例列表](https://images.gitee.com/uploads/images/2020/1209/151947_4d29e334_1168339.png "屏幕截图.png")
 
- ![输入图片说明](https://images.gitee.com/uploads/images/2020/1116/181250_4f502c7e_1168339.png "屏幕截图.png")
+![基础信息](https://images.gitee.com/uploads/images/2020/1209/152029_3ccd704e_1168339.png "屏幕截图.png")
+
+![依赖包](https://images.gitee.com/uploads/images/2020/1209/152053_de25888f_1168339.png "屏幕截图.png")
+
+![输入图片说明](https://images.gitee.com/uploads/images/2020/1116/181250_4f502c7e_1168339.png "屏幕截图.png")
  
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/0605/190447_b3cd9e91_1168339.png "屏幕截图.png")    
+
 
 ## 环境
 - JDK 1.8
