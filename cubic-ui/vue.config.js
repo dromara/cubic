@@ -32,6 +32,8 @@ module.exports = {
     sourceMap: true // 开启 CSS source maps
   },
   devServer: {
+    sockHost: 'http://localhost:6080/',
+    disableHostCheck: true,
     port: port,
     open: true,
     overlay: {
