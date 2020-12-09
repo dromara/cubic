@@ -109,7 +109,7 @@ public class AppDataServiceImpl implements AppDataService {
                         initMemory(information.getInitMemory()).maxMemory(information.getMaxMemory()).processorNum(information.getProcessorNum())
                         .ips(information.getIp()).hostname(information.getHost())
                         .progress(information.getProgress()).os(information.getOs()).osArch(information.getOsArch()).osVersion(information.getOsVersion())
-                        .arguments(JSON.parseArray(information.getArguments()).toJavaList(String.class));
+                        .arguments(JSON.parseArray(information.getArguments()).toJavaList(String.class)).instanceName(information.getInstanceName());
                 String jars = information.getJars();
                 List<String> libs = JSON.parseArray(jars,String.class);
                 builder.libs(libs);

@@ -52,6 +52,7 @@ import BaseInfo from './components/baseInfo'
 
 export default {
   components: { BaseInfo },
+  name: 'Base',
   data() {
     return {
       activeName: '1',
@@ -98,6 +99,10 @@ export default {
         //  system: res.data.system,
         //  processorNum: res.data.processorNum
         _this.serverInfoTable = [
+          {
+            name: 'service',
+            value: res.data.instanceName
+          },
           {
             name: 'hostname',
             value: res.data.hostname

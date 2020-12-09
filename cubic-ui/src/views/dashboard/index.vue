@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { appList, fetchPv, createArticle, updateArticle } from '@/api/list'
+import { appList } from '@/api/list'
 
 // arr to obj, such as { CN : "China", US : "USA" }
 export default {
@@ -182,7 +182,9 @@ export default {
     //   })
     // },
     goCmd(row) {
-      this.$router.push({ name: 'app', query: { id: row.appId }})
+      this.$router.push({ name: 'Base' })
+      this.$cookies.set('appId', row.appId)
+      this.$cookies.set('instanceName', row.instanceName)
     }
 
   }

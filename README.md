@@ -42,17 +42,26 @@
 3.  打包完成的agent 在agent-dist目录下
 4.  打包完成的proxy 在agent-proxy-dist目录下
 5.  拷贝agent-dist目录下的agent jar 路径，比如：/user/xxx/cubic-agent.jar
-6.  如使用IDEA 测试，在测试应用中加入配置 VM option 参数 如下：
+6.  修改agent-dist/config 下的agent.config 的参数agent.arthas_path为你上面agent jar 路径 如：/user/xxx/cubic-agent.jar
+7.  如使用IDEA 测试，在测试应用中加入配置 VM option 参数 如下：
 
 ```
 -javaagent:/user/xxx/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy
 ```
 
+## 功能展示
+
+#### 实例列表（展示当前实例信息）
   ![实例列表](https://images.gitee.com/uploads/images/2020/1209/151947_4d29e334_1168339.png "屏幕截图.png")
 
+#### 基础信息（点击实例-》展示当前实例的基础信息）
 ![基础信息](https://images.gitee.com/uploads/images/2020/1209/152029_3ccd704e_1168339.png "屏幕截图.png")
 
+#### 依赖监控（点击实例-》展示当前实例的依赖包信息）
+
 ![依赖包](https://images.gitee.com/uploads/images/2020/1209/152053_de25888f_1168339.png "屏幕截图.png")
+
+#### Arthas命令操作
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/1116/181250_4f502c7e_1168339.png "屏幕截图.png")
  

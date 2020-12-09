@@ -182,7 +182,7 @@ export default {
     //   })
     // },
     goCmd(row) {
-      this.$router.push({ name: 'app' })
+      this.$router.push({ name: 'Base' })
       this.$cookies.set('appId', row.appId)
       this.$cookies.set('instanceName', row.instanceName)
     }
