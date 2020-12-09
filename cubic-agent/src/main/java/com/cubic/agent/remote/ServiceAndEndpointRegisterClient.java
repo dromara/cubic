@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @Version V1.0
  **/
 @DefaultService
-public class ServiceAndEndpointRegisterClient implements CommonService, Runnable, GRPCChannelListener{
+public class ServiceAndEndpointRegisterClient implements CommonService, Runnable, AgentChannelListener{
 
 	private static final Logger logger = LoggerFactory.getLogger(ServiceAndEndpointRegisterClient.class);
 
@@ -38,7 +38,7 @@ public class ServiceAndEndpointRegisterClient implements CommonService, Runnable
 
 	@Override
 	public void prepare() {
-		ServiceManager.INSTANCE.findService(GRPCChannelManager.class).addChannelListener(this);
+		ServiceManager.INSTANCE.findService(AgentClientService.class).addListener(this);
 		INSTANCE_UUID = StringUtils.isBlank(AgentConfig.Agent.INSTANCE_UUID)
 				? UUID.randomUUID().toString().replaceAll("-", "")
 				: AgentConfig.Agent.INSTANCE_UUID;

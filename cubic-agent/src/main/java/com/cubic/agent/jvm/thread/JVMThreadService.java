@@ -33,7 +33,7 @@ public class JVMThreadService implements CommonService {
 	@Override
 	public void prepare() {
 		sender = new Sender();
-		ServiceManager.INSTANCE.findService(GRPCChannelManager.class).addChannelListener(sender);
+		ServiceManager.INSTANCE.findService(AgentClientService.class).addListener(sender);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class JVMThreadService implements CommonService {
 
 	}
 
-	class Sender implements Runnable, GRPCChannelListener {
+	class Sender implements Runnable, AgentChannelListener {
 		private volatile ChannelStatus status = ChannelStatus.DISCONNECT;
 
 		@Override
