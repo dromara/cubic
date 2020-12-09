@@ -72,7 +72,7 @@ public class JVMThreadService implements CommonService {
 						builder.setTime(currentTimeMillis);
 						builder.setInstanceUUID(ServiceAndEndpointRegisterClient.getInstanceUuid());
 						builder.build();
-//						stub.withDeadlineAfter(GRPC_UPSTREAM_TIMEOUT, TimeUnit.SECONDS).collect(builder.build());
+
 					} catch (Throwable t) {
 						logger.error("send JVM thread metrics to Collector fail.", t);
 					}
@@ -85,6 +85,7 @@ public class JVMThreadService implements CommonService {
 			if (ChannelStatus.CONNECTION.equals(status)) {
 //				Channel channel = ServiceManager.INSTANCE.findService(GRPCChannelManager.class).getChannel();
 //				stub = ThreadMetricReportServiceGrpc.newBlockingStub(channel);
+				logger.info("jvm info connection.");
 			}
 			this.status = status;
 		}

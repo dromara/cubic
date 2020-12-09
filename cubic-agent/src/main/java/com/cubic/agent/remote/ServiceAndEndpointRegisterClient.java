@@ -57,8 +57,10 @@ public class ServiceAndEndpointRegisterClient implements CommonService, Runnable
 	public void start() {
 		applicationRegisterFuture = Executors.newSingleThreadScheduledExecutor(
 				new DefaultNamedThreadFactory("ServiceAndEndpointRegisterClient"))
-		.scheduleAtFixedRate(new RunnableWithExceptionProtection(this, t -> logger.error("unexpected exception.", t)),
-				0, AgentConfig.Collector.APP_AND_SERVICE_REGISTER_CHECK_INTERVAL, TimeUnit.SECONDS);
+		.scheduleAtFixedRate(
+				new RunnableWithExceptionProtection(this, t -> logger.error("unexpected exception.", t)),
+				0, AgentConfig.Collector.APP_AND_SERVICE_REGISTER_CHECK_INTERVAL,
+				TimeUnit.SECONDS);
 	}
 
 	@Override
