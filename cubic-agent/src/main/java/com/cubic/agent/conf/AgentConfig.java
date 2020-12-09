@@ -4,6 +4,9 @@ package com.cubic.agent.conf;
 
 import io.netty.handler.logging.LogLevel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This is the core config in sniffer agent.
  */
@@ -39,6 +42,36 @@ public class AgentConfig {
          */
         public static String AUTHENTICATION = "";
 
+        /*
+         * service instance properties
+         * e.g.
+         *   agent.instance_properties[org]=apache
+         */
+        public static Map<String, String> INSTANCE_PROPERTIES = new HashMap<>();
+
+    }
+
+    public static class Collector {
+        /**
+         * grpc channel status check interval
+         */
+        public static long GRPC_CHANNEL_CHECK_INTERVAL = 30;
+        /**
+         * service and endpoint registry check interval
+         */
+        public static long APP_AND_SERVICE_REGISTER_CHECK_INTERVAL = 3;
+        /**
+         * Collector skywalking trace receiver service addresses.
+         */
+        public static String BACKEND_SERVICE = "";
+        /**
+         * How long grpc client will timeout in sending data to upstream.
+         */
+        public static int GRPC_UPSTREAM_TIMEOUT = 30;
+        /**
+         * Get profile task list interval
+         */
+        public static int GET_PROFILE_TASK_INTERVAL = 20;
     }
 
 

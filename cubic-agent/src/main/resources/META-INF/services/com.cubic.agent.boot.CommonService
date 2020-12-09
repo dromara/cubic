@@ -1,2 +1,3 @@
 com.cubic.agent.remote.AgentClientService
 com.cubic.agent.remote.ServiceRegisterClient
+com.cubic.agent.jvm.thread.JVMThreadService
