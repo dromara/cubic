@@ -3,31 +3,38 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span style="font-size: 14px;">实例： </span>
-        <el-select v-model="instanceUid" size="mini" style="width: 280px" placeholder="请选择应用实例"
-                   @change="instanceUidChange">
-          <el-option v-for="item in instanceUidOption" :key="item.uid" :label="item.name" :value="item.uid"></el-option>
+        <el-select
+          v-model="instanceUid"
+          size="mini"
+          style="width: 280px"
+          placeholder="请选择应用实例"
+          @change="instanceUidChange"
+        >
+          <el-option v-for="item in instanceUidOption" :key="item" :label="item" :value="item" />
         </el-select>
       </div>
       <el-tabs v-model="activeName">
         <el-tab-pane label="概要" name="1">
           <base-info
-            :serverInfoTable="serverInfoTable"
-            :jvmBaseTable="jvmBaseTable"
-            :jvmParamsTable="jvmParamsTable"
-            :libsTable="libsTable"
-          ></base-info>
+            :server-info-table="serverInfoTable"
+            :jvm-base-table="jvmBaseTable"
+            :jvm-params-table="jvmParamsTable"
+            :libs-table="libsTable"
+          />
         </el-tab-pane>
         <el-tab-pane label="Lib 列表" name="2">
           <ul class="instance-list">
             <li class="instance-list-item">
               <!-- <span class="instance-list-item-title" style="width: 140px">Lib 列表</span> -->
-              <el-input v-model="searchParams" size="mini" style="width: 200px" placeholder="Lib列表:输入关键字搜索"></el-input>
+              <el-input v-model="searchParams" size="mini" style="width: 200px" placeholder="Lib列表:输入关键字搜索" />
             </li>
-            <div style="height: 520px">
+            <div >
               <vue-scroll>
-                <li class="instance-list-item"
-                    v-for="(item, index) in libs.filter(data=> !searchParams || data.toLowerCase().includes(searchParams.toLowerCase()))"
-                    :key="index">
+                <li
+                  v-for="(item, index) in libs.filter(data=> !searchParams || data.toLowerCase().includes(searchParams.toLowerCase()))"
+                  :key="index"
+                  class="instance-list-item"
+                >
                   <span>{{ item.trim() }}</span>
                 </li>
               </vue-scroll>
@@ -39,15 +46,17 @@
   </div>
 </template>
 <script>
-// import {getInstanceInfo, getInstanceNames} from '@/api/logs/logsMonitorApi.js'
+import { getInstanceInfo, getInstanceNames } from '@/api/list'
+
 import BaseInfo from './components/baseInfo'
 
 export default {
-  components: {BaseInfo},
+  components: { BaseInfo },
   data() {
     return {
       activeName: '1',
       instanceUid: '',
+      instanceName: '',
       instanceUidOption: [],
       libs: [],
       instanceObj: {},
@@ -59,105 +68,100 @@ export default {
     }
   },
   created() {
-    if (Object.keys(this.$route.query).length > 0) {
-      this.instanceUid = this.$route.query.instanceUid
-      this.getInstanceList({serviceName: this.$route.query.serviceName})
-    } else {
-      this.getInstanceList({serviceName: JSON.parse(localStorage.getItem('projectInfo')).name})
-    }
+    this.instanceUid = this.$cookies.get('appId')
+    this.instanceName = this.$cookies.get('instanceName')
+    this.getInstanceList({ name: this.instanceName })
   },
   methods: {
-    // getInstanceList(params) {
-    //   getInstanceNames(params).then(res => {
-    //     this.instanceUidOption = res.data
-    //     if (res.code === 0) {
-    //       if (res.data.length > 0 && Object.keys(this.$route.query).length > 0) {
-    //         this.getInstanceDetail({instanceUid: this.$route.query.instanceUid})
-    //       } else {
-    //         this.getInstanceDetail({instanceUid: res.data[0].uid})
-    //         this.instanceUid = res.data[0].uid
-    //       }
-    //     } else {
-    //       this.$message.error(res.msg)
-    //     }
-    //   })
-    // },
-    // getInstanceDetail(params) {
-    //   getInstanceInfo(params).then(res => {
-    //     console.log(res)
-    //     this.libs = res.data.libs
-    //     this.instanceObj = res.data
-    //
-    //     // ips: res.data.ips,
-    //     //  osArch: res.data.osArch ,
-    //     //  osVersion: res.data.osVersion,
-    //     //  system: res.data.system,
-    //     //  processorNum: res.data.processorNum
-    //     this.serverInfoTable = [
-    //       {
-    //         name: 'hostname',
-    //         value: res.data.hostname
-    //       },
-    //       {
-    //         name: 'ips',
-    //         value: res.data.ips
-    //       },
-    //       {
-    //         name: 'osArch',
-    //         value: res.data.osArch
-    //       },
-    //       {
-    //         name: 'osVersion',
-    //         value: res.data.osVersion
-    //       },
-    //       {
-    //         name: 'system',
-    //         value: res.data.system
-    //       },
-    //       {
-    //         name: 'processorNum',
-    //         value: res.data.processorNum
-    //       }
-    //     ],
-    //       this.jvmBaseTable = [{
-    //         name: 'progress',
-    //         value: res.data.progress
-    //       },
-    //         {
-    //           name: 'jdkVersion',
-    //           value: res.data.jdkVersion
-    //         },
-    //         {
-    //           name: 'jdkDir',
-    //           value: res.data.jdkDir
-    //         },
-    //         {
-    //           name: 'userDir',
-    //           value: res.data.userDir
-    //         },
-    //         {
-    //           name: 'initMemory',
-    //           value: res.data.initMemory
-    //         },
-    //         {
-    //           name: 'maxMemory',
-    //           value: res.data.maxMemory
-    //         }],
-    //       this.jvmParamsTable = res.data.arguments.map(item => {
-    //         return {
-    //           value: item.trim()
-    //         }
-    //       })
-    //     this.libsTable = res.data.libs.map(item => {
-    //       return {
-    //         value: item.trim()
-    //       }
-    //     })
-    //   })
-    // },
-    // instanceUidChange(val) {
-    //   this.getInstanceDetail({instanceUid: val})
-    // }
+    getInstanceList(params) {
+      const _this = this
+      getInstanceNames(params).then(res => {
+        _this.instanceUidOption = res.data
+        if (_this.instanceUid !== '') {
+          _this.getInstanceDetail({ appId: _this.instanceUid })
+        } else {
+          _this.getInstanceDetail({ appId: res.data[0] })
+          _this.instanceUid = res.data[0].uid
+        }
+      })
+    },
+    getInstanceDetail(params) {
+      const _this = this
+      getInstanceInfo(params).then(res => {
+        console.log(res)
+        _this.libs = res.data.libs
+        _this.instanceObj = res.data
+
+        // ips: res.data.ips,
+        //  osArch: res.data.osArch ,
+        //  osVersion: res.data.osVersion,
+        //  system: res.data.system,
+        //  processorNum: res.data.processorNum
+        _this.serverInfoTable = [
+          {
+            name: 'hostname',
+            value: res.data.hostname
+          },
+          {
+            name: 'ips',
+            value: res.data.ips
+          },
+          {
+            name: 'osArch',
+            value: res.data.osArch
+          },
+          {
+            name: 'osVersion',
+            value: res.data.osVersion
+          },
+          {
+            name: 'os',
+            value: res.data.os
+          },
+          {
+            name: 'processorNum',
+            value: res.data.processorNum
+          }
+        ],
+        _this.jvmBaseTable = [{
+          name: 'progress',
+          value: res.data.progress
+        },
+        {
+          name: 'jdkVersion',
+          value: res.data.jdkVersion
+        },
+        {
+          name: 'jdkDir',
+          value: res.data.jdkDir
+        },
+        {
+          name: 'userDir',
+          value: res.data.userDir
+        },
+        {
+          name: 'initMemory',
+          value: res.data.initMemory
+        },
+        {
+          name: 'maxMemory',
+          value: res.data.maxMemory
+        }],
+        _this.jvmParamsTable = res.data.arguments.map(item => {
+          return {
+            value: item.trim()
+          }
+        })
+        _this.libsTable = res.data.libs.map(item => {
+          return {
+            value: item.trim()
+          }
+        })
+      })
+    },
+    instanceUidChange(val) {
+      this.getInstanceDetail({ instanceUid: val })
+    }
   }
 }
 </script>
@@ -192,7 +196,6 @@ export default {
     }
   }
 }
-
 
 .instance-list-item:last-child {
   border-bottom: none;

@@ -1,9 +1,14 @@
 package com.matrix.proxy.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.matrix.proxy.entity.Information;
+import com.matrix.proxy.entity.RelyInformation;
 import com.matrix.proxy.vo.BasicInformationVo;
 import com.matrix.proxy.mapper.InformationMapper;
 import com.matrix.proxy.util.DateUtils;
+import com.matrix.proxy.vo.InstanceInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -28,7 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AppDataServiceImpl implements AppDataService {
 
     @Resource
-    private InformationMapper repository;
+    private InformationMapper informationMapper;
 
     /**
      * 获取应用实例列表
@@ -47,7 +52,7 @@ public class AppDataServiceImpl implements AppDataService {
         }
 
         Map<String, Object> result = new HashMap<>(16);
-        List<Information> datas = repository.selectInstanceByLastHeartbeat(curr);
+        List<Information> datas = informationMapper.selectInstanceByLastHeartbeat(curr);
         List<BasicInformationVo> informationVos = dispose(datas);
         result.put("informations", informationVos);
 
@@ -84,5 +89,59 @@ public class AppDataServiceImpl implements AppDataService {
             result.add(vo);
         });
         return result;
+    }
+
+    /**
+     * 获取应用实例详细信息
+     *
+     * @param appId
+     * @return
+     */
+    @Override
+    public InstanceInfoVo getInstanceInfo(String appId) {
+        InstanceInfoVo.InstanceInfoVoBuilder builder = InstanceInfoVo.builder();
+
+        try {
+
+            Information information = informationMapper.selectInstanceByAppId(appId);
+            if (information != null) {
+                builder.jdkDir(information.getJdkDir()).jdkVersion(information.getJdkVersion()).userDir(information.getUserDir()).
+                        initMemory(information.getInitMemory()).maxMemory(information.getMaxMemory()).processorNum(information.getProcessorNum())
+                        .ips(information.getIp()).hostname(information.getHost())
+                        .progress(information.getProgress()).os(information.getOs()).osArch(information.getOsArch()).osVersion(information.getOsVersion())
+                        .arguments(JSON.parseArray(information.getArguments()).toJavaList(String.class));
+                String jars = information.getJars();
+                List<String> libs = JSON.parseArray(jars,String.class);
+                builder.libs(libs);
+            }
+            String jars = information.getJars();
+            List array = JSON.parseArray(jars, String.class);
+            builder.libs(array);
+        } catch (Exception e) {
+            log.error("处理InstanceInfoVo 数据异常", e);
+        }
+        return builder.build();
+    }
+
+    /**
+     * 根据应用名称获取实例列表
+     *
+     * @param name
+     * @return
+     */
+    @Override
+    public List<String> getInstanceNames(String name) {
+
+        try {
+            Calendar nowTime = Calendar.getInstance();
+            nowTime.add(Calendar.MINUTE, -5);
+            Date curr = nowTime.getTime();
+
+            List<String> informationList = informationMapper.selectInstancesByName(name,curr);
+            return informationList;
+        } catch (Exception e) {
+            log.error("处理InstanceInfoVo 数据异常", e);
+        }
+        return new ArrayList<>();
     }
 }

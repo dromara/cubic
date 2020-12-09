@@ -48,11 +48,13 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query.id)
+    //
+    // if (Object.keys(this.$route.query).length > 0) {
+    //   this.vm.agentId = this.$route.query.id
+    // }
+    console.log(this.$cookies.get('appId'))
 
-    if (Object.keys(this.$route.query).length > 0) {
-      this.vm.agentId = this.$route.query.id
-    }
+    this.vm.agentId = this.$cookies.get('appId')
   },
   mounted() {
     // 实例化终端并设置参数

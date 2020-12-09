@@ -85,8 +85,16 @@ public class RegisterProcessor extends DefaultMessageProcess   {
         JSONArray inputArguments = jvmInfo.getJSONArray("inputArguments");
         String osArch = jvmInfo.getString("osArch");
         String osVersion = jvmInfo.getString("osVersion");
+
+        List<String> jarNames = new ArrayList<>();
+        jsonArray.forEach(jar->{
+            String path = (String) jar;
+            int last = path.lastIndexOf("/");
+            String jarName = path.substring(last + 1);
+            jarNames.add(jarName);
+        });
         builder.initMemory(initMemory == null ? 0 : initMemory / 1024 / 1024).maxMemory(maxMemory == null ? 0 : maxMemory / 1024 / 1024).
-                processorNum(processorNum).arguments(inputArguments == null ? null : inputArguments.toJSONString()).os(osArch).osVersion(osVersion).jars(jsonArray.toJSONString());
+                processorNum(processorNum).arguments(inputArguments == null ? null : inputArguments.toJSONString()).osArch(osArch).osVersion(osVersion).jars(JSON.toJSONString(jarNames));
 
         Information information = builder.build();
         informationMapper.insert(information);

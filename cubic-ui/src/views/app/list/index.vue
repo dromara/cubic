@@ -39,7 +39,7 @@
         highlight-current-row
         style="width: 100%;"
       >
-        <el-table-column prop="instanceName" label="应用唯一标识" header-align="center">
+        <el-table-column prop="appId" label="实例唯一标识" header-align="center">
           <template slot-scope="{row}">
             <el-tooltip :content="row.appId" placement="top" effect="dark">
               <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goCmd(row)">{{
@@ -49,7 +49,7 @@
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" prop="instanceName" label="实例名称" />
+        <el-table-column :show-overflow-tooltip="true" prop="instanceName" label="应用名称" />
         <el-table-column :show-overflow-tooltip="true" prop="host" label="主机名称" />
         <el-table-column :show-overflow-tooltip="true" prop="ip" label="IP" />
         <el-table-column :show-overflow-tooltip="true" prop="version" label="Agent版本" />
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { appList, fetchPv, createArticle, updateArticle } from '@/api/list'
+import { appList } from '@/api/list'
 
 // arr to obj, such as { CN : "China", US : "USA" }
 export default {
@@ -182,7 +182,9 @@ export default {
     //   })
     // },
     goCmd(row) {
-      this.$router.push({ name: 'app', query: { id: row.appId }})
+      this.$router.push({ name: 'app' })
+      this.$cookies.set('appId', row.appId)
+      this.$cookies.set('instanceName', row.instanceName)
     }
 
   }

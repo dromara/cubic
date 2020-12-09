@@ -113,6 +113,9 @@ public class Information {
     @TableField(value = "os_version")
     private String osVersion;
 
+    @TableField(value = "os_arch")
+    private String osArch;
+
     @TableField(value = "jars")
     private String jars;
 

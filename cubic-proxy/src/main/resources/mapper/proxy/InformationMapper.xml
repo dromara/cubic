@@ -10,6 +10,8 @@
     <result column="progress" jdbcType="VARCHAR" property="progress" />
     <result column="host" jdbcType="VARCHAR" property="host" />
     <result column="os" jdbcType="VARCHAR" property="os" />
+    <result column="os_arch" jdbcType="VARCHAR" property="osArch" />
+    <result column="os_version" jdbcType="VARCHAR" property="osVersion" />
     <result column="language" jdbcType="VARCHAR" property="language" />
     <result column="version" jdbcType="VARCHAR" property="version" />
     <result column="last_heartbeat" jdbcType="TIMESTAMP" property="lastHeartbeat" />
@@ -21,13 +23,20 @@
     <result column="max_memory" jdbcType="INTEGER" property="maxMemory" />
     <result column="processor_num" jdbcType="INTEGER" property="processorNum" />
     <result column="arguments" jdbcType="VARCHAR" property="arguments" />
-    <result column="os_version" jdbcType="VARCHAR" property="osVersion" />
     <result column="jars" jdbcType="VARCHAR" property="jars" />
   </resultMap>
 
 
   <select id="selectInstanceByLastHeartbeat" resultMap="BaseResultMap">
       SELECT * FROM information   where  last_heartbeat > #{lastHeartbeat} order by  instance_name
+  </select>
+
+  <select id="selectInstanceByAppId" resultMap="BaseResultMap">
+    SELECT * FROM information   where  app_id = #{appId}
+  </select>
+
+  <select id="selectInstanceIdByNames" resultType="java.lang.String">
+    SELECT instance_id  FROM information   where  instance_name = #{instanceName} and last_heartbeat > #{date}
   </select>
 
 </mapper>

@@ -12,6 +12,8 @@ CREATE TABLE `information`
     `progress`       varchar(10) CHARACTER SET latin1  DEFAULT NULL COMMENT '进程号',
     `host`           varchar(30) CHARACTER SET latin1  DEFAULT NULL COMMENT 'host',
     `os`             varchar(10) CHARACTER SET latin1  DEFAULT NULL COMMENT 'os',
+    `os_arch`        varchar(20)                       DEFAULT NULL COMMENT '系统架构',
+    `os_version`     varchar(128)                      DEFAULT NULL COMMENT '系统版本',
     `language`       varchar(10) CHARACTER SET latin1  DEFAULT NULL COMMENT '语言',
     `version`        varchar(5) CHARACTER SET latin1   DEFAULT NULL COMMENT '状态',
     `last_heartbeat` datetime                          DEFAULT NULL COMMENT '最后心跳',
@@ -23,13 +25,14 @@ CREATE TABLE `information`
     `max_memory`     int(11)                           DEFAULT NULL COMMENT '最大内存',
     `processor_num`  int(11)                           DEFAULT NULL COMMENT '内核数',
     `arguments`      text COMMENT '启动参数',
-    `os_version`     varchar(128)                      DEFAULT NULL COMMENT '系统版本',
     `jars`           text COMMENT '依赖jar',
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_app_id` (`app_id`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 143
+  AUTO_INCREMENT = 154
   DEFAULT CHARSET = utf8mb4;
+
+
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------

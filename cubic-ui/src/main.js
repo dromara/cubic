@@ -4,9 +4,10 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+// import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
+import cookies from 'js-cookie'
 
 import App from './App'
 import store from './store'
@@ -17,7 +18,7 @@ import '@/permission' // permission control
 
 import api from '@/api/index.js'
 Vue.prototype.$api = api
-
+Vue.prototype.$cookies = cookies
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
