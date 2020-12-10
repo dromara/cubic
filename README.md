@@ -3,12 +3,9 @@
   <a href='https://gitee.com/sanjiankethree/cubic/stargazers'><img src='https://gitee.com/sanjiankethree/cubic/badge/star.svg?theme=gvp' alt='star'></img></a>
   <a href='https://gitee.com/sanjiankethree/cubic/members'><img src='https://gitee.com/sanjiankethree/cubic/badge/fork.svg?theme=gvp' alt='fork'></img></a>
   
-`Cubic` 是一个对应用透明，无侵入的java应用诊断工具，用于提升开发人员的诊断效率和能力。
+`Cubic` Cubic 分布式监控，以agent的方式无侵入接入应用，提供各种指标，动态线程堆栈追踪，完整集成arthas功能模块，致力于应用级监控，帮助开发人员快速定位问题
 
-`Cubic` 的目标是一站式java应用诊断解决方案，让开发人员无需登录机器或修改系统，就可以从日志、内存、线程、类信息、调试、机器和系统属性等各个方面对应用进行诊断，提升开发人员诊断问题的效率和能力。
-
-`Cubic` 可调用内部自定义命令和动态加载arthas使用arthas 命令集。
-
+ 
 因为很多公司使用监控需要进行定制化开发，Cubic 可作为一种技术参考，希望给大家带来些许启发。
  
 技术体系：
