@@ -3,6 +3,7 @@ package com.cubic.agent.arthas;
 import com.cubic.agent.boot.AgentPackagePath;
 import com.cubic.agent.conf.AgentConfig;
 import com.cubic.agent.utils.VmUtils;
+import com.sun.tools.attach.AgentLoadException;
 import com.sun.tools.attach.VirtualMachine;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -40,7 +41,10 @@ public class ArthasClient {
             String path = StringUtils.isEmpty(AgentConfig.Agent.ARTHAS_PATH) ? AgentPackagePath.getPath() + DEFAULT_ARTHAS_FILE_NAME : AgentConfig.Agent.ARTHAS_PATH;
             virtualMachine.loadAgent(path,
                     "arthas");
-        } finally {
+        }catch (AgentLoadException e){
+            logger.error("加载 arthas agent jar 失败 ，请检查agent.config 中 agent.arthas_path 路径 {} 是否配置正确",AgentConfig.Agent.ARTHAS_PATH);
+            throw e;
+        }finally {
             if (virtualMachine != null) {
                 virtualMachine.detach();
             }
