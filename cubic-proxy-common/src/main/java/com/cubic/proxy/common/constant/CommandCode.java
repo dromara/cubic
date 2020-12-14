@@ -9,28 +9,39 @@ package com.cubic.proxy.common.constant;
 public enum CommandCode {
 
     /**
-     * 心跳命令
+     * 心跳
      */
-    HEART(0),
+    HEARTBEAT(0),
+
     /**
-     * 基础模式
+     * 自定义命令
      */
     COMMAND(1),
 
     /**
-     * arthas
+     * thread dump状态
+     */
+    THREAD_DUMP(2),
+
+    /**
+     * arthas状态
      */
     ARTHAS(3),
 
     /**
-     * arthas模式
+     * 注册信息
      */
-    LINUX(4),
-    /**
-     * 主动断开
-     */
-    REQ_TYPE_CANCEL(999);
+    REGIST(4),
 
+    /**
+     * JVM 信息
+     */
+    JVM(5),
+
+    /**
+     * JVM 线程栈信息
+     */
+    JVM_THREAD_DUMP(6);
 
     private Integer code;
 

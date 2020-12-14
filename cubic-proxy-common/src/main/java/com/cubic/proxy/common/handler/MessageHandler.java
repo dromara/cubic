@@ -2,7 +2,7 @@ package com.cubic.proxy.common.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.cubic.proxy.common.constant.ResponseCode;
+import com.cubic.proxy.common.constant.CommandCode;
 import com.google.common.collect.ImmutableMap;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -41,7 +41,7 @@ public class MessageHandler extends SimpleChannelInboundHandler<String> {
         JSONObject obj = JSON.parseObject(message);
         int code = obj.getInteger("code");
         String instanceUuid = obj.getString("instanceUuid");
-        if (code != ResponseCode.HEARTBEAT.getCode()) {
+        if (code != CommandCode.HEARTBEAT.getCode()) {
             logger.info("接收到instanceUuid:{},数据请求 ctx：{},message size:{}", instanceUuid, ctx.channel(), message.length());
         }
         ServerMessgaeProcess messageProcessor = processorMap.get(code);

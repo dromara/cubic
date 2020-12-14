@@ -5,11 +5,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cubic.proxy.common.constant.CommandCode;
 import com.matrix.proxy.entity.Information;
 import com.matrix.proxy.mapper.InformationMapper;
 import com.matrix.proxy.module.Message;
 import com.cubic.proxy.common.server.ServerConnectionStore;
-import com.cubic.proxy.common.constant.ResponseCode;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +38,7 @@ public class RegisterProcessor extends DefaultMessageProcess   {
 
     @Override
     public Integer code() {
-        return ResponseCode.REGIST.getCode();
+        return CommandCode.REGIST.getCode();
     }
 
     @Override
@@ -104,7 +104,7 @@ public class RegisterProcessor extends DefaultMessageProcess   {
     private String initRegisterResponse(String id) {
 
         Map<String, Object> result = new HashMap<>(16);
-        result.put("code", ResponseCode.REGIST.getCode());
+        result.put("code", CommandCode.REGIST.getCode());
         result.put("id", id);
         result.put("command", true);
         return JSON.toJSONString(result);

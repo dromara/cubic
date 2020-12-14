@@ -1,6 +1,6 @@
 package com.matrix.proxy.server.process;
 
-import com.cubic.proxy.common.constant.ResponseCode;
+import com.cubic.proxy.common.constant.CommandCode;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,12 +21,12 @@ public class JvmThreadDumpProcess extends DefaultMessageProcess{
 
 	@Override
 	public Integer code() {
-		return ResponseCode.JVM_THREAD_DUMP.getCode();
+		return CommandCode.JVM_THREAD_DUMP.getCode();
 	}
 
 	@Override
 	public void process(ChannelHandlerContext ctx, String datagram) {
-		log.info("data:{}", datagram);
+//		log.info("data:{}", datagram);
 		// TODO app线程栈信息持久化
 	}
 }

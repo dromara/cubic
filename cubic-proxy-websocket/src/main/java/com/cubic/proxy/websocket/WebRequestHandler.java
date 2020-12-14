@@ -34,7 +34,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,7 +88,7 @@ public class WebRequestHandler extends SimpleChannelInboundHandler<TextWebSocket
         WebConnection webConnection = webConnectionStore.register(ctx.channel());
 
 
-        if (type.intValue() == CommandCode.HEART.getCode()) {
+        if (type.intValue() == CommandCode.HEARTBEAT.getCode()) {
             return;
         }
 
