@@ -42,7 +42,10 @@ public class MessageHandler extends SimpleChannelInboundHandler<String> {
         int code = obj.getInteger("code");
         String instanceUuid = obj.getString("instanceUuid");
         if (code != CommandCode.HEARTBEAT.getCode()) {
-            logger.info("接收到instanceUuid:{},数据请求 ctx：{},message size:{}", instanceUuid, ctx.channel(), message.length());
+
+            if (logger.isDebugEnabled()) {
+                logger.info("接收到 id:{}, code:{} 数据请求 ctx：{},message size:{}", instanceUuid, code, ctx.channel(), message.length());
+            }
         }
         ServerMessgaeProcess messageProcessor = processorMap.get(code);
         if (messageProcessor == null) {
