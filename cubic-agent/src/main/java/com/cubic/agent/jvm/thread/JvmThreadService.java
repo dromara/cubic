@@ -25,9 +25,9 @@ import java.util.concurrent.TimeUnit;
  * @Version V1.0
  **/
 @DefaultService
-public class JVMThreadService implements CommonService {
+public class JvmThreadService implements CommonService {
 
-    private static final Logger logger = LoggerFactory.getLogger(JVMThreadService.class);
+    private static final Logger logger = LoggerFactory.getLogger(JvmThreadService.class);
 
     private volatile ScheduledFuture<?> sendMetricFuture;
     private Sender sender;
