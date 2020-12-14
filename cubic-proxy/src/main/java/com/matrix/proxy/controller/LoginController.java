@@ -24,7 +24,7 @@ public class LoginController {
 
     @RequestMapping("/logout")
     public DataResult logout() {
-        return DataResult.ok();
+        return DataResult.success();
     }
 
 
@@ -32,7 +32,7 @@ public class LoginController {
     public DataResult login(@RequestBody AuthDetail loginDetail) {
 
         String token = systemService.login(loginDetail);
-        return DataResult.ok("",token);
+        return DataResult.success("",token);
     }
 
 

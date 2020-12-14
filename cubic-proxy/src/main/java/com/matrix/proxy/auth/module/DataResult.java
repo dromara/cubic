@@ -44,11 +44,11 @@ public class DataResult {
         return new DataResult(code, message, null);
     }
 
-    public static DataResult ok(String message) {
+    public static DataResult success(String message) {
         return new DataResult(ResultCode.SUCCESS.getCode(), message, null);
     }
 
-    public static DataResult ok() {
+    public static DataResult success() {
         return new DataResult(ResultCode.SUCCESS.getCode(), "OK", null);
     }
 
@@ -56,14 +56,14 @@ public class DataResult {
         return new DataResult(ResultCode.SUCCESS.getCode(), msg, data);
     }
 
-    public static DataResult ok(String message, Object data) {
+    public static DataResult success(String message, Object data) {
         return new DataResult(ResultCode.SUCCESS.getCode(), message, data);
     }
 
     /**
      * 自定义返回码
      */
-    public static DataResult ok(Integer code, String message) {
+    public static DataResult success(Integer code, String message) {
         return new DataResult(code, message);
     }
 
@@ -74,7 +74,7 @@ public class DataResult {
      * @param message：返回消息内容
      * @param data：返回数据
      */
-    public static DataResult ok(Integer code, String message, Object data) {
+    public static DataResult success(Integer code, String message, Object data) {
         return new DataResult(code, message, data);
     }
 

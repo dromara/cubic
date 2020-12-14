@@ -29,21 +29,21 @@ public class AppController {
     @RequestMapping("/getList")
     public DataResult getList(@RequestParam(defaultValue = "", required = false) String date) {
         Map data = appDataService.getAppList(date);
-        return DataResult.ok("OK", data);
+        return DataResult.success("OK", data);
 
     }
 
     @RequestMapping("/getInstanceInfo")
     public DataResult getInstanceInfo(@RequestParam String appId) {
         InstanceInfoVo vo = appDataService.getInstanceInfo(appId);
-        return DataResult.ok("OK", vo);
+        return DataResult.success("OK", vo);
 
     }
 
     @RequestMapping("/getInstanceNames")
     public DataResult getInstanceNames(@RequestParam String name) {
         List list = appDataService.getInstanceNames(name);
-        return DataResult.ok("OK", list);
+        return DataResult.success("OK", list);
 
     }
 }

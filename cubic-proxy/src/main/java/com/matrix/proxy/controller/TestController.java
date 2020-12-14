@@ -12,12 +12,24 @@ import java.util.Map;
  * @author luqiang
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/system")
 @CrossOrigin
-public class UserController {
+public class TestController {
 
-    @RequestMapping("/info")
-    public DataResult info() {
+
+    /**
+     * 测试统一返回
+     *
+     * @return
+     */
+    @RequestMapping("/test")
+    public String test() {
+
+        return "我是测试的";
+    }
+
+    @RequestMapping("/test2")
+    public DataResult test2() {
 
         Map<String, Object> info = new HashMap<>();
         info.put("roles", new String[]{"admin"});
@@ -28,5 +40,17 @@ public class UserController {
         return DataResult.success("OK", info);
     }
 
+    /**
+     * 测试异常包装
+     *
+     * @return
+     */
+    @RequestMapping("/test1")
+    public String test1() {
 
+
+        int i = 0;
+        int x = 3 / i;
+        return "我是测试的";
+    }
 }
