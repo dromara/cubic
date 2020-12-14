@@ -50,7 +50,7 @@ public class RegisterProcessor extends DefaultMessageProcess   {
 
         insertJvmInfo(msg, id);
 
-        logger.info("应用实例：id {} ,channel :{}注册成功！", id, ctx.channel());
+        logger.info("注册成功！实例id ：{} ,channel :{}", id, ctx.channel());
 
         ctx.channel().writeAndFlush(initRegisterResponse(id));
     }

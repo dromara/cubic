@@ -39,7 +39,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         String token = request.getHeader(HEADER_STRING);
 
 
-        log.info("JWT过滤器 - 请求路径 :{}  ,token :{}",request.getServletPath(), token);
+        if(log.isDebugEnabled()){
+            log.info("JWT过滤器 - 请求路径 :{}  ,token :{}",request.getServletPath(), token);
+        }
         if (StringUtils.isNotEmpty(token)) {
             try {
                 JwtDetail detail = JwtTokenUtil.getInfoFromToken(token);

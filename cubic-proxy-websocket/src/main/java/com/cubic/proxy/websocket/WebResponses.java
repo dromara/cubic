@@ -13,7 +13,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 public class WebResponses {
 
     public static WebSocketFrame createNoConnectionResponse(String agentId) {
-        return new TextWebSocketFrame(String.format("应用 agentId 为 %s 的后端连接未找到,请在自定义模式下进行search 寻找正确agentId  \n   ", agentId));
+        return new TextWebSocketFrame(String.format("无法连接到  agentId ： %s 的服务  \n   ", agentId));
     }
 
     public static WebSocketFrame createNoProcessResponse(String command) {
