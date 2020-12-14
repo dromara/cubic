@@ -1,5 +1,5 @@
 
-package com.cubic.agent.jstack;
+package com.cubic.agent.cmd.jstack;
 
 /**
  * @author luqiang

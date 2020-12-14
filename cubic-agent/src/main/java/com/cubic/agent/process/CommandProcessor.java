@@ -2,7 +2,7 @@
 package com.cubic.agent.process;
 
 
-import com.cubic.agent.jstack.CommandExecutor;
+import com.cubic.agent.cmd.jstack.CommandExecutor;
 import com.cubic.agent.remote.CommandCode;
 import com.cubic.agent.remote.ResponseWriter;
 import com.google.common.collect.ImmutableList;

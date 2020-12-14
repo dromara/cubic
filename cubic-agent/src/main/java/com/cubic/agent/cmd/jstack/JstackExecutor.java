@@ -1,5 +1,5 @@
 
-package com.cubic.agent.jstack;
+package com.cubic.agent.cmd.jstack;
 
 
 import com.cubic.agent.utils.VmUtils;

@@ -1,6 +1,6 @@
-package com.cubic.agent.jvm.thread;
+package com.cubic.agent.cmd.jvm.thread;
 
-import com.cubic.agent.jstack.CommandExecutor;
+import com.cubic.agent.cmd.jstack.CommandExecutor;
 import com.cubic.agent.module.ThreadDetails;
 import com.cubic.agent.utils.GzipUtils;
 

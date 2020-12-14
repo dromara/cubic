@@ -1,4 +1,4 @@
-package com.cubic.agent.jvm.thread;
+package com.cubic.agent.cmd.jvm.thread;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

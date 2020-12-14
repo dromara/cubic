@@ -1,4 +1,4 @@
-package com.cubic.agent.jvm.thread;
+package com.cubic.agent.cmd.jvm.thread;
 
 import com.cubic.agent.boot.CommonService;
 import com.cubic.agent.boot.DefaultService;
