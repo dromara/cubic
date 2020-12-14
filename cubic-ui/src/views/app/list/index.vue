@@ -42,7 +42,7 @@
         <el-table-column prop="appId" label="实例唯一标识" header-align="center">
           <template slot-scope="{row}">
             <el-tooltip :content="row.appId" placement="top" effect="dark">
-              <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goCmd(row)">{{
+              <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goBasic(row)">{{
                 row.appId
               }}
               </el-button>
@@ -56,6 +56,14 @@
         <el-table-column :show-overflow-tooltip="true" prop="startDate" label="启动时间" />
         <el-table-column :show-overflow-tooltip="true" prop="onLine" label="在线时长" />
         <el-table-column :show-overflow-tooltip="true" prop="lastHeartbeat" label="最后心跳" />
+        <el-table-column prop="instanceName" label="CMD" header-align="center">
+          <template slot-scope="{row}">
+            <el-tooltip :content="row.instanceName" placement="top" effect="dark">
+              <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goCmd(row)">Arthas命令
+              </el-button>
+            </el-tooltip>
+          </template>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -181,8 +189,13 @@ export default {
     //     this.dialogPvVisible = true
     //   })
     // },
-    goCmd(row) {
+    goBasic(row) {
       this.$router.push({ name: 'Base' })
+      this.$cookies.set('appId', row.appId)
+      this.$cookies.set('instanceName', row.instanceName)
+    },
+    goCmd(row) {
+      this.$router.push({ name: 'WebShell' })
       this.$cookies.set('appId', row.appId)
       this.$cookies.set('instanceName', row.instanceName)
     }
