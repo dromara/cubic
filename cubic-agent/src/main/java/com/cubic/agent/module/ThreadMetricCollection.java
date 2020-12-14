@@ -1,15 +1,13 @@
 package com.cubic.agent.module;
 
 /**
+ * jvm 线程栈传输对象
+ *
  * @Author qinqixuan
  * @Date 2020/12/08
  * @Version V1.0
  **/
-public class ThreadMetricCollection {
-
-    public static Builder newBuilder() {
-        return new Builder();
-    }
+public class ThreadMetricCollection extends Message{
 
     private Builder builder;
 
@@ -70,12 +68,13 @@ public class ThreadMetricCollection {
             return this;
         }
 
-        public ThreadMetricCollection build() {
-            return new ThreadMetricCollection(this);
+        public ThreadMetricCollection build(Integer code, String body, String id) {
+            return new ThreadMetricCollection(this, code, body, id);
         }
     }
 
-    public ThreadMetricCollection(Builder builder) {
+    public ThreadMetricCollection(Builder builder, Integer code, String body, String id) {
+        super(code, body, id);
         this.builder = builder;
     }
 }

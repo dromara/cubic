@@ -33,7 +33,12 @@ public enum ResponseCode {
     /**
      * JVM
      */
-    JVM(5);
+    JVM(5),
+
+    /**
+     * JVM_THREAD_DUMP
+     */
+    JVM_THREAD_DUMP(6);
 
 
 

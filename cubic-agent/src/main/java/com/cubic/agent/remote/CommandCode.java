@@ -36,7 +36,12 @@ public enum CommandCode {
     /**
      * JVM 信息
      */
-    JVM(5);
+    JVM(5),
+
+    /**
+     * JVM 线程栈信息
+     */
+    JVM_THREAD_DUMP(6);
 
     private final Integer code;
 

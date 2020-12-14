@@ -37,20 +37,18 @@ public class MessageHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String message) throws Exception {
-
+    protected void channelRead0(ChannelHandlerContext ctx, String message) {
         JSONObject obj = JSON.parseObject(message);
-        int code = obj.getInteger("code").intValue();
+        int code = obj.getInteger("code");
         String instanceUuid = obj.getString("instanceUuid");
         if (code != ResponseCode.HEARTBEAT.getCode()) {
             logger.info("接收到instanceUuid:{},数据请求 ctx：{},message size:{}", instanceUuid, ctx.channel(), message.length());
         }
         ServerMessgaeProcess messageProcessor = processorMap.get(code);
         if (messageProcessor == null) {
-            logger.warn("can not process message code [{}], {}", ctx.channel());
+            logger.warn("can not process message code [{}], {}", code, ctx.channel());
             return;
         }
-
 
         messageProcessor.process(ctx, message);
     }
