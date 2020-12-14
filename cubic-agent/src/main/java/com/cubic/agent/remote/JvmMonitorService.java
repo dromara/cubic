@@ -17,7 +17,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
-@DefaultService
+//@DefaultService
 public class JvmMonitorService implements CommonService, AgentChannelListener, Runnable {
     private static final Logger logger = LoggerFactory.getLogger(JvmMonitorService.class);
 
