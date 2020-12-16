@@ -8,7 +8,8 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 
 /**
- * @Description: TODO
+ * jvm线程栈采集
+ *
  * @Author qinqixuan
  * @Date 2020/12/08
  * @Version V1.0
@@ -45,7 +46,6 @@ public enum ThreadProvider {
 	public String getThreadDump() {
 		CommandExecutor executor = new CommandExecutor();
 		String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
-		String data = executor.execute(pid, "threadDump");
-		return GzipUtils.compress(data);
+		return executor.execute(pid, "threadDump");
 	}
 }
