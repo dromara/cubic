@@ -48,7 +48,7 @@ public class JvmThreadDumpProcess extends DefaultMessageProcess{
 		connectionStore.register(appId, ctx.channel());
 		// 数据持久化
 		insertThreadInfo(threadBuild, appId);
-		logger.info("保存成功！实例id ：{} ,channel :{}", appId, ctx.channel());
+		logger.debug("保存成功！实例id ：{} ,channel :{}", appId, ctx.channel());
 		ctx.channel().writeAndFlush(initRegisterResponse(appId));
 	}
 
