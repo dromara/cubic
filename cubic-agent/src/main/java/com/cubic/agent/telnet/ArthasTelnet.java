@@ -41,15 +41,6 @@ public class ArthasTelnet extends Telnet {
                 }
             }
         }
-//        while ((len = in.read(buffer)) != 0) {
-//            Thread.sleep(50L);
-////            hand.handler(new String(buffer, 0, len, charset));
-//            buf.append(new String(buffer, 0, len, charset));
-//            if (in.available() == 0) {
-//                break;
-//            }
-//        }
-//        hand.handler(buf.toString());
 
     }
 
@@ -73,8 +64,6 @@ public class ArthasTelnet extends Telnet {
                 firstFlag = false;
             } else if (!firstFlag) {
                 doHandler(data);
-            } else {
-                //ignore
             }
         }
 

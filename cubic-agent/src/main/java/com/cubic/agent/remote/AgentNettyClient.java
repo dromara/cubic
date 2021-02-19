@@ -120,15 +120,6 @@ public class AgentNettyClient {
                     started.set(null);
                 } else {
                     started.set(null);
-//                    log.warn("cubic netty client start fail");
-//                    log.info("agent client start error will restart  10s...");
-//                    future.channel().eventLoop().schedule(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            AgentNettyClient client = new AgentNettyClient();
-//                            client.start();
-//                        }
-//                    }, 10L, TimeUnit.SECONDS);
                 }
             }
         });
@@ -149,15 +140,6 @@ public class AgentNettyClient {
     public boolean isRunning() {
         return running.get();
     }
-
-//    private void closeFuture(final DefaultTaskStore taskStore) {
-//        channel.closeFuture().addListener(new ChannelFutureListener() {
-//            @Override
-//            public void operationComplete(ChannelFuture future) throws Exception {
-//                taskStore.close();
-//            }
-//        });
-//    }
 
     public Channel getChannel() {
         return this.channel;
@@ -186,17 +168,6 @@ public class AgentNettyClient {
             //如果运行过程中服务端挂了,执行重连机制
             super.channelInactive(ctx);
         }
-
-//        private void restart(EventLoop eventLoop) {
-//            log.info("agent client hert error will restart  10s...");
-//            eventLoop.schedule(new Runnable() {
-//                @Override
-//                public void run() {
-//                    AgentNettyClient client = new AgentNettyClient();
-//                    client.start();
-//                }
-//            }, 10L, TimeUnit.SECONDS);
-//        }
 
         @Override
         public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {

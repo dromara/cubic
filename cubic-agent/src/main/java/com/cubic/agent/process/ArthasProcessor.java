@@ -47,24 +47,7 @@ public class ArthasProcessor implements Processor {
             return;
         }
         task.execute();
-//        Futures.addCallback(future, new FutureCallback<Integer>() {
-//            @Override
-//            public void onSuccess(@Nullable Integer result) {
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Throwable throwable) {
-//                if (throwable instanceof CancellationException) {
-//                    log.info("{} command canceled, id [{}]", factory.name(), id);
-//                    return;
-//                }
-//
-//                handler.handleError(throwable);
-//                log.error(" ommand error{}", throwable);
-//            }
-//        }, AgentRemotingExecutor.getExecutor());
+
     }
 
 

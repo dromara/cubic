@@ -34,7 +34,6 @@ public class SearchWebProcess implements WebProcess {
      */
     @Override
     public String process(String cmd) {
-
         Map<String, ServerConnection> connectionMap = serverConnectionStore.getAgentConnection();
         List<String> rs = new ArrayList<>(connectionMap.size());
         connectionMap.entrySet().forEach(entry -> {

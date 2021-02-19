@@ -4,9 +4,9 @@ import com.cubic.agent.boot.CommonService;
 import com.cubic.agent.boot.DefaultService;
 import com.cubic.agent.boot.ServiceManager;
 import com.cubic.agent.conf.AgentConfig;
-import com.cubic.agent.module.Message;
-import com.cubic.agent.module.ThreadMetricCollection;
 import com.cubic.agent.remote.*;
+import com.cubic.proxy.common.module.Message;
+import com.cubic.proxy.common.module.ThreadMetricCollection;
 import com.cubic.proxy.common.thread.RunnableWithExceptionProtection;
 import com.google.gson.Gson;
 import io.netty.channel.ChannelFutureListener;
@@ -19,7 +19,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description: jvm线程栈采集
+ * JVM线程栈信息收集发送处理
+ *
  * @Author qinqixuan
  * @Date 2020/12/08
  * @Version V1.0

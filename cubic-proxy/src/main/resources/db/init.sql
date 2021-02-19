@@ -28,9 +28,7 @@ CREATE TABLE `information`
     `jars`           text COMMENT '依赖jar',
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_app_id` (`app_id`) USING BTREE
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 154
-  DEFAULT CHARSET = utf8mb4;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 
 -- ----------------------------
@@ -44,9 +42,7 @@ CREATE TABLE `user`
     `secret`      varchar(255) NOT NULL COMMENT '秘钥',
     `create_time` datetime DEFAULT NULL COMMENT '创建时间',
     PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 2
-  DEFAULT CHARSET = utf8mb4;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of user
@@ -72,7 +68,21 @@ CREATE TABLE `rely_information`
     `create_date`  datetime                                DEFAULT NULL COMMENT '创建时间',
     PRIMARY KEY (`id`),
     KEY `uuid` (`app_id`) USING BTREE COMMENT 'uuid'
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 3058
-  DEFAULT CHARSET = utf8mb4
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- app线程栈信息表
+-- ----------------------------
+DROP TABLE IF EXISTS `thread_dump`;
+CREATE TABLE `thread_dump` (
+       `id` bigint(19) NOT NULL AUTO_INCREMENT COMMENT '唯一主键',
+       `app_id` varchar(100) NOT NULL COMMENT '应用标识',
+       `instance_name` varchar(150) DEFAULT NULL COMMENT '实例名称',
+       `instance_id` varchar(100) DEFAULT NULL COMMENT '应用名称',
+       `thread_dump` longtext COMMENT '线程栈信息',
+       `create_time` datetime DEFAULT NULL COMMENT '采集时间',
+       PRIMARY KEY (`id`),
+       KEY `idx_instance_name_date` (`instance_name`,`create_time`),
+       KEY `idx_app_id` (`app_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

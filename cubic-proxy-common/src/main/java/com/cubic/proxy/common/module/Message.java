@@ -34,4 +34,11 @@ public class Message {
 
     @Tolerate
     public Message(){}
+
+    @Tolerate
+    public Message(Integer code, String body, String id) {
+        this.id = id;
+        this.code = code;
+        this.body = body;
+    }
 }
