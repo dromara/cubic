@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryUsage;
@@ -125,9 +126,10 @@ public class JvmInfoUtil {
     private static void loadSpringBootLib(JvmInfo jvmInfo) {
         List<String> springBootJars = new ArrayList<String>();
         for (String s : jvmInfo.getJarFileList()) {
+            JarFile jar = null;
             try {
                 logger.debug("springboot judge, load jar: {}", s);
-                JarFile jar = new JarFile(s);
+                jar = new JarFile(s);
                 //SpringBoot 启动类标识
                 if (jar.getManifest() == null || !"org.springframework.boot.loader.JarLauncher".equals(jar.getManifest().getMainAttributes().getValue("Main-Class"))) {
                     continue;
@@ -140,9 +142,17 @@ public class JvmInfoUtil {
                         springBootJars.add(s + "!/" + jarPath);
                     }
                 }
-                jar.close();
+
             } catch (Exception e) {
                 logger.warn("error msg: {}", e.getMessage());
+            } finally {
+                try {
+                    if (jar != null) {
+                        jar.close();
+                    }
+                } catch (IOException e) {
+                    logger.warn("error msg: {}", e.getMessage());
+                }
             }
         }
         if (springBootJars.size() > 0) {
