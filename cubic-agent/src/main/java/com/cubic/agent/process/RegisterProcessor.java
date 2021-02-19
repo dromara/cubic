@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author luqiang
  */
-public class RegisterProcessor implements Processor<String> {
+public class RegisterProcessor implements Processor  {
 
     private static final Logger log = LoggerFactory.getLogger(RegisterProcessor.class);
 

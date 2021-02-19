@@ -68,13 +68,11 @@ public class AgentNettyClient {
 
     public AgentNettyClient() {
         tcpServers = Arrays.asList(AgentConfig.Agent.TCP_SERVERS.split(","));
-        init();
     }
 
-    private void init() {
+    public void init(List<Processor> processors) {
 
-        processors = ImmutableList.of(new RegisterProcessor(),new HeartbeatProcessor(), new CommandProcessor(), new ThreadDumpProcessor(), new ArthasProcessor(ArthasTaskFactory.getInstance()));
-
+        this.processors = processors;
         log.info("AgentNettyClient init process size:{}", processors.size());
 
     }

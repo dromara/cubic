@@ -6,9 +6,12 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.List;
 
-public interface Processor<T> {
+/**
+ * @author luqiang
+ */
+public interface Processor {
 
     List<Integer> types();
 
-    void process(ChannelHandlerContext ctx, String id, T command) throws ClassNotFoundException;
+    void process(ChannelHandlerContext ctx, String id,String command) throws ClassNotFoundException;
 }

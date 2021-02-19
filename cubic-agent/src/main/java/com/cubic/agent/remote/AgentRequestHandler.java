@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author luqiang
  * 处理业务命令
  */
 @ChannelHandler.Sharable
@@ -43,7 +44,7 @@ public class AgentRequestHandler extends ChannelInboundHandlerAdapter {
 
     public AgentRequestHandler(List<Processor> processors) {
         ImmutableMap.Builder<Integer, Processor> builder = new ImmutableMap.Builder<Integer, Processor>();
-        for (Processor<?> processor : processors) {
+        for (Processor processor : processors) {
             for (Integer type : processor.types()) {
                 builder.put(type, processor);
             }

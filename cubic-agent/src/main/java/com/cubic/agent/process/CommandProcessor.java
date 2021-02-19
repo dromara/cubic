@@ -2,6 +2,7 @@
 package com.cubic.agent.process;
 
 
+import com.cubic.agent.boot.DefaultProcess;
 import com.cubic.agent.cmd.jstack.CommandExecutor;
 import com.cubic.agent.remote.CommandCode;
 import com.cubic.agent.remote.ResponseWriter;
@@ -16,7 +17,8 @@ import java.util.List;
 /**
  * 获取info信息
  */
-public class CommandProcessor implements Processor<String> {
+@DefaultProcess
+public class CommandProcessor implements Processor  {
 
     private static final Logger log = LoggerFactory.getLogger(CommandProcessor.class);
 

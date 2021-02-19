@@ -8,6 +8,10 @@ import java.lang.management.ManagementFactory;
 import java.net.*;
 import java.util.*;
 
+/**
+ * 系统工具方法
+ * @author luqiang
+ */
 public class OSUtil {
 
     private static volatile String OS_NAME;

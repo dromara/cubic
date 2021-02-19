@@ -2,6 +2,7 @@
 package com.cubic.agent.process;
 
 
+import com.cubic.agent.boot.DefaultProcess;
 import com.cubic.agent.common.ArthasResponseHandler;
 import com.cubic.agent.factory.Task;
 import com.google.common.collect.ImmutableList;
@@ -16,8 +17,10 @@ import java.util.List;
 
 /**
  * 使用arthas进行处理
+ * @author luqiang
  */
-public class ArthasProcessor implements Processor<String> {
+@DefaultProcess
+public class ArthasProcessor implements Processor {
 
     private static final Logger log = LoggerFactory.getLogger(ArthasProcessor.class);
 
@@ -26,6 +29,8 @@ public class ArthasProcessor implements Processor<String> {
     public ArthasProcessor(TaskFactory factory) {
         this.factory = factory;
     }
+
+
 
     @Override
     public List<Integer> types() {

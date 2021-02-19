@@ -1,12 +1,14 @@
 package com.cubic.agent.remote;
 
 import com.cubic.agent.boot.CommonService;
+import com.cubic.agent.boot.DefaultProcess;
 import com.cubic.agent.boot.DefaultService;
+import com.cubic.agent.exception.ServiceConflictException;
+import com.cubic.agent.process.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -29,9 +31,11 @@ public class AgentClientManager implements CommonService {
 
     private final List<AgentChannelListener> agentChannelListeners = new LinkedList<>();
 
+    private Map<Class, Processor> classProcessorMap = Collections.emptyMap();
+
     @Override
     public void prepare() {
-
+        classProcessorMap = loadProcess();
     }
 
     public AgentNettyClient getClient() {
@@ -68,6 +72,7 @@ public class AgentClientManager implements CommonService {
         logger.info("start cubic netty client");
         try {
             client = new AgentNettyClient();
+            client.init(new ArrayList<>(classProcessorMap.values()));
             client.start();
 
             if (client.isRunning()) {
@@ -114,4 +119,35 @@ public class AgentClientManager implements CommonService {
     public void complete() {
 
     }
+
+
+    private Map<Class, Processor> loadProcess() {
+        Map<Class, Processor> processorMap = new LinkedHashMap<>(16);
+        List<Processor> allProcess = new LinkedList<>();
+
+        for (Processor service : ServiceLoader.load(Processor.class)) {
+            allProcess.add(service);
+        }
+
+        for (final Processor processor : allProcess) {
+            Class<? extends Processor> serviceClass = processor.getClass();
+            boolean isDefault = serviceClass.isAnnotationPresent(DefaultProcess.class);
+            if (isDefault) {
+                if (!processorMap.containsKey(serviceClass)) {
+                    processorMap.put(serviceClass, processor);
+                } else {
+
+                }
+            } else {
+                if (!processorMap.containsKey(serviceClass)) {
+                    processorMap.put(serviceClass, processor);
+                } else {
+                    throw new ServiceConflictException("Duplicate Process define for :" + serviceClass);
+                }
+            }
+        }
+
+        return processorMap;
+    }
+
 }

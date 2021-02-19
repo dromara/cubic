@@ -2,6 +2,7 @@
 package com.cubic.agent.process;
 
 
+import com.cubic.agent.boot.DefaultProcess;
 import com.google.common.collect.ImmutableList;
 import com.cubic.agent.remote.CommandCode;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,7 +15,8 @@ import java.util.List;
  * 处理心跳数据
  * @author luqiang
  */
-public class HeartbeatProcessor implements Processor<String> {
+@DefaultProcess
+public class HeartbeatProcessor implements Processor  {
 
     private static final Logger log = LoggerFactory.getLogger(HeartbeatProcessor.class);
 
