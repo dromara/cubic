@@ -51,7 +51,7 @@ public abstract class Telnet {
         try {
             client.disconnect();
         } catch (Exception e) {
-            // ignore
+            // TODO
         }
     }
 

@@ -26,9 +26,6 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     private static final Logger logger = LoggerFactory.getLogger(ProxyHeartbeatProcessor.class);
 
     @Resource
-    private ServerConnectionStore connectionStore;
-
-    @Resource
     private InformationMapper InformationMapper;
     private final String heartbeatResponse = initHeartbeatResponse();
 
