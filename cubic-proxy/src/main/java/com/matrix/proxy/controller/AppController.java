@@ -3,6 +3,7 @@ package com.matrix.proxy.controller;
 import com.matrix.proxy.auth.module.DataResult;
 import com.matrix.proxy.service.AppDataService;
 import com.matrix.proxy.vo.InstanceInfoVo;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,14 +35,20 @@ public class AppController {
     }
 
     @RequestMapping("/getInstanceInfo")
-    public DataResult getInstanceInfo(@RequestParam String appId) {
+    public DataResult getInstanceInfo(String appId) {
+        if(!StringUtils.hasText(appId)){
+            return DataResult.success();
+        }
         InstanceInfoVo vo = appDataService.getInstanceInfo(appId);
         return DataResult.success("OK", vo);
 
     }
 
     @RequestMapping("/getInstanceNames")
-    public DataResult getInstanceNames(@RequestParam String name) {
+    public DataResult getInstanceNames(String name) {
+        if(!StringUtils.hasText(name)){
+            return DataResult.success();
+        }
         List list = appDataService.getInstanceNames(name);
         return DataResult.success("OK", list);
 
