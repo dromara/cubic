@@ -48,7 +48,7 @@ public class AgentPackagePath {
                 } catch (MalformedURLException | URISyntaxException e) {
                     logger.error("Can not locate agent jar file by url:{}", urlString);
                 }
-                if (agentJarFile.exists()) {
+                if (agentJarFile != null && agentJarFile.exists()) {
                     return agentJarFile.getParentFile();
                 }
             } else {

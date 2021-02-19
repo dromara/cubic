@@ -114,9 +114,12 @@ public class AppDataServiceImpl implements AppDataService {
                 List<String> libs = JSON.parseArray(jars,String.class);
                 builder.libs(libs);
             }
-            String jars = information.getJars();
-            List array = JSON.parseArray(jars, String.class);
-            builder.libs(array);
+            if(information != null){
+                String jars = information.getJars();
+                List array = JSON.parseArray(jars, String.class);
+                builder.libs(array);
+            }
+
         } catch (Exception e) {
             log.error("处理InstanceInfoVo 数据异常", e);
         }
