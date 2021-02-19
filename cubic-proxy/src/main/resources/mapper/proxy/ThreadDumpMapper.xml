@@ -23,9 +23,8 @@
   </select>
 
   <select id="selectThreadDumpByAppId" resultMap="BaseResultMap">
-    SELECT instance_id
+    SELECT *
       FROM thread_dump
-     WHERE instance_name = #{instanceName}
-       AND create_time > #{date}
+     WHERE app_id = #{appId} order by id desc limit 1
   </select>
 </mapper>
