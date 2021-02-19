@@ -2,6 +2,7 @@
 package com.cubic.agent.process;
 
 
+import com.cubic.agent.boot.DefaultProcess;
 import com.cubic.agent.remote.ServiceRegisterClient;
 import com.google.common.collect.ImmutableList;
 import com.cubic.agent.remote.CommandCode;
@@ -17,6 +18,7 @@ import java.util.List;
  *
  * @author luqiang
  */
+@DefaultProcess
 public class RegisterProcessor implements Processor  {
 
     private static final Logger log = LoggerFactory.getLogger(RegisterProcessor.class);
