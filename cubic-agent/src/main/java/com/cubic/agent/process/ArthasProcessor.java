@@ -2,6 +2,7 @@
 package com.cubic.agent.process;
 
 
+import com.cubic.agent.arthas.ArthasTaskFactory;
 import com.cubic.agent.boot.DefaultProcess;
 import com.cubic.agent.common.ArthasResponseHandler;
 import com.cubic.agent.factory.Task;
@@ -26,11 +27,9 @@ public class ArthasProcessor implements Processor {
 
     private final TaskFactory factory;
 
-    public ArthasProcessor(TaskFactory factory) {
-        this.factory = factory;
+    public ArthasProcessor() {
+        this.factory = ArthasTaskFactory.getInstance();
     }
-
-
 
     @Override
     public List<Integer> types() {
