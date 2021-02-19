@@ -1,13 +1,11 @@
 package com.matrix.proxy.service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.matrix.proxy.entity.Information;
-import com.matrix.proxy.entity.RelyInformation;
-import com.matrix.proxy.vo.BasicInformationVo;
 import com.matrix.proxy.mapper.InformationMapper;
 import com.matrix.proxy.util.DateUtils;
+import com.matrix.proxy.vo.BasicInformationVo;
 import com.matrix.proxy.vo.InstanceInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -100,9 +98,7 @@ public class AppDataServiceImpl implements AppDataService {
     @Override
     public InstanceInfoVo getInstanceInfo(String appId) {
         InstanceInfoVo.InstanceInfoVoBuilder builder = InstanceInfoVo.builder();
-
         try {
-
             Information information = informationMapper.selectInstanceByAppId(appId);
             if (information != null) {
                 builder.jdkDir(information.getJdkDir()).jdkVersion(information.getJdkVersion()).userDir(information.getUserDir()).
@@ -111,12 +107,10 @@ public class AppDataServiceImpl implements AppDataService {
                         .progress(information.getProgress()).os(information.getOs()).osArch(information.getOsArch()).osVersion(information.getOsVersion())
                         .arguments(JSON.parseArray(information.getArguments()).toJavaList(String.class)).instanceName(information.getInstanceName());
                 String jars = information.getJars();
-                List<String> libs = JSON.parseArray(jars,String.class);
+                List<String> libs = JSON.parseArray(jars, String.class);
+                libs.sort(null);
                 builder.libs(libs);
             }
-            String jars = information.getJars();
-            List array = JSON.parseArray(jars, String.class);
-            builder.libs(array);
         } catch (Exception e) {
             log.error("处理InstanceInfoVo 数据异常", e);
         }
@@ -137,11 +131,11 @@ public class AppDataServiceImpl implements AppDataService {
             nowTime.add(Calendar.MINUTE, -5);
             Date curr = nowTime.getTime();
             QueryWrapper<Information> wrapper = new QueryWrapper<>();
-            wrapper.eq("instance_name",name).gt("last_heartbeat",curr);
+            wrapper.eq("instance_name", name).gt("last_heartbeat", curr);
             List<Information> informationList = informationMapper.selectList(wrapper);
 
             List<String> names = new LinkedList<>();
-            informationList.forEach(info ->{
+            informationList.forEach(info -> {
                 names.add(info.getAppId());
             });
             return names;
