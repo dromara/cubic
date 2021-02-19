@@ -14,13 +14,13 @@ public class ResponseBody<T> implements Serializable {
 
     private T data;
 
-    public  ResponseBody(Integer code,T data){
+    public ResponseBody(Integer code, T data){
         this.code = code;
         this.data = data;
 
     }
 
-    public  ResponseBody(){
+    public ResponseBody(){
 
     }
 

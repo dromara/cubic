@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,29 +29,26 @@ public class AppController {
     private AppDataService appDataService;
 
     @RequestMapping("/getList")
-    public DataResult getList(@RequestParam(defaultValue = "", required = false) String date) {
-        Map data = appDataService.getAppList(date);
-        return DataResult.success("OK", data);
+    public Map getList(@RequestParam(defaultValue = "", required = false) String date) {
+        return appDataService.getAppList(date);
 
     }
 
     @RequestMapping("/getInstanceInfo")
-    public DataResult getInstanceInfo(String appId) {
+    public InstanceInfoVo getInstanceInfo(String appId) {
         if(!StringUtils.hasText(appId)){
-            return DataResult.success();
+            return InstanceInfoVo.builder().build();
         }
-        InstanceInfoVo vo = appDataService.getInstanceInfo(appId);
-        return DataResult.success("OK", vo);
+        return appDataService.getInstanceInfo(appId);
 
     }
 
     @RequestMapping("/getInstanceNames")
-    public DataResult getInstanceNames(String name) {
+    public List getInstanceNames(String name) {
         if(!StringUtils.hasText(name)){
-            return DataResult.success();
+            return new ArrayList();
         }
-        List list = appDataService.getInstanceNames(name);
-        return DataResult.success("OK", list);
+        return appDataService.getInstanceNames(name);
 
     }
 }

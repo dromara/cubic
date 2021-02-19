@@ -17,7 +17,7 @@ import java.util.Map;
 public class UserController {
 
     @RequestMapping("/info")
-    public DataResult info() {
+    public Map<String, Object> info() {
 
         Map<String, Object> info = new HashMap<>();
         info.put("roles", new String[]{"admin"});
@@ -25,7 +25,7 @@ public class UserController {
         info.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         info.put("name", "Super Admin");
 
-        return DataResult.success("OK", info);
+        return info;
     }
 
 

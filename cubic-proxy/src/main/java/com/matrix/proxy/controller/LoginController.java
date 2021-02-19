@@ -23,16 +23,15 @@ public class LoginController {
 
 
     @RequestMapping("/logout")
-    public DataResult logout() {
-        return DataResult.success();
+    public String logout() {
+        return "";
     }
 
 
     @RequestMapping("/login")
-    public DataResult login(@RequestBody AuthDetail loginDetail) {
+    public String login(@RequestBody AuthDetail loginDetail) {
 
-        String token = systemService.login(loginDetail);
-        return DataResult.success("",token);
+        return systemService.login(loginDetail);
     }
 
 
