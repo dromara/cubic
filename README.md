@@ -1,7 +1,5 @@
 
 ## 简介
-  <a href='https://gitee.com/sanjiankethree/cubic/stargazers'><img src='https://gitee.com/sanjiankethree/cubic/badge/star.svg?theme=gvp' alt='star'></img></a>
-  <a href='https://gitee.com/sanjiankethree/cubic/members'><img src='https://gitee.com/sanjiankethree/cubic/badge/fork.svg?theme=gvp' alt='fork'></img></a>
   
 `Cubic` Cubic 分布式监控，以agent的方式无侵入接入应用，提供各种指标，动态线程堆栈追踪，完整集成arthas功能模块，致力于应用级监控，帮助开发人员快速定位问题
 
