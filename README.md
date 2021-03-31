@@ -1,34 +1,71 @@
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0331/140113_74894751_1168339.png "证书 2020.png")
-## 简介
+## Cubic是什么
   
-`Cubic` Cubic 分布式监控，以agent的方式无侵入接入应用，提供各种指标，动态线程堆栈追踪，完整集成arthas功能模块，致力于应用级监控，帮助开发人员快速定位问题
+`Cubic`  分布式监控，以agent的方式无侵入接入应用，提供各种指标，动态线程堆栈追踪，完整集成arthas功能模块，致力于应用级监控，帮助开发人员快速定位问题。
+
+特性：
+- 1、兼容性：整体监控不管你是IDC、ECS、Docker部署，都可完美兼容
+- 2、易用： 无需任何配置，开箱即用，基于agent无侵入接入，升级应用端无感知
+- 3、强大： 支持对应用的基础监控、堆栈监控、线程池监控等等
+- 4、高扩展：提供良好的扩展接口，给你自主选择
 
  
-因为很多公司使用监控需要进行定制化开发，Cubic 可作为一种技术参考，希望给大家带来些许启发。
- 
-技术体系：
-- 基于Spring Boot 整体技术栈
-- 认证模块是基于Spring Boot Security JWT 技术
-- WebShell 基于 Vue Xterm 、Websocket、Netty 技术
-- Proxy 与 agent 通信基于Netty 、GRPC
-
- 
+  
 ## 文档
 - [快速开始](docs/cn/quick_start.md)
 - [远程主机命令下发（动态arthas）](docs/cn/arthas_tools.md)
  
-## 结构
- - cubic-agent       应用数据采集agent   
- - config            存放agent配置文件                                                                           
- - cubic-proxy       代理应用，用于接收agent数据，图形化操作等               
- - cubic-ui          页面UI，提供前端各种功能展示,打包完 将dist目录数据拷贝到cubic-proxy  
- - docs              文档   
- - scripts           包含打包脚本、启动脚本         
+## 技术体系：
+- 基于最新Spring Boot 整体技术栈
+- 认证模块是基于Spring Boot Security JWT 技术
+- WebShell 基于 Vue Xterm 、Websocket、Netty 技术
+- Proxy 与 agent 通信基于Netty 、GRPC
 
- - agent-dist         存放打包后的agent完整组件              
- - agent-proxy-dist   存放打包后 proxy 部署 jar                    
- - arthas-dist        用于支持arthas命令集                                                          
+
+ 
+## 环境
+- JDK 1.8
+- MySQL 5.5+ 
+
+## 功能
+
+#### 已完成
+| 功能                 |
+| -------------------- |
+| 实例列表             |
+| 实例心跳监测         |
+| 实例基础信息采集     |
+| 服务器信息采集       |
+| JVM基础信息采集      |
+| 启动参数采集         |
+| 依赖包检测           |
+| arthas动态命令集支持 |
+
+ 
+
+#### 正在进行中
+
+
+ | 功能      | 迭代版本 |
+|---------|------|
+| 线程栈监控   | V1.4 |
+| 实时线程栈   | V1.4 |
+| 实时线程图   | V1.4 |
+ 
+
+## 结构
+| cubic-agent      | 应用数据采集agent                                            |
+| ---------------- | ------------------------------------------------------------ |
+| config           | 存放agent配置文件                                            |
+| cubic-proxy      | 代理应用，用于接收agent数据                                  |
+| cubic-ui         | 页面UI，提供前端各种功能展示,打包完 将dist目录数据拷贝到cubic-proxy |
+| docs             | 文档                                                         |
+| scripts          | 包含打包脚本、启动脚本                                       |
+| agent-dist       | 存放打包后的agent完整组件                                    |
+| agent-proxy-dist | 存放打包后 proxy 部署 jar                                    |
+| arthas-dist      | 用于支持arthas命令集                                         |
+
 
 
 ## 安装
@@ -64,32 +101,6 @@
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/0605/190447_b3cd9e91_1168339.png "屏幕截图.png")    
 
 
-## 环境
-- JDK 1.8
-- MySQL 5.5+ 
-
-## 功能
-
-#### 已完成
-
-| 功能       | 子功能         | 迭代版本 |
-|----------|-------------|------|
-| [远程主机命令下发（动态arthas）](docs/cn/arthas_tools.md) | arthas 命令兼容 | V1.2 |
-|          |             |      |
-
-#### 未完成
-
-
- | 功能      | 迭代版本 |
-|---------|------|
-| 线程栈监控   | V1.3 |
-| 实时线程栈   | V1.3 |
-| 实时线程图   | V1.3 |
-| JVM基础参数 | V1.3 |
-| 依赖包基础监控 | V1.3 |
-|         |      |
-
- 
 ## Q&A
 - 因为目前自己抽时间在写，所以前端UI 有些小BUG ,功能、部署、脚本等等都在完善中，马上准备使用最新的VUE 那一套来进行页面的输出迭代了，欢迎各位大牛贡献代码。
 - 欢迎大家各种star，fork，提issue，pull request，感觉还可以就点个star吧！
