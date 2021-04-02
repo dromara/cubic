@@ -1,5 +1,9 @@
 package com.cubic.agent.remote;
 
+import com.cubic.agent.module.Message;
+import com.google.gson.Gson;
+import io.netty.channel.ChannelHandlerContext;
+
 /**
  * @ClassName ResponseHandler
  * @Author QIANGLU
@@ -13,4 +17,7 @@ public interface ResponseHandler {
     void handleEOF();
 
     void handleError(Throwable t);
+
+
+    void write(Integer code, String content);
 }

@@ -1,8 +1,6 @@
-package com.cubic.agent.arthas;
+package com.cubic.agent.factory;
 
 
-import com.cubic.agent.factory.Task;
-import com.cubic.agent.factory.TaskFactory;
 import com.cubic.agent.remote.ResponseHandler;
 import com.cubic.agent.arthas.telnet.ArthasTelnetStore;
 import com.cubic.agent.arthas.telnet.TelnetStore;
@@ -15,15 +13,15 @@ import org.slf4j.LoggerFactory;
  * @Date 2020/4/21 10:17 上午
  * @Version 1.0
  */
-public class ArthasTaskFactory implements TaskFactory<String> {
+public class ArthasTelnetTaskFactory implements TaskFactory<String> {
 
-    private static final Logger log = LoggerFactory.getLogger(ArthasTaskFactory.class);
+    private static final Logger log = LoggerFactory.getLogger(ArthasTelnetTaskFactory.class);
 
     private final static TelnetStore TELNET_STORE = ArthasTelnetStore.getInstance();
 
-    private static final ArthasTaskFactory FACTORY = new ArthasTaskFactory();
+    private static final ArthasTelnetTaskFactory FACTORY = new ArthasTelnetTaskFactory();
 
-    public static ArthasTaskFactory getInstance() {
+    public static ArthasTelnetTaskFactory getInstance() {
         return FACTORY;
     }
 
@@ -39,7 +37,7 @@ public class ArthasTaskFactory implements TaskFactory<String> {
 
     @Override
     public Task create(String id, String command, String pid, ResponseHandler handler) {
-        return new ArthasTask(id, TELNET_STORE, pid,command,handler);
+        return new ArthasTelnetTask(id, TELNET_STORE, pid,command,handler);
     }
 
 }

@@ -41,7 +41,12 @@ public enum CommandCode {
     /**
      * JVM 线程栈信息
      */
-    JVM_THREAD_DUMP(6);
+    JVM_THREAD_DUMP(6),
+
+    /**
+     * 启动arthas
+     */
+    ARTHAS_START(7);
 
     private final Integer code;
 

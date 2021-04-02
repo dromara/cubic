@@ -1,8 +1,7 @@
-package com.cubic.agent.arthas;
+package com.cubic.agent.factory;
 
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.cubic.agent.factory.Task;
 import com.cubic.agent.remote.ResponseHandler;
 import com.cubic.agent.arthas.telnet.Telnet;
 import com.cubic.agent.arthas.telnet.TelnetCommand;
@@ -22,9 +21,9 @@ import java.util.concurrent.TimeUnit;
  * @Date 2020/4/21 10:17 上午
  * @Version 1.0
  */
-public class ArthasTask implements Task {
+public class ArthasTelnetTask implements Task {
 
-    private static final Logger log = LoggerFactory.getLogger(ArthasTask.class);
+    private static final Logger log = LoggerFactory.getLogger(ArthasTelnetTask.class);
 
     private final String id;
 
@@ -42,7 +41,7 @@ public class ArthasTask implements Task {
 
     private final ResponseHandler handler;
 
-    public ArthasTask(String id, TelnetStore telnetStore, String pid, String command, ResponseHandler handler) {
+    public ArthasTelnetTask(String id, TelnetStore telnetStore, String pid, String command, ResponseHandler handler) {
         this.id = id;
         this.telnetStore = telnetStore;
         this.pid = pid;

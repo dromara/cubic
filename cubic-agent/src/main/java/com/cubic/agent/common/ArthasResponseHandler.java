@@ -38,4 +38,9 @@ public class ArthasResponseHandler implements ResponseHandler {
     public void handleError(Throwable t) {
         writer.arthasWriteError(ctx, t.getMessage(), id);
     }
+
+    @Override
+    public void write(Integer code, String content) {
+        writer.write(ctx, code, content, id);
+    }
 }

@@ -2,13 +2,14 @@
 package com.cubic.agent.process;
 
 
+import com.cubic.agent.factory.ArthasHttpTaskFactory;
 import com.cubic.agent.factory.ArthasTelnetTaskFactory;
 import com.cubic.agent.boot.DefaultProcess;
 import com.cubic.agent.common.ArthasResponseHandler;
 import com.cubic.agent.factory.Task;
-import com.google.common.collect.ImmutableList;
 import com.cubic.agent.factory.TaskFactory;
 import com.cubic.agent.remote.CommandCode;
+import com.google.common.collect.ImmutableList;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,19 +22,19 @@ import java.util.List;
  * @author luqiang
  */
 @DefaultProcess
-public class ArthasProcessor implements Processor {
+public class ArthasHttpProcessor implements Processor {
 
-    private static final Logger log = LoggerFactory.getLogger(ArthasProcessor.class);
+    private static final Logger log = LoggerFactory.getLogger(ArthasHttpProcessor.class);
 
     private final TaskFactory factory;
 
-    public ArthasProcessor() {
-        this.factory = ArthasTelnetTaskFactory.getInstance();
+    public ArthasHttpProcessor() {
+        this.factory = ArthasHttpTaskFactory.getInstance();
     }
 
     @Override
     public List<Integer> types() {
-        return ImmutableList.of(CommandCode.ARTHAS.getCode());
+        return ImmutableList.of(CommandCode.ARTHAS_START.getCode());
     }
 
     @Override

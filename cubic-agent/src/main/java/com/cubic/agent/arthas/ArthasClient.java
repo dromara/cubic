@@ -41,13 +41,19 @@ public class ArthasClient {
             String path = StringUtils.isEmpty(AgentConfig.Agent.ARTHAS_PATH) ? AgentPackagePath.getPath() + DEFAULT_ARTHAS_FILE_NAME : AgentConfig.Agent.ARTHAS_PATH;
             virtualMachine.loadAgent(path,
                     "arthas");
-        }catch (AgentLoadException e){
-            logger.error("加载 arthas agent jar 失败 ，请检查agent.config 中 agent.arthas_path 路径 {} 是否配置正确",AgentConfig.Agent.ARTHAS_PATH);
-            throw e;
-        }finally {
+        } catch (AgentLoadException e) {
+            logger.error("加载 arthas agent jar 失败 ，请检查agent.config 中 agent.arthas_path 路径 {} 是否配置正确", AgentConfig.Agent.ARTHAS_PATH);
+
             if (virtualMachine != null) {
                 virtualMachine.detach();
             }
+            throw e;
         }
     }
+
+
+
+    public void shutDown(){
+
+     }
 }
