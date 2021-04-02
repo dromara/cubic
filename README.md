@@ -8,6 +8,8 @@
 
 官方网站：https://cubic.jiagoujishu.com
 
+Gitee: https://gitee.com/dromara/cubic (如果github代码有滞后，请查看gitee)
+
 特性：
 
 - 1、兼容性：整体监控不管你是IDC、ECS、Docker部署，都可完美兼容
