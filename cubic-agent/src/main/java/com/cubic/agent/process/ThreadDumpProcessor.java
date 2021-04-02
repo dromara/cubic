@@ -17,6 +17,7 @@ import java.util.List;
  * @author luqiang
  * 获取info信息
  */
+
 public class ThreadDumpProcessor implements Processor  {
 
     private static final Logger log = LoggerFactory.getLogger(ThreadDumpProcessor.class);
