@@ -4,8 +4,8 @@ package com.cubic.agent.arthas;
 import com.cubic.agent.factory.Task;
 import com.cubic.agent.factory.TaskFactory;
 import com.cubic.agent.remote.ResponseHandler;
-import com.cubic.agent.telnet.ArthasTelnetStore;
-import com.cubic.agent.telnet.TelnetStore;
+import com.cubic.agent.arthas.telnet.ArthasTelnetStore;
+import com.cubic.agent.arthas.telnet.TelnetStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
