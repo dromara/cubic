@@ -71,14 +71,14 @@
 
 
 ## 安装
-0.  执行cubic-proxy -> resources -> db -> init.sql 创建表
-1.  git clone https://gitee.com/sanjiankethree/cubic.git
-2.  执行./mvnw clean package  -DskipTests 或 执行打包脚本 ./scripts/build.sh
-3.  打包完成的agent 在agent-dist目录下
+
+0.  git clone https://gitee.com/sanjiankethree/cubic.git
+1.  执行cubic-proxy -> resources -> db -> init.sql 创建表
+2.  执行打包脚本 ./scripts/build.sh
+3.  执行运行脚本 ./scripts/start.sh (也可执行build-start.sh打包连带启动)
 4.  打包完成的proxy 在agent-proxy-dist目录下
-5.  拷贝agent-dist目录下的agent jar 路径，比如：/user/xxx/cubic-agent.jar
-6.  修改agent-dist/config 下的agent.config 的参数agent.arthas_path为agent-dist/arthas/arthas-agent.jar   路径 
-7.  如使用IDEA 测试，在测试应用中加入配置 VM option 参数 如下：
+
+注意： 如使用IDEA 测试，在测试应用中加入agent配置参数 如下：
 
 ```
 -javaagent:/user/xxx/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy

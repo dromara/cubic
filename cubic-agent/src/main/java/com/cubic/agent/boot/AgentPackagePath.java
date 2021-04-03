@@ -1,5 +1,7 @@
 package com.cubic.agent.boot;
 
+import com.cubic.agent.conf.AgentConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,6 +51,7 @@ public class AgentPackagePath {
                     logger.error("Can not locate agent jar file by url:{}", urlString);
                 }
                 if (agentJarFile != null && agentJarFile.exists()) {
+                    initArthasPath(agentJarFile.getPath());
                     return agentJarFile.getParentFile();
                 }
             } else {
@@ -61,6 +64,28 @@ public class AgentPackagePath {
 
         logger.error("Can not locate agent jar file.");
         throw new AgentPackageNotFoundException("Can not locate agent jar file.");
+    }
+
+
+    /**
+     * 如果未设置arthas path就使用默认的
+     * @param agentPath
+     */
+    private static void initArthasPath(String agentPath) {
+
+        if (StringUtils.isEmpty(agentPath)) {
+            return;
+        }
+
+        int index = agentPath.lastIndexOf("/");
+        boolean isInJar = index > -1;
+        if (isInJar) {
+            String arthasUrl = agentPath.substring(0, index).concat("/arthas/arthas-agent.jar");
+            if (StringUtils.isBlank(AgentConfig.Agent.ARTHAS_PATH)) {
+                AgentConfig.Agent.ARTHAS_PATH = arthasUrl;
+            }
+        }
+
     }
 
 }
