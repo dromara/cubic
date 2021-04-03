@@ -6,7 +6,7 @@ cd "${0%/*}"
 cd ..
 
 echo " install-file to maven repository linux-tools.jar"
-mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
+# mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
 
 BASE_DIR=`pwd`
 echo $BASE_DIR

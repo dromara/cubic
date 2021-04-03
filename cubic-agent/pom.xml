@@ -13,6 +13,7 @@
 
 
     <properties>
+        <tools_jar>${java.home}/../lib/tools.jar</tools_jar>
         <premain.class>com.cubic.agent.MatrixAgent</premain.class>
         <can.redefine.classes>true</can.redefine.classes>
         <can.retransform.classes>true</can.retransform.classes>
@@ -52,6 +53,13 @@
             <groupId>com.sun</groupId>
             <artifactId>linux-tools</artifactId>
             <version>1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
+            <version>${java.version}</version>
+            <scope>system</scope>
+            <systemPath>${tools_jar}</systemPath>
         </dependency>
         <dependency>
             <groupId>io.netty</groupId>

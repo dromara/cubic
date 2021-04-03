@@ -83,6 +83,17 @@
 ```
 -javaagent:/user/xxx/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy
 ```
+# 注意事项
+
+1. JDK版本错误或tools.jar不存在
+
+cubic使用的java为JAVA_HOME/bin/java, 需要JDK8及以上，但"不要求"与目标应用的JVM使用相同的JDK版本。
+
+cubic需要依赖JAVA_HOME/lib/tools.jar
+
+JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，则尝试通过"which java"定位java从而获得相对路径。
+
+可通过echo $JAVA_HOME 查看当前配置
 
 ## 功能展示
 
