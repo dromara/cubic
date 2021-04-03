@@ -72,11 +72,11 @@
 
 ## 安装
 
-0.  git clone https://gitee.com/sanjiankethree/cubic.git
-1.  执行cubic-proxy -> resources -> db -> init.sql 创建表
-2.  执行打包脚本 ./scripts/build.sh
-3.  执行运行脚本 ./scripts/start.sh (也可执行build-start.sh打包连带启动)
-4.  打包完成的proxy 在agent-proxy-dist目录下
+1.  git clone https://gitee.com/sanjiankethree/cubic.git
+2.  执行cubic-proxy -> resources -> db -> init.sql 创建表
+3.  执行打包脚本 ./scripts/build.sh
+4.  执行运行脚本 ./scripts/start.sh (也可执行build-start.sh打包连带启动)
+
 
 注意： 如使用IDEA 测试，在测试应用中加入agent配置参数 如下：
 
