@@ -78,6 +78,6 @@ public enum ThreadPoolMonitorItems {
         String name = Thread.currentThread().getName();
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 1];
-        return name + "-" + stackTraceElement.getClassName() + "[" + stackTraceElement.getMethodName() + "]_" + stackTraceElement.hashCode();
+        return name + "-" + stackTraceElement.getClassName() + "[" + stackTraceElement.getMethodName() + "]" + stackTraceElement.hashCode();
     }
 }

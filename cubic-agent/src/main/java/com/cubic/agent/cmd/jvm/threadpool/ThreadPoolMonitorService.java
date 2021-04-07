@@ -44,7 +44,6 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
 
     @Override
     public void prepare() {
-        System.out.println("------" + this.getClass().getClassLoader());
         ServiceManager.INSTANCE.findService(AgentClientManager.class).addListener(this);
         /**
          * 初始化，对监控类进行字节码增强
@@ -80,7 +79,6 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
      */
     public static void addMonitor(ThreadPoolExecutor threadPoolExecutor) {
         threadPoolReferences.put(ThreadPoolMonitorItems.key(), new WeakReference<>(threadPoolExecutor));
-        System.out.println("---1111----" + threadPoolReferences.size());
     }
 
     /**
