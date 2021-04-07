@@ -86,3 +86,17 @@ CREATE TABLE `thread_dump` (
        KEY `idx_instance_name_date` (`instance_name`,`create_time`),
        KEY `idx_app_id` (`app_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- app线程池信息表
+-- ----------------------------
+DROP TABLE IF EXISTS `thread_pool`;
+CREATE TABLE `thread_pool` (
+   `id` bigint(19) NOT NULL AUTO_INCREMENT COMMENT '唯一主键',
+   `instance_id` varchar(100) DEFAULT NULL COMMENT '应用名称',
+   `instance_name` varchar(150) DEFAULT NULL COMMENT '实例名称',
+   `thread_pool_key`  varchar(100) COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '线程池key',
+   `thread_pool_params` longtext COMMENT '线程池参数',
+   `create_time` datetime DEFAULT NULL COMMENT '采集时间',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

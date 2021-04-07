@@ -43,7 +43,12 @@ public enum CommandCode {
      */
     JVM_THREAD_DUMP(6),
 
-    ARTHAS_START(7);
+    ARTHAS_START(7),
+
+    /**
+     * JVM 线程池信息
+     */
+    JVM_THREAD_POOL(8);
 
     private Integer code;
 
