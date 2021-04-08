@@ -9,9 +9,9 @@ spring:
     default-property-inclusion: non_null
   datasource:
     name: test
-    url: jdbc:mysql://47.104.79.116:3366/cubic?useUnicode=true&characterEncoding=UTF8
-    username: cubic
-    password: nxE5pGR2wRkhRAb8
+    url: jdbc:mysql://localhost:3306/cubic?useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: root
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -58,7 +58,7 @@ management:
         include: configprops
 log:
   level: info
-  #path: /tmp/logs
+  path: /tmp/logs
 jwt:
   token-header: Authorization
   expire: 365
