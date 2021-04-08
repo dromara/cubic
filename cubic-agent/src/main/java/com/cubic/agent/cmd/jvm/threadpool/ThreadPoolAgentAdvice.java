@@ -29,7 +29,9 @@ public class ThreadPoolAgentAdvice {
     public static void exit(@Advice.This Object obj) {
         if (obj instanceof ThreadPoolExecutor) {
             try {
-                Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass("com.cubic.agent.cmd.jvm.threadpool.ThreadPoolMonitorService");
+                Class<?> clazz = Thread.currentThread()
+                        .getContextClassLoader()
+                        .loadClass("com.cubic.agent.cmd.jvm.threadpool.ThreadPoolMonitorService");
                 clazz.getMethod("addMonitor", ThreadPoolExecutor.class).invoke(clazz.newInstance(), obj);
             } catch (Exception e) {
                 e.printStackTrace();

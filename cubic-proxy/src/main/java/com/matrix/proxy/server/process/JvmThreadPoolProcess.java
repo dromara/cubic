@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -44,14 +46,14 @@ public class JvmThreadPoolProcess extends DefaultMessageProcess {
             return;
         }
         JSONObject body = JSON.parseObject(message.getBody());
-        Date data = new Date();
+        Date date = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         body.forEach((key, params) -> {
             threadPoolMapper.insert(ThreadPoolEntity.builder()
                     .instanceId(message.getInstanceUuid())
                     .instanceName(message.getInstanceName())
                     .threadPoolKey(key)
                     .threadPoolParams(params.toString())
-                    .createTime(data)
+                    .createTime(date)
                     .build());
         });
     }
