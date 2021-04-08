@@ -6,6 +6,8 @@
 
 官方网站：https://cubic.jiagoujishu.com
 
+Demo: http://47.104.79.116:6080
+
 特性：
 - 1、兼容性：整体监控不管你是IDC、ECS、Docker部署，都可完美兼容
 - 2、易用： 无需任何配置，开箱即用，基于agent无侵入接入，升级应用端无感知
