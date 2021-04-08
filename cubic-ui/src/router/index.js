@@ -82,6 +82,12 @@ export const constantRoutes = [
         name: 'WebShell',
         component: () => import('@/views/app/command/cmd'),
         meta: { title: 'Arthas', icon: 'tree' }
+      },
+      {
+        path: 'dump',
+        name: 'Dump',
+        component: () => import('@/views/dump/index'),
+        meta: { title: '线程栈监控', icon: 'tree' }
       }
     ]
   },
