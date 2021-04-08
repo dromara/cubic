@@ -127,4 +127,8 @@ JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，�
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
 
 
+#### 感谢我们的小伙伴
+[![Giteye chart](https://chart.giteye.net/gitee/dromara/cubic/6E6HZTAA.png)](https://giteye.net/chart/6E6HZTAA)
+
+#### 一起成长
 [![Giteye chart](https://chart.giteye.net/gitee/dromara/cubic/JQD5ZBUE.png)](https://giteye.net/chart/JQD5ZBUE)
