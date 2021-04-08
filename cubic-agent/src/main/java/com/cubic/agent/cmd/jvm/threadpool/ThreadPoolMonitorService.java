@@ -29,9 +29,12 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
     private volatile ChannelStatus status = ChannelStatus.DISCONNECT;
     private volatile AgentNettyClient client;
 
-    private ScheduledThreadPoolExecutor scheduledThreadPoolExecutor;
+    private ScheduledThreadPoolExecutor scheduledExecutor;
     private ScheduledFuture<?> sendMetricFuture;
-
+    /**
+     * 采集间隔时间10s
+     */
+    private final static Long PERIOD = 10L;
 
     /**
      * 所有线程池资源的引用
@@ -53,8 +56,10 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
 
     @Override
     public void start() {
-        scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1, new DefaultThreadFactory("JvmThreadPoolMonitorService-"));
-        sendMetricFuture = scheduledThreadPoolExecutor.scheduleAtFixedRate(new ThreadPoolMonitor(), 0L, 10, TimeUnit.SECONDS);
+        scheduledExecutor = new ScheduledThreadPoolExecutor(1,
+                new DefaultThreadFactory("JvmThreadPoolMonitorService-")
+        );
+        sendMetricFuture = scheduledExecutor.scheduleAtFixedRate(new ThreadPoolMonitor(), 0L, PERIOD, TimeUnit.SECONDS);
     }
 
     @Override
@@ -62,8 +67,8 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
         if (sendMetricFuture != null) {
             sendMetricFuture.cancel(true);
         }
-        if (scheduledThreadPoolExecutor != null) {
-            scheduledThreadPoolExecutor.shutdown();
+        if (scheduledExecutor != null) {
+            scheduledExecutor.shutdown();
         }
     }
 
@@ -137,12 +142,13 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
                         if (!future.isSuccess()) {
                             logger.error("ThreadPoolMonitorService send {} fail", message.getCommand());
                         } else {
-                            logger.debug("ThreadPoolMonitorService send h:{}  channel : {} ", message.getCommand(), client.getChannel());
+                            logger.debug("ThreadPoolMonitorService send command:{}  channel : {} ",
+                                    message.getCommand(), client.getChannel());
                         }
                     }
                 });
             } catch (Exception e) {
-                logger.warn("ThreadPoolMonitorService execute fail.{}", e.getMessage());
+                logger.warn("ThreadPoolMonitorService execute fail. " + e.getMessage(), e);
             }
 
         }
