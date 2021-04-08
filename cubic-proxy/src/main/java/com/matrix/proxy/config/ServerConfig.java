@@ -1,14 +1,20 @@
 package com.matrix.proxy.config;
 
+import com.cubic.proxy.common.server.ServerConnectionStore;
+import com.cubic.proxy.common.webserver.WebConnectionStore;
+import com.cubic.proxy.common.webserver.WebProcess;
+import com.cubic.proxy.websocket.DefaultWebConnectionStore;
+import com.cubic.proxy.websocket.MatrixNettyWebServer;
+import com.cubic.proxy.websocket.WebRequestHandler;
+import com.cubic.proxy.websocket.process.SearchWebProcess;
 import com.matrix.proxy.server.MatrixNettyServer;
-import com.matrix.proxy.server.handler.MessageHandler;
-import com.matrix.proxy.server.handler.ServerMessgaeProcess;
-import com.matrix.proxy.webscoket.MatrixNettyWebServer;
-import com.matrix.proxy.webscoket.WebRequestHandler;
+import com.cubic.proxy.common.handler.MessageHandler;
+import com.cubic.proxy.common.handler.ServerMessgaeProcess;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,6 +27,8 @@ import java.util.List;
 @EnableConfigurationProperties(value = ServerProperties.class)
 public class ServerConfig {
 
+    @Resource
+    private List<WebProcess> webProcesses;
 
     @Bean(initMethod = "start")
     public MatrixNettyServer nettyServerForAgent(ServerProperties serverProperties, List<ServerMessgaeProcess> processors) {
@@ -32,5 +40,23 @@ public class ServerConfig {
     @Bean(initMethod = "start")
     public MatrixNettyWebServer matrixNettyWebServer(ServerProperties serverProperties, WebRequestHandler webRequestHandler) {
         return new MatrixNettyWebServer(serverProperties.getAgentPort() + 1, webRequestHandler);
+    }
+
+    @Bean
+    public WebRequestHandler webRequestHandler(WebConnectionStore webConnectionStore, ServerConnectionStore serverConnectionStore){
+        return new WebRequestHandler(webConnectionStore,serverConnectionStore,webProcesses);
+    }
+
+
+    @Bean
+    public DefaultWebConnectionStore defaultWebConnectionStore(){
+
+        return new DefaultWebConnectionStore();
+    }
+
+
+    @Bean
+    public SearchWebProcess searchWebProcess(){
+        return new SearchWebProcess();
     }
 }

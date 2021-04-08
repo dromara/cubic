@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # define newest arthas's version
-ARTHAS_VERSION=3.2.0
+ARTHAS_VERSION=3.5.0
 
 # define newest arthas's lib home
 ARTHAS_LIB_HOME=${HOME}/.arthas/lib/${ARTHAS_VERSION}/arthas

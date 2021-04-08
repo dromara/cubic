@@ -2,9 +2,9 @@ package com.matrix.proxy.service;
 
 import com.alibaba.fastjson.JSON;
 import com.matrix.proxy.module.Command;
-import com.matrix.proxy.server.ServerConnection;
-import com.matrix.proxy.server.ServerConnectionStore;
-import com.matrix.proxy.server.SyncFuture;
+import com.cubic.proxy.common.server.ServerConnection;
+import com.cubic.proxy.common.server.ServerConnectionStore;
+import com.cubic.proxy.common.server.SyncFuture;
 import com.matrix.proxy.server.process.DefaultMessageProcess;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

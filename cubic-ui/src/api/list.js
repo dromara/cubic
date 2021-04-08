@@ -8,6 +8,22 @@ export function appList(query) {
   })
 }
 
+export function getInstanceInfo(query) {
+  return request({
+    url: '/app/getInstanceInfo',
+    method: 'get',
+    params: query
+  })
+}
+
+export function getInstanceNames(query) {
+  return request({
+    url: '/app/getInstanceNames',
+    method: 'get',
+    params: query
+  })
+}
+
 export function fetchArticle(id) {
   return request({
     url: '/vue-element-admin/article/detail',
