@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.matrix.proxy.mapper.ThreadPoolMapper">
+    <resultMap id="BaseResultMap" type="com.matrix.proxy.entity.ThreadPoolEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="instance_id" jdbcType="VARCHAR" property="instanceId"/>
+        <result column="instance_name" jdbcType="VARCHAR" property="instanceName"/>
+        <result column="thread_pool_key" jdbcType="VARCHAR" property="threadPoolKey"/>
+        <result column="thread_pool_params" jdbcType="VARCHAR" property="threadPoolParams"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <select id="selectByQuery" resultMap="BaseResultMap">
+        select * from thread_pool
+        <where>
+            <if test="instanceId != null">
+                and instance_id = #{instanceId}
+            </if>
+            <if test="instanceName != null">
+                and instance_name = #{instanceName}
+            </if>
+            <if test="threadPoolKey != null">
+                and thread_pool_key = #{threadPoolKey}
+            </if>
+            <if test="startTime != null">
+                and create_time &gt;= #{startTime}
+            </if>
+            <if test="endTime != null">
+                and create_time &lt;= #{endTime}
+            </if>
+        </where>
+        order by id desc
+    </select>
 </mapper>
