@@ -65,8 +65,15 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-<!--
--->
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -87,7 +94,8 @@
                             <createSourcesJar>true</createSourcesJar>
                             <shadeSourcesContent>true</shadeSourcesContent>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
                                         <Premain-Class>${premain.class}</Premain-Class>
                                         <Can-Redefine-Classes>${can.redefine.classes}</Can-Redefine-Classes>
@@ -97,18 +105,18 @@
                             </transformers>
                             <artifactSet>
                                 <excludes>
-<!--                                    <exclude>*:gson</exclude>-->
-<!--                                    <exclude>io.grpc:*</exclude>-->
-<!--                                    <exclude>io.netty:*</exclude>-->
-<!--                                    <exclude>com.google.*:*</exclude>-->
-<!--                                    <exclude>com.google.guava:guava</exclude>-->
-<!--                                    <exclude>net.bytebuddy:byte-buddy:jar:</exclude>-->
-<!--                                    <exclude>com.google.errorprone:error_prone_annotations:jar:</exclude>-->
-<!--                                    <exclude>com.google.code.findbugs:jsr305:jar:</exclude>-->
-<!--                                    <exclude>com.google.android:annotations:jar:</exclude>-->
-<!--                                    <exclude>com.google.api.grpc:proto-google-common-protos:jar:</exclude>-->
-<!--                                    <exclude>org.checkerframework:checker-compat-qual:jar:</exclude>-->
-<!--                                    <exclude>org.codehaus.mojo:animal-sniffer-annotations:jar:</exclude>-->
+                                    <!--                                    <exclude>*:gson</exclude>-->
+                                    <!--                                    <exclude>io.grpc:*</exclude>-->
+                                    <!--                                    <exclude>io.netty:*</exclude>-->
+                                    <!--                                    <exclude>com.google.*:*</exclude>-->
+                                    <!--                                    <exclude>com.google.guava:guava</exclude>-->
+                                    <!--                                    <exclude>net.bytebuddy:byte-buddy:jar:</exclude>-->
+                                    <!--                                    <exclude>com.google.errorprone:error_prone_annotations:jar:</exclude>-->
+                                    <!--                                    <exclude>com.google.code.findbugs:jsr305:jar:</exclude>-->
+                                    <!--                                    <exclude>com.google.android:annotations:jar:</exclude>-->
+                                    <!--                                    <exclude>com.google.api.grpc:proto-google-common-protos:jar:</exclude>-->
+                                    <!--                                    <exclude>org.checkerframework:checker-compat-qual:jar:</exclude>-->
+                                    <!--                                    <exclude>org.codehaus.mojo:animal-sniffer-annotations:jar:</exclude>-->
                                 </excludes>
                             </artifactSet>
                             <relocations>
@@ -164,7 +172,7 @@
                         <configuration>
                             <tasks>
                                 <echo>${project.basedir}</echo>
-                                <delete dir="${project.basedir}/../agent-dist" />
+                                <delete dir="${project.basedir}/../agent-dist"/>
                             </tasks>
                         </configuration>
                     </execution>
@@ -176,12 +184,15 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <mkdir dir="${project.basedir}/../agent-dist" />
-                                <copy file="${project.build.directory}/cubic-agent.jar" tofile="${project.basedir}/../agent-dist/cubic-agent.jar" overwrite="true" />
-                                <mkdir dir="${project.basedir}/../agent-dist/config" />
-                                <mkdir dir="${project.basedir}/../agent-dist/logs" />
-                                <copydir src="${project.basedir}/../config" dest="${project.basedir}/../agent-dist/config" forceoverwrite="true" />
-                                <copydir src="${project.basedir}/../arthas-dist" dest="${project.basedir}/../agent-dist/arthas" forceoverwrite="true" />
+                                <mkdir dir="${project.basedir}/../agent-dist"/>
+                                <copy file="${project.build.directory}/cubic-agent.jar"
+                                      tofile="${project.basedir}/../agent-dist/cubic-agent.jar" overwrite="true"/>
+                                <mkdir dir="${project.basedir}/../agent-dist/config"/>
+                                <mkdir dir="${project.basedir}/../agent-dist/logs"/>
+                                <copydir src="${project.basedir}/../config"
+                                         dest="${project.basedir}/../agent-dist/config" forceoverwrite="true"/>
+                                <copydir src="${project.basedir}/../arthas-dist"
+                                         dest="${project.basedir}/../agent-dist/arthas" forceoverwrite="true"/>
                             </tasks>
                         </configuration>
                     </execution>

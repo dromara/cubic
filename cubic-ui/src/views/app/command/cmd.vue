@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       vm: {
-        ip: 'localhost',
+        ip: '47.104.79.116',
         port: 11901,
         agentId: 'cubic'
       },

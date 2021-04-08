@@ -100,6 +100,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -172,7 +177,7 @@
                         <configuration>
                             <tasks>
                                 <echo>${project.basedir}</echo>
-                                <delete dir="${project.basedir}/../agent-proxy-dist" />
+                                <delete dir="${project.basedir}/../agent-proxy-dist"/>
                             </tasks>
                         </configuration>
                     </execution>
@@ -184,7 +189,8 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <copydir src="${project.basedir}/../${cubic-ui-path}" dest="${project.basedir}/src/main/resources/static" forceoverwrite="true" />
+                                <copydir src="${project.basedir}/../${cubic-ui-path}"
+                                         dest="${project.basedir}/src/main/resources/static" forceoverwrite="true"/>
                             </tasks>
                         </configuration>
                     </execution>
@@ -196,8 +202,9 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <mkdir dir="${project.basedir}/../agent-proxy-dist" />
-                                <copy file="${project.build.directory}/cubic-proxy.jar" tofile="${project.basedir}/../agent-proxy-dist/cubic-proxy.jar" overwrite="true" />
+                                <mkdir dir="${project.basedir}/../agent-proxy-dist"/>
+                                <copy file="${project.build.directory}/cubic-proxy.jar"
+                                      tofile="${project.basedir}/../agent-proxy-dist/cubic-proxy.jar" overwrite="true"/>
                             </tasks>
                         </configuration>
                     </execution>

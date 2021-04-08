@@ -6,6 +6,8 @@
 
 官方网站：https://cubic.jiagoujishu.com
 
+Demo: http://47.104.79.116:6080
+
 特性：
 - 1、兼容性：整体监控不管你是IDC、ECS、Docker部署，都可完美兼容
 - 2、易用： 无需任何配置，开箱即用，基于agent无侵入接入，升级应用端无感知
@@ -125,4 +127,8 @@ JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，�
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
 
 
+#### 感谢我们的小伙伴
+[![Giteye chart](https://chart.giteye.net/gitee/dromara/cubic/6E6HZTAA.png)](https://giteye.net/chart/6E6HZTAA)
+
+#### 一起成长
 [![Giteye chart](https://chart.giteye.net/gitee/dromara/cubic/JQD5ZBUE.png)](https://giteye.net/chart/JQD5ZBUE)
