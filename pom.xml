@@ -76,6 +76,23 @@
                 <artifactId>cubic-proxy-websocket</artifactId>
                 <version>1.2.0.RELEASE</version>
             </dependency>
+
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>1.10.22</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy-agent</artifactId>
+                <version>1.10.22</version>
+            </dependency>
+            <!--page helper-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>1.2.13</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
