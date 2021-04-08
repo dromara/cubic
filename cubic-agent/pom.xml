@@ -49,11 +49,7 @@
             <artifactId>commons-net</artifactId>
             <version>3.6</version>
         </dependency>
-        <dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>linux-tools</artifactId>
-            <version>1.8</version>
-        </dependency>
+       
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>tools</artifactId>
@@ -69,8 +65,17 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-<!--
--->
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.10.22</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.10.22</version>
+        </dependency>
     </dependencies>
 
     <build>

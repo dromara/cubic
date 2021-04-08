@@ -12,23 +12,54 @@
 - 3、强大： 支持对应用的基础监控、堆栈监控、线程池监控等等
 - 4、高扩展：提供良好的扩展接口，给你自主选择
 
+## 部署
+
+只需两步：
+ - 执行cubic-proxy -> resources -> db -> init.sql 创建表
+ - 执行运行脚本 build-start.sh 打包部署应用
+
  
-  
+## 注意事项
+
+1、环境
+ - JDK 1.8
+ - MySQL 5.5+
+
+
+2、 JDK版本错误或tools.jar不存在
+
+cubic使用的java为JAVA_HOME/bin/java, 需要JDK8及以上，但"不要求"与目标应用的JVM使用相同的JDK版本。
+
+cubic需要依赖JAVA_HOME/lib/tools.jar
+
+JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，则尝试通过"which java"定位java从而获得相对路径。
+
+可通过echo $JAVA_HOME 查看当前配置
+
 ## 文档
 - [快速开始](docs/cn/quick_start.md)
 - [远程主机命令下发（动态arthas）](docs/cn/arthas_tools.md)
- 
+
+
+## 结构
+| cubic-agent      | 应用数据采集agent                                            |
+| ---------------- | ------------------------------------------------------------ |
+| config           | 存放agent配置文件                                            |
+| cubic-proxy      | 代理应用，用于接收agent数据                                  |
+| cubic-ui         | 页面UI，提供前端各种功能展示,打包完 将dist目录数据拷贝到cubic-proxy |
+| docs             | 文档                                                         |
+| scripts          | 包含打包脚本、启动脚本                                       |
+| agent-dist       | 存放打包后的agent完整组件                                    |
+| agent-proxy-dist | 存放打包后 proxy 部署 jar                                    |
+| arthas-dist      | 用于支持arthas命令集                                         |
+
+
 ## 技术体系：
 - 基于最新Spring Boot 整体技术栈
 - 认证模块是基于Spring Boot Security JWT 技术
 - WebShell 基于 Vue Xterm 、Websocket、Netty 技术
 - Proxy 与 agent 通信基于Netty 、GRPC
 
-
- 
-## 环境
-- JDK 1.8
-- MySQL 5.5+ 
 
 ## 功能
 
@@ -56,44 +87,7 @@
 | 实时线程图   | V1.4 |
  
 
-## 结构
-| cubic-agent      | 应用数据采集agent                                            |
-| ---------------- | ------------------------------------------------------------ |
-| config           | 存放agent配置文件                                            |
-| cubic-proxy      | 代理应用，用于接收agent数据                                  |
-| cubic-ui         | 页面UI，提供前端各种功能展示,打包完 将dist目录数据拷贝到cubic-proxy |
-| docs             | 文档                                                         |
-| scripts          | 包含打包脚本、启动脚本                                       |
-| agent-dist       | 存放打包后的agent完整组件                                    |
-| agent-proxy-dist | 存放打包后 proxy 部署 jar                                    |
-| arthas-dist      | 用于支持arthas命令集                                         |
 
-
-
-## 安装
-
-1.  git clone https://gitee.com/sanjiankethree/cubic.git
-2.  执行cubic-proxy -> resources -> db -> init.sql 创建表
-3.  执行打包脚本 ./scripts/build.sh
-4.  执行运行脚本 ./scripts/start.sh (也可执行build-start.sh打包连带启动)
-
-
-注意： 如使用IDEA 测试，在测试应用中加入agent配置参数 如下：
-
-```
--javaagent:/user/xxx/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy
-```
-# 注意事项
-
-1. JDK版本错误或tools.jar不存在
-
-cubic使用的java为JAVA_HOME/bin/java, 需要JDK8及以上，但"不要求"与目标应用的JVM使用相同的JDK版本。
-
-cubic需要依赖JAVA_HOME/lib/tools.jar
-
-JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，则尝试通过"which java"定位java从而获得相对路径。
-
-可通过echo $JAVA_HOME 查看当前配置
 
 ## 功能展示
 
