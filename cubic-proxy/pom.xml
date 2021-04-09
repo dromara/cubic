@@ -18,60 +18,70 @@
     <dependencies>
 
         <dependency>
+            <groupId>matrix.cubic</groupId>
+            <artifactId>cubic-proxy-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>matrix.cubic</groupId>
+            <artifactId>cubic-proxy-websocket</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.google.protobuf</groupId>-->
-<!--            <artifactId>protobuf-java</artifactId>-->
-<!--            <version>${protobuf.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+        <!-- druid -->
+        <dependency>
+            <groupId>com.github.drtrang</groupId>
+            <artifactId>druid-spring-boot2-starter</artifactId>
+            <version>1.1.10.2</version>
+        </dependency>
+
+        <!-- 持久层 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.9</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+        <!-- 通用mapper -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>20.0</version>
-        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.45.Final</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -87,13 +97,13 @@
         </dependency>
         <!-- Datsabase -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.200</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
@@ -103,7 +113,6 @@
         <resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
-                <filtering>true</filtering>
                 <includes>
                     <include>**/*</include>
                 </includes>
@@ -168,7 +177,7 @@
                         <configuration>
                             <tasks>
                                 <echo>${project.basedir}</echo>
-                                <delete dir="${project.basedir}/../agent-proxy-dist" />
+                                <delete dir="${project.basedir}/../agent-proxy-dist"/>
                             </tasks>
                         </configuration>
                     </execution>
@@ -180,7 +189,8 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <copydir src="${project.basedir}/../${cubic-ui-path}" dest="${project.basedir}/src/main/resources/static" forceoverwrite="true" />
+                                <copydir src="${project.basedir}/../${cubic-ui-path}"
+                                         dest="${project.basedir}/src/main/resources/static" forceoverwrite="true"/>
                             </tasks>
                         </configuration>
                     </execution>
@@ -192,8 +202,9 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <mkdir dir="${project.basedir}/../agent-proxy-dist" />
-                                <copy file="${project.build.directory}/cubic-proxy.jar" tofile="${project.basedir}/../agent-proxy-dist/cubic-proxy.jar" overwrite="true" />
+                                <mkdir dir="${project.basedir}/../agent-proxy-dist"/>
+                                <copy file="${project.build.directory}/cubic-proxy.jar"
+                                      tofile="${project.basedir}/../agent-proxy-dist/cubic-proxy.jar" overwrite="true"/>
                             </tasks>
                         </configuration>
                     </execution>

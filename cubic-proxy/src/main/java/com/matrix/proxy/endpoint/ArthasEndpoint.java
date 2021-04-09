@@ -1,7 +1,7 @@
 package com.matrix.proxy.endpoint;
 
+import com.cubic.proxy.websocket.MatrixNettyWebServer;
 import com.matrix.proxy.config.ServerProperties;
-import com.matrix.proxy.webscoket.MatrixNettyWebServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;

@@ -1,0 +1,72 @@
+{
+  "groups": [
+    {
+      "name": "jwt",
+      "type": "com.matrix.proxy.auth.JwtProperties",
+      "sourceType": "com.matrix.proxy.auth.JwtProperties"
+    },
+    {
+      "name": "management.endpoint.arthas",
+      "type": "com.matrix.proxy.endpoint.ArthasEndpoint",
+      "sourceType": "com.matrix.proxy.endpoint.ArthasEndpoint"
+    },
+    {
+      "name": "matrix.server",
+      "type": "com.matrix.proxy.config.ServerProperties",
+      "sourceType": "com.matrix.proxy.config.ServerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt.expire",
+      "type": "java.lang.Integer",
+      "sourceType": "com.matrix.proxy.auth.JwtProperties"
+    },
+    {
+      "name": "jwt.private-key",
+      "type": "java.lang.Byte[]",
+      "sourceType": "com.matrix.proxy.auth.JwtProperties"
+    },
+    {
+      "name": "jwt.public-key",
+      "type": "java.lang.Byte[]",
+      "sourceType": "com.matrix.proxy.auth.JwtProperties"
+    },
+    {
+      "name": "jwt.rsa-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.matrix.proxy.auth.JwtProperties"
+    },
+    {
+      "name": "jwt.sign",
+      "type": "java.lang.String",
+      "sourceType": "com.matrix.proxy.auth.JwtProperties"
+    },
+    {
+      "name": "jwt.token-header",
+      "type": "java.lang.String",
+      "sourceType": "com.matrix.proxy.auth.JwtProperties"
+    },
+    {
+      "name": "management.endpoint.arthas.cache.time-to-live",
+      "type": "java.time.Duration",
+      "description": "Maximum time that a response can be cached.",
+      "sourceType": "com.matrix.proxy.endpoint.ArthasEndpoint",
+      "defaultValue": "0ms"
+    },
+    {
+      "name": "management.endpoint.arthas.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the arthas endpoint.",
+      "sourceType": "com.matrix.proxy.endpoint.ArthasEndpoint",
+      "defaultValue": true
+    },
+    {
+      "name": "matrix.server.agent-port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.matrix.proxy.config.ServerProperties",
+      "defaultValue": 10080
+    }
+  ],
+  "hints": []
+}

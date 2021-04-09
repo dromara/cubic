@@ -26,7 +26,8 @@ Cubic 主要有两部分，目前UI 和proxy 是写在一起的
     
     -Dcubic.agent.service_name=cubic-proxy (添加项目名称)
     
- - 启动 cubic-proxy java -jar cubic-proxy.jar 的方式启动
+ - 启动   
+   java -jar -javaagent:/path/agent-dist/cubic-agent.jar  -Dcubic.agent.service_name=cubic-proxy cubic-proxy.jar  
  
  
  

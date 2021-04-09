@@ -1,8 +1,9 @@
 package com.matrix.proxy.session;
 
+import com.cubic.proxy.common.session.Session;
+import com.cubic.proxy.common.webserver.WebConnection;
 import com.google.common.util.concurrent.SettableFuture;
-import com.matrix.proxy.server.ServerConnection;
-import com.matrix.proxy.webscoket.WebConnection;
+import com.cubic.proxy.common.server.ServerConnection;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
 

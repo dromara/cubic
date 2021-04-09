@@ -17,6 +17,8 @@
 
 package com.matrix.proxy.server;
 
+import com.cubic.proxy.common.server.ServerConnection;
+import com.cubic.proxy.common.server.ServerConnectionStore;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.MoreExecutors;

@@ -1,9 +1,9 @@
 package com.matrix.proxy.controller;
 
-import com.matrix.proxy.server.ServerConnection;
-import com.matrix.proxy.server.ServerConnectionStore;
-import com.matrix.proxy.webscoket.WebConnection;
-import com.matrix.proxy.webscoket.WebConnectionStore;
+import com.cubic.proxy.common.server.ServerConnection;
+import com.cubic.proxy.common.server.ServerConnectionStore;
+import com.cubic.proxy.common.webserver.WebConnection;
+import com.cubic.proxy.common.webserver.WebConnectionStore;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
