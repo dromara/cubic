@@ -30,7 +30,7 @@ export function getThreadDetails(params) {
  */
 export function getThreadsDetailsByUid(params) {
   return request({
-    url: process.env.BASE_ERROR_LOG_API + '/thread/getThreadsDetailsByUid',
+    url: '/dump/getThreadDumpByAppId',
     method: 'get',
     params
   })
@@ -46,7 +46,7 @@ export function getThreadsRealDetailsByUid(params) {
 
 export function getThreadsDetailsByMin(params) {
   return request({
-    url: process.env.BASE_ERROR_LOG_API + '/thread/getThreadsDetailsByMin',
+    url: process.env.BASE_ERROR_LOG_API + '/dump/getThreadDumpByAppId1',
     method: 'get',
     params
   })

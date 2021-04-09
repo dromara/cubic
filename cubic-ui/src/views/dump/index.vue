@@ -2,7 +2,7 @@
   <div v-loading="loading" class="app-container">
     <el-card>
       <div slot="header" class="clearfix">
-        <span style="font-size: 14px;">实例： </span>
+        <span style="font-size: 14px;">实例选择： </span>
         <el-select
           v-model="instanceUid"
           size="mini"
@@ -14,7 +14,7 @@
         </el-select>
       </div>
       <el-tabs v-model="activeName" @tab-click="handleTabClick">
-        <el-tab-pane label="线程栈" name="second">
+        <el-tab-pane label="线程栈" name="first">
           <el-card style="margin-top: 10px">
             <div slot="header" class="clearfix">
               <el-date-picker
@@ -36,7 +36,7 @@
             </div>
           </el-card>
         </el-tab-pane>
-        <el-tab-pane label="实时线程栈" name="third">
+        <el-tab-pane label="实时线程栈" name="second">
           <el-card style="margin-top: 10px">
             <div slot="header" class="clearfix">
               <el-button size="mini" type="primary" @click="querySum">查询</el-button>
@@ -93,6 +93,8 @@ export default {
     }
   },
   created() {
+    this.instanceUid = this.$cookies.get('appId')
+    this.instanceName = this.$cookies.get('instanceName')
     this.getInstanceList({ name: this.instanceName })
   },
   methods: {
@@ -110,14 +112,10 @@ export default {
     },
     handleTabClick(obj, e) {
       if (obj.name === 'first') {
-        this.getThreadsDetailsByMin()
-      }
-
-      if (obj.name === 'second') {
         this.getThreadTimeDetail()
       }
 
-      if (obj.name === 'third') {
+      if (obj.name === 'second') {
         this.getThreadRealTimeDetail()
       }
     },
@@ -128,7 +126,7 @@ export default {
     getThreadTimeDetail() {
       this.loading = true
       const params = {
-        uid: this.searchChart.uuid,
+        appId: this.instanceUid,
         dayTime: this.secondDateTime // 依赖日期
       }
       getThreadsDetailsByUid(params).then(res => {
@@ -158,14 +156,10 @@ export default {
     },
     querySum() {
       if (this.activeName === 'first') {
-        this.getThreadsDetailsByMin()
-      }
-
-      if (this.activeName === 'second') {
         this.getThreadTimeDetail()
       }
 
-      if (this.activeName === 'third') {
+      if (this.activeName === 'second') {
         this.getThreadRealTimeDetail()
       }
     },
