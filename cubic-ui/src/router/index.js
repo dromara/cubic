@@ -42,127 +42,141 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
   {
     path: '/',
     component: Layout,
-    redirect: '/list',
+    redirect: '/dashboard',
     children: [{
-      path: 'list',
-      name: 'List',
-      component: () => import('@/views/app/list/index'),
-      meta: { title: '首页', icon: 'dashboard' }
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: '应用中心' }
     }]
   },
-
   {
     path: '/app',
     component: Layout,
-    redirect: '/app/command',
-    name: 'app',
-    meta: { title: '应用中心', icon: 'example', activeMenu: '/article/list' },
-    children: [
-      {
-        path: 'list',
-        name: 'List',
-        component: () => import('@/views/app/list/index'),
-        meta: { title: '应用实例', icon: 'tree' }
-      },
-      {
-        path: 'base',
-        name: 'Base',
-        component: () => import('@/views/app/base/index'),
-        meta: {
-          title: '基础信息',
-          icon: 'table'
-        }
-      },
-      {
-        path: 'command',
-        name: 'WebShell',
-        component: () => import('@/views/app/command/cmd'),
-        meta: { title: 'Arthas', icon: 'tree' }
-      },
-      {
-        path: 'dump',
-        name: 'Dump',
-        component: () => import('@/views/dump/index'),
-        meta: { title: '线程栈监控', icon: 'tree' }
-      }
-    ]
+    redirect: '/base',
+    children: [{
+      path: 'base',
+      name: 'Base',
+      component: () => import('@/views/app/base/index'),
+      meta: { title: '基础信息'  }
+    }]
   },
   {
-    path: '/form',
+    path: '/command',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '服务监控', icon: 'form' }
-      }
-    ]
+    redirect: '/command',
+    children: [{
+      path: 'command',
+      name: 'WebShell',
+      component: () => import('@/views/command/cmd'),
+      meta: { title: 'Arthas工具' }
+    }]
   },
+  // {
+  //   path: '/app',
+  //   component: Layout,
+  //   redirect: '/app/command',
+  //   name: 'app',
+  //   meta: { title: '应用中心', icon: 'example', activeMenu: '/article/list' },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       name: 'List',
+  //       component: () => import('@/views/app/list/index'),
+  //       meta: { title: '应用实例', icon: 'tree' }
+  //     },
+  //     {
+  //       path: 'base',
+  //       name: 'Base',
+  //       component: () => import('@/views/app/base/index'),
+  //       meta: {
+  //         title: '基础信息',
+  //         icon: 'table'
+  //       }
+  //     },
+  //     {
+  //       path: 'command',
+  //       name: 'WebShell',
+  //       component: () => import('@/views/app/command/cmd'),
+  //       meta: { title: 'Arthas', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/form/index'),
+  //       meta: { title: '服务监控', icon: 'form' }
+  //     }
+  //   ]
+  // },
 
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: '工具',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Dump分析',
-        meta: { title: 'Menu1' },
-        children: [
-
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Thread Dump分析',
-            meta: { title: 'Menu1-2' }
-            // children: [
-            //   {
-            //     path: 'menu1-2-1',
-            //     component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-            //     name: 'Head Dump分析',
-            //     meta: { title: 'Menu1-2-1' }
-            //   },
-            //   {
-            //     path: 'menu1-2-2',
-            //     component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-            //     name: 'Menu1-2-2',
-            //     meta: { title: 'Menu1-2-2' }
-            //   }
-            // ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'XX分析',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu1-1',
-        component: () => import('@/views/nested/menu1/menu1-1'),
-        name: 'Menu1-1',
-        meta: { title: 'Menu1-1' }
-      },
-      {
-        path: 'menu2',
-        name: 'JVM参数生成',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
+  // {
+  //   path: '/nested',
+  //   component: Layout,
+  //   redirect: '/nested/menu1',
+  //   name: 'Nested',
+  //   meta: {
+  //     title: '工具',
+  //     icon: 'nested'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'menu1',
+  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
+  //       name: 'Dump分析',
+  //       meta: { title: 'Menu1' },
+  //       children: [
+  //
+  //         {
+  //           path: 'menu1-2',
+  //           component: () => import('@/views/nested/menu1/menu1-2'),
+  //           name: 'Thread Dump分析',
+  //           meta: { title: 'Menu1-2' }
+  //           // children: [
+  //           //   {
+  //           //     path: 'menu1-2-1',
+  //           //     component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+  //           //     name: 'Head Dump分析',
+  //           //     meta: { title: 'Menu1-2-1' }
+  //           //   },
+  //           //   {
+  //           //     path: 'menu1-2-2',
+  //           //     component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+  //           //     name: 'Menu1-2-2',
+  //           //     meta: { title: 'Menu1-2-2' }
+  //           //   }
+  //           // ]
+  //         },
+  //         {
+  //           path: 'menu1-3',
+  //           component: () => import('@/views/nested/menu1/menu1-3'),
+  //           name: 'XX分析',
+  //           meta: { title: 'Menu1-3' }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       path: 'menu1-1',
+  //       component: () => import('@/views/nested/menu1/menu1-1'),
+  //       name: 'Menu1-1',
+  //       meta: { title: 'Menu1-1' }
+  //     },
+  //     {
+  //       path: 'menu2',
+  //       name: 'JVM参数生成',
+  //       component: () => import('@/views/nested/menu2/index'),
+  //       meta: { title: 'menu2' }
+  //     }
+  //   ]
+  // },
   // {
   //   path: 'external-link',
   //   component: Layout,
