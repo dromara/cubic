@@ -12,7 +12,7 @@ public interface ThreadDumpService {
 	 * @param appId
 	 * @return
 	 */
-	String getThreadDumpByAppId(String time, String appId );
+	String getThreadDumpByAppId(String appId, String time );
 //
 //	/**
 //	 * 根据 uid查询 threadpool

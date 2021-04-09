@@ -132,7 +132,7 @@ export default {
       getThreadsDetailsByUid(params).then(res => {
         this.loading = false
         console.log(res)
-        if (res.code === 0) {
+        if (res.code === 200) {
           this.threadDetail = res.data
         } else {
           this.$message.error(res.msg)

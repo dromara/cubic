@@ -92,7 +92,8 @@ JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，�
 
 
 ## 功能展示
-
+#### 历史线程栈
+![img.png](img.png)
 #### 实例列表（展示当前实例信息）
   ![实例列表](https://images.gitee.com/uploads/images/2020/1209/151947_4d29e334_1168339.png "屏幕截图.png")
 

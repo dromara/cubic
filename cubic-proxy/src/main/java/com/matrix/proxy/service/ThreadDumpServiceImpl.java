@@ -44,11 +44,9 @@ public class ThreadDumpServiceImpl implements ThreadDumpService {
      * @return
      */
     @Override
-    public String getThreadDumpByAppId(String time, String appId) {
-//        LocalDateTime localDate = StringUtils.contains(time, "-") ? DateUtils.getTimeByPattern(time, "yyyy-MM-dd HH:mm") : DateUtils.getTimeByPattern(time, "yyyyMMddHHmm");
-//		String minTime = localDate.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
+    public String getThreadDumpByAppId(String appId, String time) {
         QueryWrapper<ThreadDump> wrapper = new QueryWrapper<>();
-        wrapper.eq("appId", appId);
+        wrapper.eq("app_id",appId).apply("date_format(create_time,'%Y-%m-%d %H:%i') = '" + time + " '") ;
         ThreadDump threadDump = threadDumpMapper.selectOne(wrapper);
         return threadDump == null ? "" : GzipUtils.decompress(threadDump.getThreadDump());
     }
