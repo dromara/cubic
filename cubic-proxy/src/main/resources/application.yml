@@ -58,7 +58,7 @@ management:
         include: configprops
 log:
   level: info
-  #path: /tmp/logs
+  path: /tmp/logs
 jwt:
   token-header: Authorization
   expire: 365
