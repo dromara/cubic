@@ -94,7 +94,7 @@ public class AgentNettyClient {
                 .option(ChannelOption.SO_REUSEADDR, true)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel socketChannel) throws Exception {
+                    protected void initChannel(SocketChannel socketChannel) {
                         String delimiter = "_$";
                         socketChannel.pipeline()
                                 .addLast(new DelimiterBasedFrameDecoder(10240, Unpooled.wrappedBuffer(delimiter.getBytes())))
@@ -106,22 +106,16 @@ public class AgentNettyClient {
                     }
                 });
         log.info("will connection server:{}...", server);
-        bootstrap.connect(ipAndPort[0], Integer.parseInt(ipAndPort[1])).addListener(new ChannelFutureListener() {
-            @Override
-            public void operationComplete(ChannelFuture future) throws Exception {
-                if (future.isSuccess()) {
-                    log.info("cubic netty client start success, {}");
-                    channel = future.channel();
-
-//                    closeFuture(taskStore);
-                    running.compareAndSet(false, true);
-                    started.set(null);
-                } else {
-                    started.set(null);
-                }
+        bootstrap.connect(ipAndPort[0], Integer.parseInt(ipAndPort[1])).addListener((ChannelFutureListener) future -> {
+            if (future.isSuccess()) {
+                log.info("cubic netty client start success");
+                channel = future.channel();
+                running.compareAndSet(false, true);
+                started.set(null);
+            } else {
+                started.set(null);
             }
         });
-
 
         try {
             started.get();
@@ -178,7 +172,7 @@ public class AgentNettyClient {
         }
 
         @Override
-        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
             destroyAndSync();
         }
     }
