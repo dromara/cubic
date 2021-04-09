@@ -65,7 +65,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.1</version>
+            <version>3.4.2</version>
         </dependency>
 
 
@@ -101,10 +101,6 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <!-- 分页插件 -->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

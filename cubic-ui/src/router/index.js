@@ -75,6 +75,17 @@ export const constantRoutes = [
       meta: { title: 'Arthas工具' }
     }]
   },
+  {
+    path: '/dump',
+    component: Layout,
+    redirect: '/dump',
+    children: [{
+      path: 'dump',
+      name: 'Dump',
+      component: () => import('@/views/dump/index'),
+      meta: { title: '线程栈' }
+    }]
+  },
   // {
   //   path: '/app',
   //   component: Layout,
