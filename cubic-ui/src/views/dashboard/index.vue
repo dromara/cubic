@@ -39,23 +39,31 @@
         highlight-current-row
         style="width: 100%;"
       >
-        <el-table-column prop="instanceName" label="应用唯一标识" header-align="center">
+        <el-table-column prop="appId" label="实例唯一标识" header-align="center">
           <template slot-scope="{row}">
             <el-tooltip :content="row.appId" placement="top" effect="dark">
-              <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goCmd(row)">{{
-                row.appId
-              }}
+              <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goBasic(row)">{{
+                  row.appId
+                }}
               </el-button>
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" prop="instanceName" label="实例名称" />
+        <el-table-column :show-overflow-tooltip="true" prop="instanceName" label="应用名称" />
         <el-table-column :show-overflow-tooltip="true" prop="host" label="主机名称" />
         <el-table-column :show-overflow-tooltip="true" prop="ip" label="IP" />
         <el-table-column :show-overflow-tooltip="true" prop="version" label="Agent版本" />
         <el-table-column :show-overflow-tooltip="true" prop="startDate" label="启动时间" />
         <el-table-column :show-overflow-tooltip="true" prop="onLine" label="在线时长" />
         <el-table-column :show-overflow-tooltip="true" prop="lastHeartbeat" label="最后心跳" />
+        <el-table-column prop="instanceName" label="CMD" header-align="center">
+          <template slot-scope="{row}">
+            <el-tooltip :content="row.instanceName" placement="top" effect="dark">
+              <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goCmd(row)">Arthas命令
+              </el-button>
+            </el-tooltip>
+          </template>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -66,7 +74,7 @@ import { appList } from '@/api/list'
 
 // arr to obj, such as { CN : "China", US : "USA" }
 export default {
-  name: 'Dashboard',
+  name: 'List',
   data() {
     return {
       caseInfo: {
@@ -181,8 +189,13 @@ export default {
     //     this.dialogPvVisible = true
     //   })
     // },
-    goCmd(row) {
+    goBasic(row) {
       this.$router.push({ name: 'Base' })
+      this.$cookies.set('appId', row.appId)
+      this.$cookies.set('instanceName', row.instanceName)
+    },
+    goCmd(row) {
+      this.$router.push({ name: 'WebShell' })
       this.$cookies.set('appId', row.appId)
       this.$cookies.set('instanceName', row.instanceName)
     }
