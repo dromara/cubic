@@ -38,6 +38,9 @@ JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，�
 
 可通过echo $JAVA_HOME 查看当前配置
 
+3、如果linux 上出现java.lang.NoClassDefFoundError: com/sun/tools/attach/VirtualMachine
+此时echo $JAVA_HOME 发现也已经配置，请在应用启动参数上增加 -Xbootclasspath/a:$JAVA_HOME/lib/tools.jar
+
 ## 文档
 - [快速开始](docs/cn/quick_start.md)
 - [远程主机命令下发（动态arthas）](docs/cn/arthas_tools.md)

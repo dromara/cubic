@@ -89,9 +89,9 @@
     <logger name="org.logicalcobwebs.proxool" level="error"/>
     <!--统一日志输出级别，其他appender中如果有高于此处等级设置的也会被输出 -->
     <root level="${LOG_LEVEL}">
-        <!--        <springProfile name="test,dev,local">-->
-        <appender-ref ref="ASYN_STDOUT"/>
-        <!--        </springProfile>-->
+        <springProfile name="test,dev,local">
+            <appender-ref ref="ASYN_STDOUT"/>
+        </springProfile>
         <appender-ref ref="ASYN_APP"/>
         <appender-ref ref="ASYN_ERROR"/>
     </root>
