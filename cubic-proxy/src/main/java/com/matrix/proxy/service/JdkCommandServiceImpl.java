@@ -52,7 +52,7 @@ public class JdkCommandServiceImpl extends DefaultMessageProcess implements JdkC
                 log.error("CommandService dispose error:{}", e);
             }
         }
-        log.warn("不能获取uid:{}到有效连接:{}", command.getId(), command.getCode());
+        log.warn("不能获取uid:{} 到有效连接. instanceUuid:{},type:{},data:{},", command.getId(),instanceUuid, type,data);
 
         return "";
     }
