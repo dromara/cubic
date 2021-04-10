@@ -1,11 +1,13 @@
 package com.matrix.proxy.session;
 
 import com.alibaba.fastjson.JSON;
+import com.cubic.proxy.common.session.Session;
+import com.cubic.proxy.common.session.SessionManager;
+import com.cubic.proxy.common.webserver.WebConnection;
 import com.google.common.collect.Maps;
 import com.matrix.proxy.module.Command;
-import com.matrix.proxy.server.ServerConnection;
-import com.matrix.proxy.util.CommandCode;
-import com.matrix.proxy.webscoket.WebConnection;
+import com.cubic.proxy.common.server.ServerConnection;
+import com.cubic.proxy.common.constant.CommandCode;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

@@ -1,0 +1,4 @@
+com.cubic.agent.process.CommandProcessor
+com.cubic.agent.process.HeartbeatProcessor
+com.cubic.agent.process.RegisterProcessor
+com.cubic.agent.process.ArthasProcessor

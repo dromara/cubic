@@ -1,10 +1,12 @@
 #!/bin/bash
-
+if [ -z "$JAVA_HOME" ]; then
+    error_exit "Please set the JAVA_HOME variable in your environment, We need java(x64)! jdk8 or later is better!"
+fi
 cd "${0%/*}"
 cd ..
 
 echo " install-file to maven repository linux-tools.jar"
-mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
+# mvn install:install-file -Dfile=DependLib/linux-tools-1.8.jar -DgroupId=com.sun -DartifactId=linux-tools -Dversion=1.8 -Dpackaging=jar
 
 BASE_DIR=`pwd`
 echo $BASE_DIR
@@ -19,9 +21,11 @@ fi
 #打包agent
 echo "================ starting to build cubic ui ================"
 npm install --save xterm
+npm i -S xterm-addon-web-links
 npm install --save xterm-addon-fit
 npm install --save xterm-addon-attach
-cd "$BASE_UI_DIR"
+npm install --save moment
+ cd "$BASE_UI_DIR"
 echo `pwd`
 
 npm install

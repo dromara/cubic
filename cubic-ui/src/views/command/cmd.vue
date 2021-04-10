@@ -1,16 +1,16 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />
-      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />
-      <el-input v-model="vm.agentId" placeholder="AgentId" size="mini" style="width: 200px;" class="filter-item" />
-      <el-button v-waves class="filter-item" size="mini" type="success" @click="startConnect">
-        连接
-      </el-button>
-      <el-button v-waves class="filter-item" size="mini" type="danger" @click="disconnect">
-        断开
-      </el-button>
-    </div>
+    <!--    <div class="filter-container">-->
+    <!--      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />-->
+    <!--      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />-->
+    <!--      <el-input v-model="vm.agentId" placeholder="AgentId" size="mini" style="width: 200px;" class="filter-item" />-->
+    <!--      <el-button class="filter-item" size="mini" type="success" @click="startConnect">-->
+    <!--        连接-->
+    <!--      </el-button>-->
+    <!--      <el-button class="filter-item" size="mini" type="danger" @click="disconnect">-->
+    <!--        断开-->
+    <!--      </el-button>-->
+    <!--    </div>-->
     <div id="xterm" class="xterm" />
   </div>
 
@@ -26,14 +26,15 @@ export default {
   data() {
     return {
       vm: {
-        ip: 'localhost',
+        ip: '47.104.79.116',
+        // ip: 'localhost',
         port: 11901,
         agentId: 'cubic'
       },
       socket: null,
       term: null,
       result: '',
-      currType: '1',
+      currType: '3',
       state: '',
       type: [1, 3],
       msg: {
@@ -47,6 +48,15 @@ export default {
       cols: 100
     }
   },
+  created() {
+    //
+    // if (Object.keys(this.$route.query).length > 0) {
+    //   this.vm.agentId = this.$route.query.id
+    // }
+    console.log(this.$cookies.get('appId'))
+
+    this.vm.agentId = this.$cookies.get('appId')
+  },
   mounted() {
     // 实例化终端并设置参数
     this.startConnect()
@@ -58,10 +68,15 @@ export default {
   },
   methods: {
     initXterm() {
+      // 获取容器宽高/字号大小，定义行数和列数
+      this.rows = document.querySelector('.app-container').offsetHeight
+      this.cols = document.querySelector('.app-container').offsetWidth
+
+      const _this = this
       this.term = new Terminal({
         cursorBlink: true, // 光标闪烁
-        // rows: parseInt(_this.rows), // 行数
-        // cols: parseInt(_this.cols), // 不指定行数，自动回车后光标从下一行开始
+        rows: parseInt(_this.rows), // 行数
+        cols: parseInt(_this.cols), // 不指定行数，自动回车后光标从下一行开始
         cursorStyle: 'block', // 光标样式  null | 'block' | 'underline' | 'bar'
         screenKeys: true,
         theme: {
@@ -90,11 +105,28 @@ export default {
       // // 聚焦
       this.term.focus()
       this.term.writeln(' ')
-      this.term.writeln(' 欢迎使用代理终端，此终端可连接到目标机器进行命令操作')
-      this.term.writeln(' 命令分为两类，自定义命令，Arthas命令（Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html）')
-      this.term.writeln(' 输入 1 回车进入自定义命令模式（默认）')
-      this.term.writeln(' 输入 3 回车进入Arthas命令模式')
-      this.term.writeln(' 正在连接。。。')
+      this.term.writeln(' > 欢迎进入Arthas代理终端，此终端可连接到目标机器进行命令操作')
+      this.term.writeln('')
+      this.term.writeln(' > Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html')
+      // this.term.writeln(' 输入 1 回车进入自定义命令模式（默认）')
+      // this.term.writeln(' 输入 3 回车进入Arthas命令模式')
+      this.term.writeln('')
+      this.term.writeln(' > 正在连接。。。')
+      this.term.writeln('')
+    },
+    resizeScreen(size) {
+      console.log('size', size)
+      try {
+        this.fitAddon.fit()
+
+        const _this = this
+        // 窗口大小改变时触发xterm的resize方法，向后端发送行列数，格式由后端决定
+        this.term.onResize(size => {
+          _this.sendMessage(_this.agentId, { Op: 'resize', Cols: size.cols, Rows: size.rows })
+        })
+      } catch (e) {
+        console.log('e', e.message)
+      }
     },
     prompt() {
       this.term.write('\r\n$ ')
@@ -164,7 +196,7 @@ export default {
     },
     socketOnOpen() {
       this.socket.onopen = () => {
-        this.term.writeln(' 已连接, 当前 host: ' + this.vm.ip + ', agentId: ' + this.vm.agentId + ', findState: ' + this.state)
+        this.term.writeln(' > 已连接, 当前 IP : ' + this.vm.ip + ', ID: ' + this.vm.agentId)
         this.prompt()
         this.termOnKey()
         this.socketOnMessage()
@@ -234,9 +266,7 @@ export default {
       }
     },
     startConnect() {
-      if (this.socket != null && this.term != null) {
-        this.disconnect()
-      }
+      this.disconnect()
       this.initXterm()
       this.socketOnClose()
       this.socketOnOpen()

@@ -19,7 +19,6 @@ public class DateUtils {
 
     public static final ZoneId ASIA_SHANGHAI = ZoneId.of("Asia/Shanghai");
 
-
     /**
      * 计算心跳
      */
@@ -27,7 +26,6 @@ public class DateUtils {
         Date heartTime = new Date(heart);
         LocalDateTime.ofInstant(heartTime.toInstant(), ASIA_SHANGHAI);
         long seconds = ChronoUnit.SECONDS.between(LocalDateTime.ofInstant(heartTime.toInstant(), ASIA_SHANGHAI), LocalDateTime.now(ASIA_SHANGHAI));
-
         return seconds;
     }
 
@@ -311,8 +309,12 @@ public class DateUtils {
     }
 
     public static String getDateFormat(Date date) {
-        LocalDateTime heartTime = LocalDateTime.ofInstant(date.toInstant(),  DateUtils.ASIA_SHANGHAI);
-        return heartTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return getDateFormat(date,"yyyy-MM-dd HH:mm:ss");
+    }
+
+    public static String getDateFormat(Date date,String format) {
+        LocalDateTime time = LocalDateTime.ofInstant(date.toInstant(),  DateUtils.ASIA_SHANGHAI);
+        return time.format(DateTimeFormatter.ofPattern(format));
     }
 
     public static LocalDateTime minu(LocalDateTime time, long number, TemporalUnit field) {
