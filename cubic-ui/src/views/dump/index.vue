@@ -36,20 +36,20 @@
             </div>
           </el-card>
         </el-tab-pane>
-        <el-tab-pane label="实时线程栈" name="second">
-          <el-card style="margin-top: 10px">
-            <div slot="header" class="clearfix">
-              <el-button size="mini" type="primary" @click="querySum">查询</el-button>
-              <el-button type="text" style="float: right" @click="downLoadTxtFileReal">下载</el-button>
-            </div>
-            <pre v-if="threadRealDetail">
-                    {{ threadRealDetail }}
-            </pre>
-            <div v-else>
-              无数据
-            </div>
-          </el-card>
-        </el-tab-pane>
+<!--        <el-tab-pane label="实时线程栈" name="second">-->
+<!--          <el-card style="margin-top: 10px">-->
+<!--            <div slot="header" class="clearfix">-->
+<!--              <el-button size="mini" type="primary" @click="querySum">查询</el-button>-->
+<!--              <el-button type="text" style="float: right" @click="downLoadTxtFileReal">下载</el-button>-->
+<!--            </div>-->
+<!--            <pre v-if="threadRealDetail">-->
+<!--                    {{ threadRealDetail }}-->
+<!--            </pre>-->
+<!--            <div v-else>-->
+<!--              无数据-->
+<!--            </div>-->
+<!--          </el-card>-->
+<!--        </el-tab-pane>-->
       </el-tabs>
 
     </el-card>
