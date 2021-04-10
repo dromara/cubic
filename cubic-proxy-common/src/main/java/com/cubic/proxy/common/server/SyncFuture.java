@@ -1,5 +1,8 @@
 package com.cubic.proxy.common.server;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.concurrent.*;
 
 /**
@@ -43,7 +46,8 @@ public class SyncFuture implements Future<String> {
     @Override
     public String get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
         if(latch.await(timeout,unit)){
-            return this.response;
+            JSONObject object = JSON.parseObject(this.response);
+            return object.getString("body");
         }
         return null;
     }

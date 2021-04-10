@@ -22,6 +22,6 @@ echo "kill old application --end--"
 
 JAVA_OPTS=" -Xms512M -Xmx512M"
 echo "准备启动应用 AGENT_DIR $CUBIC_PROXY_DIR/$AGENT_DIR"
-BUILD_ID=cubic nohup java -jar -javaagent:${CUBIC_DIR}/${CUBIC_AGNT_DIR}/cubic-agent.jar ${JAVA_OPTS} -Dcubic.agent.service_name=cubic-proxy ${CUBIC_DIR}/${CUBIC_PROXY_DIR}/cubic-proxy.jar --spring.profiles.active=test >/data/logs/cubic.log 2>&1 &
+BUILD_ID=cubic nohup java -jar -javaagent:${CUBIC_DIR}/${CUBIC_AGNT_DIR}/cubic-agent.jar ${JAVA_OPTS}   ${CUBIC_DIR}/${CUBIC_PROXY_DIR}/cubic-proxy.jar --spring.profiles.active=test >/data/logs/cubic.log 2>&1 &
 
 

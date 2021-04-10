@@ -12,6 +12,7 @@ export function getThreadCharts(params) {
     params
   })
 }
+
 /**
  * 获取线程列表
  * @param {*} params
@@ -23,6 +24,7 @@ export function getThreadDetails(params) {
     params
   })
 }
+
 /**
  * 获取监控图标数据
  * @param {*} params
@@ -38,7 +40,7 @@ export function getThreadsDetailsByUid(params) {
 
 export function getThreadsRealDetailsByUid(params) {
   return request({
-    url: process.env.BASE_ERROR_LOG_API + '/thread/getRealThreadsDetails',
+    url: '/command/jdkCommand',
     method: 'get',
     params
   })

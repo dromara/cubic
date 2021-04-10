@@ -83,7 +83,7 @@ export const constantRoutes = [
       path: 'dump',
       name: 'Dump',
       component: () => import('@/views/dump/index'),
-      meta: { title: '线程栈' }
+      meta: { title: '线程栈监控' }
     }]
   },
   // {

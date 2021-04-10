@@ -36,20 +36,20 @@
             </div>
           </el-card>
         </el-tab-pane>
-<!--        <el-tab-pane label="实时线程栈" name="second">-->
-<!--          <el-card style="margin-top: 10px">-->
-<!--            <div slot="header" class="clearfix">-->
-<!--              <el-button size="mini" type="primary" @click="querySum">查询</el-button>-->
-<!--              <el-button type="text" style="float: right" @click="downLoadTxtFileReal">下载</el-button>-->
-<!--            </div>-->
-<!--            <pre v-if="threadRealDetail">-->
-<!--                    {{ threadRealDetail }}-->
-<!--            </pre>-->
-<!--            <div v-else>-->
-<!--              无数据-->
-<!--            </div>-->
-<!--          </el-card>-->
-<!--        </el-tab-pane>-->
+        <el-tab-pane label="实时线程栈" name="second">
+          <el-card style="margin-top: 10px">
+            <div slot="header" class="clearfix">
+              <el-button size="mini" type="primary" @click="querySum">查询</el-button>
+              <el-button type="text" style="float: right" @click="downLoadTxtFileReal">下载</el-button>
+            </div>
+            <pre v-if="threadRealDetail">
+                    {{ threadRealDetail }}
+            </pre>
+            <div v-else>
+              无数据
+            </div>
+          </el-card>
+        </el-tab-pane>
       </el-tabs>
 
     </el-card>
@@ -141,16 +141,7 @@ export default {
         this.loading = false
       })
     },
-    // rangeDateChange(val) {
-    //   if (this.timeStamp) {
-    //     const stamp = (moment(val[1]) - moment(val[0])) / 60000
-    //     this.searchChart.timePeriod = stamp > 1 ? Math.round(stamp) : 1
-    //     this.searchChart.endTime = val[1]
-    //   } else {
-    //     this.searchChart.endTime = val[1]
-    //   }
-    //   this.timeStamp = true
-    // },
+
     instanceUidChange(val) {
       // this.getInstanceDetail({appId: val})
     },
@@ -166,13 +157,14 @@ export default {
     getThreadRealTimeDetail() {
       this.loading = true
       const params = {
-        uid: this.searchChart.uuid,
-        // dayTime: this.secondDateTime // 依赖日期
+        instanceUuid: this.instanceUid,
+        type: 2,
+        command: 'dump'
       }
       getThreadsRealDetailsByUid(params).then(res => {
         this.loading = false
         console.log(res)
-        if (res.code === 0) {
+        if (res.code === 200 ) {
           this.threadRealDetail = res.data
         } else {
           this.$message.error(res.msg)
