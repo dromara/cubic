@@ -13,7 +13,7 @@
 
 
     <properties>
-        <tools_jar>${java.home}/lib/tools.jar</tools_jar>
+        <tools_jar>${java.home}/../lib/tools.jar</tools_jar>
         <premain.class>com.cubic.agent.MatrixAgent</premain.class>
         <can.redefine.classes>true</can.redefine.classes>
         <can.retransform.classes>true</can.retransform.classes>
