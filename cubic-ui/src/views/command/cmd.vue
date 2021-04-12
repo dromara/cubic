@@ -1,5 +1,27 @@
 <template>
   <div class="app-container">
+    <div slot="header" class="clearfix">
+      <span style="font-size: 14px;">应用： </span>
+      <el-select
+        v-model="value"
+        size="mini"
+        style="width: 280px"
+        filterable
+        placeholder="请选择应用">
+        <el-option v-for="item in options" :key="item" :label="item" :value="item" />
+      </el-select>
+
+      <span style="font-size: 14px;">实例： </span>
+      <el-select
+        v-model="instanceUid"
+        size="mini"
+        style="width: 280px"
+        placeholder="请选择应用实例"
+        @change="instanceUidChange"
+      >
+        <el-option v-for="item in instanceUidOption" :key="item" :label="item" :value="item" />
+      </el-select>
+    </div>
     <!--    <div class="filter-container">-->
     <!--      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />-->
     <!--      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />-->
