@@ -1,18 +1,19 @@
 /*
- * Copyright (C) 2019 Qunar, Inc.
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.cubic.agent.remote;
@@ -94,7 +95,7 @@ public class AgentNettyClient {
                 .option(ChannelOption.SO_REUSEADDR, true)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel socketChannel) throws Exception {
+                    protected void initChannel(SocketChannel socketChannel) {
                         String delimiter = "_$";
                         socketChannel.pipeline()
                                 .addLast(new DelimiterBasedFrameDecoder(10240, Unpooled.wrappedBuffer(delimiter.getBytes())))
@@ -106,22 +107,16 @@ public class AgentNettyClient {
                     }
                 });
         log.info("will connection server:{}...", server);
-        bootstrap.connect(ipAndPort[0], Integer.parseInt(ipAndPort[1])).addListener(new ChannelFutureListener() {
-            @Override
-            public void operationComplete(ChannelFuture future) throws Exception {
-                if (future.isSuccess()) {
-                    log.info("cubic netty client start success, {}");
-                    channel = future.channel();
-
-//                    closeFuture(taskStore);
-                    running.compareAndSet(false, true);
-                    started.set(null);
-                } else {
-                    started.set(null);
-                }
+        bootstrap.connect(ipAndPort[0], Integer.parseInt(ipAndPort[1])).addListener((ChannelFutureListener) future -> {
+            if (future.isSuccess()) {
+                log.info("cubic netty client start success");
+                channel = future.channel();
+                running.compareAndSet(false, true);
+                started.set(null);
+            } else {
+                started.set(null);
             }
         });
-
 
         try {
             started.get();
@@ -178,7 +173,7 @@ public class AgentNettyClient {
         }
 
         @Override
-        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
             destroyAndSync();
         }
     }

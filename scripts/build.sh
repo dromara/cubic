@@ -24,6 +24,7 @@ npm install --save xterm
 npm i -S xterm-addon-web-links
 npm install --save xterm-addon-fit
 npm install --save xterm-addon-attach
+npm install --save moment
  cd "$BASE_UI_DIR"
 echo `pwd`
 

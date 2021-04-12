@@ -27,11 +27,8 @@
           <router-link to="/">
             <el-dropdown-item>Home</el-dropdown-item>
           </router-link>
-          <a href="https://www.jiagoujishu.com" target="_blank">
-            <el-dropdown-item>Gitee</el-dropdown-item>
-          </a>
-          <a href="https://gitee.com/sanjiankethree/cubic" target="_blank">
-            <el-dropdown-item>Docs</el-dropdown-item>
+          <a href="https://cubic.jiagoujishu.com" target="_blank">
+            <el-dropdown-item>官方网站</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">Log Out</span>

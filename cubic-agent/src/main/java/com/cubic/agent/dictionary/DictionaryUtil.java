@@ -1,7 +1,6 @@
 package com.cubic.agent.dictionary;
 
 /**
- * @Description: TODO
  * @Author qinqixuan
  * @Date 2020/12/08
  * @Version V1.0

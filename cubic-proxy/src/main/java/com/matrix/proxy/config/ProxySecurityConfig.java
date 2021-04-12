@@ -5,6 +5,7 @@ import com.matrix.proxy.auth.handlers.ProxyAuthFailHandler;
 import com.matrix.proxy.auth.handlers.ProxyAuthSuccessHandler;
 import com.matrix.proxy.auth.service.UserService;
 import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;

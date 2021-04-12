@@ -1,6 +1,6 @@
 package com.matrix.proxy.service;
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.matrix.proxy.entity.ThreadPoolEntity;
 import com.matrix.proxy.vo.ThreadPoolQuery;
 
@@ -17,5 +17,5 @@ public interface JvmDataService {
      * @param query
      * @return
      */
-    PageInfo<ThreadPoolEntity> threadPoolDataPage(ThreadPoolQuery query);
+    IPage<ThreadPoolEntity> threadPoolDataPage(ThreadPoolQuery query);
 }

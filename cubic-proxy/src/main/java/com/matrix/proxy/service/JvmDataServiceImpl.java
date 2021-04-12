@@ -1,7 +1,8 @@
 package com.matrix.proxy.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.matrix.proxy.entity.ThreadPoolEntity;
 import com.matrix.proxy.mapper.ThreadPoolMapper;
 import com.matrix.proxy.vo.ThreadPoolQuery;
@@ -27,8 +28,10 @@ public class JvmDataServiceImpl implements JvmDataService {
      * @return
      */
     @Override
-    public PageInfo<ThreadPoolEntity> threadPoolDataPage(ThreadPoolQuery query) {
-        return PageHelper.startPage(query.getPageNo(), query.getPageSize())
-                .doSelectPageInfo(() -> threadPoolMapper.selectByQuery(query));
+    public IPage<ThreadPoolEntity> threadPoolDataPage(ThreadPoolQuery query) {
+        Page<ThreadPoolEntity> page = new Page<>(query.getPageNo(),query.getPageSize());
+
+        IPage<ThreadPoolEntity> iPages =threadPoolMapper.selectPage(page,new QueryWrapper<>());
+        return iPages;
     }
 }
