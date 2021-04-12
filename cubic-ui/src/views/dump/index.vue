@@ -2,7 +2,18 @@
   <div v-loading="loading" class="app-container">
     <el-card>
       <div slot="header" class="clearfix">
-        <span style="font-size: 14px;">实例选择： </span>
+        <span style="font-size: 14px;">应用： </span>
+        <el-select
+          v-model="instanceName"
+          size="mini"
+          style="width: 280px"
+          filterable
+          placeholder="请选择应用"
+          @change="appChange">
+          <el-option v-for="item in appOption" :key="item" :label="item" :value="item"/>
+        </el-select>
+
+        <span style="font-size: 14px;">实例： </span>
         <el-select
           v-model="instanceUid"
           size="mini"
@@ -57,7 +68,7 @@
 </template>
 <script>
 import {getThreadsDetailsByUid, getThreadsRealDetailsByUid} from '@/utils/threadMonitorApi'
-import {getInstanceInfo, getInstanceNames} from '@/api/list'
+import {getAppNames, getInstanceInfo, getInstanceNames} from '@/api/list'
 import moment from 'moment'
 
 export default {
@@ -66,6 +77,7 @@ export default {
     return {
       secondDateTime: moment().subtract(1, 'm').format('YYYY-MM-DD HH:mm'),
       instanceUid: '',
+      instanceName: '',
       tableOther: {},
       search: '',
       checkList: ['RUNNABLE'],
@@ -81,34 +93,51 @@ export default {
       threadDetail: '',
       threadRealDetail: '',
       scatterChartData: {},
-      instanceName: '',
-      instanceUidOption: []
+      instanceUidOption: [],
+      appOption: []
     }
   },
   computed: {},
   watch: {
     checkList(val) {
-      console.log(val, '...checkList')
       this.getThreadsDetailsByMin()
     }
   },
   created() {
     this.instanceUid = this.$cookies.get('appId')
     this.instanceName = this.$cookies.get('instanceName')
-    this.getInstanceList({ name: this.instanceName })
+    this.getInstanceList({name: this.instanceName})
+    this.getAppList()
   },
   methods: {
     getInstanceList(params) {
       const _this = this
       getInstanceNames(params).then(res => {
         _this.instanceUidOption = res.data
-        if (_this.instanceUid !== '') {
-          _this.getInstanceDetail({ appId: _this.instanceUid })
+        _this.instanceUid = res.data[0]
+      })
+    },
+    getAppList() {
+      const _this = this
+      getAppNames().then(res => {
+        _this.appOption = res.data
+        if (_this.instanceName !== '') {
+          //TODO 第一个赋值默认的
         } else {
-          _this.getInstanceDetail({ appId: res.data[0] })
-          _this.instanceUid = res.data[0].uid
+          _this.instanceName = res.data[0]
         }
       })
+    },
+    instanceUidChange(val) {
+      this.$cookies.set("instanceUid", val)
+      this.getInstanceDetail({appId: val})
+    },
+    appChange(val) {
+      this.instanceName = val;
+      this.instanceUid = '';
+      this.$cookies.set("instanceName", val)
+      this.$cookies.set("instanceUid", '')
+      this.getInstanceList({name: this.instanceName});
     },
     handleTabClick(obj, e) {
       if (obj.name === 'first') {
@@ -141,10 +170,6 @@ export default {
         this.loading = false
       })
     },
-
-    instanceUidChange(val) {
-      // this.getInstanceDetail({appId: val})
-    },
     querySum() {
       if (this.activeName === 'first') {
         this.getThreadTimeDetail()
@@ -164,7 +189,7 @@ export default {
       getThreadsRealDetailsByUid(params).then(res => {
         this.loading = false
         console.log(res)
-        if (res.code === 200 ) {
+        if (res.code === 200) {
           this.threadRealDetail = res.data
         } else {
           this.$message.error(res.msg)

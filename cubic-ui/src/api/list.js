@@ -24,6 +24,13 @@ export function getInstanceNames(query) {
   })
 }
 
+export function getAppNames() {
+  return request({
+    url: '/app/getAppNames',
+    method: 'get'
+  })
+}
+
 export function fetchArticle(id) {
   return request({
     url: '/vue-element-admin/article/detail',
