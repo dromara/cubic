@@ -8,6 +8,15 @@ export function appList(query) {
   })
 }
 
+export function threadPoolList(query) {
+  return request({
+    url: '/jvm/threadPoolList',
+    method: 'get',
+    params: query
+  })
+}
+
+
 export function getInstanceInfo(query) {
   return request({
     url: '/app/getInstanceInfo',

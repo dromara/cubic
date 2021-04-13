@@ -86,6 +86,17 @@ export const constantRoutes = [
       meta: { title: '线程栈监控' }
     }]
   },
+  {
+    path: '/threadpool',
+    component: Layout,
+    redirect: '/threadpool',
+    children: [{
+      path: 'threadpool',
+      name: 'ThreadPool',
+      component: () => import('@/views/threadpool/index'),
+      meta: { title: '线程池监控' }
+    }]
+  },
   // {
   //   path: '/app',
   //   component: Layout,

@@ -12,7 +12,9 @@ import java.util.Date;
  */
 @Data
 public class ThreadPoolQueryVo {
+
     int pageNo = 1;
+
     int pageSize = 20;
 
     private String instanceId;
@@ -22,6 +24,7 @@ public class ThreadPoolQueryVo {
     private String threadPoolKey;
 
     private Date startTime;
+
     private Date endTime;
 
 }
