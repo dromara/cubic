@@ -9,7 +9,7 @@ import com.cubic.proxy.websocket.WebRequestHandler;
 import com.cubic.proxy.websocket.process.SearchWebProcess;
 import com.matrix.proxy.server.MatrixNettyServer;
 import com.cubic.proxy.common.handler.MessageHandler;
-import com.cubic.proxy.common.handler.ServerMessgaeProcess;
+import com.cubic.proxy.common.handler.ServerMessageProcess;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +31,7 @@ public class ServerConfig {
     private List<WebProcess> webProcesses;
 
     @Bean(initMethod = "start")
-    public MatrixNettyServer nettyServerForAgent(ServerProperties serverProperties, List<ServerMessgaeProcess> processors) {
+    public MatrixNettyServer nettyServerForAgent(ServerProperties serverProperties, List<ServerMessageProcess> processors) {
         MessageHandler messageHandler = new MessageHandler(processors);
         return new MatrixNettyServer(serverProperties.getAgentPort(), messageHandler);
     }

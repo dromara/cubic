@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.cache.*;
 import com.matrix.proxy.module.Command;
 import com.cubic.proxy.common.server.SyncFuture;
-import com.cubic.proxy.common.handler.ServerMessgaeProcess;
+import com.cubic.proxy.common.handler.ServerMessageProcess;
 import com.cubic.proxy.common.session.Session;
 import com.cubic.proxy.common.session.SessionManager;
 import com.matrix.proxy.util.CubicContextHolder;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @Version 1.0
  */
 @Slf4j
-public class DefaultMessageProcess implements ServerMessgaeProcess {
+public class DefaultMessageProcess implements ServerMessageProcess {
 
     private final static LoadingCache<String, SyncFuture> futureCache;
     private SessionManager sessionManager;

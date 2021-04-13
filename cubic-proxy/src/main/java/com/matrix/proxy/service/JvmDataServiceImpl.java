@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.matrix.proxy.entity.ThreadPoolEntity;
 import com.matrix.proxy.mapper.ThreadPoolMapper;
-import com.matrix.proxy.vo.ThreadPoolQuery;
+import com.matrix.proxy.vo.ThreadPoolQueryVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,7 +28,7 @@ public class JvmDataServiceImpl implements JvmDataService {
      * @return
      */
     @Override
-    public IPage<ThreadPoolEntity> threadPoolDataPage(ThreadPoolQuery query) {
+    public IPage<ThreadPoolEntity> threadPoolDataPage(ThreadPoolQueryVo query) {
         Page<ThreadPoolEntity> page = new Page<>(query.getPageNo(),query.getPageSize());
 
         IPage<ThreadPoolEntity> iPages =threadPoolMapper.selectPage(page,new QueryWrapper<>());

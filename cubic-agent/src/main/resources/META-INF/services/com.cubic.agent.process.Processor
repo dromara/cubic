@@ -3,3 +3,4 @@ com.cubic.agent.process.HeartbeatProcessor
 com.cubic.agent.process.RegisterProcessor
 com.cubic.agent.process.ArthasProcessor
 com.cubic.agent.process.ThreadDumpProcessor
+com.cubic.agent.cmd.jvm.threadpool.ThreadPoolProcessor
