@@ -28,7 +28,7 @@ public class CommandProcessor implements Processor  {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String id, String command, String body) {
+    public void process(ChannelHandlerContext ctx, String id, String command) {
 
         CommandExecutor commandExecutor = new CommandExecutor();
         String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];

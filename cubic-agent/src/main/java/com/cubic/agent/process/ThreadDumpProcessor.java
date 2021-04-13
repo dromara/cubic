@@ -28,7 +28,7 @@ public class ThreadDumpProcessor implements Processor  {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String id, String command, String body) {
+    public void process(ChannelHandlerContext ctx, String id, String command) {
 
         try {
             JstackExecutor executor = new JstackExecutor();

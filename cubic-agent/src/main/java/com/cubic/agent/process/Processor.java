@@ -13,5 +13,5 @@ public interface Processor {
 
     List<Integer> types();
 
-    void process(ChannelHandlerContext ctx, String id, String command, String body) throws ClassNotFoundException;
+    void process(ChannelHandlerContext ctx, String id, String command) throws ClassNotFoundException;
 }

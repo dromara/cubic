@@ -74,7 +74,6 @@ public class AgentRequestHandler extends ChannelInboundHandlerAdapter {
         Integer code = obj.getCode();
         String command = obj.getCommand();
         String id = obj.getId();
-        String body = obj.getBody();
 
         if (code.intValue() != CommandCode.HEARTBEAT.getCode()) {
             log.debug("agent receive process code {} request: id={}, sourceIp={}, code={}", code, id, ctx.channel().remoteAddress(), code);
@@ -86,6 +85,6 @@ public class AgentRequestHandler extends ChannelInboundHandlerAdapter {
 
             return;
         }
-        processor.process(ctx, id, command, body);
+        processor.process(ctx, id, command);
     }
 }

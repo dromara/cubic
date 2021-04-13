@@ -6,7 +6,7 @@ package com.cubic.agent.cmd.jvm.threadpool;
  * @author zhanghao
  * @date 2021/4/134:58 下午
  */
-public class ThreadPoolCommandBody {
+public class ThreadPoolCommand {
     private String key;
     private String name;
     private Object arg;

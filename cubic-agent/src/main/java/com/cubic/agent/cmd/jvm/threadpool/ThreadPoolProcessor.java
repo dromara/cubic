@@ -36,13 +36,13 @@ public class ThreadPoolProcessor implements Processor {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String id, String command, String body) throws ClassNotFoundException {
+    public void process(ChannelHandlerContext ctx, String id, String command) throws ClassNotFoundException {
         if (service == null) {
             log.error("service is null");
             return;
         }
         Gson gson = new Gson();
-        ThreadPoolCommandBody threadPoolCommandBody = gson.fromJson(body, ThreadPoolCommandBody.class);
+        ThreadPoolCommand threadPoolCommandBody = gson.fromJson(command, ThreadPoolCommand.class);
 
         String key = threadPoolCommandBody.getKey();
         String methodName = threadPoolCommandBody.getName();
