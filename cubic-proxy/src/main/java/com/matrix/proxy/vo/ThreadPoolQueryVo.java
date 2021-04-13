@@ -11,7 +11,7 @@ import java.util.Date;
  * @date 2021/4/75:56 下午
  */
 @Data
-public class ThreadPoolQuery {
+public class ThreadPoolQueryVo {
     int pageNo = 1;
     int pageSize = 20;
 

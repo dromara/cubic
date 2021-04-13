@@ -2,7 +2,7 @@ package com.matrix.proxy.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.matrix.proxy.entity.ThreadPoolEntity;
-import com.matrix.proxy.vo.ThreadPoolQuery;
+import com.matrix.proxy.vo.ThreadPoolQueryVo;
 
 import java.util.List;
 
@@ -19,5 +19,5 @@ public interface ThreadPoolMapper extends BaseMapper<ThreadPoolEntity> {
      * @param query
      * @return
      */
-    List<ThreadPoolEntity> selectByQuery(ThreadPoolQuery query);
+    List<ThreadPoolEntity> selectByQuery(ThreadPoolQueryVo query);
 }

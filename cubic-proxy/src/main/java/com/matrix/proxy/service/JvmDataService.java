@@ -2,7 +2,7 @@ package com.matrix.proxy.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.matrix.proxy.entity.ThreadPoolEntity;
-import com.matrix.proxy.vo.ThreadPoolQuery;
+import com.matrix.proxy.vo.ThreadPoolQueryVo;
 
 /**
  * JVM数据采集服务
@@ -17,5 +17,5 @@ public interface JvmDataService {
      * @param query
      * @return
      */
-    IPage<ThreadPoolEntity> threadPoolDataPage(ThreadPoolQuery query);
+    IPage<ThreadPoolEntity> threadPoolDataPage(ThreadPoolQueryVo query);
 }
