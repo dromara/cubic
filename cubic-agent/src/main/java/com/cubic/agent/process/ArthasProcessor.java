@@ -37,7 +37,7 @@ public class ArthasProcessor implements Processor {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String id, String command) {
+    public void process(ChannelHandlerContext ctx, String id, String command, String body) {
 
         String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
         ArthasResponseHandler handler = new ArthasResponseHandler(ctx, id);

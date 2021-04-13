@@ -26,7 +26,7 @@ public class HeartbeatProcessor implements Processor  {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String id, String command) {
+    public void process(ChannelHandlerContext ctx, String id, String command, String body) {
         log.debug("receive heartbeat response, id {}", id);
 
 
