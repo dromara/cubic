@@ -11,14 +11,11 @@
         />
         <span style="float: right;padding: 4px 10px">
            <el-date-picker
-             v-model="searchForm.date"
-             :picker-options="pickerOptions"
+             v-model="secondDateTime"
              type="datetime"
              size="mini"
-             placeholder="时间"
-             value-format="yyyy-MM-dd HH:mm:ss"
-             format="yyyy-MM-dd HH:mm:ss"
-             align="right"
+             placeholder="选择日期时间"
+             value-format="yyyy-MM-dd HH:mm"
            />
           <el-button
             class="filter-item"
@@ -78,20 +75,22 @@
 
 <script>
 import {appList, getAppNames, getInstanceNames, threadPoolList} from '@/api/list'
+import moment from "moment";
 
 // arr to obj, such as { CN : "China", US : "USA" }
 export default {
   name: 'List',
   data() {
     return {
+      total: '',
+      instanceUid: '',
+      instanceName: '',
       instanceUidOption: [],
       appOption: [],
       search: '',
       tableData: [],
       listLoading: true,
-      searchForm: {
-        date: null
-      },
+      secondDateTime: moment().subtract(1, 'm').format('YYYY-MM-DD HH:mm'),
       dialogVisible: false,
       drawerVisible: false,
       sort: 'id_desc',
@@ -147,7 +146,6 @@ export default {
     },
     instanceUidChange(val) {
       this.$cookies.set("instanceUid", val)
-      this.getInstanceDetail({appId: val})
     },
     appChange(val) {
       this.instanceName = val;
@@ -160,25 +158,13 @@ export default {
       this.listLoading = true
       let _this;
       _this = this;
-      threadPoolList({ instanceName: this.instanceName }).then(response => {
-        console.log(response.data)
+      threadPoolList({ instanceUid:  _this.instanceUid, dayTime: _this.secondDateTime }).then(response => {
         _this.tableData = response.data.records
         _this.total = response.data.total
       }).finally(() => {
         this.listLoading = false
       })
     },
-    // handleFilter() {
-    //   this.listQuery.page = 1
-    //   this.getList()
-    // },
-    // handleModifyStatus(row, status) {
-    //   this.$message({
-    //     message: '操作Success',
-    //     type: 'success'
-    //   })
-    //   row.status = status
-    // },
     sortChange(data) {
       const { prop, order } = data
       if (prop === 'id') {

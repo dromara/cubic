@@ -8,12 +8,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.matrix.proxy.entity.ThreadPoolEntity;
 import com.matrix.proxy.mapper.ThreadPoolMapper;
 import com.matrix.proxy.module.ThreadPoolVo;
+import com.matrix.proxy.util.DateUtils;
 import com.matrix.proxy.vo.ThreadPoolQueryVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * JVM采集数据服务
@@ -29,17 +30,26 @@ public class JvmDataServiceImpl implements JvmDataService {
     /**
      * 查询线程池数据分页
      *
-     * @param instanceName
+     * @param instanceUid
      * @return
      */
     @Override
-    public Page threadPoolDataPage(String instanceName) {
-        Page<ThreadPoolEntity> page = new Page<>(1, 100);
+    public Map<String, Object> threadPoolDataPage(String instanceUid, String dayTime) {
 
-        IPage<ThreadPoolEntity> iPages = threadPoolMapper.selectPage(page, new QueryWrapper<>());
+        String[] appId = instanceUid.split("_");
+
+        String time =dayTime;
+        if(StringUtils.isEmpty(dayTime)){
+            time = DateUtils.getDateFormat(new Date(),"yyyy-MM-dd HH:mm");
+        }
+        QueryWrapper queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("instance_name", appId[0]);
+        queryWrapper.eq("instance_id", appId[1]);
+        queryWrapper.apply("date_format(create_time,'%Y-%m-%d %H:%i') = '" + time + "'");
+        List<ThreadPoolEntity> poolEntities = threadPoolMapper.selectList(queryWrapper);
 
         List<ThreadPoolVo> vos = new ArrayList<>();
-        for (ThreadPoolEntity entity : iPages.getRecords()) {
+        for (ThreadPoolEntity entity : poolEntities) {
             ThreadPoolVo.ThreadPoolVoBuilder builder = ThreadPoolVo.builder().threadPoolKey(entity.getThreadPoolKey()).createTime(entity.getCreateTime());
 
             JSONObject params = JSON.parseObject(entity.getThreadPoolParams());
@@ -54,10 +64,9 @@ public class JvmDataServiceImpl implements JvmDataService {
 
             vos.add(builder.build());
         }
-        Page pg = new Page();
-        pg.setTotal(iPages.getTotal());
-        pg.setRecords(vos);
-        pg.setPages(iPages.getPages());
-        return pg;
+        Map<String, Object> rs = new HashMap<>(16);
+        rs.put("total", poolEntities.size());
+        rs.put("records", vos);
+        return rs;
     }
 }

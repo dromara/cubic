@@ -7,10 +7,13 @@ import com.matrix.proxy.service.JdkCommandService;
 import com.matrix.proxy.service.JvmDataService;
 import com.matrix.proxy.vo.ThreadPoolCommandVo;
 import com.matrix.proxy.vo.ThreadPoolQueryVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 应用jvm相关接口
@@ -30,12 +33,16 @@ public class JvmController {
     /**
      * 线程池列表
      *
-     * @param instanceName
+     * @param instanceUid
      * @return
      */
     @RequestMapping("/threadPoolList")
-    public Page threadPoolPage(@RequestParam String instanceName) {
-        return jvmDataService.threadPoolDataPage(instanceName);
+    public Map<String,Object> threadPoolPage(@RequestParam String instanceUid, @RequestParam String dayTime) {
+
+        if(StringUtils.isEmpty(instanceUid)){
+            return new HashMap<>();
+        }
+        return jvmDataService.threadPoolDataPage(instanceUid,dayTime);
     }
 
 

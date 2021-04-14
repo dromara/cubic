@@ -7,6 +7,7 @@ import com.matrix.proxy.module.ThreadPoolVo;
 import com.matrix.proxy.vo.ThreadPoolQueryVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * JVM数据采集服务
@@ -18,8 +19,8 @@ public interface JvmDataService {
     /**
      * 线程池数据查询分页
      *
-     * @param query
+     * @param instanceUid
      * @return
      */
-    Page threadPoolDataPage(String instanceName);
+    Map<String,Object> threadPoolDataPage(String instanceUid, String dayTime);
 }
