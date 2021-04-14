@@ -50,7 +50,7 @@ public class JvmThreadDumpProcess extends DefaultMessageProcess{
 		// 数据持久化
 		insertThreadInfo(threadBuild, appId);
 		logger.debug("保存成功！实例id ：{} ,channel :{}", appId, ctx.channel());
-		ctx.channel().writeAndFlush(initRegisterResponse(appId));
+//		ctx.channel().writeAndFlush(initRegisterResponse(appId));
 	}
 
 	private void insertThreadInfo(Builder threadBuild, String appId) {

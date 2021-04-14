@@ -144,4 +144,30 @@ public class AppDataServiceImpl implements AppDataService {
         }
         return new ArrayList<>();
     }
+
+
+    /**
+     * 获取应用名称
+     *
+     * @return
+     */
+    @Override
+    public List<String> getAppNames() {
+
+        try {
+
+            QueryWrapper<Information> wrapper = new QueryWrapper<>();
+            wrapper.select("DISTINCT instance_name");
+            List<Information> informationList = informationMapper.selectList(wrapper);
+
+            List<String> names = new LinkedList<>();
+            informationList.forEach(info -> {
+                names.add(info.getInstanceName());
+            });
+            return names;
+        } catch (Exception e) {
+            log.error("getAppNames 数据异常", e);
+        }
+        return new ArrayList<>();
+    }
 }
