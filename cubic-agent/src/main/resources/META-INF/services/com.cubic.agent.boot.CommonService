@@ -1,4 +1,4 @@
 com.cubic.agent.remote.AgentClientManager
 com.cubic.agent.remote.ServiceRegisterClient
 com.cubic.agent.cmd.jvm.thread.JvmThreadService
-com.cubic.agent.cmd.jvm.threadpool.ThreadPoolMonitorService
+com.cubic.agent.cmd.jvm.threadpool.ThreadPoolService

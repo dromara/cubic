@@ -17,7 +17,7 @@ public class ThreadPoolAgentAdvice {
      * <p>
      * 切入点在{@link ThreadPoolAgent}
      * <p>
-     * 不能直接使用{@link ThreadPoolMonitorService#addMonitor(ThreadPoolExecutor)}原因，
+     * 不能直接使用{@link ThreadPoolService#addMonitor(ThreadPoolExecutor)}原因，
      * 当前类是系统加载器加载，ThreadPoolMonitorService是app加载器加载，父加载器找不到子加载器
      * 加载的class，通过反射方式解决。
      * <p>
@@ -31,7 +31,7 @@ public class ThreadPoolAgentAdvice {
             try {
                 Class<?> clazz = Thread.currentThread()
                         .getContextClassLoader()
-                        .loadClass("com.cubic.agent.cmd.jvm.threadpool.ThreadPoolMonitorService");
+                        .loadClass("com.cubic.agent.cmd.jvm.threadpool.ThreadPoolService");
                 clazz.getMethod("addMonitor", ThreadPoolExecutor.class).invoke(clazz.newInstance(), obj);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -37,7 +37,9 @@ public class JvmThreadPoolProcess extends DefaultMessageProcess {
     @Override
     public void process(ChannelHandlerContext ctx, String datagram) {
         super.process(ctx, datagram);
-        logger.info("receive datagram" + datagram);
+        if(logger.isDebugEnabled()){
+            logger.debug("receive datagram" + datagram);
+        }
         insertThreadPool(JSON.parseObject(datagram, Message.class));
     }
 

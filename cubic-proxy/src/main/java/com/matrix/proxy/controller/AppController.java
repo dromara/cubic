@@ -51,4 +51,16 @@ public class AppController {
         return appDataService.getInstanceNames(name);
 
     }
+
+
+    /**
+     * 获取应用列表信息
+     * @return
+     */
+    @RequestMapping("/getAppNames")
+    public List getAppNames() {
+
+        return appDataService.getAppNames();
+
+    }
 }

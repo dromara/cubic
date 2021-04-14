@@ -15,29 +15,4 @@ import java.util.List;
  **/
 public interface ThreadDumpMapper extends BaseMapper<ThreadDump> {
 
-
-    /**
-     * 根据名称查询app对应的线程栈信息
-     *
-     * @param instanceName
-     * @return
-     */
-    List<ThreadDump> selectThreadDumpByName(String instanceName);
-
-    /**
-     * 根据时间维度查询app线程栈信息
-     *
-     * @param instanceName
-     * @param date
-     * @return
-     */
-    List<String> selectThreadDumpByTime(String instanceName, Date date);
-
-    /**
-     * 根据appId查询应用实例信息
-     *
-     * @param appId
-     * @return
-     */
-    ThreadDump selectThreadDumpByAppId(String appId);
 }

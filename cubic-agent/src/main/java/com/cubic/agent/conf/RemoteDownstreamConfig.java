@@ -3,7 +3,6 @@ package com.cubic.agent.conf;
 import com.cubic.agent.dictionary.DictionaryUtil;
 
 /**
- * @Description: TODO
  * @Author qinqixuan
  * @Date 2020/12/08
  * @Version V1.0

@@ -1,12 +1,12 @@
 package com.matrix.proxy.server;
 
+import com.cubic.proxy.common.handler.ChannelCloseHandler;
+import com.cubic.proxy.common.handler.ConnectionCounterHandler;
+import com.cubic.proxy.common.handler.MessageHandler;
 import com.cubic.proxy.common.server.NettyServer;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.matrix.proxy.encoder.DelimiterBasedFrameEncoder;
 import com.matrix.proxy.encoder.GzipDecoder;
-import com.cubic.proxy.common.handler.ChannelCloseHandler;
-import com.cubic.proxy.common.handler.ConnectionCounterHandler;
-import com.cubic.proxy.common.handler.MessageHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.buffer.Unpooled;
@@ -62,9 +62,8 @@ public class MatrixNettyServer implements NettyServer {
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel ch) throws Exception {
+                    protected void initChannel(SocketChannel ch) {
                         String delimiter = "_$";
-
                         ch.pipeline()
                                 .addLast(new DelimiterBasedFrameDecoder(102400, Unpooled.wrappedBuffer(delimiter.getBytes())))
                                 .addLast(new StringDecoder())

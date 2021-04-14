@@ -11,8 +11,10 @@ import java.util.Date;
  * @date 2021/4/75:56 下午
  */
 @Data
-public class ThreadPoolQuery {
+public class ThreadPoolQueryVo {
+
     int pageNo = 1;
+
     int pageSize = 20;
 
     private String instanceId;
@@ -22,6 +24,7 @@ public class ThreadPoolQuery {
     private String threadPoolKey;
 
     private Date startTime;
+
     private Date endTime;
 
 }

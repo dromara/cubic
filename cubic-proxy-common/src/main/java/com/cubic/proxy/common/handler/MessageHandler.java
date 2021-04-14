@@ -26,11 +26,11 @@ public class MessageHandler extends SimpleChannelInboundHandler<String> {
 
     private static final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
-    private final Map<Integer, ServerMessgaeProcess> processorMap;
+    private final Map<Integer, ServerMessageProcess> processorMap;
 
-    public MessageHandler(List<ServerMessgaeProcess> processors) {
-        ImmutableMap.Builder<Integer, ServerMessgaeProcess> builder = new ImmutableMap.Builder<>();
-        for (ServerMessgaeProcess processor : processors) {
+    public MessageHandler(List<ServerMessageProcess> processors) {
+        ImmutableMap.Builder<Integer, ServerMessageProcess> builder = new ImmutableMap.Builder<>();
+        for (ServerMessageProcess processor : processors) {
             builder.put(processor.code(), processor);
         }
         processorMap = builder.build();
@@ -42,12 +42,9 @@ public class MessageHandler extends SimpleChannelInboundHandler<String> {
         int code = obj.getInteger("code");
         String instanceUuid = obj.getString("instanceUuid");
         if (code != CommandCode.HEARTBEAT.getCode()) {
-
-            if (logger.isDebugEnabled()) {
-                logger.info("接收到 id:{}, code:{} 数据请求 ctx：{},message size:{}", instanceUuid, code, ctx.channel(), message.length());
-            }
+            logger.debug("接收到 id:{}, code:{} 数据请求 ctx：{},message size:{}", instanceUuid, code, ctx.channel(), message.length());
         }
-        ServerMessgaeProcess messageProcessor = processorMap.get(code);
+        ServerMessageProcess messageProcessor = processorMap.get(code);
         if (messageProcessor == null) {
             logger.warn("can not process message code [{}], {}", code, ctx.channel());
             return;

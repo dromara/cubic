@@ -14,6 +14,12 @@ import java.util.Map;
  * @Version 1.0
  */
 public interface AppDataService {
+    /**
+     * 获取应用名称
+     *
+     * @return
+     */
+    public List<String> getAppNames();
 
     /**
      * 获取应用实例列表

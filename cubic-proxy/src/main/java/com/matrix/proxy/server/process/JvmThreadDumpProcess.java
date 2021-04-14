@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +50,7 @@ public class JvmThreadDumpProcess extends DefaultMessageProcess{
 		// 数据持久化
 		insertThreadInfo(threadBuild, appId);
 		logger.debug("保存成功！实例id ：{} ,channel :{}", appId, ctx.channel());
-		ctx.channel().writeAndFlush(initRegisterResponse(appId));
+//		ctx.channel().writeAndFlush(initRegisterResponse(appId));
 	}
 
 	private void insertThreadInfo(Builder threadBuild, String appId) {
@@ -58,6 +59,7 @@ public class JvmThreadDumpProcess extends DefaultMessageProcess{
 				.instanceId(threadBuild.getInstanceUUID())
 				.instanceName(threadBuild.getServiceName())
 				.threadDump(GzipUtils.compress(threadBuild.getThreadDump()))
+				.createTime(new Date())
 				.build();
 		threadDumpMapper.insert(threadDump);
 	}
