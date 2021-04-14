@@ -23,8 +23,8 @@ import java.util.concurrent.*;
  * @author zhanghao
  * @date 2021/4/59:00 上午
  */
-public class ThreadPoolMonitorService implements CommonService, AgentChannelListener {
-    private static final Logger logger = LoggerFactory.getLogger(ThreadPoolMonitorService.class);
+public class ThreadPoolService implements CommonService, AgentChannelListener {
+    private static final Logger logger = LoggerFactory.getLogger(ThreadPoolService.class);
 
     private volatile ChannelStatus status = ChannelStatus.DISCONNECT;
     private volatile AgentNettyClient client;
@@ -34,7 +34,7 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
     /**
      * 采集间隔时间10s
      */
-    private final static Long PERIOD = 10L;
+    private final static Long PERIOD = 60L;
 
     /**
      * 所有线程池资源的引用
@@ -42,7 +42,7 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
      * key规则 -> {@link ThreadPoolMonitorItems#key()}
      * value  -> 弱引用线程池资源，不影响gc回收
      */
-    public static Map<String, WeakReference<ThreadPoolExecutor>> threadPoolReferences = new ConcurrentHashMap<>();
+    private static Map<String, WeakReference<ThreadPoolExecutor>> threadPoolReferences = new ConcurrentHashMap<>();
 
 
     @Override
@@ -84,6 +84,20 @@ public class ThreadPoolMonitorService implements CommonService, AgentChannelList
      */
     public static void addMonitor(ThreadPoolExecutor threadPoolExecutor) {
         threadPoolReferences.put(ThreadPoolMonitorItems.key(), new WeakReference<>(threadPoolExecutor));
+    }
+
+    /**
+     * 获取监控线程池
+     *
+     * @param key
+     * @return
+     */
+    public ThreadPoolExecutor getMonitor(String key) {
+        WeakReference<ThreadPoolExecutor> threadPoolExecutorWeakReference = threadPoolReferences.get(key);
+        if (threadPoolExecutorWeakReference == null) {
+            return null;
+        }
+        return threadPoolExecutorWeakReference.get();
     }
 
     /**

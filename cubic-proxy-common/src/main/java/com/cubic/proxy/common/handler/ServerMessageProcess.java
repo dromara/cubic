@@ -8,7 +8,7 @@ import com.cubic.proxy.common.server.MessageProcessor;
  * @Date 2020/3/19 11:17 上午
  * @Version 1.0
  */
-public interface ServerMessgaeProcess extends MessageProcessor {
+public interface ServerMessageProcess extends MessageProcessor {
 
     public boolean ackSync(String msg);
 }
