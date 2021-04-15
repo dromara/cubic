@@ -1,3 +1,6 @@
 /agent-dist/
 *.iml
 /agent-proxy-dist/
+.idea
+**/target
+**/dependency-reduced-pom.xml
