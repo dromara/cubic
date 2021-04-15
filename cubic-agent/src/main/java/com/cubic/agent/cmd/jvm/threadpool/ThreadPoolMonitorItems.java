@@ -74,7 +74,7 @@ public enum ThreadPoolMonitorItems {
      *
      * @return
      */
-    public static String key() {
+    public static String key(Object obj) {
         String name = Thread.currentThread().getName();
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 1];
@@ -83,8 +83,8 @@ public enum ThreadPoolMonitorItems {
                 .append(stackTraceElement.getClassName())
                 .append("[")
                 .append(stackTraceElement.getMethodName())
-                .append("]")
-                .append(stackTraceElement.hashCode());
+                .append("]-")
+                .append(obj.hashCode());
         return builder.toString();
     }
 }

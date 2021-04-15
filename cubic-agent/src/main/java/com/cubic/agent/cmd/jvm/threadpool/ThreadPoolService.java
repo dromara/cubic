@@ -83,7 +83,7 @@ public class ThreadPoolService implements CommonService, AgentChannelListener {
      * @param threadPoolExecutor
      */
     public static void addMonitor(ThreadPoolExecutor threadPoolExecutor) {
-        threadPoolReferences.put(ThreadPoolMonitorItems.key(), new WeakReference<>(threadPoolExecutor));
+        threadPoolReferences.put(ThreadPoolMonitorItems.key(threadPoolExecutor), new WeakReference<>(threadPoolExecutor));
     }
 
     /**
