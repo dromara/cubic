@@ -2,7 +2,7 @@
   <div class="app-container case-list-container">
     <el-card class="box-card">
       <div class="case-info">
-        <el-tag>线程池总数：{{  this.total }}</el-tag>
+        <el-tag class="mr">线程池总数：{{  this.total }}</el-tag>
         <el-input
           v-model="search"
           size="mini"
@@ -18,7 +18,7 @@
              value-format="yyyy-MM-dd HH:mm"
            />
           <el-button
-            class="filter-item"
+            class="filter-item ml"
             size="mini"
             type="primary"
             icon="el-icon-search"
@@ -29,6 +29,7 @@
       <div slot="header" class="clearfix">
         <span style="font-size: 14px;">应用： </span>
         <el-select
+          class="mr"
           v-model="instanceName"
           size="mini"
           style="width: 280px"
@@ -183,3 +184,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .mr {
+    margin-right: 20px;
+  }
+  .ml {
+    margin-left: 10px;
+  }
+</style>
