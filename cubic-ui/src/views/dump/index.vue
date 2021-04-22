@@ -4,6 +4,7 @@
       <div slot="header" class="clearfix">
         <span style="font-size: 14px;">应用： </span>
         <el-select
+          class="mr"
           v-model="instanceName"
           size="mini"
           style="width: 280px"
@@ -397,5 +398,9 @@ export default {
   .legend-text {
     font-size: 12px;
   }
+
+}
+.mr {
+  margin-right: 20px;
 }
 </style>

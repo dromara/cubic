@@ -50,7 +50,10 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '应用中心' }
+      meta: { 
+        title: '应用中心',
+        showMenu: false
+      }
     }]
   },
   {
@@ -61,7 +64,10 @@ export const constantRoutes = [
       path: 'base',
       name: 'Base',
       component: () => import('@/views/app/base/index'),
-      meta: { title: '基础信息'  }
+      meta: { 
+        title: '基础信息',
+        showMenu: true
+      }
     }]
   },
   {
@@ -72,7 +78,10 @@ export const constantRoutes = [
       path: 'command',
       name: 'WebShell',
       component: () => import('@/views/command/cmd'),
-      meta: { title: 'Arthas工具' }
+      meta: { 
+        title: 'Arthas工具',
+        showMenu: true
+      }
     }]
   },
   {
@@ -83,7 +92,10 @@ export const constantRoutes = [
       path: 'dump',
       name: 'Dump',
       component: () => import('@/views/dump/index'),
-      meta: { title: '线程栈监控' }
+      meta: { 
+        title: '线程栈监控',
+        showMenu: true
+      }
     }]
   },
   {
@@ -94,7 +106,10 @@ export const constantRoutes = [
       path: 'threadpool',
       name: 'ThreadPool',
       component: () => import('@/views/threadpool/index'),
-      meta: { title: '线程池监控' }
+      meta: { 
+        title: '线程池监控',
+        showMenu: true
+      }
     }]
   },
   // {
