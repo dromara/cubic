@@ -16,15 +16,15 @@ public enum ThreadPoolMonitorItems {
     /**
      * 活动线程数
      */
-    ACTIVE_COUNT((t) -> t.getActiveCount()),
+    ACTIVE_COUNT((t) -> (long)t.getActiveCount()),
     /**
      * 线程数
      */
-    POOL_SIZE((t) -> t.getPoolSize()),
+    POOL_SIZE((t) -> (long)t.getPoolSize()),
     /**
      * 核心线程数
      */
-    CORE_POOL_SIZE((t) -> t.getCorePoolSize()),
+    CORE_POOL_SIZE((t) -> (long)t.getCorePoolSize()),
     /**
      * 存活时间
      */
@@ -37,19 +37,19 @@ public enum ThreadPoolMonitorItems {
     /**
      * 最大时的线程数
      */
-    LARGEST_POOL_SIZE((t) -> t.getLargestPoolSize()),
+    LARGEST_POOL_SIZE((t) -> (long)t.getLargestPoolSize()),
     /**
      * 最大线程数
      */
-    MAXIMUM_POOL_SIZE((t) -> t.getMaximumPoolSize()),
+    MAXIMUM_POOL_SIZE((t) -> (long)t.getMaximumPoolSize()),
     /**
      * 计划执行的任务数
      */
     TASK_COUNT((t) -> t.getTaskCount());
 
-    private Function<ThreadPoolExecutor, Object> func;
+    private Function<ThreadPoolExecutor, Long> func;
 
-    ThreadPoolMonitorItems(Function<ThreadPoolExecutor, Object> func) {
+    ThreadPoolMonitorItems(Function<ThreadPoolExecutor, Long> func) {
         this.func = func;
     }
 
@@ -59,8 +59,8 @@ public enum ThreadPoolMonitorItems {
      * @param tpe 线程池
      * @return
      */
-    public static Map<String, Object> getItems(ThreadPoolExecutor tpe) {
-        Map<String, Object> items = new HashMap<>();
+    public static Map<String, Long> getItems(ThreadPoolExecutor tpe) {
+        Map<String, Long> items = new HashMap<>();
         for (ThreadPoolMonitorItems items1 : values()) {
             items.put(items1.name(), items1.func.apply(tpe));
         }

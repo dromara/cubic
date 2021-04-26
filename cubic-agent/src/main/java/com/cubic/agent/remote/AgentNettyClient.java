@@ -18,17 +18,19 @@
 package com.cubic.agent.remote;
 
 import com.cubic.agent.conf.AgentConfig;
-import com.cubic.agent.process.*;
+import com.cubic.agent.process.Processor;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
@@ -95,11 +97,11 @@ public class AgentNettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) {
-                        String delimiter = "_$";
                         socketChannel.pipeline()
-                                .addLast(new DelimiterBasedFrameDecoder(10240, Unpooled.wrappedBuffer(delimiter.getBytes())))
-                                .addLast(new StringDecoder())
-                                .addLast(new DelimiterBasedFrameEncoder(delimiter))
+                                .addLast(new ProtobufVarint32FrameDecoder())
+                                .addLast(new ProtobufDecoder(CommonMessage.getDefaultInstance()))
+                                .addLast(new ProtobufVarint32LengthFieldPrepender())
+                                .addLast(new ProtobufEncoder())
                                 .addLast(idleStateHandler)
                                 .addLast(requestHandler)
                                 .addLast(connectionManagerHandler);

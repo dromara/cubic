@@ -2,6 +2,7 @@ package com.matrix.proxy.server.process;
 
 
 import com.cubic.proxy.common.constant.CommandCode;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ThreadDumpProcess extends DefaultMessageProcess {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String datagram) {
+    public void process(ChannelHandlerContext ctx, CommonMessage datagram) {
         this.ackSync(datagram);
     }
 

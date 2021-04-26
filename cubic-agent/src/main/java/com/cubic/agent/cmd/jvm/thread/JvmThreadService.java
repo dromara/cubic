@@ -22,10 +22,9 @@ import com.cubic.agent.boot.CommonService;
 import com.cubic.agent.boot.DefaultService;
 import com.cubic.agent.boot.ServiceManager;
 import com.cubic.agent.conf.AgentConfig;
-import com.cubic.agent.module.Message;
-import com.cubic.agent.module.ThreadMetricCollection;
 import com.cubic.agent.remote.*;
-import com.google.gson.Gson;
+import com.cubic.serialization.agent.v1.CommonMessage;
+import com.cubic.serialization.agent.v1.JVMThreadMetric;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import org.slf4j.Logger;
@@ -83,15 +82,20 @@ public class JvmThreadService implements CommonService {
             if (status == ChannelStatus.CONNECTION) {
                 try {
                     long currentTimeMillis = System.currentTimeMillis();
-                    ThreadMetricCollection.Builder builder = new ThreadMetricCollection.Builder();
-                    builder.setThreadDump(ThreadProvider.INSTANCE.getThreadDump());
-                    builder.setAllThreadPools(ThreadPoolProvider.INSTANCE.getDubboThreadPool());
-                    builder.setServiceName(AgentConfig.Agent.SERVICE_NAME);
+                    JVMThreadMetric.Builder builder = JVMThreadMetric.newBuilder();
                     builder.setTime(currentTimeMillis);
-                    builder.setInstanceUUID(AgentConfig.Agent.INSTANCE_UUID);
-                    Gson gson = new Gson();
-                    Message message = builder.build(CommandCode.JVM_THREAD_DUMP.getCode(), "jvm thread dump", AgentConfig.Agent.INSTANCE_UUID);
-                    client.getChannel().writeAndFlush(gson.toJson(message)).addListener((ChannelFutureListener) future -> {
+                    builder.setThreadDump(ThreadProvider.INSTANCE.getThreadDump());
+                    builder.setServiceName(AgentConfig.Agent.SERVICE_NAME);
+                    builder.setThreadPools(ThreadPoolProvider.INSTANCE.getDubboThreadPool());
+                    CommonMessage.Builder message = CommonMessage.newBuilder();
+                    message.setCode(CommandCode.JVM_THREAD_DUMP.getCode());
+                    message.setBody("jvm thread dump");
+                    message.setId("0000");
+                    message.setInstanceName(AgentConfig.Agent.SERVICE_NAME);
+                    message.setInstanceUuid(AgentConfig.Agent.INSTANCE_UUID);
+                    message.setInstanceVersion(AgentConfig.Agent.VERSION);
+                    message.setMsgContent(builder.build().toByteString());
+                    client.getChannel().writeAndFlush(message.build()).addListener((ChannelFutureListener) future -> {
                         if (future.isSuccess()) {
                             logger.debug("JvmThreadService send successful");
                         } else {

@@ -60,7 +60,7 @@ public class MatrixNettyWebServer implements NettyServer {
                 .group(BOSS_GROUP, WORKER_GROUP)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel ch) throws Exception {
+                    protected void initChannel(SocketChannel ch) {
                         ChannelPipeline pip = ch.pipeline();
                         pip.addLast(new IdleStateHandler(0 , 0, 300 * 1000))
                                 .addLast(new ChannelCloseHandler("websocket"))

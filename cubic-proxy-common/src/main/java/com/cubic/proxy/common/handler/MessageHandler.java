@@ -1,8 +1,7 @@
 package com.cubic.proxy.common.handler;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.cubic.proxy.common.constant.CommandCode;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.google.common.collect.ImmutableMap;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -22,7 +21,7 @@ import java.util.Map;
  * @Version 1.0
  */
 @ChannelHandler.Sharable
-public class MessageHandler extends SimpleChannelInboundHandler<String> {
+public class MessageHandler extends SimpleChannelInboundHandler<CommonMessage> {
 
     private static final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
@@ -37,19 +36,17 @@ public class MessageHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String message) {
-        JSONObject obj = JSON.parseObject(message);
-        int code = obj.getInteger("code");
-        String instanceUuid = obj.getString("instanceUuid");
+    protected void channelRead0(ChannelHandlerContext ctx, CommonMessage message) {
+        int code = message.getCode();
+        String instanceUuid = message.getInstanceUuid();
         if (code != CommandCode.HEARTBEAT.getCode()) {
-            logger.debug("接收到 id:{}, code:{} 数据请求 ctx：{},message size:{}", instanceUuid, code, ctx.channel(), message.length());
+            logger.debug("接收到 id:{}, code:{} 数据请求 ctx：{},message size:{}", instanceUuid, code, ctx.channel(), message.getSerializedSize());
         }
         ServerMessageProcess messageProcessor = processorMap.get(code);
         if (messageProcessor == null) {
             logger.warn("can not process message code [{}], {}", code, ctx.channel());
             return;
         }
-
         messageProcessor.process(ctx, message);
     }
 

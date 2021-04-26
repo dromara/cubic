@@ -4,6 +4,7 @@ import com.cubic.proxy.common.handler.ChannelCloseHandler;
 import com.cubic.proxy.common.handler.ConnectionCounterHandler;
 import com.cubic.proxy.common.handler.MessageHandler;
 import com.cubic.proxy.common.server.NettyServer;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.matrix.proxy.encoder.DelimiterBasedFrameEncoder;
 import com.matrix.proxy.encoder.GzipDecoder;
@@ -15,6 +16,10 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -63,13 +68,12 @@ public class MatrixNettyServer implements NettyServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) {
-                        String delimiter = "_$";
                         ch.pipeline()
-                                .addLast(new DelimiterBasedFrameDecoder(102400, Unpooled.wrappedBuffer(delimiter.getBytes())))
-                                .addLast(new StringDecoder())
-                                .addLast(new GzipDecoder())
+                                .addLast(new ProtobufVarint32FrameDecoder())
+                                .addLast(new ProtobufDecoder(CommonMessage.getDefaultInstance()))
+                                .addLast(new ProtobufVarint32LengthFieldPrepender())
+                                .addLast(new ProtobufEncoder())
                                 .addLast("connectionCounter", connectionCounterHandler)
-                                .addLast(new DelimiterBasedFrameEncoder(delimiter))
                                 .addLast("messageHandler", messageHandler)
                                 .addLast("idleHandler", new IdleStateHandler(0, 0, 2, TimeUnit.DAYS))
                                 .addLast("closeHandler", new ChannelCloseHandler("agent"));

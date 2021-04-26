@@ -1,12 +1,13 @@
 package com.matrix.proxy.server.process;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.cache.*;
-import com.matrix.proxy.module.Command;
-import com.cubic.proxy.common.server.SyncFuture;
 import com.cubic.proxy.common.handler.ServerMessageProcess;
+import com.cubic.proxy.common.server.SyncFuture;
 import com.cubic.proxy.common.session.Session;
 import com.cubic.proxy.common.session.SessionManager;
+import com.cubic.serialization.agent.v1.CommonMessage;
+import com.google.common.cache.*;
+import com.matrix.proxy.module.Command;
 import com.matrix.proxy.util.CubicContextHolder;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
@@ -56,25 +57,25 @@ public class DefaultMessageProcess implements ServerMessageProcess {
     }
 
     @Override
-    public boolean ackSync(String msg) {
-
+    public boolean ackSync(CommonMessage msg) {
+        // TODO
         if(sessionManager == null){
             this.sessionManager = CubicContextHolder.getCache(SessionManager.class);
         }
-        log.info("接收到服务返回数据 length: {}", msg.length());
+        log.info("接收到服务返回数据 length: {}", msg.getSerializedSize());
         boolean rs = false;
         try {
-            Command cmd = JSON.parseObject(msg, Command.class);
+            Command cmd = JSON.parseObject(msg.getCommand(), Command.class);
             String id = cmd.getId();
 
             SyncFuture syncFuture = futureCache.getIfPresent(id);
 
             if (syncFuture == null) {
-                log.warn("ackSync command data length:{},but can not found SyncFuture by cache", msg.length());
+                log.warn("ackSync command data length:{},but can not found SyncFuture by cache", msg.getSerializedSize());
 
                 return ackToWeb(cmd);
             }
-            syncFuture.setResponse(msg);
+            syncFuture.setResponse(msg.toString());
             futureCache.invalidate(id);
             rs = true;
         } catch (Exception e) {
@@ -109,9 +110,7 @@ public class DefaultMessageProcess implements ServerMessageProcess {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String datagram) {
+    public void process(ChannelHandlerContext ctx, CommonMessage datagram) {
 
     }
-
-
 }
