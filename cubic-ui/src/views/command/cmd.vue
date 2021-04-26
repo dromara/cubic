@@ -3,6 +3,7 @@
     <div slot="header" class="clearfix">
       <span style="font-size: 14px;">应用： </span>
       <el-select
+        class="mr"
         v-model="value"
         size="mini"
         style="width: 280px"
@@ -309,3 +310,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .mr {
+    margin-right: 20px;
+  }
+</style>

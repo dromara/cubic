@@ -2,8 +2,9 @@
   <div :class="classObj" class="app-wrapper">
     <topbar />
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-    <sidebar v-if="!sidebar.hide" class="sidebar-container" />
-    <div :class="{sidebarHide: sidebar.hide}" class="main-container">
+    <!-- <sidebar v-if="!sidebar.hide" class="sidebar-container" /> -->
+    <left-bar :class="LeftBarShow ? ' sidebar-container' : 'sidebar-container disnone'" />
+    <div :class="{sidebarHide: sidebar.hide, marginnone: !LeftBarShow}" class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
       </div>
@@ -13,16 +14,22 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain, Topbar } from './components'
+import { Navbar, Sidebar, AppMain, Topbar, LeftBar } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
   name: 'Layout',
+  data() {
+    return {
+      LeftBarShow: true
+    }
+  },
   components: {
     Navbar,
     Sidebar,
     AppMain,
-    Topbar
+    Topbar,
+    'left-bar': LeftBar
   },
   mixins: [ResizeMixin],
   computed: {
@@ -48,6 +55,14 @@ export default {
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     }
+  },
+  watch: {
+    $route(to) {
+      this.LeftBarShow = to.meta.showMenu
+    }
+  },
+  mounted() {
+    this.LeftBarShow = this.$route.meta.showMenu
   }
 }
 </script>
@@ -87,10 +102,18 @@ export default {
   }
 
   .hideSidebar .fixed-header {
-    width: calc(100% - 54px)
+    width: calc(100% - 210px)
   }
 
   .mobile .fixed-header {
     width: 100%;
+  }
+
+  .disnone {
+    display: none;
+  }
+
+  .marginnone {
+    margin: 0 !important;
   }
 </style>

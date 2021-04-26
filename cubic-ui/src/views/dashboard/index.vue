@@ -2,8 +2,8 @@
   <div class="app-container case-list-container">
     <el-card class="box-card">
       <div class="case-info">
-        <el-tag>在线应用：{{ caseInfo.services }}</el-tag>
-        <el-tag type="success">在线实例数：{{ caseInfo.instances }}</el-tag>
+        <el-tag class="margin">在线应用：{{ caseInfo.services }}</el-tag>
+        <el-tag class="margin" type="success">在线实例数：{{ caseInfo.instances }}</el-tag>
         <el-input
           v-model="search"
           size="mini"
@@ -22,7 +22,7 @@
             align="right"
           />
           <el-button
-            class="filter-item"
+            class="filter-item ml"
             size="mini"
             type="primary"
             icon="el-icon-search"
@@ -62,6 +62,14 @@
               <el-button type="text" style="font-size: 12px;" @click.stop.prevent="goCmd(row)">Arthas命令
               </el-button>
             </el-tooltip>
+          </template>
+        </el-table-column>
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="100">
+          <template slot-scope="scope">
+            <el-button @click="goBasic(scope.row)" type="text" size="small">进入实例</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -203,3 +211,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .margin {
+    margin-right: 10px;
+  }
+  .ml {
+    margin-left: 10px;
+  }
+</style>

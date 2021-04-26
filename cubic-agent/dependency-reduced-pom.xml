@@ -53,8 +53,8 @@
                   <shadedPattern>${shade.org.apache.commons.target}</shadedPattern>
                 </relocation>
                 <relocation>
-                  <pattern>com.cubic.serialization</pattern>
-                  <shadedPattern>com.cubic.agent.dependencies.com.cubic.serialization</shadedPattern>
+                  <pattern>${shade.com.cubic.serialization.source}</pattern>
+                  <shadedPattern>${shade.com.cubic.serialization.target}</shadedPattern>
                 </relocation>
               </relocations>
               <filters>
@@ -138,5 +138,7 @@
     <shade.com.google.target>${shade.package}.${shade.com.google.source}</shade.com.google.target>
     <premain.class>com.cubic.agent.MatrixAgent</premain.class>
     <shade.org.apache.commons.source>org.apache.commons</shade.org.apache.commons.source>
+    <shade.com.cubic.serialization.source>com.cubic.serialization</shade.com.cubic.serialization.source>
+    <shade.com.cubic.serialization.target>${shade.package}.${shade.com.cubic.serialization.source}</shade.com.cubic.serialization.target>
   </properties>
 </project>
