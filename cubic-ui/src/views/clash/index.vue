@@ -83,38 +83,38 @@ export default {
       tableData: [],
       listLoading: true,
       list: {
-        "shanzhu": [
-            {
-                "id": 4,
-                "appId": "1",
-                "serviceName": "lihongtest",
-                "jarName": "shanzhu:01",
-                "createDate": "2021-04-24 00:21:08"
-            }
-        ],
-        "lihong": [
-            {
-                "id": 1,
-                "appId": "1",
-                "serviceName": "lihongtest",
-                "jarName": "lihong:01",
-                "createDate": "2021-04-23 23:31:20"
-            },
-            {
-                "id": 2,
-                "appId": "1",
-                "serviceName": "lihongtest",
-                "jarName": "lihong:02",
-                "createDate": "2021-04-24 00:19:43"
-            },
-            {
-                "id": 3,
-                "appId": "1",
-                "serviceName": "lihongtest",
-                "jarName": "lihong:03",
-                "createDate": "2021-04-24 00:20:14"
-            }
-        ]
+        // "shanzhu": [
+        //     {
+        //         "id": 4,
+        //         "appId": "1",
+        //         "serviceName": "lihongtest",
+        //         "jarName": "shanzhu:01",
+        //         "createDate": "2021-04-24 00:21:08"
+        //     }
+        // ],
+        // "lihong": [
+        //     {
+        //         "id": 1,
+        //         "appId": "1",
+        //         "serviceName": "lihongtest",
+        //         "jarName": "lihong:01",
+        //         "createDate": "2021-04-23 23:31:20"
+        //     },
+        //     {
+        //         "id": 2,
+        //         "appId": "1",
+        //         "serviceName": "lihongtest",
+        //         "jarName": "lihong:02",
+        //         "createDate": "2021-04-24 00:19:43"
+        //     },
+        //     {
+        //         "id": 3,
+        //         "appId": "1",
+        //         "serviceName": "lihongtest",
+        //         "jarName": "lihong:03",
+        //         "createDate": "2021-04-24 00:20:14"
+        //     }
+        // ]
       },
       detail: ''
     }
