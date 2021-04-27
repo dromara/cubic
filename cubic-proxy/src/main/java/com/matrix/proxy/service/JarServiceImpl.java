@@ -24,9 +24,11 @@ public class JarServiceImpl implements JarService {
     @Override
     public Map<String, List<RelyInformation>> getJarList(String Appid) {
         List<RelyInformation> jarList = relyinformationMapper.getJarList(Appid);
-        Map<String, List<RelyInformation>>jarmap =
-                jarList.stream().collect(Collectors.groupingBy(item ->
-                        item.getJarName().substring(0,item.getJarName().indexOf(":"))));
+        Map<String, List<RelyInformation>> jarmap = null;
+        if(jarList != null){
+            jarmap = jarList.stream().collect(Collectors.groupingBy(item ->
+                    item.getJarName().substring(0,item.getJarName().indexOf(":"))));
+        }
         return jarmap;
     }
 }
