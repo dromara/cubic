@@ -61,15 +61,17 @@ public class ServiceRegisterClient implements CommonService, AgentChannelListene
     public void run() {
         if (ChannelStatus.CONNECTION == status) {
             try {
-                CommonMessage.Builder commonMessage = CommonMessage.newBuilder();
+                CommonMessage.Builder commonMessage = CommonMessage.newBuilder()
+                        .setId("0000")
+                        .setBody("heart beat")
+                        .setCode(CommandCode.HEARTBEAT.getCode())
+                        .setInstanceName(AgentConfig.Agent.SERVICE_NAME)
+                        .setInstanceUuid(AgentConfig.Agent.INSTANCE_UUID)
+                        .setInstanceVersion(AgentConfig.Agent.VERSION);
                 if (!registed) {
-                    commonMessage.setId("0000");
                     commonMessage.setCode(CommandCode.REGIST.getCode());
                     commonMessage.setBody("register");
                     commonMessage.putAllOsInfo(OSUtil.buildOSInfo());
-                    commonMessage.setInstanceName(AgentConfig.Agent.SERVICE_NAME);
-                    commonMessage.setInstanceUuid(AgentConfig.Agent.INSTANCE_UUID);
-                    commonMessage.setInstanceVersion(AgentConfig.Agent.VERSION);
                 }
                 AgentNettyClient client = ServiceManager.INSTANCE.findService(AgentClientManager.class).getClient();
                 client.getChannel().writeAndFlush(commonMessage.build()).addListener((ChannelFutureListener) future -> {

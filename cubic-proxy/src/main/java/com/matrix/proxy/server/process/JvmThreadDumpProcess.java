@@ -58,7 +58,6 @@ public class JvmThreadDumpProcess extends DefaultMessageProcess{
 		// 数据持久化
 		insertThreadInfo(threadMetric, appId);
 		logger.debug("保存成功！实例id ：{} ,channel :{}", appId, ctx.channel());
-//		ctx.channel().writeAndFlush(initRegisterResponse(appId));
 	}
 
 	private void insertThreadInfo(JVMThreadMetric threadMetric, String appId) {
@@ -70,13 +69,5 @@ public class JvmThreadDumpProcess extends DefaultMessageProcess{
 				.createTime(new Date())
 				.build();
 		threadDumpMapper.insert(threadDump);
-	}
-
-	private String initRegisterResponse(String id) {
-		Map<String, Object> result = new HashMap<>(8);
-		result.put("code", CommandCode.JVM_THREAD_DUMP.getCode());
-		result.put("id", id);
-		result.put("command", true);
-		return JSON.toJSONString(result);
 	}
 }

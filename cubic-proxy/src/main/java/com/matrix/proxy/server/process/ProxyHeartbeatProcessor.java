@@ -28,7 +28,7 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
 
     @Resource
     private InformationMapper InformationMapper;
-    private final String heartbeatResponse = initHeartbeatResponse();
+    private final CommonMessage heartbeatResponse = initHeartbeatResponse();
 
     public ProxyHeartbeatProcessor() {
     }
@@ -56,10 +56,16 @@ public class ProxyHeartbeatProcessor extends DefaultMessageProcess {
     }
 
 
-    private String initHeartbeatResponse() {
-        Map<String, Object> result = new HashMap<>(16);
-        result.put("code", CommandCode.HEARTBEAT.getCode());
-        result.put("command", "heartbeat");
-        return JSON.toJSONString(result);
+//    private String initHeartbeatResponse() {
+//        Map<String, Object> result = new HashMap<>(16);
+//        result.put("code", CommandCode.HEARTBEAT.getCode());
+//        result.put("command", "heartbeat");
+//        return JSON.toJSONString(result);
+//    }
+
+    private CommonMessage initHeartbeatResponse() {
+        return CommonMessage.newBuilder()
+                .setCode(CommandCode.HEARTBEAT.getCode())
+                .setCommand("heartbeat").build();
     }
 }

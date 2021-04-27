@@ -17,6 +17,7 @@
         <grpc.protobuf.version>1.32.1</grpc.protobuf.version>
         <protoc-gen-grpc-java.plugin.version>1.32.1</protoc-gen-grpc-java.plugin.version>
         <com.google.protobuf.protoc.version>3.12.0</com.google.protobuf.protoc.version>
+        <com.googlecode.protobuf-java-format.version>1.4</com.googlecode.protobuf-java-format.version>
     </properties>
 
     <dependencies>
@@ -34,6 +35,11 @@
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
             <version>${grpc.protobuf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.protobuf-java-format</groupId>
+            <artifactId>protobuf-java-format</artifactId>
+            <version>${com.googlecode.protobuf-java-format.version}</version>
         </dependency>
     </dependencies>
 

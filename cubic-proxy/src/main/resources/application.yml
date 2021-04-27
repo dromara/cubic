@@ -9,9 +9,9 @@ spring:
     default-property-inclusion: non_null
   datasource:
     name: test
-    url: jdbc:mysql://47.104.79.116:3366/cubic?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
-    username: cubic
-    password: nxE5pGR2wRkhRAb8
+    url: jdbc:mysql://10.0.253.122:3306/nacos?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    username: Qinqixuan
+    password: l6d7njOO9Y8T2fzHgnfu
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver

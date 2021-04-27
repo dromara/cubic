@@ -2,6 +2,7 @@ package com.cubic.proxy.common.session;
 
 import com.cubic.proxy.common.server.ServerConnection;
 import com.cubic.proxy.common.webserver.WebConnection;
+import com.cubic.serialization.agent.v1.CommonMessage;
 
 /**
  * @ClassName Session
@@ -15,9 +16,9 @@ public interface Session {
         finish, down
     }
 
-    void writeToAgent(String data);
+    void writeToAgent(CommonMessage data);
 
-    void writeToWeb(String data);
+    void writeToWeb(CommonMessage data);
 
     WebConnection getWebConnection();
 

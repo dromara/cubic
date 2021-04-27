@@ -95,12 +95,19 @@ public class RegisterProcessor extends DefaultMessageProcess {
 
     }
 
-    private String initRegisterResponse(String id) {
+//    private String initRegisterResponse(String id) {
+//
+//        Map<String, Object> result = new HashMap<>(16);
+//        result.put("code", CommandCode.REGIST.getCode());
+//        result.put("id", id);
+//        result.put("command", true);
+//        return JSON.toJSONString(result);
+//    }
 
-        Map<String, Object> result = new HashMap<>(16);
-        result.put("code", CommandCode.REGIST.getCode());
-        result.put("id", id);
-        result.put("command", true);
-        return JSON.toJSONString(result);
+    private CommonMessage initRegisterResponse(String id) {
+        return CommonMessage.newBuilder()
+                .setId(id)
+                .setCode(CommandCode.REGIST.getCode())
+                .setCommand("true").build();
     }
 }

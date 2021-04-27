@@ -1,14 +1,15 @@
 
 package com.cubic.proxy.common.server;
 
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.google.common.util.concurrent.ListenableFuture;
 
 public interface Connection {
 
 
-    String write(Object message, SyncFuture syncFuture);
+    String write(CommonMessage message, SyncFuture syncFuture);
 
-    public void write(Object message);
+    void write(CommonMessage message);
 
     ListenableFuture<Void> closeFuture();
 
