@@ -1,5 +1,5 @@
 package com.matrix.proxy.service;
-import com.matrix.proxy.entity.RelyInformation;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,5 +14,5 @@ public interface JarService {
      * 获取应用JAR列表信息
      * @return
      */
-    public Map<String, List<RelyInformation>> getJarList(String id);
+    public  Map<Object, List<Object>> getJarList(String id);
 }

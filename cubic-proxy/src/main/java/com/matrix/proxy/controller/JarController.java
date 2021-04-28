@@ -1,10 +1,11 @@
 package com.matrix.proxy.controller;
 
-import com.matrix.proxy.entity.RelyInformation;
+
 import com.matrix.proxy.service.JarService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class JarController {
      * @return
      */
     @RequestMapping("/getList")
-    public Map<String, List<RelyInformation>> getJarList(String appId) {
+    public Map<Object, List<Object>> getJarList(String appId) {
         return jarService.getJarList(appId);
 
     }
