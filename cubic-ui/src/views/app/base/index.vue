@@ -4,6 +4,7 @@
       <div slot="header" class="clearfix">
         <span style="font-size: 14px;">应用： </span>
         <el-select
+          class="mr"
           v-model="instanceName"
           size="mini"
           style="width: 280px"
@@ -41,7 +42,7 @@
               <el-input v-model="searchParams" size="mini" style="width: 200px" placeholder="Lib列表:输入关键字搜索" />
             </li>
             <div >
-              <vue-scroll>
+              <!-- <vue-scroll> -->
                 <li
                   v-for="(item, index) in libs.filter(data=> !searchParams || data.toLowerCase().includes(searchParams.toLowerCase()))"
                   :key="index"
@@ -49,7 +50,7 @@
                 >
                   <span>{{ item.trim() }}</span>
                 </li>
-              </vue-scroll>
+              <!-- </vue-scroll> -->
             </div>
           </ul>
         </el-tab-pane>
@@ -116,7 +117,7 @@ export default {
     getInstanceDetail(params) {
       const _this = this
       getInstanceInfo(params).then(res => {
-        console.log(res)
+        console.log('testFEzjw', res)
         _this.libs = res.data.libs
         _this.instanceObj = res.data
 
@@ -259,5 +260,9 @@ export default {
   .el-form-item:last-child {
     // border-bottom: none;
   }
+}
+
+.mr {
+  margin-right: 20px;
 }
 </style>

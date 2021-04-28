@@ -55,6 +55,7 @@ public class ThreadPoolProcessor implements Processor {
         ThreadPoolExecutor monitorThreadPool = service.getMonitor(threadPoolCommandBody.getKey());
         if (monitorThreadPool == null) {
             log.warn("thread pool is null, key [{}]", key);
+            return;
         }
 
         log.debug("update [{}] thread pool, {}({})", key, methodName, arg);

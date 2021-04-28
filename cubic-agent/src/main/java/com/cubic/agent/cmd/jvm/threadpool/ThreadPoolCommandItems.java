@@ -15,29 +15,35 @@ public enum ThreadPoolCommandItems {
     /**
      * 修改核心线程数
      */
-    CORE_POOL_SIZE("setCorePoolSize", (t, value) -> t.setCorePoolSize((Integer) value)),
+    CORE_POOL_SIZE("setCorePoolSize", (t, v) ->
+            t.setCorePoolSize(doubleToObject((Double) v, Integer.class))
+    ),
 
     /**
      * 修改存活时间
      */
-    KEEP_ALIVE_TIME("setKeepAliveTime", (t, v) -> t.setKeepAliveTime((Long) v, TimeUnit.MILLISECONDS)),
+    KEEP_ALIVE_TIME("setKeepAliveTime", (t, v) ->
+            t.setKeepAliveTime(doubleToObject((Double) v, Long.class), TimeUnit.MILLISECONDS)
+    ),
 
     /**
      * 修改最大线程数
      */
-    MAXIMUM_POOL_SIZE("setMaximumPoolSize", (t, v) -> t.setMaximumPoolSize((Integer) v)),
+    MAXIMUM_POOL_SIZE("setMaximumPoolSize", (t, v) ->
+            t.setMaximumPoolSize(doubleToObject((Double) v, Integer.class))
+    ),
 
     /**
      * 修改拒绝策略
      */
     REJECTED_EXECUTION_HANDLER("setRejectedExecutionHandler", (t, v) -> {
         for (RejectedExecutionHandler rejectedExecutionHandler : RejectedExecution.HANDLERS) {
-            if (rejectedExecutionHandler.getClass().getName().equals(v.toString())) {
+            if (rejectedExecutionHandler.getClass().getName().split("\\$")[1].equals(v.toString())) {
                 t.setRejectedExecutionHandler(rejectedExecutionHandler);
                 return;
             }
         }
-        new IllegalArgumentException("not found `RejectedExecutionHandler` for [" + v + "]");
+        throw new IllegalArgumentException("not found `RejectedExecutionHandler` for [" + v + "]");
     }),
 
     /**
@@ -72,6 +78,30 @@ public enum ThreadPoolCommandItems {
                 return;
             }
         }
+    }
+
+    /**
+     * dubbo转指定类型
+     * <p>
+     * gson数值默认转成double类型
+     *
+     * @param n
+     * @param mClass
+     * @param <T>
+     * @return
+     */
+    private static <T> T doubleToObject(Double n, Class<T> mClass) {
+        if (n == null || mClass == null) {
+            return (T) n;
+        }
+        if (mClass == Integer.class) {
+            return (T) (Integer) n.intValue();
+        }
+
+        if (mClass == Long.class) {
+            return (T) (Long) n.longValue();
+        }
+        throw new UnsupportedOperationException("can not to [" + mClass + "]");
     }
 
     /**
