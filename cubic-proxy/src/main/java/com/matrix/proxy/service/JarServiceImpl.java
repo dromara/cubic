@@ -29,10 +29,7 @@ public class JarServiceImpl implements JarService {
     public Map<Object, List<Object>> getJarList(String Appid) {
         Information information = informationMapper.selectJarsByAppId(Appid);
         if(information == null){return null;}
-        JSONArray jsonArray =JSONArray.parseArray(information.getJars());
-        Map<Object, List<Object>> jarmap = null;
-//        .substring(0,item.toString().lastIndexOf("-")
-        jarmap = jsonArray.stream().collect(Collectors.groupingBy(item -> Arrays.stream(item.toString().split("-")).findFirst().get()));
+        Map<Object, List<Object>> jarmap = JSONArray.parseArray(information.getJars()).stream().collect(Collectors.groupingBy(item -> Arrays.stream(item.toString().split("-")).findFirst().get()));
         return jarmap;
     }
 }
