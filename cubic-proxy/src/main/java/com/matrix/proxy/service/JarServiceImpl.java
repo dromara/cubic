@@ -1,11 +1,15 @@
 package com.matrix.proxy.service;
 
-import com.matrix.proxy.entity.RelyInformation;
-import com.matrix.proxy.mapper.RelyinformationMapper;
+import com.alibaba.fastjson.JSONArray;
+import com.matrix.proxy.entity.Information;
+import com.matrix.proxy.mapper.InformationMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -19,14 +23,13 @@ import java.util.stream.Collectors;
 public class JarServiceImpl implements JarService {
 
     @Resource
-    private RelyinformationMapper relyinformationMapper;
+    private InformationMapper informationMapper;
 
     @Override
-    public Map<String, List<RelyInformation>> getJarList(String Appid) {
-        List<RelyInformation> jarList = relyinformationMapper.getJarList(Appid);
-        Map<String, List<RelyInformation>>jarmap =
-                jarList.stream().collect(Collectors.groupingBy(item ->
-                        item.getJarName().substring(0,item.getJarName().indexOf(":"))));
+    public Map<Object, List<Object>> getJarList(String Appid) {
+        Information information = informationMapper.selectJarsByAppId(Appid);
+        if(information == null){return null;}
+        Map<Object, List<Object>> jarmap = JSONArray.parseArray(information.getJars()).stream().collect(Collectors.groupingBy(item -> Arrays.stream(item.toString().split("-")).findFirst().get()));
         return jarmap;
     }
 }

@@ -35,6 +35,10 @@
     SELECT * FROM information   where  app_id = #{appId}
   </select>
 
+  <select id="selectJarsByAppId" resultMap="BaseResultMap">
+    SELECT jars FROM information   where  app_id = #{appId}
+  </select>
+
   <select id="selectInstanceIdByNames" resultType="java.lang.String">
     SELECT instance_id  FROM information   where  instance_name = #{instanceName} and last_heartbeat > #{date}
   </select>
