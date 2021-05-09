@@ -46,18 +46,11 @@
           <div slot="header" class="clearfix">
             <span>版本详情</span>
           </div>
-          <el-collapse>
-            <el-collapse-item v-for="(item, index) in detail" :key="index" :title="item.jarName" :name="item.jarName">
-              <el-form label-width="80px">
-                <el-form-item label="服务名称:">
-                  {{ item.serviceName }}
-                </el-form-item>
-                <el-form-item label="jar包名称:">
-                  {{ item.jarName }}
-                </el-form-item>
-              </el-form>
-            </el-collapse-item>
-          </el-collapse>
+          <el-form label-width="80px">
+            <el-form-item v-for="(item, index) in detail" :key="index" label="jar包名称:">
+              {{ item }}
+            </el-form-item>
+          </el-form>
         </el-card>
       </div>
       
@@ -83,37 +76,19 @@ export default {
       tableData: [],
       listLoading: true,
       list: {
-        // "shanzhu": [
-        //     {
-        //         "id": 4,
-        //         "appId": "1",
-        //         "serviceName": "lihongtest",
-        //         "jarName": "shanzhu:01",
-        //         "createDate": "2021-04-24 00:21:08"
-        //     }
+        // "apiguardian": [
+        //     "apiguardian-api-1.1.0.jar"
         // ],
-        // "lihong": [
-        //     {
-        //         "id": 1,
-        //         "appId": "1",
-        //         "serviceName": "lihongtest",
-        //         "jarName": "lihong:01",
-        //         "createDate": "2021-04-23 23:31:20"
-        //     },
-        //     {
-        //         "id": 2,
-        //         "appId": "1",
-        //         "serviceName": "lihongtest",
-        //         "jarName": "lihong:02",
-        //         "createDate": "2021-04-24 00:19:43"
-        //     },
-        //     {
-        //         "id": 3,
-        //         "appId": "1",
-        //         "serviceName": "lihongtest",
-        //         "jarName": "lihong:03",
-        //         "createDate": "2021-04-24 00:20:14"
-        //     }
+        // "jsse.jar": [
+        //     "jsse.jar"
+        // ],
+        // "tomcat": [
+        //     "tomcat-embed-core-9.0.39.jar",
+        //     "tomcat-embed-websocket-9.0.39.jar"
+        // ],
+        // "jakarta.activation": [
+        //     "jakarta.activation-api-1.2.2.jar",
+        //     "jakarta.activation-1.2.2.jar"
         // ]
       },
       detail: ''
