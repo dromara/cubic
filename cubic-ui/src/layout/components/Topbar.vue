@@ -1,24 +1,14 @@
 <template>
   <div class="top-nav">
-    <div class="log">Cubic</div>
-    <!-- <el-menu
-      :active-text-color="variables.menuActiveText"
-      :default-active="activeMenu"
-      mode="horizontal"
-      @select="handleSelect"
-    >
-      <div v-for="item in routes" :key="item.path" class="nav-item">
-        <app-link :to="resolvePath(item)">
-          <el-menu-item
-            v-if="!item.hidden"
-            :index="item.path"
-          >{{ item.meta ? item.meta.title : item.children[0].meta.title }}</el-menu-item>
-        </app-link>
+    <div class="logo-container">
+      <div class="log">
+        <router-link to="/">Cubic</router-link>
       </div>
-    </el-menu> -->
-    <div class="txt">
-      一站式问题定位平台
+      <div class="txt">
+        一站式问题定位平台
+      </div>
     </div>
+    
 
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">

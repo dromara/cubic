@@ -112,6 +112,20 @@ export const constantRoutes = [
       }
     }]
   },
+  {
+    path: '/clash',
+    component: Layout,
+    redirect: '/clash',
+    children: [{
+      path: 'clash',
+      name: 'Clash',
+      component: () => import('@/views/clash/index'),
+      meta: { 
+        title: '依赖冲突预警',
+        showMenu: true
+      }
+    }]
+  },
   // {
   //   path: '/app',
   //   component: Layout,
