@@ -34,6 +34,14 @@ public interface InformationMapper extends BaseMapper<Information> {
 
 
     /**
+     * 根据appId查询jars信息
+     *
+     * @param appId
+     * @return
+     */
+    Information selectJarsByAppId(String appId);
+
+    /**
      * 根据应用名称查询应用存活实例
      *
      * @param instanceName

@@ -16,6 +16,14 @@ export function threadPoolList(query) {
   })
 }
 
+export function getJarList(query) {
+  return request({
+    url: '/jar/getList',
+    method: 'get',
+    params: query
+  })
+}
+
 
 export function getInstanceInfo(query) {
   return request({

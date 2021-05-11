@@ -23,6 +23,10 @@
         <i class="el-icon-data-line"></i>
         <span slot="title">线程池监控</span>
     </el-menu-item>
+    <el-menu-item index="/clash/clash">
+        <i class="el-icon-warning"></i>
+        <span slot="title">依赖冲突预警</span>
+    </el-menu-item>
     </el-menu>
   </div>
 </template>
