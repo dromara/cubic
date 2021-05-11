@@ -2,7 +2,9 @@
 
   .main-container {
     // min-height: 100%;
+    // padding: 20px;
     height: $contentHeight;
+    // height:  calc(#{$contentHeight} - 120px);
     transition: margin-left .28s;
     margin-left: $sideBarWidth;
     margin-top: $topBarHeight;
@@ -25,6 +27,8 @@
     left: 0;
     z-index: 1001;
     overflow: hidden;
+    box-shadow: 3px 0px 10px rgb(124, 124, 124);
+
 
     // reset element-ui css
     .horizontal-collapse-transition {

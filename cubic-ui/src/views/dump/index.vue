@@ -105,6 +105,7 @@ export default {
     }
   },
   created() {
+    console.log(this.$cookies.get());
     this.instanceUid = this.$cookies.get('appId')
     this.instanceName = this.$cookies.get('instanceName')
     this.getInstanceList({name: this.instanceName})
