@@ -19,13 +19,12 @@
 package com.cubic.agent.remote;
 
 
-import com.cubic.agent.module.Message;
 import com.cubic.agent.process.Processor;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +36,7 @@ import java.util.Map;
  * 处理业务命令
  */
 @ChannelHandler.Sharable
-public class AgentRequestHandler extends ChannelInboundHandlerAdapter {
+public class AgentRequestHandler extends SimpleChannelInboundHandler<CommonMessage> {
     private static final Logger log = LoggerFactory.getLogger(AgentRequestHandler.class);
 
 
@@ -54,7 +53,7 @@ public class AgentRequestHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         log.error("request process error", cause);
         ctx.channel().close();
     }
@@ -67,22 +66,16 @@ public class AgentRequestHandler extends ChannelInboundHandlerAdapter {
      * @throws Exception
      */
     @Override
-    public void channelRead(final ChannelHandlerContext ctx, Object msg) throws Exception {
-        Gson gson = new Gson();
-        String data = (String) msg;
-        Message obj = gson.fromJson(data, Message.class);
-        Integer code = obj.getCode();
-        String command = obj.getCommand();
-        String id = obj.getId();
-
+    public void channelRead0(final ChannelHandlerContext ctx, CommonMessage msg) throws Exception {
+        Integer code = msg.getCode();
+        String command = msg.getCommand();
+        String id = msg.getId();
         if (code.intValue() != CommandCode.HEARTBEAT.getCode()) {
             log.debug("agent receive process code {} request: id={}, sourceIp={}, code={}", code, id, ctx.channel().remoteAddress(), code);
         }
-
         Processor processor = processorMap.get(code.intValue());
         if (processor == null) {
             log.warn("agent receive process code {} request: id={}, sourceIp={}, code={} ,but it can not find process", code, id, ctx.channel().remoteAddress(), code);
-
             return;
         }
         processor.process(ctx, id, command);

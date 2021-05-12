@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.cubic.proxy.common.session.Session;
 import com.cubic.proxy.common.session.SessionManager;
 import com.cubic.proxy.common.webserver.WebConnection;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.google.common.collect.Maps;
 import com.matrix.proxy.module.Command;
 import com.cubic.proxy.common.server.ServerConnection;
@@ -54,8 +55,13 @@ public class DefaultSessionManager implements SessionManager, Runnable {
             if (!session.getWebConnection().getChannel().isActive()) {
                 ServerConnection connection = session.getServerConnection();
                 if (connection.isActive()) {
-                    Command command = Command.builder().command("stop").code(CommandCode.ARTHAS.getCode()).id(UUID.randomUUID().toString()).instanceUuid(entry.getKey()).build();
-                    connection.write(JSON.toJSONString(command));
+//                    Command command = Command.builder().command("stop").code(CommandCode.ARTHAS.getCode()).id(UUID.randomUUID().toString()).instanceUuid(entry.getKey()).build();
+                    CommonMessage command = CommonMessage.newBuilder()
+                            .setCommand("stop")
+                            .setCode(CommandCode.ARTHAS.getCode())
+                            .setId(UUID.randomUUID().toString())
+                            .setInstanceUuid(entry.getKey()).build();
+                    connection.write(command);
                 }
                 return true;
             }

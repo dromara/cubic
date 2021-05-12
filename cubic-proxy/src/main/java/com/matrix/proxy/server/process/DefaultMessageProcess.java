@@ -1,12 +1,28 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.matrix.proxy.server.process;
 
-import com.alibaba.fastjson.JSON;
-import com.google.common.cache.*;
-import com.matrix.proxy.module.Command;
-import com.cubic.proxy.common.server.SyncFuture;
 import com.cubic.proxy.common.handler.ServerMessageProcess;
+import com.cubic.proxy.common.server.SyncFuture;
 import com.cubic.proxy.common.session.Session;
 import com.cubic.proxy.common.session.SessionManager;
+import com.cubic.serialization.agent.v1.CommonMessage;
+import com.google.common.cache.*;
 import com.matrix.proxy.util.CubicContextHolder;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
@@ -56,25 +72,20 @@ public class DefaultMessageProcess implements ServerMessageProcess {
     }
 
     @Override
-    public boolean ackSync(String msg) {
-
+    public boolean ackSync(CommonMessage msg) {
         if(sessionManager == null){
             this.sessionManager = CubicContextHolder.getCache(SessionManager.class);
         }
-        log.info("接收到服务返回数据 length: {}", msg.length());
+        log.info("接收到服务返回数据 length: {}", msg.getSerializedSize());
         boolean rs = false;
         try {
-            Command cmd = JSON.parseObject(msg, Command.class);
-            String id = cmd.getId();
-
+            String id = msg.getId();
             SyncFuture syncFuture = futureCache.getIfPresent(id);
-
             if (syncFuture == null) {
-                log.warn("ackSync command data length:{},but can not found SyncFuture by cache", msg.length());
-
-                return ackToWeb(cmd);
+                log.warn("ackSync command data length:{},but can not found SyncFuture by cache", msg.getSerializedSize());
+                return ackToWeb(msg);
             }
-            syncFuture.setResponse(msg);
+            syncFuture.setResponse(msg.toString());
             futureCache.invalidate(id);
             rs = true;
         } catch (Exception e) {
@@ -84,21 +95,21 @@ public class DefaultMessageProcess implements ServerMessageProcess {
         return rs;
     }
 
-    public boolean ackToWeb(Command command) {
+    public boolean ackToWeb(CommonMessage msg) {
 
         if (sessionManager == null) {
             return false;
         }
-        Session session = sessionManager.getSession(command.getId());
+        Session session = sessionManager.getSession(msg.getId());
         if (session == null) {
             log.warn("receive message ,can not get websocket session ");
             return false;
         }
 
-        log.info("接收到 arthas 返回数据，id:{}", command.getId());
+        log.info("接收到 arthas 返回数据，id:{}", msg.getId());
 
-        if (StringUtils.isNotEmpty(command.getBody())) {
-            session.writeToWeb(command.getBody());
+        if (StringUtils.isNotEmpty(msg.getBody())) {
+            session.writeToWeb(msg);
         }
         return true;
     }
@@ -109,9 +120,7 @@ public class DefaultMessageProcess implements ServerMessageProcess {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String datagram) {
+    public void process(ChannelHandlerContext ctx, CommonMessage datagram) {
 
     }
-
-
 }
