@@ -1,10 +1,9 @@
 package com.matrix.proxy.service;
 
-import com.alibaba.fastjson.JSON;
-import com.matrix.proxy.module.Command;
 import com.cubic.proxy.common.server.ServerConnection;
 import com.cubic.proxy.common.server.ServerConnectionStore;
 import com.cubic.proxy.common.server.SyncFuture;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.matrix.proxy.server.process.DefaultMessageProcess;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,30 +37,28 @@ public class JdkCommandServiceImpl extends DefaultMessageProcess implements JdkC
      */
     @Override
     public String exeCommand(String instanceUuid, Integer type, String data) {
-
-        Command.CommandBuilder commandBuilder = Command.builder();
-        Command command =  commandBuilder.id(UUID.randomUUID().toString()).code(type).command(data).instanceUuid(instanceUuid).build();
-        Optional<ServerConnection> connection = this.serverConnectionStore.getConnection(command.getInstanceUuid());
-
+        CommonMessage commonMessage = CommonMessage.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setCode(type)
+                .setCommand(data)
+                .setInstanceUuid(instanceUuid).build();
+        Optional<ServerConnection> connection = this.serverConnectionStore.getConnection(commonMessage.getInstanceUuid());
         if (connection.isPresent() && connection.get().isActive()) {
             try {
                 SyncFuture syncFuture = new SyncFuture();
-                putSyncFuture(command.getId(),syncFuture);
-                log.info("执行reqId:{},uid:{}命令code:{}", command.getId(), command.getInstanceUuid(), command.getCode());
-                return connection.get().write(JSON.toJSONString(command), syncFuture);
+                putSyncFuture(commonMessage.getId(),syncFuture);
+                log.info("执行reqId:{},uid:{}命令code:{}", commonMessage.getId(), commonMessage.getInstanceUuid(), commonMessage.getCode());
+                return connection.get().write(commonMessage, syncFuture);
             } catch (Exception e) {
-                log.error("CommandService dispose error:{}", e);
+                log.error("CommandService dispose error: {}", e);
             }
         }
-        Map<String, ServerConnection>  connectionMap = serverConnectionStore.getAgentConnection();
+        Map<String, ServerConnection> connectionMap = serverConnectionStore.getAgentConnection();
         StringBuilder builder = new StringBuilder();
         connectionMap.forEach((k,v) ->{
             builder.append(k).append("  ||  ");
-       });
-        log.warn("不能获取uid:{} 到有效连接. instanceUuid:{},type:{},data:{},serverConnectionStore:{}", command.getId(),instanceUuid, type,data,builder.toString());
-
+        });
+        log.warn("不能获取uid:{} 到有效连接. instanceUuid:{},type:{},data:{},serverConnectionStore:{}", commonMessage.getId(), instanceUuid, type,data, builder);
         return "";
     }
-
-
 }

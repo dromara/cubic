@@ -1,7 +1,6 @@
 package com.cubic.agent.remote;
 
-import com.google.gson.Gson;
-import com.cubic.agent.module.Message;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
@@ -27,8 +26,13 @@ public class ResponseWriter {
     }
 
     public void write(ChannelHandlerContext ctx, Integer code, String content, String id) {
-        Message message = new Message(code, content, id);
-        Gson gson = new Gson();
-        ctx.writeAndFlush(gson.toJson(message));
+        CommonMessage message = CommonMessage.newBuilder()
+                .setCode(code)
+                .setBody(content)
+                .setId(id)
+                .build();
+//        Message message = new Message(code, content, id);
+//        Gson gson = new Gson();
+        ctx.writeAndFlush(message);
     }
 }

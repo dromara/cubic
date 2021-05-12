@@ -2,17 +2,17 @@ package com.cubic.agent.cmd.jvm.threadpool;
 
 import com.cubic.agent.boot.CommonService;
 import com.cubic.agent.boot.ServiceManager;
-import com.cubic.agent.module.Message;
+import com.cubic.agent.conf.AgentConfig;
 import com.cubic.agent.remote.*;
-import com.google.gson.Gson;
-import io.netty.channel.ChannelFuture;
+import com.cubic.serialization.agent.v1.CommonMessage;
+import com.cubic.serialization.agent.v1.JVMThreadPoolMetric;
+import com.cubic.serialization.agent.v1.ThreadPoolInfo;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.*;
@@ -133,32 +133,30 @@ public class ThreadPoolService implements CommonService, AgentChannelListener {
                 logger.warn("Channel not connection.");
                 return;
             }
-
-            Map<String, Map<String, Object>> body = new HashMap<>();
+            JVMThreadPoolMetric.Builder jvmThreadPoolMap = JVMThreadPoolMetric.newBuilder();
             threadPoolReferences.forEach((key, weakThreadPool) -> {
                 if (weakThreadPool == null || weakThreadPool.get() == null) {
                     return;
                 }
-                body.put(key, ThreadPoolMonitorItems.getItems(weakThreadPool.get()));
+                jvmThreadPoolMap.putThreadPoolMetric(key, ThreadPoolInfo.newBuilder()
+                                .putAllThreadPoolMetricInfo(ThreadPoolMonitorItems.getItems(weakThreadPool.get()))
+                                .build());
             });
-
-            if (body.isEmpty()) {
-                logger.debug("cubic thread pool monitor, body is empty.");
-                return;
-            }
-
             try {
-                Gson gson = new Gson();
-                Message message = new Message(CommandCode.JVM_THREAD_POOL.getCode(), gson.toJson(body), "0000");
-                client.getChannel().writeAndFlush(gson.toJson(message)).addListener(new ChannelFutureListener() {
-                    @Override
-                    public void operationComplete(ChannelFuture future) {
-                        if (!future.isSuccess()) {
-                            logger.error("ThreadPoolMonitorService send {} fail", message.getCommand());
-                        } else {
-                            logger.debug("ThreadPoolMonitorService send command:{}  channel : {} ",
-                                    message.getCommand(), client.getChannel());
-                        }
+                CommonMessage commonMessage = CommonMessage.newBuilder()
+                        .setBody("JVM Thread Pool")
+                        .setCode(CommandCode.JVM_THREAD_POOL.getCode())
+                        .setMsgContent(jvmThreadPoolMap.build().toByteString())
+                        .setId("0000")
+                        .setInstanceUuid(AgentConfig.Agent.INSTANCE_UUID)
+                        .setInstanceName(AgentConfig.Agent.SERVICE_NAME)
+                        .setInstanceVersion(AgentConfig.Agent.VERSION).build();
+                client.getChannel().writeAndFlush(commonMessage).addListener((ChannelFutureListener) future -> {
+                    if (!future.isSuccess()) {
+                        logger.error("ThreadPoolMonitorService send {} fail", commonMessage.getCommand());
+                    } else {
+                        logger.debug("ThreadPoolMonitorService send command:{}  channel : {} ",
+                                commonMessage.getCommand(), client.getChannel());
                     }
                 });
             } catch (Exception e) {

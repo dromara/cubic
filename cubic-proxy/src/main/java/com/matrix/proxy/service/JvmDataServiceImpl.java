@@ -5,11 +5,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cubic.serialization.agent.v1.ThreadPoolInfo;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.TextFormat;
 import com.matrix.proxy.entity.ThreadPoolEntity;
 import com.matrix.proxy.mapper.ThreadPoolMapper;
 import com.matrix.proxy.module.ThreadPoolVo;
 import com.matrix.proxy.util.DateUtils;
 import com.matrix.proxy.vo.ThreadPoolQueryVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +26,7 @@ import java.util.*;
  * @author zhanghao
  * @date 2021/4/75:59 下午
  */
+@Slf4j
 @Service
 public class JvmDataServiceImpl implements JvmDataService {
     @Resource
@@ -51,17 +56,21 @@ public class JvmDataServiceImpl implements JvmDataService {
         List<ThreadPoolVo> vos = new ArrayList<>();
         for (ThreadPoolEntity entity : poolEntities) {
             ThreadPoolVo.ThreadPoolVoBuilder builder = ThreadPoolVo.builder().threadPoolKey(entity.getThreadPoolKey()).createTime(entity.getCreateTime());
-
-            JSONObject params = JSON.parseObject(entity.getThreadPoolParams());
-            builder.coreSize(params.getString("CORE_POOL_SIZE"))
-                    .activeCount(params.getString("ACTIVE_COUNT"))
-                    .completedTaskCount(params.getString("COMPLETED_TASK_COUNT"))
-                    .largestPoolSize(params.getString("LARGEST_POOL_SIZE"))
-                    .poolSize(params.getString("POOL_SIZE"))
-                    .taskCount(params.getString("TASK_COUNT"))
-                    .maximumPoolSize(params.getString("MAXIMUM_POOL_SIZE"))
-                    .keepAliveTime(params.getString("KEEP_ALIVE_TIME"));
-
+            ThreadPoolInfo.Builder threadPoolBuild = ThreadPoolInfo.newBuilder();
+            try {
+                TextFormat.merge(entity.getThreadPoolParams(), threadPoolBuild);
+            } catch (TextFormat.ParseException e) {
+                log.error("线程池监控 ThreadPoolInfo.Builder 解析出错 {} {}", entity.getThreadPoolParams(), e.getStackTrace());
+            }
+            Map<String, Long> params = threadPoolBuild.build().getThreadPoolMetricInfoMap();
+            builder.coreSize(params.get("CORE_POOL_SIZE").toString())
+                    .activeCount(params.get("ACTIVE_COUNT").toString())
+                    .completedTaskCount(params.get("COMPLETED_TASK_COUNT").toString())
+                    .largestPoolSize(params.get("LARGEST_POOL_SIZE").toString())
+                    .poolSize(params.get("POOL_SIZE").toString())
+                    .taskCount(params.get("TASK_COUNT").toString())
+                    .maximumPoolSize(params.get("MAXIMUM_POOL_SIZE").toString())
+                    .keepAliveTime(params.get("KEEP_ALIVE_TIME").toString());
             vos.add(builder.build());
         }
         Map<String, Object> rs = new HashMap<>(16);
