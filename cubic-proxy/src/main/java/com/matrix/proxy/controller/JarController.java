@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,7 +27,7 @@ public class JarController {
      * @return
      */
     @RequestMapping("/getList")
-    public Map<Object, List<Object>> getJarList(String appId) {
+    public Map<String, Integer> getJarList(String appId) {
         return jarService.getJarList(appId);
 
     }
