@@ -44,11 +44,6 @@ public class JarServiceImpl implements JarService {
                 .collect(Collectors.groupingBy(item -> item.toString()
                         ,Collectors.counting()));
 
-        Map<String, Integer> jarmapW = (Map<String, Integer>) jarList.stream()
-                .filter(item -> NUMBER_PATTERN.matcher(item.toString()).find() && item.toString().contains("-"))
-                .collect(Collectors.groupingBy(item -> item.toString()
-                        ,Collectors.counting()));
-
         Map<Object, List<Object>> jarmapV = JSONArray.parseArray(information.getJars())
                 .stream()
                 .filter(item -> NUMBER_PATTERN.matcher(item.toString()).find() && item.toString().contains("-"))
