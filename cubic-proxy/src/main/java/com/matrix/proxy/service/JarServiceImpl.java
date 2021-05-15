@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,7 @@ public class JarServiceImpl implements JarService {
             }
         }
         jarmap.putAll(jarmapN);
-        return jarmap;
+        Map<String, Integer> sorted = new TreeMap<>(jarmap);
+        return sorted;
     }
 }
