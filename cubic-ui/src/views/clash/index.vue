@@ -46,7 +46,7 @@
               <el-input v-model="search" @input="searchInput" placeholder="模糊搜索"></el-input>
             </div>
           </div>
-          <div v-for="(value, key, index) in showList" :key="index" class="text item">
+          <div v-for="(value, key, index) in showList" :key="index" class="text item" :class="value == 1 ? '' : 'red'">
             {{ key }}
           </div>
         </el-card>
@@ -54,13 +54,11 @@
           <div slot="header" class="clearfix">
             <span>依赖冲突</span>
           </div>
-          <el-form label-width="10px">
-            <el-form-item v-for="(value, key, index) in detail" :key="index" label="">
-              <span class="red">
-                {{ key }}
-              </span>
-            </el-form-item>
-          </el-form>
+          <div v-for="(value, key, index) in detail" :key="index" class="detail">
+            <span class="red line-heigth">
+              {{ key }}
+            </span>
+          </div>
         </el-card>
       </div>
       
@@ -87,10 +85,10 @@ export default {
       listLoading: true,
       list: {
         // "junit-platform-commons-1.6.3.jar": 1,
-        // "junit-vintage-engine-5.6.3.jar": 1,
+        // "junit-vintage-engine-5.6.3.jar": 2,
         // "sunpkcs11.jar": 1,
         // "zipfs.jar": 1,
-        // "mybatis-plus-core-3.4.2.jar": 1,
+        // "mybatis-plus-core-3.4.2.jar": 2,
         // "spring-boot-devtools-2.3.5.RELEASE.jar": 1
       },
       detail: '',
@@ -153,7 +151,7 @@ export default {
         let search = this.search
         let obj = {}
         for (const key in this.list) {
-          if (key.indexOf(search) != -1) {
+          if (key.toLowerCase().indexOf(search.toLowerCase()) != -1) {
             obj[key] = this.list[key]
           }
         }
@@ -212,12 +210,10 @@ export default {
 
   .left-card {
     width: 100%;
-    margin-right: 10px;
   }
 
   .rigth-card {
     width: 100%;
-    margin-left: 10px;
   }
 
   .bottom-crad {
@@ -238,10 +234,13 @@ export default {
       right: 0;
       top: 0;
     }
-
+  }
   .header-input {
-    width: 200px !important;
+    width: 260px !important;
     display: inline-block;
   }
+
+  .detail {
+    line-height: 26px;
   }
 </style>
