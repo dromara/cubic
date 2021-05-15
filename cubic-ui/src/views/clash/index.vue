@@ -33,22 +33,32 @@
           >搜索</el-button>
       </div>
       <!-- 依赖列表 -->
+      <div class="check" >
+        <el-button @click="check" type="primary" class="rigth">
+          检测冲突
+        </el-button>
+      </div>
       <div class="bottom-crad">
         <el-card class="left-card">
-          <div slot="header" class="clearfix">
+          <div slot="header" class="clearfix-header">
             <span>依赖列表</span>
+            <div class="header-input">
+              <el-input v-model="search" @input="searchInput" placeholder="模糊搜索"></el-input>
+            </div>
           </div>
-          <div v-for="(value, key, index) in list" :key="index" class="text item">
-            <el-button @click="handleDetail(key)" type="text" size="small" :class="value.length > 1 ? 'red' : ''" >{{key + '(' + value.length + ')'}}</el-button>
+          <div v-for="(value, key, index) in showList" :key="index" class="text item">
+            {{ key }}
           </div>
         </el-card>
-        <el-card class="left-card">
+        <el-card class="rigth-card">
           <div slot="header" class="clearfix">
-            <span>版本详情</span>
+            <span>依赖冲突</span>
           </div>
-          <el-form label-width="80px">
-            <el-form-item v-for="(item, index) in detail" :key="index" label="jar包名称:">
-              {{ item }}
+          <el-form label-width="10px">
+            <el-form-item v-for="(value, key, index) in detail" :key="index" label="">
+              <span class="red">
+                {{ key }}
+              </span>
             </el-form-item>
           </el-form>
         </el-card>
@@ -76,22 +86,16 @@ export default {
       tableData: [],
       listLoading: true,
       list: {
-        // "apiguardian": [
-        //     "apiguardian-api-1.1.0.jar"
-        // ],
-        // "jsse.jar": [
-        //     "jsse.jar"
-        // ],
-        // "tomcat": [
-        //     "tomcat-embed-core-9.0.39.jar",
-        //     "tomcat-embed-websocket-9.0.39.jar"
-        // ],
-        // "jakarta.activation": [
-        //     "jakarta.activation-api-1.2.2.jar",
-        //     "jakarta.activation-1.2.2.jar"
-        // ]
+        // "junit-platform-commons-1.6.3.jar": 1,
+        // "junit-vintage-engine-5.6.3.jar": 1,
+        // "sunpkcs11.jar": 1,
+        // "zipfs.jar": 1,
+        // "mybatis-plus-core-3.4.2.jar": 1,
+        // "spring-boot-devtools-2.3.5.RELEASE.jar": 1
       },
-      detail: ''
+      detail: '',
+      search: '',
+      showList: {}
     }
   },
   created() {
@@ -137,12 +141,33 @@ export default {
       _this.detail = ''
       getJarList({ appId:  _this.instanceUid}).then(response => {
         _this.list = response.data
+        _this.showList = response.data
       }).finally(() => {
         this.listLoading = false
       })
     },
-    handleDetail(row) {
-      this.detail = this.list[row]
+    searchInput() {
+      if (this.search == '') {
+        this.showList = this.list
+      } else {
+        let search = this.search
+        let obj = {}
+        for (const key in this.list) {
+          if (key.indexOf(search) != -1) {
+            obj[key] = this.list[key]
+          }
+        }
+        this.showList = obj
+      }
+    },
+    check() {
+      let list = {}
+      for (const key in this.list) {
+        if (this.list[key] > 1) {
+          list[key] = this.list[key]
+        }
+      }
+      this.detail = list
     }
   }
 }
@@ -172,16 +197,51 @@ export default {
     clear: both
   }
 
+  .clearfix-header {
+    display: flex;
+    justify-content: space-between;
+    span {
+      line-height: 40px;
+    }
+  }
+  .clearfix {
+    span {
+      line-height: 40px;
+    }
+  }
+
   .left-card {
-    width: 500px;
+    width: 100%;
+    margin-right: 10px;
+  }
+
+  .rigth-card {
+    width: 100%;
+    margin-left: 10px;
   }
 
   .bottom-crad {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   .red {
     color: red;
+  }
+
+  .check {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    .rigth {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+  .header-input {
+    width: 200px !important;
+    display: inline-block;
+  }
   }
 </style>
