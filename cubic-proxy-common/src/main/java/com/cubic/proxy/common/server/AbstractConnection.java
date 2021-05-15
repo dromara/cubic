@@ -1,5 +1,6 @@
 package com.cubic.proxy.common.server;
 
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import io.netty.channel.Channel;
@@ -26,7 +27,7 @@ public abstract class AbstractConnection implements Connection {
     }
 
     @Override
-    public String write(Object message, SyncFuture syncFuture) {
+    public String write(CommonMessage message, SyncFuture syncFuture) {
         String result = "";
         try {
             if (channel.isWritable()) {
@@ -51,7 +52,7 @@ public abstract class AbstractConnection implements Connection {
     }
 
     @Override
-    public void write(Object message) {
+    public void write(CommonMessage message) {
         write(message, null);
     }
 

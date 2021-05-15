@@ -22,7 +22,7 @@ public class DelimiterBasedFrameEncoder extends MessageToByteEncoder<String> {
     }
 
     @Override
-    protected void encode(ChannelHandlerContext ctx, String msg, ByteBuf out) throws Exception {
+    protected void encode(ChannelHandlerContext ctx, String msg, ByteBuf out) {
         ctx.writeAndFlush(Unpooled.wrappedBuffer((GzipUtils.compress(msg) + delimiter).getBytes()));
     }
 }

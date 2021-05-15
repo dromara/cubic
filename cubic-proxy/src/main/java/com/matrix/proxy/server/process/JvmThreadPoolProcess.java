@@ -1,9 +1,10 @@
 package com.matrix.proxy.server.process;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.cubic.proxy.common.constant.CommandCode;
-import com.cubic.proxy.common.module.Message;
+import com.cubic.serialization.agent.v1.CommonMessage;
+import com.cubic.serialization.agent.v1.JVMThreadPoolMetric;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.matrix.proxy.entity.ThreadPoolEntity;
 import com.matrix.proxy.mapper.ThreadPoolMapper;
 import io.netty.channel.ChannelHandlerContext;
@@ -35,21 +36,27 @@ public class JvmThreadPoolProcess extends DefaultMessageProcess {
     }
 
     @Override
-    public void process(ChannelHandlerContext ctx, String datagram) {
+    public void process(ChannelHandlerContext ctx, CommonMessage datagram) {
         super.process(ctx, datagram);
         if(logger.isDebugEnabled()){
             logger.debug("receive datagram" + datagram);
         }
-        insertThreadPool(JSON.parseObject(datagram, Message.class));
+        insertThreadPool(datagram);
     }
 
-    private void insertThreadPool(Message message) {
+    private void insertThreadPool(CommonMessage message) {
         if (message == null) {
             return;
         }
-        JSONObject body = JSON.parseObject(message.getBody());
+        JVMThreadPoolMetric body;
+        try {
+            body = JVMThreadPoolMetric.parseFrom(message.getMsgContent());
+        } catch (InvalidProtocolBufferException e) {
+            logger.error("反序列化线程池监控数据出错：", e);
+            return;
+        }
         Date date = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-        body.forEach((key, params) -> {
+        body.getThreadPoolMetricMap().forEach((key, params) -> {
             threadPoolMapper.insert(ThreadPoolEntity.builder()
                     .instanceId(message.getInstanceUuid())
                     .instanceName(message.getInstanceName())

@@ -29,6 +29,7 @@ import com.cubic.proxy.common.session.SessionManager;
 import com.cubic.proxy.common.webserver.WebConnection;
 import com.cubic.proxy.common.webserver.WebConnectionStore;
 import com.cubic.proxy.common.webserver.WebProcess;
+import com.cubic.serialization.agent.v1.CommonMessage;
 import com.google.common.collect.ImmutableMap;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -162,7 +163,13 @@ public class WebRequestHandler extends SimpleChannelInboundHandler<TextWebSocket
     private Session writeAgent(Command cmd, WebConnection webConnection, ServerConnection serverConnection) {
         Session session = sessionManager.create(webConnection, serverConnection);
         cmd.setId(session.getId());
-        session.writeToAgent(JSON.toJSONString(cmd));
+        CommonMessage message = CommonMessage.newBuilder()
+                .setId(cmd.getId())
+                .setCommand(cmd.getCommand())
+                .setCode(cmd.getCode())
+                .build();
+//        session.writeToAgent(JSON.toJSONString(cmd));
+        session.writeToAgent(message);
         log.info("request command :{}  type:{}  id:{}", cmd.getCommand(), cmd.getCode(), cmd.getId());
         return session;
     }
