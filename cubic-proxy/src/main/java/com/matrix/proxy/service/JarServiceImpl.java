@@ -1,15 +1,17 @@
 package com.matrix.proxy.service;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.matrix.proxy.entity.Information;
 import com.matrix.proxy.mapper.InformationMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -25,11 +27,36 @@ public class JarServiceImpl implements JarService {
     @Resource
     private InformationMapper informationMapper;
 
+    private static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
+
     @Override
-    public Map<Object, List<Object>> getJarList(String Appid) {
+    public Map<String, Integer> getJarList(String Appid) {
         Information information = informationMapper.selectJarsByAppId(Appid);
         if(information == null){return null;}
-        Map<Object, List<Object>> jarmap = JSONArray.parseArray(information.getJars()).stream().collect(Collectors.groupingBy(item -> Arrays.stream(item.toString().split("-")).findFirst().get()));
-        return jarmap;
+
+        List jarList = JSONObject.parseArray(information.getJars());
+        Map<String, Integer> jarmap = (Map<String, Integer>) jarList.stream()
+                .filter(item -> NUMBER_PATTERN.matcher(item.toString()).find() && !item.toString().contains("-"))
+                .collect(Collectors.groupingBy(item -> item.toString()
+                        ,Collectors.counting()));
+
+        Map<String, Integer> jarmapN = (Map<String, Integer>) jarList.stream()
+                .filter(item -> !NUMBER_PATTERN.matcher(item.toString()).find())
+                .collect(Collectors.groupingBy(item -> item.toString()
+                        ,Collectors.counting()));
+
+        Map<Object, List<Object>> jarmapV = JSONArray.parseArray(information.getJars())
+                .stream()
+                .filter(item -> NUMBER_PATTERN.matcher(item.toString()).find() && item.toString().contains("-"))
+                .collect(Collectors.groupingBy(item -> item.toString().substring(0,item.toString().lastIndexOf("-"))));
+
+        for (List<Object> value : jarmapV.values()) {
+            for (Object item : value) {
+                jarmap.put(item.toString(),value.size());
+            }
+        }
+        jarmap.putAll(jarmapN);
+        Map<String, Integer> sorted = new TreeMap<>(jarmap);
+        return sorted;
     }
 }
