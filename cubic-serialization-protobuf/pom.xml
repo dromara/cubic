@@ -5,14 +5,14 @@
     <parent>
         <artifactId>cubic</artifactId>
         <groupId>matrix.cubic</groupId>
-        <version>1.2.0.RELEASE</version>
+        <version>1.4.1.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cubic-serialization-protobuf</artifactId>
 
     <properties>
-        <skip_maven_deploy>false</skip_maven_deploy>
+<!--        <skip_maven_deploy>false</skip_maven_deploy>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <grpc.protobuf.version>1.32.1</grpc.protobuf.version>
         <protoc-gen-grpc-java.plugin.version>1.32.1</protoc-gen-grpc-java.plugin.version>
