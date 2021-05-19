@@ -1,7 +1,6 @@
 /agent-dist/
 *.iml
 /agent-proxy-dist/
-/cubic-ui/dist/
 
 .idea
 target/
@@ -30,3 +29,4 @@ target/
 .settings
 .springBeans
 .sts4-cache
+/cubic-agent/dependency-reduced-pom.xml
