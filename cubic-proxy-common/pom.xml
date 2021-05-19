@@ -15,7 +15,6 @@
         <dependency>
             <groupId>matrix.cubic</groupId>
             <artifactId>cubic-serialization-protobuf</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

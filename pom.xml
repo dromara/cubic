@@ -17,19 +17,43 @@
 
     <properties>
         <java.version>1.8</java.version>
-
         <grpc-protobuf.version>1.32.1</grpc-protobuf.version>
         <protobuf-java.version>3.13.0</protobuf-java.version>
-
         <os-maven-plugin.version>1.6.2</os-maven-plugin.version>
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
         <com.google.protobuf.protoc.version>3.12.0</com.google.protobuf.protoc.version>
         <protoc-gen-grpc-java.plugin.version>1.32.1</protoc-gen-grpc-java.plugin.version>
+        <cubic.version>1.2.0.RELEASE</cubic.version>
     </properties>
 
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>matrix.cubic</groupId>
+                <artifactId>cubic-agent</artifactId>
+                <version>${cubic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>matrix.cubic</groupId>
+                <artifactId>cubic-proxy</artifactId>
+                <version>${cubic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>matrix.cubic</groupId>
+                <artifactId>cubic-proxy-common</artifactId>
+                <version>${cubic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>matrix.cubic</groupId>
+                <artifactId>cubic-proxy-websocket</artifactId>
+                <version>${cubic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>matrix.cubic</groupId>
+                <artifactId>cubic-serialization-protobuf</artifactId>
+                <version>${cubic.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
