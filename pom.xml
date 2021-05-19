@@ -13,7 +13,6 @@
         <module>cubic-proxy</module>
         <module>cubic-proxy-websocket</module>
         <module>cubic-proxy-common</module>
-        <module>cubic-serialization</module>
     </modules>
 
     <properties>
