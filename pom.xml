@@ -7,12 +7,13 @@
     <groupId>matrix.cubic</groupId>
     <artifactId>cubic</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.0.RELEASE</version>
+    <version>1.4.1.RELEASE</version>
     <modules>
         <module>cubic-agent</module>
         <module>cubic-proxy</module>
         <module>cubic-proxy-websocket</module>
         <module>cubic-proxy-common</module>
+        <module>cubic-serialization-protobuf</module>
     </modules>
 
     <properties>
@@ -23,7 +24,6 @@
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
         <com.google.protobuf.protoc.version>3.12.0</com.google.protobuf.protoc.version>
         <protoc-gen-grpc-java.plugin.version>1.32.1</protoc-gen-grpc-java.plugin.version>
-        <cubic.version>1.2.0.RELEASE</cubic.version>
     </properties>
 
 
@@ -32,27 +32,29 @@
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-agent</artifactId>
-                <version>${cubic.version}</version>
+                <version>1.4.1.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy</artifactId>
-                <version>${cubic.version}</version>
+                <version>1.4.1.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy-common</artifactId>
-                <version>${cubic.version}</version>
+                <version>1.4.1.RELEASE</version>
             </dependency>
+
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy-websocket</artifactId>
-                <version>${cubic.version}</version>
+                <version>1.4.1.RELEASE</version>
             </dependency>
+
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-serialization-protobuf</artifactId>
-                <version>${cubic.version}</version>
+                <version>1.4.1.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -96,17 +98,6 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.200</version>
-            </dependency>
-            <dependency>
-                <groupId>matrix.cubic</groupId>
-                <artifactId>cubic-proxy-common</artifactId>
-                <version>1.2.0.RELEASE</version>
-            </dependency>
-
-            <dependency>
-                <groupId>matrix.cubic</groupId>
-                <artifactId>cubic-proxy-websocket</artifactId>
-                <version>1.2.0.RELEASE</version>
             </dependency>
 
             <dependency>
