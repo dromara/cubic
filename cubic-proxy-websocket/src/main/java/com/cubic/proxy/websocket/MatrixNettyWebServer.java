@@ -12,6 +12,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder;
 import io.netty.handler.codec.http.websocketx.WebSocketFrameAggregator;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.timeout.IdleStateHandler;
@@ -68,6 +69,8 @@ public class MatrixNettyWebServer implements NettyServer {
                                 .addLast(new HttpObjectAggregator(1024 * 1024))
                                 .addLast(new WebSocketServerProtocolHandler("/ws"))
                                 .addLast(new WebSocketFrameAggregator(1024 * 1024 * 1024))
+                                .addLast(new CommonMessageToWebSocketEncoder())
+                                .addLast(new WebSocket00FrameEncoder())
                                 .addLast(connectionCounterHandler)
                                 .addLast(webRequestHandler);
                     }
