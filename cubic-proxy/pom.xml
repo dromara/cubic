@@ -172,19 +172,19 @@
                             </tasks>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>prepare-package</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <copydir src="${project.basedir}/../${cubic-ui-path}"
-                                         dest="${project.basedir}/src/main/resources/static" forceoverwrite="true"/>
-                            </tasks>
-                        </configuration>
-                    </execution>
+<!--                    <execution>-->
+<!--                        <id>prepare-package</id>-->
+<!--                        <phase>prepare-package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>run</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <tasks>-->
+<!--                                <copydir src="${project.basedir}/../${cubic-ui-path}"-->
+<!--                                         dest="${project.basedir}/src/main/resources/static" forceoverwrite="true"/>-->
+<!--                            </tasks>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
                     <execution>
                         <id>package</id>
                         <phase>package</phase>
