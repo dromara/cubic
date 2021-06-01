@@ -26,7 +26,22 @@
         </el-select>
       </div>
       <el-tabs v-model="activeName" @tab-click="handleTabClick">
-        <el-tab-pane label="线程栈" name="first">
+        <el-tab-pane label="实时线程栈" name="first">
+          <el-card style="margin-top: 10px">
+            <div slot="header" class="clearfix">
+              <el-button size="mini" type="primary" @click="querySum">查询</el-button>
+              <el-button type="text" style="float: right" @click="downLoadTxtFileReal">下载</el-button>
+            </div>
+            <pre v-if="threadRealDetail">
+                    {{ threadRealDetail }}
+            </pre>
+            <div v-else>
+              无数据
+            </div>
+          </el-card>
+        </el-tab-pane>
+
+        <el-tab-pane label="历史线程栈" name="second">
           <el-card style="margin-top: 10px">
             <div slot="header" class="clearfix">
               <el-date-picker
@@ -42,20 +57,6 @@
             </div>
             <pre v-if="threadDetail">
                     {{ threadDetail }}
-            </pre>
-            <div v-else>
-              无数据
-            </div>
-          </el-card>
-        </el-tab-pane>
-        <el-tab-pane label="实时线程栈" name="second">
-          <el-card style="margin-top: 10px">
-            <div slot="header" class="clearfix">
-              <el-button size="mini" type="primary" @click="querySum">查询</el-button>
-              <el-button type="text" style="float: right" @click="downLoadTxtFileReal">下载</el-button>
-            </div>
-            <pre v-if="threadRealDetail">
-                    {{ threadRealDetail }}
             </pre>
             <div v-else>
               无数据
@@ -143,11 +144,11 @@ export default {
     },
     handleTabClick(obj, e) {
       if (obj.name === 'first') {
-        this.getThreadTimeDetail()
+        this.getThreadRealTimeDetail()
       }
 
       if (obj.name === 'second') {
-        this.getThreadRealTimeDetail()
+        this.getThreadTimeDetail()
       }
     },
     handleSecondDateTime(val) {
@@ -174,11 +175,12 @@ export default {
     },
     querySum() {
       if (this.activeName === 'first') {
-        this.getThreadTimeDetail()
+        this.getThreadRealTimeDetail()
+
       }
 
       if (this.activeName === 'second') {
-        this.getThreadRealTimeDetail()
+        this.getThreadTimeDetail()
       }
     },
     getThreadRealTimeDetail() {

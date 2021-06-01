@@ -43,7 +43,7 @@ module.exports = {
     // before: require('./mock/mock-server.js'),
     proxy: {
       '/': {
-        target: 'http://47.104.79.116:6080/',
+        target: 'http://localhost:6080/',
         changeOrigin: true,
         // pathRewrite: {
         //   '^/dev-api': ''
