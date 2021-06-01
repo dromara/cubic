@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.matrix.proxy.mapper.ThreadPoolMapper">
-    <resultMap id="BaseResultMap" type="com.matrix.proxy.entity.ThreadPoolEntity">
+    <resultMap id="BaseResultMap" type="com.matrix.proxy.entity.ThreadPool">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="instance_id" jdbcType="VARCHAR" property="instanceId"/>
         <result column="instance_name" jdbcType="VARCHAR" property="instanceName"/>
@@ -11,7 +11,7 @@
     </resultMap>
 
     <select id="selectByQuery" resultMap="BaseResultMap">
-        select * from thread_pool
+        select * from cubic_thread_pool
         <where>
             <if test="instanceId != null">
                 and instance_id = #{instanceId}

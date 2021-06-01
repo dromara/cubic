@@ -3,6 +3,7 @@ package com.matrix.proxy.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
@@ -19,6 +20,7 @@ import java.util.Date;
 @Data
 @Entity
 @Builder
+@TableName("cubic_thread_dump")
 public class ThreadDump {
 
 	@Id

@@ -28,19 +28,19 @@
 
 
   <select id="selectInstanceByLastHeartbeat" resultMap="BaseResultMap">
-      SELECT * FROM information   where  last_heartbeat > #{lastHeartbeat} order by  instance_name
+      SELECT * FROM cubic_information   where  last_heartbeat > #{lastHeartbeat} order by  instance_name
   </select>
 
   <select id="selectInstanceByAppId" resultMap="BaseResultMap">
-    SELECT * FROM information   where  app_id = #{appId}
+    SELECT * FROM cubic_information   where  app_id = #{appId}
   </select>
 
   <select id="selectJarsByAppId" resultMap="BaseResultMap">
-    SELECT jars FROM information   where  app_id = #{appId}
+    SELECT jars FROM cubic_information   where  app_id = #{appId}
   </select>
 
   <select id="selectInstanceIdByNames" resultType="java.lang.String">
-    SELECT instance_id  FROM information   where  instance_name = #{instanceName} and last_heartbeat > #{date}
+    SELECT instance_id  FROM cubic_information   where  instance_name = #{instanceName} and last_heartbeat > #{date}
   </select>
 
 </mapper>

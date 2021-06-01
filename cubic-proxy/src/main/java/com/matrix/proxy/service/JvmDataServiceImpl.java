@@ -1,18 +1,12 @@
 package com.matrix.proxy.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cubic.serialization.agent.v1.ThreadPoolInfo;
-import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.TextFormat;
-import com.matrix.proxy.entity.ThreadPoolEntity;
+import com.matrix.proxy.entity.ThreadPool;
 import com.matrix.proxy.mapper.ThreadPoolMapper;
 import com.matrix.proxy.module.ThreadPoolVo;
 import com.matrix.proxy.util.DateUtils;
-import com.matrix.proxy.vo.ThreadPoolQueryVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -51,10 +45,10 @@ public class JvmDataServiceImpl implements JvmDataService {
         queryWrapper.eq("instance_name", appId[0]);
         queryWrapper.eq("instance_id", appId[1]);
         queryWrapper.apply("date_format(create_time,'%Y-%m-%d %H:%i') = '" + time + "'");
-        List<ThreadPoolEntity> poolEntities = threadPoolMapper.selectList(queryWrapper);
+        List<ThreadPool> poolEntities = threadPoolMapper.selectList(queryWrapper);
 
         List<ThreadPoolVo> vos = new ArrayList<>();
-        for (ThreadPoolEntity entity : poolEntities) {
+        for (ThreadPool entity : poolEntities) {
             ThreadPoolVo.ThreadPoolVoBuilder builder = ThreadPoolVo.builder().threadPoolKey(entity.getThreadPoolKey()).createTime(entity.getCreateTime());
             ThreadPoolInfo.Builder threadPoolBuild = ThreadPoolInfo.newBuilder();
             try {

@@ -11,7 +11,7 @@
 
 
   <select id="getJarList" resultMap="BaseResultMap">
-      SELECT * FROM rely_information where app_id = #{appId}
+      SELECT * FROM cubic_rely_information where app_id = #{appId}
   </select>
 
 </mapper>

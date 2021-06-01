@@ -1,7 +1,7 @@
 package com.matrix.proxy.auth.service;
 
-import com.matrix.proxy.auth.entity.User;
-import com.matrix.proxy.auth.mapper.UserMapper;
+import com.matrix.proxy.auth.entity.CubicUser;
+import com.matrix.proxy.auth.mapper.CubicUserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,14 +20,14 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private UserMapper userMapper;
+    private CubicUserMapper cubicUserMapper;
 
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User u = userMapper.selectByUsername(username);
+        CubicUser u = cubicUserMapper.selectByUsername(username);
         if(u == null){
            throw new UsernameNotFoundException("username not found");
         }

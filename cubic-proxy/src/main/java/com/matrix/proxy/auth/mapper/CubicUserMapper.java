@@ -13,48 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.matrix.proxy.auth.entity;
+package com.matrix.proxy.auth.mapper;
 
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Builder;
-import lombok.Data;
-import lombok.experimental.Tolerate;
-
-import java.util.Date;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.matrix.proxy.auth.entity.CubicUser;
 
 /**
- * 实体类
+ * Mapper 接口
  *
- * @author luqiang
+ * @author Chill
  */
-@Data
-@Builder
-@TableName("user")
-public class User {
-
-    @TableId(type = IdType.AUTO)
-    private Integer id;
-    /**
-     * 用户名
-     */
-    private String username;
+public interface CubicUserMapper extends BaseMapper<CubicUser> {
 
     /**
-     * 秘钥
+     * 根据用户名查询用户信息
+     * @param username
+     * @return
      */
-    private String secret;
-
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-
-    @Tolerate
-    User() {
-    }
+    CubicUser selectByUsername(String username);
 }

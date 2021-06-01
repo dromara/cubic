@@ -1,11 +1,10 @@
 package com.matrix.proxy.server.process;
 
-import com.alibaba.fastjson.JSON;
 import com.cubic.proxy.common.constant.CommandCode;
 import com.cubic.serialization.agent.v1.CommonMessage;
 import com.cubic.serialization.agent.v1.JVMThreadPoolMetric;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.matrix.proxy.entity.ThreadPoolEntity;
+import com.matrix.proxy.entity.ThreadPool;
 import com.matrix.proxy.mapper.ThreadPoolMapper;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
@@ -57,7 +56,7 @@ public class JvmThreadPoolProcess extends DefaultMessageProcess {
         }
         Date date = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         body.getThreadPoolMetricMap().forEach((key, params) -> {
-            threadPoolMapper.insert(ThreadPoolEntity.builder()
+            threadPoolMapper.insert(ThreadPool.builder()
                     .instanceId(message.getInstanceUuid())
                     .instanceName(message.getInstanceName())
                     .threadPoolKey(key)

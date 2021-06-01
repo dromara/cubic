@@ -21,8 +21,8 @@ import java.util.Date;
 @Data
 @Entity
 @Builder
-@TableName("thread_pool")
-public class ThreadPoolEntity {
+@TableName("cubic_thread_pool")
+public class ThreadPool {
     @Id
     @TableId(type = IdType.AUTO)
     private Long id;
@@ -43,6 +43,6 @@ public class ThreadPoolEntity {
     private Date createTime;
 
     @Tolerate
-    public ThreadPoolEntity() {
+    public ThreadPool() {
     }
 }
