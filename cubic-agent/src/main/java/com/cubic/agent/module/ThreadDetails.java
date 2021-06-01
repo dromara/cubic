@@ -1,5 +1,6 @@
 package com.cubic.agent.module;
 
+@Deprecated
 public class ThreadDetails {
 
 	public static Builder newBuilder() {
