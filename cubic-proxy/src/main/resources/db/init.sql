@@ -120,3 +120,8 @@ CREATE TABLE `cubic_user`
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户权限表';
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+INSERT INTO `user` (`id`, `username`, `secret`, `create_time`)
+VALUES
+(1, 'matrix', '$2a$10$oRzuT/fvUlO6Eh7RtUwNiuEm7vJcymtgC53AnkS/km9E8GUBjMZ8S', '2020-11-25 12:08:51');
