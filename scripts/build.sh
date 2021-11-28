@@ -37,7 +37,6 @@ npm run build:prod
 echo "================ starting to build cubic agent ================"
 cd ..
 ./mvnw clean package  -DskipTests
-./mvnw compile  -DskipTests
 
 echo "================ building cubic agent finished ================"
 
