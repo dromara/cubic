@@ -1,15 +1,17 @@
 <template>
   <div class="app-container">
-    <div slot="header" class="clearfix">
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
       <span style="font-size: 14px;">应用： </span>
       <el-select
         class="mr"
-        v-model="value"
+        v-model="instanceName"
         size="mini"
         style="width: 280px"
         filterable
-        placeholder="请选择应用">
-        <el-option v-for="item in options" :key="item" :label="item" :value="item" />
+        placeholder="请选择应用"
+        @change="appChange">
+        <el-option v-for="item in appOption" :key="item" :label="item" :value="item"/>
       </el-select>
 
       <span style="font-size: 14px;">实例： </span>
@@ -20,9 +22,13 @@
         placeholder="请选择应用实例"
         @change="instanceUidChange"
       >
-        <el-option v-for="item in instanceUidOption" :key="item" :label="item" :value="item" />
+        <el-option v-for="item in instanceUidOption" :key="item" :label="item" :value="item"/>
       </el-select>
-    </div>
+      </div>
+      <el-tabs v-model="activeName">
+        <div id="xterm" class="xterm"/>
+      </el-tabs>
+    </el-card>
     <!--    <div class="filter-container">-->
     <!--      <el-input v-model="vm.ip" placeholder="IP" size="mini" style="width: 200px;" class="filter-item" />-->
     <!--      <el-input v-model="vm.port" placeholder="Port" size="mini" style="width: 200px;" class="filter-item" />-->
@@ -34,20 +40,27 @@
     <!--        断开-->
     <!--      </el-button>-->
     <!--    </div>-->
-    <div id="xterm" class="xterm" />
+
   </div>
 
 </template>
 <script>
-import { Terminal } from 'xterm'
-import { FitAddon } from 'xterm-addon-fit'
+import {Terminal} from 'xterm'
+import {FitAddon} from 'xterm-addon-fit'
 // import { AttachAddon } from 'xterm-addon-attach'
-import { WebLinksAddon } from 'xterm-addon-web-links'
+import {WebLinksAddon} from 'xterm-addon-web-links'
 import 'xterm/css/xterm.css'
+import {getAppNames, getInstanceInfo, getInstanceNames} from "@/api/list";
+
 export default {
   name: 'WebShell',
   data() {
     return {
+      activeName: '1',
+      instanceUidOption: [],
+      instanceUid: '',
+      instanceName: '',
+      appOption: [],
       vm: {
         ip: '47.104.79.116',
         // ip: 'localhost',
@@ -66,7 +79,8 @@ export default {
         },
         '3': {
           text: '进入 arthas命令模式 '
-        }},
+        }
+      },
       rows: 400,
       cols: 100
     }
@@ -76,14 +90,20 @@ export default {
     // if (Object.keys(this.$route.query).length > 0) {
     //   this.vm.agentId = this.$route.query.id
     // }
-    console.log(this.$cookies.get('appId'))
-
+    this.instanceUid = this.$cookies.get('appId')
+    this.instanceName = this.$cookies.get('instanceName')
     this.vm.agentId = this.$cookies.get('appId')
+    this.getAppList()
+    this.getInstanceList({ name: this.instanceName })
+
+    console.log(this.$cookies.get('appId'))
   },
   mounted() {
     // 实例化终端并设置参数
     this.startConnect()
     this.interval()
+
+
     // window.addEventListener('resize', resizeScreen);
 
     // // 监听resize,当窗口拖动的时候,监听事件,实时改变xterm窗口
@@ -145,7 +165,7 @@ export default {
         const _this = this
         // 窗口大小改变时触发xterm的resize方法，向后端发送行列数，格式由后端决定
         this.term.onResize(size => {
-          _this.sendMessage(_this.agentId, { Op: 'resize', Cols: size.cols, Rows: size.rows })
+          _this.sendMessage(_this.agentId, {Op: 'resize', Cols: size.cols, Rows: size.rows})
         })
       } catch (e) {
         console.log('e', e.message)
@@ -181,7 +201,7 @@ export default {
     },
     socketOnMessage() {
       const vueThis = this
-      this.socket.onmessage = function(event) {
+      this.socket.onmessage = function (event) {
         console.log(event)
         if (event.type === 'message') {
           const d = event.data
@@ -243,7 +263,7 @@ export default {
         // })
         // //监听粘贴
 
-        document.addEventListener('paste', function(e) {
+        document.addEventListener('paste', function (e) {
           const c = e.clipboardData.getData('text/plain')
           tis.term.write(c)
           tis.result += c
@@ -295,6 +315,37 @@ export default {
       this.socketOnOpen()
       this.socketOnError()
     },
+    getAppList() {
+      const _this = this
+      getAppNames().then(res => {
+        console.log(res.data)
+        _this.appOption = res.data
+        if (_this.instanceName !== '') {
+          //TODO 第一个赋值默认的
+        } else {
+          _this.instanceName = res.data[0]
+        }
+      })
+      this.getInstanceList();
+    },
+    getInstanceList(params) {
+      const _this = this
+      getInstanceNames(params).then(res => {
+        _this.instanceUidOption =res.data;
+        _this.instanceUid = res.data[0];
+
+      })
+    },
+    appChange(val) {
+      this.instanceName = val;
+      this.instanceUid = '';
+      this.$cookies.set("instanceName", val)
+      this.$cookies.set("instanceUid", '')
+      this.getInstanceList({name: this.instanceName});
+    },
+    instanceUidChange(val) {
+      this.$cookies.set("instanceUid", val)
+    },
     interval() {
       const vue = this
       window.setInterval(() => {
@@ -312,7 +363,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .mr {
-    margin-right: 20px;
-  }
+.mr {
+  margin-right: 20px;
+}
 </style>
