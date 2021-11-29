@@ -147,7 +147,7 @@ A: 此时`echo $JAVA_HOME `发现也已经配置，请在应用启动参数上�
 
 #### QQ群
 
- ![输入图片说明](docs/WechatIMG51.jpeg)
+ ![输入图片说明](docs/qq.jpeg)
 
 #### 感谢我们的小伙伴
 [![Giteye chart](https://chart.giteye.net/gitee/dromara/cubic/6E6HZTAA.png)](https://giteye.net/chart/6E6HZTAA)
