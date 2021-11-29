@@ -49,6 +49,7 @@ server:
 matrix:
   server:
     agentPort: 11900
+    ip: localhost #webconsole 连接IP
 
 management:
   endpoints:

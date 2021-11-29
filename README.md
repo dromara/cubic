@@ -40,6 +40,8 @@ Demo: http://47.104.79.116:6080
 | ---------------- | ------------------------------------------------------------ |
 | config           | 存放agent配置文件                                            |
 | cubic-proxy      | 代理应用，用于接收agent数据                                  |
+| cubic-proxy-common      | 公共基础参数                                 |
+| cubic-proxy-websocket      | 代理应用，用于接收页面与proxy之间的数据通信                             |
 | cubic-ui         | 页面UI，提供前端各种功能展示,打包完 将dist目录数据拷贝到cubic-proxy |
 | docs             | 文档                                                         |
 | scripts          | 包含打包脚本、启动脚本                                       |

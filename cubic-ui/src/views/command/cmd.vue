@@ -50,7 +50,7 @@ import {FitAddon} from 'xterm-addon-fit'
 // import { AttachAddon } from 'xterm-addon-attach'
 import {WebLinksAddon} from 'xterm-addon-web-links'
 import 'xterm/css/xterm.css'
-import {getAppNames, getInstanceInfo, getInstanceNames} from "@/api/list";
+import {getAppNames, getInstanceInfo, getInstanceNames,appList} from "@/api/list";
 
 export default {
   name: 'WebShell',
@@ -62,8 +62,8 @@ export default {
       instanceName: '',
       appOption: [],
       vm: {
-        ip: '47.104.79.116',
-        // ip: 'localhost',
+        // ip: '47.104.79.116',
+        ip: 'localhost',
         port: 11901,
         agentId: 'cubic'
       },
@@ -93,13 +93,14 @@ export default {
     this.instanceUid = this.$cookies.get('appId')
     this.instanceName = this.$cookies.get('instanceName')
     this.vm.agentId = this.$cookies.get('appId')
-    this.getAppList()
+    this.getClientNames()
     this.getInstanceList({ name: this.instanceName })
 
     console.log(this.$cookies.get('appId'))
   },
   mounted() {
     // 实例化终端并设置参数
+    this.vm.ip = this.$cookies.get('serverIp')
     this.startConnect()
     this.interval()
 
@@ -315,7 +316,15 @@ export default {
       this.socketOnOpen()
       this.socketOnError()
     },
-    getAppList() {
+    getAppInfo() {
+      const _this = this
+      appList().then(res => {
+        console.log(res.data)
+        _this.vm.ip = res.data.serverIp;
+      })
+      this.getInstanceList();
+    },
+    getClientNames() {
       const _this = this
       getAppNames().then(res => {
         console.log(res.data)

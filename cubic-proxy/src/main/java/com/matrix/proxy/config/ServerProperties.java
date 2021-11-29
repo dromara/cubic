@@ -17,4 +17,8 @@ public class ServerProperties {
     @Getter
     @Setter
     private int agentPort = 10080;
+
+    @Getter
+    @Setter
+    private String ip ;
 }

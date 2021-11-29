@@ -2,9 +2,11 @@ package com.matrix.proxy.service;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.matrix.proxy.config.ServerProperties;
 import com.matrix.proxy.entity.Information;
 import com.matrix.proxy.mapper.InformationMapper;
 import com.matrix.proxy.util.DateUtils;
+import com.matrix.proxy.util.InetAddressUtil;
 import com.matrix.proxy.vo.BasicInformationVo;
 import com.matrix.proxy.vo.InstanceInfoVo;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,8 @@ public class AppDataServiceImpl implements AppDataService {
     @Resource
     private InformationMapper informationMapper;
 
+    @Resource
+    private ServerProperties serverProperties;
     /**
      * 获取应用实例列表
      *
@@ -62,6 +66,8 @@ public class AppDataServiceImpl implements AppDataService {
         });
         result.put("services", services.size());
         result.put("instances", instances.intValue());
+        result.put("serverIp", serverProperties.getIp());
+
         return result;
     }
 

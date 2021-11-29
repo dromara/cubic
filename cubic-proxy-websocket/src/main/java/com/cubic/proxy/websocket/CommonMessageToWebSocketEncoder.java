@@ -7,6 +7,9 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
 import java.util.List;
 
+/**
+ * @author luqiang
+ */
 public class CommonMessageToWebSocketEncoder extends MessageToMessageEncoder<CommonMessage> {
 
     @Override

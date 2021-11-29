@@ -133,6 +133,7 @@ export default {
         this.total = response.data.total
         this.caseInfo.services = response.data.services
         this.caseInfo.instances = response.data.instances
+        this.$cookies.set("serverIp",response.data.serverIp)
       }).finally(() => {
         this.listLoading = false
       })
