@@ -145,6 +145,9 @@ A: 此时`echo $JAVA_HOME `发现也已经配置，请在应用启动参数上�
 
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
 
+#### QQ群
+
+ ![输入图片说明](docs/WechatIMG51.jpeg)
 
 #### 感谢我们的小伙伴
 [![Giteye chart](https://chart.giteye.net/gitee/dromara/cubic/6E6HZTAA.png)](https://giteye.net/chart/6E6HZTAA)
