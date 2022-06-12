@@ -37,9 +37,9 @@ public class JvmDataServiceImpl implements JvmDataService {
 
         String[] appId = instanceUid.split("_");
 
-        String time =dayTime;
-        if(StringUtils.isEmpty(dayTime)){
-            time = DateUtils.getDateFormat(new Date(),"yyyy-MM-dd HH:mm");
+        String time = dayTime;
+        if (StringUtils.isEmpty(dayTime)) {
+            time = DateUtils.getDateFormat(new Date(), "yyyy-MM-dd HH:mm");
         }
         QueryWrapper queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("instance_name", appId[0]);
@@ -63,8 +63,8 @@ public class JvmDataServiceImpl implements JvmDataService {
                     .largestPoolSize(params.get("LARGEST_POOL_SIZE").toString())
                     .poolSize(params.get("POOL_SIZE").toString())
                     .taskCount(params.get("TASK_COUNT").toString())
-                    .maximumPoolSize(params.get("MAXIMUM_POOL_SIZE").toString())
-                    .keepAliveTime(params.get("KEEP_ALIVE_TIME").toString());
+                    .maximumPoolSize(params.get("MAXIMUM_POOL_SIZE") == Integer.MAX_VALUE ? "Integer.MAX_VALUE" : params.get("MAXIMUM_POOL_SIZE").toString())
+                    .keepAliveTime(params.get("KEEP_ALIVE_TIME") / 1000 + "s");
             vos.add(builder.build());
         }
         Map<String, Object> rs = new HashMap<>(16);

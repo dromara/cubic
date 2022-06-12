@@ -4,11 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.cubic.proxy.common.constant.CommandCode;
 import com.matrix.proxy.service.JdkCommandService;
 import com.matrix.proxy.service.JvmDataService;
+import com.matrix.proxy.util.DateUtils;
 import com.matrix.proxy.vo.ThreadPoolCommandVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,12 +37,12 @@ public class JvmController {
      * @return
      */
     @RequestMapping("/threadPoolList")
-    public Map<String, Object> threadPoolPage(@RequestParam(required = false) String instanceUid, @RequestParam String dayTime) {
+    public Map<String, Object> threadPoolPage(@RequestParam(required = false) String instanceUid, @RequestParam(defaultValue = "", required = false) String dayTime) {
 
         if (StringUtils.isEmpty(instanceUid)) {
             return new HashMap<>();
         }
-        return jvmDataService.threadPoolDataPage(instanceUid, dayTime);
+        return jvmDataService.threadPoolDataPage(instanceUid, StringUtils.isEmpty(dayTime) ? DateUtils.dateTime2Str(LocalDateTime.now(),"yyyy-MM-dd HH:mm") : dayTime);
     }
 
 

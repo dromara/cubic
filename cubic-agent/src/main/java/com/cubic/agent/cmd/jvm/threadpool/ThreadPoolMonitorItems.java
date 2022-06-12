@@ -1,7 +1,12 @@
 package com.cubic.agent.cmd.jvm.threadpool;
 
+import io.netty.util.concurrent.DefaultThreadFactory;
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -16,15 +21,15 @@ public enum ThreadPoolMonitorItems {
     /**
      * 活动线程数
      */
-    ACTIVE_COUNT((t) -> (long)t.getActiveCount()),
+    ACTIVE_COUNT((t) -> (long) t.getActiveCount()),
     /**
      * 线程数
      */
-    POOL_SIZE((t) -> (long)t.getPoolSize()),
+    POOL_SIZE((t) -> (long) t.getPoolSize()),
     /**
      * 核心线程数
      */
-    CORE_POOL_SIZE((t) -> (long)t.getCorePoolSize()),
+    CORE_POOL_SIZE((t) -> (long) t.getCorePoolSize()),
     /**
      * 存活时间
      */
@@ -37,11 +42,11 @@ public enum ThreadPoolMonitorItems {
     /**
      * 最大时的线程数
      */
-    LARGEST_POOL_SIZE((t) -> (long)t.getLargestPoolSize()),
+    LARGEST_POOL_SIZE((t) -> (long) t.getLargestPoolSize()),
     /**
      * 最大线程数
      */
-    MAXIMUM_POOL_SIZE((t) -> (long)t.getMaximumPoolSize()),
+    MAXIMUM_POOL_SIZE((t) -> (long) t.getMaximumPoolSize()),
     /**
      * 计划执行的任务数
      */
@@ -74,17 +79,33 @@ public enum ThreadPoolMonitorItems {
      *
      * @return
      */
-    public static String key(Object obj) {
-        String name = Thread.currentThread().getName();
-        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-        StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 1];
+    public static String key(ThreadPoolExecutor executor) {
+
+        String name = "";
+        ThreadFactory factory = executor.getThreadFactory();
+
+        if (factory instanceof DefaultThreadFactory) {
+            DefaultThreadFactory defaultThreadFactory = (DefaultThreadFactory) factory;
+            try {
+                Field field = defaultThreadFactory.getClass().getDeclaredField("prefix");
+                field.setAccessible(true);
+                name = (String) field.get(defaultThreadFactory);
+            } catch (Exception e) {
+
+            }
+        }
+
+
+        if (StringUtils.isNoneBlank(name)) {
+            return name;
+        }
+        name = Thread.currentThread().getName();
+
         StringBuilder builder = new StringBuilder(name);
         builder.append("-")
-                .append(stackTraceElement.getClassName())
-                .append("[")
-                .append(stackTraceElement.getMethodName())
-                .append("]-")
-                .append(obj.hashCode());
+                .append(executor.getClass().getName())
+                .append("-")
+                .append(executor.hashCode());
         return builder.toString();
     }
 }
