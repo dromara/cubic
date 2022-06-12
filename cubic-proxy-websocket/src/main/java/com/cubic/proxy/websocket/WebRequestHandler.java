@@ -98,7 +98,7 @@ public class WebRequestHandler extends SimpleChannelInboundHandler<TextWebSocket
 
         if (type == null) {
             ctx.writeAndFlush(WebResponses.typeIsNullResponse());
-            cancelRequest(webConnection);
+
             return;
         }
 
