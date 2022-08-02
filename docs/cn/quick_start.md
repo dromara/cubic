@@ -8,7 +8,7 @@ Cubic 主要有两部分，目前UI 和proxy 是写在一起的
 
 ### 构建
 #### 获取部署包
- - 在项目[发行版本](https://gitee.com/sanjiankethree/cubic/releases)可直接下载
+ - 在项目[发行版本](https://gitee.com/dromara/cubic/releases)可直接下载
  - 也可以下载源码后自己打包。先clone 项目到本地，然后进入cubic 目录执行 scripts/build.sh.运行完成后会出现agent-dist 、agent-proxy-dist两个目录，第一个存放的是agent 加载需要的，第二个就是proxy 部署包。
 - 可以单独打包页面，测试启动命令 npm run dev,打包命令 npm run build:prod ,打完的包在dist 下
 
