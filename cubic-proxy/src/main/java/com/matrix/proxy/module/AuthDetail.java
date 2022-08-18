@@ -1,4 +1,4 @@
-package com.matrix.proxy.auth.login;
+package com.matrix.proxy.module;
 
 import lombok.Builder;
 import lombok.Data;

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.matrix.proxy.auth.mapper;
+package com.matrix.proxy.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.matrix.proxy.auth.entity.CubicUser;
+import com.matrix.proxy.module.CubicUser;
 
 /**
  * Mapper 接口

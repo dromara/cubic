@@ -1,6 +1,5 @@
 package com.matrix.proxy.controller;
 
-import com.matrix.proxy.auth.module.DataResult;
 import com.matrix.proxy.service.AppDataService;
 import com.matrix.proxy.vo.InstanceInfoVo;
 import org.springframework.util.StringUtils;

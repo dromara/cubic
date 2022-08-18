@@ -1,8 +1,8 @@
 package com.matrix.proxy.common;
 
 import com.alibaba.fastjson.JSON;
-import com.matrix.proxy.auth.module.DataResult;
-import com.matrix.proxy.constant.ResultCode;
+import com.cubic.proxy.common.module.DataResult;
+import com.cubic.proxy.common.enums.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

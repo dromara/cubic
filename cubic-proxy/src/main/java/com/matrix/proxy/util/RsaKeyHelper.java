@@ -1,4 +1,4 @@
-package com.matrix.proxy.auth.utils;
+package com.matrix.proxy.util;
 
 
 
