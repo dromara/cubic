@@ -1,7 +1,7 @@
-package com.matrix.proxy.auth.module;
+package com.cubic.proxy.common.module;
 
 
-import com.matrix.proxy.constant.ResultCode;
+import com.cubic.proxy.common.enums.ResultCode;
 
 /**
  * @author luqiang

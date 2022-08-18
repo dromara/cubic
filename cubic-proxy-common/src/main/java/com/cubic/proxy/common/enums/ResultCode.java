@@ -1,4 +1,4 @@
-package com.matrix.proxy.constant;
+package com.cubic.proxy.common.enums;
 
 
 /**

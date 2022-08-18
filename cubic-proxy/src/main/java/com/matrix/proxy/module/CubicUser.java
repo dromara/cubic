@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.matrix.proxy.auth.entity;
+package com.matrix.proxy.module;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;

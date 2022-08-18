@@ -1,8 +1,9 @@
 package com.matrix.proxy.controller;
 
-import com.matrix.proxy.auth.login.AuthDetail;
-import com.matrix.proxy.auth.module.DataResult;
-import com.matrix.proxy.auth.service.SystemService;
+import cn.dev33.satoken.stp.StpUtil;
+import com.matrix.proxy.module.AuthDetail;
+import com.cubic.proxy.common.module.DataResult;
+import com.matrix.proxy.service.SystemService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,8 @@ public class LoginController {
 
 
     @RequestMapping("/logout")
-    public String logout() {
-        return "";
+    public void logout() {
+        StpUtil.logout();
     }
 
 
