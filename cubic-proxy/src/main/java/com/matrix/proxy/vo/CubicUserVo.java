@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.matrix.proxy.module;
+package com.matrix.proxy.vo;
 
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.cubic.proxy.common.module.PageQuery;
 import lombok.Data;
 
 import java.util.Date;
@@ -30,11 +27,8 @@ import java.util.Date;
  * @author luqiang
  */
 @Data
-@TableName("cubic_user")
-public class CubicUser {
+public class CubicUserVo extends PageQuery {
 
-    @TableId(type = IdType.AUTO)
-    private Integer id;
     /**
      * 用户名
      */
@@ -48,21 +42,17 @@ public class CubicUser {
     /**
      * 是否管理员 0 不是 1是
      */
-    @TableField("is_admin")
     private Boolean isAdmin;
+
 
     /**
      * 状态 1 正常 0禁用
      */
-    @TableField("status")
     private Boolean status;
-
 
     /**
      * 创建时间
      */
-    @TableField("create_time")
     private Date createTime;
-
 
 }

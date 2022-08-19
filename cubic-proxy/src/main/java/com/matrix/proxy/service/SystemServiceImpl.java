@@ -1,6 +1,8 @@
 package com.matrix.proxy.service;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cubic.proxy.common.enums.StatusEnum;
 import com.cubic.proxy.common.exception.CubicServiceException;
 import com.matrix.proxy.mapper.CubicUserMapper;
 import com.matrix.proxy.module.AuthDetail;
@@ -27,7 +29,7 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public String login(AuthDetail loginDetail) {
 
-        CubicUser user = cubicUserMapper.selectByUsername(loginDetail.getUsername());
+        CubicUser user = cubicUserMapper.selectOne(new QueryWrapper<CubicUser>().eq("username",loginDetail.getUsername()).eq("status", StatusEnum.YES.getCode()));
         if (!user.getSecret().equals(loginDetail.getPassword())) {
             throw new CubicServiceException("登录失败，账号密码不匹配");
         }
