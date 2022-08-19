@@ -86,6 +86,11 @@ public class UserController {
         userService.updateStatus(userDto);
     }
 
+    /**
+     * 用户信息
+     *
+     * @param
+     */
     @RequestMapping("/info")
     public Map<String, Object> info() {
 
