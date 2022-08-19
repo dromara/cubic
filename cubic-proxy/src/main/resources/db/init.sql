@@ -113,15 +113,16 @@ CREATE TABLE `cubic_user`
     `id`          int(11)      NOT NULL AUTO_INCREMENT,
     `username`    varchar(50)  NOT NULL COMMENT '用户名',
     `secret`      varchar(255) NOT NULL COMMENT '秘钥',
-    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-    PRIMARY KEY (`id`)
+    `status`      tinyint(255) DEFAULT '1' COMMENT '状态 1 正常 0禁用',
+    `is_admin`    tinyint(255) DEFAULT '0' COMMENT '是否为管理员 0 不是 1是',
+    `create_time` datetime     DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uniq_username` (`username`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 2
-  DEFAULT CHARSET = utf8mb4 COMMENT ='用户权限表';
-
+  DEFAULT CHARSET = utf8mb4 COMMENT ='用户表';
 SET FOREIGN_KEY_CHECKS = 1;
 
 
 INSERT INTO `cubic_user` (`id`, `username`, `secret`, `create_time`)
-VALUES
-(1, 'matrix', '$2a$10$oRzuT/fvUlO6Eh7RtUwNiuEm7vJcymtgC53AnkS/km9E8GUBjMZ8S', '2020-11-25 12:08:51');
+VALUES (1, 'matrix', '123456', '2020-11-25 12:08:51');

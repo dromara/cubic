@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.matrix.proxy.auth.entity;
+package com.matrix.proxy.module;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Tolerate;
 
 import java.util.Date;
 
@@ -31,7 +30,6 @@ import java.util.Date;
  * @author luqiang
  */
 @Data
-@Builder
 @TableName("cubic_user")
 public class CubicUser {
 
@@ -47,14 +45,24 @@ public class CubicUser {
      */
     private String secret;
 
+    /**
+     * 是否管理员 0 不是 1是
+     */
+    @TableField("is_admin")
+    private Boolean isAdmin;
+
+    /**
+     * 状态 1 正常 0禁用
+     */
+    @TableField("status")
+    private Boolean status;
+
 
     /**
      * 创建时间
      */
+    @TableField("create_time")
     private Date createTime;
 
 
-    @Tolerate
-    CubicUser() {
-    }
 }

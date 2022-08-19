@@ -1,6 +1,8 @@
 package com.matrix.proxy.config;
 
+import cn.dev33.satoken.interceptor.SaRouteInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
@@ -30,6 +32,14 @@ public class ProxyWebConfig extends WebMvcConfigurationSupport {
         super.addResourceHandlers(registry);
     }
 
+    // 注册拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 注册 Sa-Token 的路由拦截器
+        registry.addInterceptor(new SaRouteInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/system/login");
+    }
 
 
 }
