@@ -23,6 +23,11 @@ public class DataResult {
      */
     private Object data;
 
+    /**
+     * 需要分页时返回
+     */
+    private Long total;
+
     /***
      * 过期
      *
@@ -52,6 +57,10 @@ public class DataResult {
         return new DataResult(ResultCode.SUCCESS.getCode(), "OK", null);
     }
 
+    public static DataResult success(Object data,Long total) {
+        return new DataResult(data, total);
+    }
+
     public static DataResult build(Integer code, String msg, Object data) {
         return new DataResult(ResultCode.SUCCESS.getCode(), msg, data);
     }
@@ -78,7 +87,8 @@ public class DataResult {
         return new DataResult(code, message, data);
     }
 
-    public DataResult() { }
+    public DataResult() {
+    }
 
     public static DataResult build(Integer code, String msg) {
         return new DataResult(code, msg, null);
@@ -94,6 +104,13 @@ public class DataResult {
         this.code = ResultCode.SUCCESS.getCode();
         this.message = "OK";
         this.data = data;
+    }
+
+    public DataResult(Object data, Long total) {
+        this.code = ResultCode.SUCCESS.getCode();
+        this.message = "OK";
+        this.data = data;
+        this.total = total;
     }
 
     public DataResult(String message) {

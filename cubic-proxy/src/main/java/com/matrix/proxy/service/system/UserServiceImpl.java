@@ -3,6 +3,7 @@ package com.matrix.proxy.service.system;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cubic.proxy.common.module.DataResult;
 import com.matrix.proxy.mapper.CubicUserMapper;
 import com.matrix.proxy.module.CubicUser;
 import com.matrix.proxy.module.CubicUserDto;
@@ -35,30 +36,30 @@ public class UserServiceImpl implements UserService {
      * @param query
      */
     @Override
-    public List<CubicUserDto> list(CubicUserVo query) {
+    public DataResult list(CubicUserVo query) {
 
-        Page<CubicUser> page = new Page<>(query.getPageNum(),query.getPageSize());
+        Page<CubicUser> page = new Page<>(query.getPageNum(), query.getPageSize());
 
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.orderByDesc("create_time");
-        if(StringUtils.isNoneBlank(query.getUsername())){
-            wrapper.eq("username",query.getUsername());
+        if (StringUtils.isNoneBlank(query.getUsername())) {
+            wrapper.eq("username", query.getUsername());
         }
 
-        IPage<CubicUser> datas = cubicUserMapper.selectPage(page,wrapper);
+        IPage<CubicUser> datas = cubicUserMapper.selectPage(page, wrapper);
 
-        if(CollectionUtils.isEmpty(datas.getRecords())){
-            return new ArrayList<>();
+        if (CollectionUtils.isEmpty(datas.getRecords())) {
+            return DataResult.success();
         }
-       List<CubicUserDto> result = new ArrayList<>();
-        BeanCopier copier =BeanCopier.create(CubicUser.class,CubicUserDto.class,false);
-        datas.getRecords().forEach(user ->{
+        List<CubicUserDto> result = new ArrayList<>();
+        BeanCopier copier = BeanCopier.create(CubicUser.class, CubicUserDto.class, false);
+        datas.getRecords().forEach(user -> {
             CubicUserDto dto = new CubicUserDto();
-            copier.copy(user,dto,null);
+            copier.copy(user, dto, null);
             result.add(dto);
         });
 
-        return result;
+        return DataResult.success(result, datas.getTotal());
     }
 
     /**

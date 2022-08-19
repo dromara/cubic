@@ -1,9 +1,8 @@
 package com.matrix.proxy.service.system;
 
+import com.cubic.proxy.common.module.DataResult;
 import com.matrix.proxy.module.CubicUserDto;
 import com.matrix.proxy.vo.CubicUserVo;
-
-import java.util.List;
 
 /**
  * @ClassName UserService
@@ -18,7 +17,7 @@ public interface UserService {
      *
      * @param userVo
      */
-    List<CubicUserDto> list(CubicUserVo userVo);
+    DataResult list(CubicUserVo userVo);
 
     /**
      * 创建用户

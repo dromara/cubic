@@ -1,12 +1,12 @@
 package com.matrix.proxy.controller.system;
 
+import com.cubic.proxy.common.module.DataResult;
 import com.matrix.proxy.module.CubicUserDto;
 import com.matrix.proxy.service.system.UserService;
 import com.matrix.proxy.vo.CubicUserVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author luqiang
@@ -25,7 +25,7 @@ public class UserController {
      * @param query
      */
     @GetMapping("/list")
-    public List<CubicUserDto> list(CubicUserVo query) {
+    public DataResult list(CubicUserVo query) {
         return userService.list(query);
     }
 
