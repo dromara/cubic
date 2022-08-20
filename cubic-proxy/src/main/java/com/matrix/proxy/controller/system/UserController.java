@@ -69,7 +69,7 @@ public class UserController {
      *
      * @param userDto
      */
-    @PostMapping("/view")
+    @PostMapping("/delete")
     public void delete(@RequestBody CubicUserDto userDto) {
 
         userService.delete(userDto);
