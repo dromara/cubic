@@ -155,4 +155,4 @@ A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还�
 
 #### 欢迎加入社区星球
 
-![dromara](docs/pic/dromara.jpeg)
+ ![输入图片说明](docs/pic/Wechat-xingqiu.jpeg)
