@@ -103,7 +103,7 @@ Demo: http://47.104.79.116:6080
 ![实时线程栈](https://images.gitee.com/uploads/images/2021/0410/165039_18aa56ab_1168339.png "屏幕截图.png")
 
 #### 历史线程栈
-![历史线程栈](https://images.gitee.com/uploads/images/2021/0410/000408_02eab12d_1168339.png "屏幕截图.png")
+![历史线程栈](docs/pic/dump-history.png)
 
 ## Q&A
 **1、Q : 为什么页面迭代这么慢？**
@@ -138,7 +138,9 @@ JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，�
 
 A: 此时`echo $JAVA_HOME `发现也已经配置，请在应用启动参数上增加 `-Xbootclasspath/a:$JAVA_HOME/lib/tools.jar`
 
+**7、Q : 下载后有些编译报错**
 
+A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还有报错，点下IDEA的build(绿锤子)
 ## 组织
  让我们一起学习成长，关注公众号获得每日一个知识点的储备，让我们一起成长
 
@@ -150,3 +152,8 @@ A: 此时`echo $JAVA_HOME `发现也已经配置，请在应用启动参数上�
 #### QQ群
 
  <img src="https://gitee.com/dromara/cubic/raw/master/docs/qq.jpeg" width="200px" />
+
+#### 欢迎加入社区星球
+
+  <img src="https://gitee.com/dromara/cubic/raw/master/docs/WechatIMG91.jpeg" width="200px" />
+

@@ -73,7 +73,7 @@
               </el-table-column>
               <el-table-column
                 prop="createTime"
-                label="创建时间">
+                label="抓取时间">
               </el-table-column>
               <el-table-column
                 prop="threadDump"
