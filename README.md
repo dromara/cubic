@@ -150,6 +150,7 @@ A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还�
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
 
 #### 问题交流
+[点击链接加入群聊【Cubic开源交流群】](https://jq.qq.com/?_wv=1027&k=eS6c8HkS)
 
  <img src="https://gitee.com/dromara/cubic/raw/master/docs/qq.jpeg" width="200px" />
 
