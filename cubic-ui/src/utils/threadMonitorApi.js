@@ -53,3 +53,18 @@ export function getThreadsDetailsByMin(params) {
     params
   })
 }
+export function getHistoryByAppId(params) {
+  return request({
+    url: '/dump/getHistoryByAppId',
+    method: 'get',
+    params
+  })
+}
+
+export function downloadByAppId(params) {
+  return request({
+    url: '/dump/downloadByAppId',
+    method: 'get',
+    params
+  })
+}

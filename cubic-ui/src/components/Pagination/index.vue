@@ -26,11 +26,11 @@ export default {
     },
     page: {
       type: Number,
-      default: 0
+      default: 1
     },
     limit: {
       type: Number,
-      default: 10
+      default: 20
     },
     pageSizes: {
       type: Array,

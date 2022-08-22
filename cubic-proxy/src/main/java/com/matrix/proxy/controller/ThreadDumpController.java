@@ -53,4 +53,17 @@ public class ThreadDumpController {
         return threadDumpService.getHistoryByAppId(dumpVo);
 
     }
+
+
+    /**
+     * 获取应用线程栈历史信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/downloadByAppId")
+    public DataResult downloadByAppId(ThreadDumpVo dumpVo) {
+
+        return DataResult.success(dumpVo.getAppId());
+
+    }
 }

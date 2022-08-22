@@ -29,8 +29,8 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public String login(AuthDetail loginDetail) {
 
-        CubicUser user = cubicUserMapper.selectOne(new QueryWrapper<CubicUser>().eq("username",loginDetail.getUsername()).eq("status", StatusEnum.YES.getCode()));
-        if (!user.getSecret().equals(loginDetail.getPassword())) {
+        CubicUser user = cubicUserMapper.selectOne(new QueryWrapper<CubicUser>().eq("username", loginDetail.getUsername()).eq("status", StatusEnum.YES.getCode()));
+        if (user == null || !user.getSecret().equals(loginDetail.getPassword())) {
             throw new CubicServiceException("登录失败，账号密码不匹配");
         }
         StpUtil.login(user.getId());

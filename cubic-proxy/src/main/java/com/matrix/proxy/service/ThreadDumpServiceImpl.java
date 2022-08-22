@@ -44,7 +44,7 @@ public class ThreadDumpServiceImpl implements ThreadDumpService {
     @Override
     public String getThreadDumpByAppId(String appId, String time) {
         QueryWrapper<ThreadDump> wrapper = new QueryWrapper<>();
-        wrapper.eq("app_id",appId).apply("date_format(create_time,'%Y-%m-%d %H:%i') = '" + time + " '") ;
+        wrapper.eq("app_id", appId).apply("date_format(create_time,'%Y-%m-%d %H:%i') = '" + time + " '");
         ThreadDump threadDump = threadDumpMapper.selectOne(wrapper);
         return threadDump == null ? "" : GzipUtils.decompress(threadDump.getThreadDump());
     }
@@ -55,13 +55,13 @@ public class ThreadDumpServiceImpl implements ThreadDumpService {
      * @return
      */
     @Override
-    public DataResult getHistoryByAppId(ThreadDumpVo dumpVo ) {
+    public DataResult getHistoryByAppId(ThreadDumpVo dumpVo) {
 
         Page<ThreadDump> page = new Page<>(dumpVo.getPageNum(), dumpVo.getPageSize());
 
         QueryWrapper<ThreadDump> wrapper = new QueryWrapper<>();
-        wrapper.eq("app_id",dumpVo.getAppId()) ;
-        wrapper.select("app_id","instance_name","instance_id","create_time");
+        wrapper.eq("app_id", dumpVo.getAppId());
+        wrapper.select("app_id", "instance_name", "instance_id", "create_time", "thread_dump");
         wrapper.orderByDesc("create_time");
 
         IPage<ThreadDump> datas = threadDumpMapper.selectPage(page, wrapper);
@@ -74,6 +74,7 @@ public class ThreadDumpServiceImpl implements ThreadDumpService {
         datas.getRecords().forEach(user -> {
             ThreadDumpVo dto = new ThreadDumpVo();
             copier.copy(user, dto, null);
+            dto.setThreadDump(GzipUtils.decompress(user.getThreadDump()));
             result.add(dto);
         });
 

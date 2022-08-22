@@ -150,4 +150,12 @@ public class DataResult {
     public void setData(Object data) {
         this.data = data;
     }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
 }
