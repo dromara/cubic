@@ -152,3 +152,8 @@ A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还�
 #### QQ群
 
  <img src="https://gitee.com/dromara/cubic/raw/master/docs/qq.jpeg" width="200px" />
+
+#### 欢迎加入社区星球
+
+  <img src="https://gitee.com/dromara/cubic/raw/master/docs/WechatIMG91.jpeg" width="200px" />
+
