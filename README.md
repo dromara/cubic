@@ -138,7 +138,9 @@ JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，�
 
 A: 此时`echo $JAVA_HOME `发现也已经配置，请在应用启动参数上增加 `-Xbootclasspath/a:$JAVA_HOME/lib/tools.jar`
 
+**7、Q : 下载后有些编译报错**
 
+A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还有报错，点下IDEA的build(绿锤子)
 ## 组织
  让我们一起学习成长，关注公众号获得每日一个知识点的储备，让我们一起成长
 
