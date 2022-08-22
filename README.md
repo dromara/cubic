@@ -129,7 +129,6 @@ A : JDK 1.8、 MySQL 5.5+
 A : cubic使用的java为JAVA_HOME/bin/java, 需要JDK8及以上，但"不要求"与目标应用的JVM使用相同的JDK版本。
 
 cubic需要依赖JAVA_HOME/lib/tools.jar
-
 JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，则尝试通过"which java"定位java从而获得相对路径。
 
 可通过echo $JAVA_HOME 查看当前配置
@@ -150,3 +149,8 @@ A: 此时`echo $JAVA_HOME `发现也已经配置，请在应用启动参数上�
 #### QQ群
 
  <img src="https://gitee.com/dromara/cubic/raw/master/docs/qq.jpeg" width="200px" />
+
+#### 欢迎加入社区星球
+
+  <img src="https://gitee.com/dromara/cubic/raw/master/docs/WechatIMG91.jpeg" width="200px" />
+
