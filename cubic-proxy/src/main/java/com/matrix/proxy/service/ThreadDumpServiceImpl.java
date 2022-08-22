@@ -1,24 +1,22 @@
 package com.matrix.proxy.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.jayway.jsonpath.Criteria;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cubic.proxy.common.module.DataResult;
 import com.matrix.proxy.entity.ThreadDump;
 import com.matrix.proxy.mapper.ThreadDumpMapper;
-import com.matrix.proxy.module.ThreadPoolLog;
-import com.matrix.proxy.module.ThreadStackLog;
-import com.matrix.proxy.util.DateUtils;
 import com.matrix.proxy.util.GzipUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.matrix.proxy.vo.ThreadDumpVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.*;
+import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 处理线程栈信息展示
@@ -46,9 +44,42 @@ public class ThreadDumpServiceImpl implements ThreadDumpService {
     @Override
     public String getThreadDumpByAppId(String appId, String time) {
         QueryWrapper<ThreadDump> wrapper = new QueryWrapper<>();
-        wrapper.eq("app_id",appId).apply("date_format(create_time,'%Y-%m-%d %H:%i') = '" + time + " '") ;
+        wrapper.eq("app_id", appId).apply("date_format(create_time,'%Y-%m-%d %H:%i') = '" + time + " '");
         ThreadDump threadDump = threadDumpMapper.selectOne(wrapper);
         return threadDump == null ? "" : GzipUtils.decompress(threadDump.getThreadDump());
+    }
+
+    /**
+     * 获取应用线程栈历史信息
+     *
+     * @return
+     */
+    @Override
+    public DataResult getHistoryByAppId(ThreadDumpVo dumpVo) {
+
+        Page<ThreadDump> page = new Page<>(dumpVo.getPageNum(), dumpVo.getPageSize());
+
+        QueryWrapper<ThreadDump> wrapper = new QueryWrapper<>();
+        wrapper.eq("app_id", dumpVo.getAppId());
+        wrapper.select("app_id", "instance_name", "instance_id", "create_time", "thread_dump");
+        wrapper.orderByDesc("create_time");
+
+        IPage<ThreadDump> datas = threadDumpMapper.selectPage(page, wrapper);
+        if (CollectionUtils.isEmpty(datas.getRecords())) {
+            return DataResult.success();
+        }
+        List<ThreadDumpVo> result = new ArrayList<>();
+        BeanCopier copier = BeanCopier.create(ThreadDump.class, ThreadDumpVo.class, false);
+
+        datas.getRecords().forEach(user -> {
+            ThreadDumpVo dto = new ThreadDumpVo();
+            copier.copy(user, dto, null);
+            dto.setThreadDump(GzipUtils.decompress(user.getThreadDump()));
+            result.add(dto);
+        });
+
+        return DataResult.success(result, datas.getTotal());
+
     }
 
 //	public ThreadStackLog getDetails(String serviceId, String uid, String date) {
