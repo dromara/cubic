@@ -103,7 +103,7 @@ Demo: http://47.104.79.116:6080
 ![实时线程栈](https://images.gitee.com/uploads/images/2021/0410/165039_18aa56ab_1168339.png "屏幕截图.png")
 
 #### 历史线程栈
-![历史线程栈](https://images.gitee.com/uploads/images/2021/0410/000408_02eab12d_1168339.png "屏幕截图.png")
+![历史线程栈](docs/pic/dump-history.png)
 
 ## Q&A
 **1、Q : 为什么页面迭代这么慢？**
