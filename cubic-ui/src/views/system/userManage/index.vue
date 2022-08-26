@@ -47,10 +47,9 @@
         </el-table-column>
         <el-table-column prop="status" show-overflow-tooltip label="状态">
           <template slot-scope="scope">
-            <el-button @click="handleStatus(scope.row)">
-              <span v-if="scope.row.status">启用</span>
-              <span v-else>禁用</span>
-            </el-button>
+            <el-button v-if="scope.row.status" size="mini" type="success" @click="handleStatus(scope.row)">启用</el-button>
+            <el-button  v-else  size="mini" type="danger" @click="handleStatus(scope.row)">禁用</el-button>
+
           </template>
         </el-table-column>
         <el-table-column prop="createTime" show-overflow-tooltip label="创建时间"></el-table-column>
@@ -91,7 +90,7 @@
         <el-row>
           <el-form-item label="状态" prop="status">
             <el-select clearable v-model="formData.status" placeholder="请选择" filterable>
-              <el-option :size=mini :value='1' :label="'启用'"></el-option>
+              <el-option :value='1' :label="'启用'"></el-option>
               <el-option :value='0' :label="'禁用'"></el-option>
             </el-select>
           </el-form-item>
