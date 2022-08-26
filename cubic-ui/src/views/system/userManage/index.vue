@@ -91,7 +91,7 @@
         <el-row>
           <el-form-item label="状态" prop="status">
             <el-select clearable v-model="formData.status" placeholder="请选择" filterable>
-              <el-option :value='1' :label="'启用'"></el-option>
+              <el-option :size=mini :value='1' :label="'启用'"></el-option>
               <el-option :value='0' :label="'禁用'"></el-option>
             </el-select>
           </el-form-item>

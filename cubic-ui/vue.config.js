@@ -1,7 +1,7 @@
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
-const kiwiMock = require('./lib/kiwi-mock/mock')
+// const kiwiMock = require('./lib/kiwi-mock/mock')
 
 function resolve(dir) {
   return path.join(__dirname, dir)

@@ -81,7 +81,7 @@ public class UserController {
      * @param userDto
      */
     @PostMapping("/updateStatus")
-    public void updateStatus(CubicUserDto userDto) {
+    public void updateStatus(@RequestBody CubicUserDto userDto) {
 
         userService.updateStatus(userDto);
     }
