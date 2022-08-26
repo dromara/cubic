@@ -49,13 +49,13 @@ public class CubicUser {
      * 是否管理员 0 不是 1是
      */
     @TableField("is_admin")
-    private Boolean isAdmin;
+    private Integer isAdmin;
 
     /**
      * 状态 1 正常 0禁用
      */
     @TableField("status")
-    private Boolean status;
+    private Integer status;
 
 
     /**

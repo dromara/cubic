@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 
         CubicUser user = new CubicUser();
         BeanUtils.copyProperties(userDto, user);
-        cubicUserMapper.insert(user);
+        cubicUserMapper.updateById(user);
     }
 
     /**
