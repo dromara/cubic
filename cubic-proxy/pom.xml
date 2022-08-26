@@ -14,6 +14,7 @@
 
     <properties>
         <cubic-ui-path>cubic-ui/dist</cubic-ui-path>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -44,12 +45,12 @@
 <!--            <version>0.9.1</version>-->
 <!--        </dependency>-->
 
-        <!-- druid -->
-        <dependency>
-            <groupId>com.github.drtrang</groupId>
-            <artifactId>druid-spring-boot2-starter</artifactId>
-            <version>1.1.10.2</version>
-        </dependency>
+<!--        &lt;!&ndash; druid &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.github.drtrang</groupId>-->
+<!--            <artifactId>druid-spring-boot2-starter</artifactId>-->
+<!--            <version>1.1.10.2</version>-->
+<!--        </dependency>-->
 
         <!-- 持久层 -->
         <dependency>

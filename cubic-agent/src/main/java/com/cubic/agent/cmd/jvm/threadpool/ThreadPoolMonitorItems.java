@@ -4,8 +4,11 @@ import io.netty.util.concurrent.DefaultThreadFactory;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -84,14 +87,14 @@ public enum ThreadPoolMonitorItems {
         String name = "";
         ThreadFactory factory = executor.getThreadFactory();
 
-        if (factory instanceof DefaultThreadFactory) {
-            DefaultThreadFactory defaultThreadFactory = (DefaultThreadFactory) factory;
+        Optional<Field> field = Arrays.stream(factory.getClass().getDeclaredFields())
+                .filter(e -> e.toString().toLowerCase().contains("prefix")).findAny();
+        if (field.isPresent()) {
+            field.get().setAccessible(true);
             try {
-                Field field = defaultThreadFactory.getClass().getDeclaredField("prefix");
-                field.setAccessible(true);
-                name = (String) field.get(defaultThreadFactory);
-            } catch (Exception e) {
-
+                name = (String) field.get().get(factory);
+            } catch (IllegalAccessException ignored) {
+                ;
             }
         }
 
