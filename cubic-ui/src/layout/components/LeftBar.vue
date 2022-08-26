@@ -27,6 +27,15 @@
         <i class="el-icon-warning"></i>
         <span slot="title">依赖冲突预警</span>
     </el-menu-item>
+    <el-submenu index="/system">
+        <template slot="title">
+          <i class="el-icon-setting"></i>
+          <span>系统管理</span>
+        </template>
+        <el-menu-item-group class="margin-left">
+          <el-menu-item index="/system/userManage">用户管理</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
     </el-menu>
   </div>
 </template>
@@ -72,5 +81,11 @@ export default {
         padding: 16px;
         color: #1b1b1b;
     }
+}
+.margin-left {
+  margin-left: 30px;
+}
+::v-deep .el-menu-item-group__title {
+  padding: 0 !important;
 }
 </style>

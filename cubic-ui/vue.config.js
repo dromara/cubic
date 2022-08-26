@@ -1,6 +1,7 @@
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
+// const kiwiMock = require('./lib/kiwi-mock/mock')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -32,7 +33,7 @@ module.exports = {
     sourceMap: true // 开启 CSS source maps
   },
   devServer: {
-    sockHost: 'http://localhost:6080/',
+    sockHost: 'http://localhost:9528/',
     disableHostCheck: true,
     port: port,
     open: true,
@@ -43,7 +44,7 @@ module.exports = {
     // before: require('./mock/mock-server.js'),
     proxy: {
       '/': {
-        target: 'http://localhost:6080/',
+        target: 'http://47.104.79.116:6080/',
         changeOrigin: true,
         // pathRewrite: {
         //   '^/dev-api': ''
@@ -54,6 +55,17 @@ module.exports = {
       }
     }
   },
+  // devServer: {
+
+  //   before(app) {
+  //     kiwiMock(app)
+  //     app.listen(8081, () => {
+  //       console.info(`mock服务启动成功： http://localhost:9528`)
+  //     })
+  //   },
+  //   port: port,
+  //   disableHostCheck: true
+  // },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.

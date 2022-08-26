@@ -116,6 +116,7 @@ public class AgentNettyClient {
                 running.compareAndSet(false, true);
                 started.set(null);
             } else {
+                log.info("cubic netty client connect failure: {}", future);
                 started.set(null);
             }
         });

@@ -145,15 +145,15 @@ A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还�
  让我们一起学习成长，关注公众号获得每日一个知识点的储备，让我们一起成长
 
 
-#### 微信关注
+#### 知识获取
 
  ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
 
-#### QQ群
+#### 问题交流
+[点击链接加入群聊【Cubic开源交流群】](https://jq.qq.com/?_wv=1027&k=eS6c8HkS)
 
  <img src="https://gitee.com/dromara/cubic/raw/master/docs/qq.jpeg" width="200px" />
 
 #### 欢迎加入社区星球
 
-  <img src="https://gitee.com/dromara/cubic/raw/master/docs/WechatIMG91.jpeg" width="200px" />
-
+  <img src="https://gitee.com/dromara/cubic/raw/master/docs/pic/Wechat-xingqiu.jpeg" width="300px" />
