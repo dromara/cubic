@@ -43,25 +43,61 @@
 
         <el-tab-pane label="历史线程栈" name="second">
           <el-card style="margin-top: 10px">
-            <div slot="header" class="clearfix">
-              <el-date-picker
-                v-model="secondDateTime"
-                type="datetime"
-                size="mini"
-                placeholder="选择日期时间"
-                value-format="yyyy-MM-dd HH:mm"
-                @change="handleSecondDateTime"
-              />
-              <el-button size="mini" type="primary" @click="querySum">查询</el-button>
-              <el-button type="text" style="float: right" @click="downLoadTxtFile">下载</el-button>
-            </div>
-            <pre v-if="threadDetail">
-                    {{ threadDetail }}
-            </pre>
-            <div v-else>
-              无数据
-            </div>
+<!--            <div slot="header" class="clearfix">-->
+<!--              <el-date-picker-->
+<!--                v-model="secondDateTime"-->
+<!--                type="datetime"-->
+<!--                size="mini"-->
+<!--                placeholder="选择日期时间"-->
+<!--                value-format="yyyy-MM-dd HH:mm"-->
+<!--                @change="handleSecondDateTime"-->
+<!--              />-->
+<!--              <el-button size="mini" type="primary" @click="querySum">查询</el-button>-->
+<!--              <el-button type="text" style="float: right" @click="downLoadTxtFile">下载</el-button>-->
+
+<!--            </div>-->
+            <el-button size="mini" type="primary" @click="getList">查询</el-button>
+
+            <el-table
+              :data="list"
+              style="width: 100%">
+              <el-table-column
+                prop="appId"
+                label="应用标识"
+                width="500">
+              </el-table-column>
+              <el-table-column
+                prop="instanceName"
+                label="实例名称"
+                width="180">
+              </el-table-column>
+              <el-table-column
+                prop="createTime"
+                label="抓取时间">
+              </el-table-column>
+              <el-table-column
+                prop="threadDump"
+                label="线程栈"
+                v-if="false">
+              </el-table-column>
+              <el-table-column
+                prop="createTime"
+                label="操作">
+                <template slot-scope="scope">
+                  <el-button
+                    size="mini"
+                    type="primary"
+                    @click="downLoadTxtFileByUid(scope.row)">下载</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <pagination
+              :total="total"
+              :page.sync="listQuery.pageNum"
+              :limit.sync="listQuery.pageSize"
+              @pagination="getList" />
           </el-card>
+
         </el-tab-pane>
       </el-tabs>
 
@@ -69,14 +105,28 @@
   </div>
 </template>
 <script>
-import {getThreadsDetailsByUid, getThreadsRealDetailsByUid} from '@/utils/threadMonitorApi'
+import {
+  downloadByAppId,
+  getHistoryByAppId,
+  getThreadsDetailsByUid,
+  getThreadsRealDetailsByUid
+} from '@/utils/threadMonitorApi'
 import {getAppNames, getInstanceInfo, getInstanceNames} from '@/api/list'
 import moment from 'moment'
+import Pagination from '@/components/Pagination'
 
 export default {
   name: 'Dump',
+  components: { Pagination },
   data() {
     return {
+      list: null,
+      listLoading: true,
+      total: 0,
+      listQuery: {
+        pageNum: 1,
+        pageSize: 20
+      },
       secondDateTime: moment().subtract(1, 'm').format('YYYY-MM-DD HH:mm'),
       instanceUid: '',
       instanceName: '',
@@ -111,8 +161,25 @@ export default {
     this.instanceName = this.$cookies.get('instanceName')
     this.getInstanceList({name: this.instanceName})
     this.getAppList()
+    this.getList()
   },
   methods: {
+    getList() {
+      this.listLoading = true
+      this.listQuery.appId = this.instanceUid
+      getHistoryByAppId(this.listQuery).then(response => {
+        this.list = response.data
+        this.total = response.total
+        // Just to simulate the time of the request
+        setTimeout(() => {
+          this.listLoading = false
+        }, 1.5 * 1000)
+      })
+    },
+    handleFilter() {
+      this.listQuery.page = 1
+      this.getList()
+    },
     getInstanceList(params) {
       const _this = this
       getInstanceNames(params).then(res => {
@@ -231,6 +298,12 @@ export default {
       const a = document.createElement('a')
       a.href = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(this.threadDetail)
       a.download = name + '(' + this.dayTime + ').dump'
+      a.click()
+    },
+    downLoadTxtFileByUid(row) {
+      const a = document.createElement('a')
+      a.href = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(row.threadDump)
+      a.download = row.appId + '.dump'
       a.click()
     }
   }
