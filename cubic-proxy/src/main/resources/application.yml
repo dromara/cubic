@@ -13,7 +13,7 @@ spring:
     username: root
     password: root
     # 使用druid数据源
-    type: com.alibaba.druid.pool.DruidDataSource
+    type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     filters: stat
     maxActive: 20
