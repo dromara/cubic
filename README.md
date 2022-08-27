@@ -156,4 +156,4 @@ A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还�
 
 #### 欢迎加入社区星球
 
-  <img src="http://pic.jiagoujishu.com/dromara.jpeg" width="300px" />
+ <img src="http://pic.jiagoujishu.com/dromara.jpeg" width="300px" />
