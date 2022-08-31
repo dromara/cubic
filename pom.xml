@@ -7,7 +7,7 @@
     <groupId>matrix.cubic</groupId>
     <artifactId>cubic</artifactId>
     <packaging>pom</packaging>
-    <version>1.4.3.RELEASE</version>
+    <version>1.4.4.RELEASE</version>
     <modules>
         <module>cubic-agent</module>
         <module>cubic-proxy</module>
@@ -32,29 +32,29 @@
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-agent</artifactId>
-                <version>1.4.3.RELEASE</version>
+                <version>1.4.4.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy</artifactId>
-                <version>1.4.3.RELEASE</version>
+                <version>1.4.4.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy-common</artifactId>
-                <version>1.4.3.RELEASE</version>
+                <version>1.4.4.RELEASE</version>
             </dependency>
 
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy-websocket</artifactId>
-                <version>1.4.3.RELEASE</version>
+                <version>1.4.4.RELEASE</version>
             </dependency>
 
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-serialization-protobuf</artifactId>
-                <version>1.4.3.RELEASE</version>
+                <version>1.4.4.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
