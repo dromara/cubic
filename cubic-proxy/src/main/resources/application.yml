@@ -9,7 +9,7 @@ spring:
     default-property-inclusion: non_null
   datasource:
     name: test
-    url: jdbc:mysql:43.138.50.220:3366/cubic?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql:43.138.50.220:3306/cubic?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
     username: cubic
     password: DHXL7tCpdnNan8D8
     # 使用druid数据源
