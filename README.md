@@ -11,7 +11,7 @@ Gitee: https://gitee.com/dromara/cubic
 
 Github: https://github.com/dromara/cubic
 
-Demo: http://47.104.79.116:6080
+Demo: http://43.138.50.220:6080
 
 特性：
 - 1、兼容性：整体监控不管你是IDC、ECS、Docker部署，都可完美兼容
