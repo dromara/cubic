@@ -15,8 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 处理线程栈信息展示
@@ -82,44 +85,16 @@ public class ThreadDumpServiceImpl implements ThreadDumpService {
 
     }
 
-//	public ThreadStackLog getDetails(String serviceId, String uid, String date) {
-//		Criteria criteria = Criteria.where("serviceId").is(serviceId).and("uuid").is(uid).and("timeBucket").is(date);
-//		Query query = new Query(criteria);
-//		ThreadStackLog log = mongoTemplate.findOne(query, ThreadStackLog.class, MongoConstant.THREAD_STACK);
-//		return log;
-//	}
 
-//
-//    /**
-//     * 根据 uid查询 threadpool
-//     *
-//     * @param uid
-//     * @param pageIndex
-//     * @param pageSize
-//     * @param startDate
-//     * @param endDate
-//     * @return
-//     */
-//    @Override
-//    public Page<ThreadPoolLog> getThreadPoolByUid(String uid, int pageIndex, int pageSize, String startDate, String endDate) {
-//        Sort sort = Sort.by(Sort.Direction.DESC, "createDate");
-//        Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
-//        Criteria criteria = Criteria.where("uuid").is(uid);
-//        if (StringUtils.isNotEmpty(startDate)) {
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//            LocalDateTime end = DateUtils.getTime(endDate);
-//            LocalDateTime start = StringUtils.contains(startDate, "-") ? DateUtils.str2Date(startDate, formatter) : end.minusMinutes(Long.valueOf(startDate));
-////			criteria.andOperator(Criteria.where("createDate").lte(end), Criteria.where("createDate").gte(start));
-//        }
-////		Query query = new Query(criteria);
-////		long count = mongoTemplate.count(query, ThreadPoolLog.class, MongoConstant.THREAD_POOLS);
-////		query.with(pageable);
-////		List<ThreadPoolLog> logs = mongoTemplate.find(query, ThreadPoolLog.class, MongoConstant.THREAD_POOLS);
-//        List<String> result = new LinkedList<>();
-////		logs.forEach(log -> {
-////			result.add(log.getDetails());
-////		});
-////		return new PageImpl(result, pageable, count);
-//        return null;
-//    }
+    /**
+     * 解析线程栈数据
+     *
+     * @param dumpId 线程栈ID
+     * @return
+     */
+    @Override
+    public String analyzer(Long dumpId) {
+
+        return "";
+    }
 }
