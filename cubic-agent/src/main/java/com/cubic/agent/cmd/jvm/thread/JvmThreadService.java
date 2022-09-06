@@ -61,7 +61,7 @@ public class JvmThreadService implements CommonService {
         sendMetricFuture = new ScheduledThreadPoolExecutor(1, new DefaultThreadFactory("JVMService-consume"))
                 .scheduleAtFixedRate(new RunnableWithExceptionProtection(sender, th -> {
             logger.error("JVMService consumes and upload failure.", th);
-        }), 0, 1, TimeUnit.MINUTES);
+        }), 0, 5, TimeUnit.MINUTES);
     }
 
     @Override

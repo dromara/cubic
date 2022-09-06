@@ -49,15 +49,15 @@ public class DataResult {
         return new DataResult(code, message, null);
     }
 
-    public static DataResult success(String message) {
-        return new DataResult(ResultCode.SUCCESS.getCode(), message, null);
+    public static DataResult success(Object data) {
+        return new DataResult(ResultCode.SUCCESS.getCode(), "", data);
     }
 
     public static DataResult success() {
         return new DataResult(ResultCode.SUCCESS.getCode(), "OK", null);
     }
 
-    public static DataResult success(Object data,Long total) {
+    public static DataResult success(Object data, Long total) {
         return new DataResult(data, total);
     }
 

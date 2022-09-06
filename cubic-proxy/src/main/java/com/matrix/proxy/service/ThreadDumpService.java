@@ -3,6 +3,8 @@ package com.matrix.proxy.service;
 import com.cubic.proxy.common.module.DataResult;
 import com.matrix.proxy.vo.ThreadDumpVo;
 
+import java.util.Map;
+
 public interface ThreadDumpService {
 
     /**
@@ -20,16 +22,12 @@ public interface ThreadDumpService {
      * @return
      */
     DataResult getHistoryByAppId(ThreadDumpVo dumpVo);
-//
-//	/**
-//	 * 根据 uid查询 threadpool
-//	 *
-//	 * @param uid
-//	 * @param pageIndex
-//	 * @param pageSize
-//	 * @param startDate
-//	 * @param endDate
-//	 * @return
-//	 */
-//	Page<ThreadPoolLog> getThreadPoolByUid(String uid, int pageIndex, int pageSize, String startDate, String endDate);
+
+    /**
+     * 解析线程栈数据
+     *
+     * @param dumpId 线程栈ID
+     * @return
+     */
+    Map analyzer(Long dumpId);
 }
