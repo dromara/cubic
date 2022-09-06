@@ -34,7 +34,7 @@ public class ThreadPoolService implements CommonService, AgentChannelListener {
     /**
      * 采集间隔时间10s
      */
-    private final static Long PERIOD = 60L;
+    private final static Long PERIOD = 300L;
 
     /**
      * 所有线程池资源的引用

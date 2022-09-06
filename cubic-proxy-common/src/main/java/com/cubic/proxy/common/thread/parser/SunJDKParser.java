@@ -3,6 +3,8 @@ package com.cubic.proxy.common.thread.parser;
 
 import com.cubic.proxy.common.thread.LockInfo;
 import com.cubic.proxy.common.thread.ThreadInfo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.text.ParseException;
@@ -11,31 +13,40 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JavaThreadDumpParserImpl implements  JavaThreadDumpParser {
+@Slf4j
+@Service
+public class SunJDKParser {
 
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
 
-   private static  Pattern namePattern = Pattern.compile("^\"(.*)\".*prio=[0-9]+ tid=(\\w*) nid=(\\w*)\\s\\w*");
+    private static Pattern namePattern = Pattern.compile("^\"(.*)\".*prio=[0-9]+ tid=(\\w*) nid=(\\w*)\\s\\w*");
+
     private static Pattern statePattern = Pattern.compile("\\s+java.lang.Thread.State: (.*)");
+
     private static Pattern lockWaitPattern = Pattern.compile("\\s+- parking to wait for\\s+<(.*)>\\s+\\(.*\\)");
+
     private static Pattern lockedPattern = Pattern.compile("\\s+- locked\\s+<(.*)>\\s+\\(.*\\)");
 
+    private String dumpFile;
 
-//    public static void main(String[] args) {
-////        if (args.length > 0) {
-//
-//            parser.JavaThreadDumpParser javaThreadDumpParser = new JavaThreadDumpParserImpl();
-//            javaThreadDumpParser.parseJavaThreadDumpFile("/Users/luqiang/Documents/github/ThreadDumpAnalyzer/src/test/resource/TestThreadDump.txt");
-////        } else {
-////            System.err.println("USAGE: JavaThreadDumpParserImpl <File name with path>");
-////        }
-//    }
+    public SunJDKParser(String dumpFile) {
+        this.dumpFile = dumpFile;
+    }
 
+    /**
+     * 解析dump文件
+     *
+     */
+    public void parseDump() {
 
-    public void parseJavaThreadDumpFile(String fullpathFileName) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fullpathFileName))) {
+        InputStreamReader inputStreamReader = null;
+        InputStream inputStream = null;
+        try {
 
+            inputStream = new ByteArrayInputStream(dumpFile.getBytes());
+            inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             ThreadInfo threadInfo = null;
             String dateTime = null;
             String timeStamp = "";
@@ -58,7 +69,7 @@ public class JavaThreadDumpParserImpl implements  JavaThreadDumpParser {
                     if (isFirstLine) {
                         try {
                             dateTime = line;
-                            dateTime = dateTime.replace(":","-");
+                            dateTime = dateTime.replace(":", "-");
                             timeStamp = Long.toString(new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").parse(line).getTime());
                             isFirstLine = false;
                         } catch (ParseException e) {

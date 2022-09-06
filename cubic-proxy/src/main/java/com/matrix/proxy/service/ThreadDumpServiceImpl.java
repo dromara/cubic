@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cubic.proxy.common.module.DataResult;
+import com.cubic.proxy.common.thread.parser.DumpParserFactory;
 import com.matrix.proxy.entity.ThreadDump;
 import com.matrix.proxy.mapper.ThreadDumpMapper;
 import com.matrix.proxy.util.GzipUtils;
@@ -94,7 +95,15 @@ public class ThreadDumpServiceImpl implements ThreadDumpService {
      */
     @Override
     public String analyzer(Long dumpId) {
+        ThreadDump threadDump = threadDumpMapper.selectById(dumpId);
 
+        if (threadDump == null) {
+            return "";
+        }
+        String dumpFile = GzipUtils.decompress(threadDump.getThreadDump());
+        DumpParserFactory.get().getDumpParser(dumpFile);
         return "";
     }
+
+
 }
