@@ -3,6 +3,8 @@ package com.matrix.proxy.service;
 import com.cubic.proxy.common.module.DataResult;
 import com.matrix.proxy.vo.ThreadDumpVo;
 
+import java.util.Map;
+
 public interface ThreadDumpService {
 
     /**
@@ -27,5 +29,5 @@ public interface ThreadDumpService {
      * @param dumpId 线程栈ID
      * @return
      */
-    String analyzer(Long dumpId);
+    Map analyzer(Long dumpId);
 }

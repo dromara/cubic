@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,15 +95,14 @@ public class ThreadDumpServiceImpl implements ThreadDumpService {
      * @return
      */
     @Override
-    public String analyzer(Long dumpId) {
+    public Map analyzer(Long dumpId) {
         ThreadDump threadDump = threadDumpMapper.selectById(dumpId);
 
         if (threadDump == null) {
-            return "";
+            return new HashMap();
         }
         String dumpFile = GzipUtils.decompress(threadDump.getThreadDump());
-        DumpParserFactory.get().getDumpParser(dumpFile);
-        return "";
+       return DumpParserFactory.get().getDumpParser(dumpFile);
     }
 
 

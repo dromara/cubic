@@ -10,6 +10,9 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,8 +41,9 @@ public class SunJDKParser {
      * 解析dump文件
      *
      */
-    public void parseDump() {
+    public Map parseDump() {
 
+        Map<String, List> result = new HashMap<>(16);
         InputStreamReader inputStreamReader = null;
         InputStream inputStream = null;
         try {
@@ -60,7 +64,8 @@ public class SunJDKParser {
 
             ArrayList<ThreadInfo> threadList = new ArrayList<>();
             ArrayList<LockInfo> lockedList = new ArrayList<>();
-
+            result.put("threads",threadList);
+            result.put("locked",lockedList);
 
             boolean isFirstLine = true;
             while ((line = bufferedReader.readLine()) != null) {
@@ -152,6 +157,7 @@ public class SunJDKParser {
 
             e.printStackTrace();
         }
+        return result;
 
     }
 }

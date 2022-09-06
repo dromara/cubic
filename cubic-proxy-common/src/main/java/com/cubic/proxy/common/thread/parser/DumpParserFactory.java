@@ -2,6 +2,9 @@ package com.cubic.proxy.common.thread.parser;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @ClassName DumpParserFactory
  * @Author QIANGLU
@@ -27,13 +30,14 @@ public class DumpParserFactory {
     }
 
 
-    public void getDumpParser(String dumpFile) {
+    public Map getDumpParser(String dumpFile) {
 
         try {
             SunJDKParser jdkParser = new SunJDKParser(dumpFile);
-            jdkParser.parseDump();
+            return jdkParser.parseDump();
         } catch (Exception e) {
             log.error("DumpParserFactory getDumpParser fail", e);
         }
+        return new HashMap();
     }
 }
