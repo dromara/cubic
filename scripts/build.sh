@@ -11,7 +11,7 @@ BASE_DIR=`pwd`
 echo $BASE_DIR
 BASE_UI_DIR="cubic-ui"
 
-mvn -v
+./mvnw -v
 if [ $? -ne 0 ]; then
     echo "command mvn not found, Install the maven before executing the script！"
     exit 0;

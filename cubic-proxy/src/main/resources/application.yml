@@ -9,9 +9,9 @@ spring:
     default-property-inclusion: non_null
   datasource:
     name: test
-    url: jdbc:mysql://localhost:3306/cubic?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
-    username: root
-    password: root
+    url: jdbc:mysql://${cubic_db_host:localhost}:${cubic_db_port:3306}/${cubic_db_name:cubic}?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    username: ${cubic_db_user:root}
+    password: ${cubic_db_password:root}
     # 使用druid数据源
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -31,7 +31,7 @@ mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml
 
 server:
-  port: 6080
+  port: ${cubic_server_port:6080}
   tomcat:
     accesslog:
       enabled: true
@@ -52,8 +52,8 @@ management:
       exposure:
         include: configprops
 log:
-  level: info
-  path: /tmp/logs
+  level: ${cubic_log_level:info}
+  path: ${cubic_log_path:/tmp/logs}
 jwt:
   token-header: Authorization
   expire: 365
