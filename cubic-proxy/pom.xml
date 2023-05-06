@@ -5,7 +5,7 @@
     <parent>
         <artifactId>cubic</artifactId>
         <groupId>matrix.cubic</groupId>
-        <version>1.4.4.RELEASE</version>
+        <version>1.4.5-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -166,10 +166,10 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <echo>${project.basedir}</echo>
                                 <delete dir="${project.basedir}/../agent-proxy-dist"/>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
 <!--                    <execution>-->
@@ -192,11 +192,11 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <mkdir dir="${project.basedir}/../agent-proxy-dist"/>
                                 <copy file="${project.build.directory}/cubic-proxy.jar"
                                       tofile="${project.basedir}/../agent-proxy-dist/cubic-proxy.jar" overwrite="true"/>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

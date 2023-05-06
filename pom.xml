@@ -7,13 +7,14 @@
     <groupId>matrix.cubic</groupId>
     <artifactId>cubic</artifactId>
     <packaging>pom</packaging>
-    <version>1.4.4.RELEASE</version>
+    <version>1.4.5-SNAPSHOT</version>
     <modules>
-        <module>cubic-agent</module>
+        <module>cubic-agent-core</module>
         <module>cubic-proxy</module>
         <module>cubic-proxy-websocket</module>
         <module>cubic-proxy-common</module>
         <module>cubic-serialization-protobuf</module>
+        <module>cubic-agent</module>
     </modules>
 
     <properties>
@@ -32,29 +33,34 @@
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-agent</artifactId>
-                <version>1.4.4.RELEASE</version>
+                <version>1.4.5-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>matrix.cubic</groupId>
+                <artifactId>cubic-agent-core</artifactId>
+                <version>1.4.5-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy</artifactId>
-                <version>1.4.4.RELEASE</version>
+                <version>1.4.5-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy-common</artifactId>
-                <version>1.4.4.RELEASE</version>
+                <version>1.4.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-proxy-websocket</artifactId>
-                <version>1.4.4.RELEASE</version>
+                <version>1.4.5-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>matrix.cubic</groupId>
                 <artifactId>cubic-serialization-protobuf</artifactId>
-                <version>1.4.4.RELEASE</version>
+                <version>1.4.5-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -165,6 +171,14 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.2.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
