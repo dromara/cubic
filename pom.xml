@@ -7,7 +7,7 @@
     <groupId>matrix.cubic</groupId>
     <artifactId>cubic</artifactId>
     <packaging>pom</packaging>
-    <version>1.4.5-SNAPSHOT</version>
+    <version>1.4.5.release</version>
     <modules>
         <module>cubic-agent-core</module>
         <module>cubic-proxy</module>
