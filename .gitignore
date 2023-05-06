@@ -30,3 +30,5 @@ target/
 .springBeans
 .sts4-cache
 /cubic-agent/dependency-reduced-pom.xml
+/cubic-agent-core/dependency-reduced-pom.xml
+*.versionsBackup
