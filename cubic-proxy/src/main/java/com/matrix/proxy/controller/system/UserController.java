@@ -49,8 +49,8 @@ public class UserController {
      */
     @PostMapping("/update")
     public void update(@RequestBody CubicUserDto userDto) {
-
-        userService.update(userDto);
+        //测试环境屏蔽密码修改
+       // userService.update(userDto);
     }
 
     /**
@@ -71,8 +71,8 @@ public class UserController {
      */
     @PostMapping("/delete")
     public void delete(@RequestBody CubicUserDto userDto) {
-
-        userService.delete(userDto);
+        //测试环境屏蔽删除用户
+        //userService.delete(userDto);
     }
 
     /**
