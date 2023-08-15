@@ -9,9 +9,9 @@ spring:
     default-property-inclusion: non_null
   datasource:
     name: test
-    url: jdbc:mysql://${cubic_db_host:localhost}:${cubic_db_port:3306}/${cubic_db_name:cubic}?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
-    username: ${cubic_db_user:root}
-    password: ${cubic_db_password:root}
+    url: jdbc:mysql://127.0.0.1:3306/cubic?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    username: cubic
+    password: DHXL7tCpdnNan8D8
     # 使用druid数据源
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
