@@ -11,7 +11,7 @@ Gitee: https://gitee.com/dromara/cubic
 
 Github: https://github.com/dromara/cubic
 
-Demo: http://47.104.79.116:6080
+Demo: http://43.138.50.220:6080
 
 特性：
 - 1、兼容性：整体监控不管你是IDC、ECS、Docker部署，都可完美兼容
@@ -138,7 +138,7 @@ JAVA_HOME的定位，通过读取环境变量JAVA_HOME，如果没有定义，�
 
 A: 此时`echo $JAVA_HOME `发现也已经配置，请在应用启动参数上增加 `-Xbootclasspath/a:$JAVA_HOME/lib/tools.jar`
 
-**7、Q : 下载后有些编译报错**
+**7、Q : 下载后有些编译报错 **
 
 A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还有报错，点下IDEA的build(绿锤子)
 ## 组织
@@ -147,13 +147,13 @@ A: 不要怕，可以使用scripts里面的build.sh打包下即可。如果还�
 
 #### 知识获取
 
- ![输入图片说明](https://images.gitee.com/uploads/images/2020/1012/211345_e216e60c_1168339.jpeg "架构技术.jpg")
+ ![输入图片说明](http://pic.jiagoujishu.com/qrcode_for_gh_13314ac27929_258.jpg "架构技术.jpg")
 
 #### 问题交流
 [点击链接加入群聊【Cubic开源交流群】](https://jq.qq.com/?_wv=1027&k=eS6c8HkS)
 
- <img src="https://gitee.com/dromara/cubic/raw/master/docs/qq.jpeg" width="200px" />
+ <img src="http://pic.jiagoujishu.com/qq.jpeg" width="200px" />
 
 #### 欢迎加入社区星球
 
-  <img src="https://gitee.com/dromara/cubic/raw/master/docs/pic/Wechat-xingqiu.jpeg" width="300px" />
+ <img src="http://pic.jiagoujishu.com/dromara.jpeg" width="300px" />

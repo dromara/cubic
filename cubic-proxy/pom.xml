@@ -5,7 +5,7 @@
     <parent>
         <artifactId>cubic</artifactId>
         <groupId>matrix.cubic</groupId>
-        <version>1.4.3.RELEASE</version>
+        <version>1.4.5.release</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -44,13 +44,6 @@
 <!--            <artifactId>jjwt</artifactId>-->
 <!--            <version>0.9.1</version>-->
 <!--        </dependency>-->
-
-<!--        &lt;!&ndash; druid &ndash;&gt;-->
-        <dependency>
-            <groupId>com.github.drtrang</groupId>
-            <artifactId>druid-spring-boot2-starter</artifactId>
-            <version>1.1.10.2</version>
-        </dependency>
 
         <!-- 持久层 -->
         <dependency>
@@ -173,10 +166,10 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <echo>${project.basedir}</echo>
                                 <delete dir="${project.basedir}/../agent-proxy-dist"/>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
 <!--                    <execution>-->
@@ -199,11 +192,11 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <mkdir dir="${project.basedir}/../agent-proxy-dist"/>
                                 <copy file="${project.build.directory}/cubic-proxy.jar"
                                       tofile="${project.basedir}/../agent-proxy-dist/cubic-proxy.jar" overwrite="true"/>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

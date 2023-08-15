@@ -66,4 +66,16 @@ public class ThreadDumpController {
         return DataResult.success(dumpVo.getAppId());
 
     }
+
+    /**
+     * 解析线程栈
+     *
+     * @return
+     */
+    @RequestMapping(value = "/analyzer")
+    public DataResult analyzer(ThreadDumpVo dumpVo) {
+
+        return DataResult.success(threadDumpService.analyzer(dumpVo.getId()));
+
+    }
 }

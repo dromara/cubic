@@ -13,21 +13,15 @@ spring:
     username: cubic
     password: DHXL7tCpdnNan8D8
     # 使用druid数据源
-    type: com.alibaba.druid.pool.DruidDataSource
+    type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    filters: stat
-    maxActive: 20
-    initialSize: 1
-    maxWait: 60000
-    minIdle: 1
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: select 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    maxOpenPreparedStatements: 20
+    hikari:
+      auto-commit: true
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 1800000
+      max-lifetime: 1800000
+      connection-timeout: 30000
 
 
 mybatis-plus:
@@ -37,7 +31,7 @@ mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml
 
 server:
-  port: 6080
+  port: ${cubic_server_port:6080}
   tomcat:
     accesslog:
       enabled: true
@@ -58,8 +52,8 @@ management:
       exposure:
         include: configprops
 log:
-  level: info
-  path: /tmp/logs
+  level: ${cubic_log_level:info}
+  path: ${cubic_log_path:/tmp/logs}
 jwt:
   token-header: Authorization
   expire: 365

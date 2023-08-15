@@ -151,7 +151,7 @@ export default {
       this.term.writeln(' ')
       this.term.writeln(' > 欢迎进入Arthas代理终端，此终端可连接到目标机器进行命令操作')
       this.term.writeln('')
-      this.term.writeln(' > Arthas 命令请查看文档 https://alibaba.github.io/arthas/commands.html')
+      this.term.writeln(' > Arthas 命令请查看文档 https://arthas.aliyun.com/doc/commands.html')
       // this.term.writeln(' 输入 1 回车进入自定义命令模式（默认）')
       // this.term.writeln(' 输入 3 回车进入Arthas命令模式')
       this.term.writeln('')
